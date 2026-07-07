@@ -10,6 +10,9 @@ import { addCourseResource, getAllCourseResources } from "@/lib/course-resources
 import { prisma } from "@/lib/prisma";
 
 const MAX_IMAGE_UPLOAD_BYTES = 5 * 1024 * 1024;
+const SUPABASE_UPLOAD_BUCKET = "uploads";
+
+let uploadBucketReady = false;
 
 async function assertAdmin() {
   const session = await auth();
@@ -36,6 +39,84 @@ function parseDateInput(raw: FormDataEntryValue | null) {
   const parsed = new Date(`${value}T00:00:00.000Z`);
   if (Number.isNaN(parsed.getTime())) return null;
   return parsed;
+}
+
+function isVercelRuntime() {
+  return process.env.VERCEL === "1";
+}
+
+async function ensureSupabaseUploadBucket() {
+  if (uploadBucketReady) return;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !serviceRoleKey) {
+    throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY for production uploads.");
+  }
+
+  const headers = {
+    apikey: serviceRoleKey,
+    Authorization: `Bearer ${serviceRoleKey}`,
+  };
+  const bucketRes = await fetch(`${supabaseUrl}/storage/v1/bucket/${SUPABASE_UPLOAD_BUCKET}`, {
+    headers,
+    cache: "no-store",
+  });
+  if (bucketRes.ok) {
+    uploadBucketReady = true;
+    return;
+  }
+  if (bucketRes.status !== 404) {
+    throw new Error("Unable to verify Supabase uploads bucket.");
+  }
+  const createRes = await fetch(`${supabaseUrl}/storage/v1/bucket`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: SUPABASE_UPLOAD_BUCKET,
+      name: SUPABASE_UPLOAD_BUCKET,
+      public: true,
+    }),
+  });
+  if (!createRes.ok) {
+    throw new Error("Unable to create Supabase uploads bucket.");
+  }
+  uploadBucketReady = true;
+}
+
+async function saveThumbnail(file: File) {
+  const ext = path.extname(file.name) || ".jpg";
+  const fileName = `${Date.now()}-${randomUUID()}${ext.toLowerCase()}`;
+  if (!isVercelRuntime()) {
+    const targetDir = path.join(process.cwd(), "public", "uploads", "thumbnails");
+    await fs.mkdir(targetDir, { recursive: true });
+    await fs.writeFile(path.join(targetDir, fileName), Buffer.from(await file.arrayBuffer()));
+    return `/uploads/thumbnails/${fileName}`;
+  }
+
+  await ensureSupabaseUploadBucket();
+  const supabaseUrl = process.env.SUPABASE_URL as string;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
+  const objectPath = `thumbnails/${fileName}`;
+  const uploadRes = await fetch(
+    `${supabaseUrl}/storage/v1/object/${SUPABASE_UPLOAD_BUCKET}/${objectPath}`,
+    {
+      method: "POST",
+      headers: {
+        apikey: serviceRoleKey,
+        Authorization: `Bearer ${serviceRoleKey}`,
+        "x-upsert": "true",
+        "Content-Type": file.type || "application/octet-stream",
+      },
+      body: Buffer.from(await file.arrayBuffer()),
+    },
+  );
+  if (!uploadRes.ok) {
+    throw new Error("Thumbnail upload failed on production storage.");
+  }
+  return `${supabaseUrl}/storage/v1/object/public/${SUPABASE_UPLOAD_BUCKET}/${objectPath}`;
 }
 
 export default async function AdminPage() {
@@ -132,12 +213,7 @@ export default async function AdminPage() {
       if (thumbnailFile.size > MAX_IMAGE_UPLOAD_BYTES) {
         throw new Error("Thumbnail is too large. Please use an image under 5MB.");
       }
-      const ext = path.extname(thumbnailFile.name) || ".jpg";
-      const fileName = `${Date.now()}-${randomUUID()}${ext.toLowerCase()}`;
-      const targetDir = path.join(process.cwd(), "public", "uploads", "thumbnails");
-      await fs.mkdir(targetDir, { recursive: true });
-      await fs.writeFile(path.join(targetDir, fileName), Buffer.from(await thumbnailFile.arrayBuffer()));
-      thumbnailUrl = `/uploads/thumbnails/${fileName}`;
+      thumbnailUrl = await saveThumbnail(thumbnailFile);
     }
     await prisma.course.create({
       data: { slug, title, description, priceInr, isPublished, thumbnailUrl, availableFrom },
@@ -171,12 +247,7 @@ export default async function AdminPage() {
       if (thumbnailFile.size > MAX_IMAGE_UPLOAD_BYTES) {
         throw new Error("Thumbnail is too large. Please use an image under 5MB.");
       }
-      const ext = path.extname(thumbnailFile.name) || ".jpg";
-      const fileName = `${Date.now()}-${randomUUID()}${ext.toLowerCase()}`;
-      const targetDir = path.join(process.cwd(), "public", "uploads", "thumbnails");
-      await fs.mkdir(targetDir, { recursive: true });
-      await fs.writeFile(path.join(targetDir, fileName), Buffer.from(await thumbnailFile.arrayBuffer()));
-      thumbnailUrl = `/uploads/thumbnails/${fileName}`;
+      thumbnailUrl = await saveThumbnail(thumbnailFile);
     }
     await prisma.course.update({
       where: { id: courseId },
