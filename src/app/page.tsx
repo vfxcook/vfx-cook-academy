@@ -179,6 +179,16 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      <a
+        className="whatsapp-float"
+        href="https://wa.me/919353720487"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp before joining"
+      >
+        <span aria-hidden="true">💬</span>
+      </a>
     </div>
   );
 }
