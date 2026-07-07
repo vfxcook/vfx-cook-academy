@@ -13,11 +13,28 @@ import { prisma } from "@/lib/prisma";
 import { formatInr } from "@/lib/utils";
 
 export default async function HomePage() {
-  const courses = await prisma.course.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: "desc" },
-    include: { videos: true },
-  });
+  let courses: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    description: string;
+    priceInr: number;
+    thumbnailUrl: string | null;
+    availableFrom: Date | null;
+    isPublished: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+    videos: Array<{ id: string }>;
+  }> = [];
+  try {
+    courses = await prisma.course.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: "desc" },
+      include: { videos: { select: { id: true } } },
+    });
+  } catch (error) {
+    console.error("Failed to load published courses on homepage", error);
+  }
   const mainCourse = courses[0];
   const enrollHref = getEnrollHref(mainCourse);
   const showreelUrl = "https://www.youtube.com/embed/-fI2FQ8FqPk";

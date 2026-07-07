@@ -4,15 +4,29 @@ import { prisma } from "@/lib/prisma";
 
 export default async function CoursesPage() {
   const session = await auth();
-  const courses = await prisma.course.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: "desc" },
-    include: {
-      videos: {
-        select: { id: true },
+  let courses: Array<{
+    id: string;
+    slug: string;
+    title: string;
+    description: string;
+    priceInr: number;
+    thumbnailUrl: string | null;
+    availableFrom: Date | null;
+    videos: Array<{ id: string }>;
+  }> = [];
+  try {
+    courses = await prisma.course.findMany({
+      where: { isPublished: true },
+      orderBy: { createdAt: "desc" },
+      include: {
+        videos: {
+          select: { id: true },
+        },
       },
-    },
-  });
+    });
+  } catch (error) {
+    console.error("Failed to load courses catalog", error);
+  }
 
   return (
     <div style={{ display: "grid", gap: "1rem" }}>
