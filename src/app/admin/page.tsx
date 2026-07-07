@@ -200,6 +200,50 @@ export default async function AdminPage() {
     redirect("/admin");
   }
 
+  async function updateVideo(formData: FormData) {
+    "use server";
+    await assertAdmin();
+    const videoId = String(formData.get("videoId") ?? "").trim();
+    const title = String(formData.get("title") ?? "").trim();
+    const description = String(formData.get("description") ?? "").trim();
+    const order = Number(formData.get("order") ?? 1);
+    const durationSec = Number(formData.get("durationSec") ?? 0);
+    const sourceType = String(formData.get("sourceType") ?? "url");
+    const existingVideoUrl = String(formData.get("existingVideoUrl") ?? "").trim();
+    const videoUrlInput = String(formData.get("videoUrl") ?? "").trim();
+    const videoFile = formData.get("videoFile");
+
+    if (!videoId || !title || !description || Number.isNaN(order) || order < 1) {
+      throw new Error("Missing required lesson fields.");
+    }
+
+    let videoUrl = videoUrlInput || existingVideoUrl;
+    if (sourceType === "upload") {
+      if (!(videoFile instanceof File) || videoFile.size <= 0) {
+        throw new Error("Video file required.");
+      }
+      if (!videoFile.type.startsWith("video/")) {
+        throw new Error("Only video files are allowed.");
+      }
+      videoUrl = await saveUploadFile(videoFile, "videos");
+    }
+    if (!videoUrl) {
+      throw new Error("Video URL or upload is required.");
+    }
+
+    await prisma.video.update({
+      where: { id: videoId },
+      data: {
+        title,
+        description,
+        order,
+        durationSec: Number.isNaN(durationSec) ? 0 : durationSec,
+        videoUrl,
+      },
+    });
+    redirect("/admin");
+  }
+
   async function togglePublished(formData: FormData) {
     "use server";
     await assertAdmin();
@@ -424,6 +468,55 @@ export default async function AdminPage() {
                           <textarea className="textarea" name="description" rows={2} placeholder="Description" />
                           <button className="btn btn-primary" type="submit">Attach Resource</button>
                         </form>
+                      )}
+                    </div>
+                    <div style={{ marginTop: "0.7rem", borderTop: "1px solid #2b3f69", paddingTop: "0.7rem" }}>
+                      <h4 style={{ margin: "0 0 0.45rem" }}>Edit Existing Lessons</h4>
+                      {course.videos.length === 0 ? (
+                        <p className="muted" style={{ margin: 0 }}>
+                          No lessons added yet.
+                        </p>
+                      ) : (
+                        <div style={{ display: "grid", gap: "0.6rem" }}>
+                          {course.videos.map((video) => (
+                            <details key={video.id} className="admin-inline-editor">
+                              <summary className="btn btn-secondary">
+                                Edit L{video.order} - {video.title}
+                              </summary>
+                              <form action={updateVideo} className="admin-form-grid">
+                                <input type="hidden" name="videoId" value={video.id} />
+                                <input type="hidden" name="existingVideoUrl" value={video.videoUrl} />
+                                <input className="input" name="title" defaultValue={video.title} required />
+                                <textarea
+                                  className="textarea"
+                                  name="description"
+                                  rows={2}
+                                  defaultValue={video.description ?? ""}
+                                  required
+                                />
+                                <select className="select" name="sourceType" defaultValue="url">
+                                  <option value="url">Keep or update URL</option>
+                                  <option value="upload">Upload replacement video</option>
+                                </select>
+                                <input className="input" name="videoUrl" defaultValue={video.videoUrl} />
+                                <input className="input" type="file" name="videoFile" accept="video/*" />
+                                <div className="admin-form-split">
+                                  <input className="input" type="number" name="order" min={1} defaultValue={video.order} required />
+                                  <input
+                                    className="input"
+                                    type="number"
+                                    name="durationSec"
+                                    min={0}
+                                    defaultValue={video.durationSec}
+                                  />
+                                </div>
+                                <button className="btn btn-primary" type="submit">
+                                  Save Lesson
+                                </button>
+                              </form>
+                            </details>
+                          ))}
+                        </div>
                       )}
                     </div>
                   </details>

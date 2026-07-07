@@ -4,6 +4,12 @@ import { getPublishedCoursesCached } from "@/lib/public-data";
 
 export default async function CoursesPage() {
   const session = await auth();
+  const toIsoOrNull = (value: Date | string | null) => {
+    if (!value) return null;
+    if (value instanceof Date) return value.toISOString();
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
+  };
   let courses: Array<{
     id: string;
     slug: string;
@@ -40,7 +46,7 @@ export default async function CoursesPage() {
           priceInr: course.priceInr,
           thumbnailUrl: course.thumbnailUrl,
           lessonsCount: course.videos.length,
-          availableFrom: course.availableFrom ? course.availableFrom.toISOString() : null,
+          availableFrom: toIsoOrNull(course.availableFrom),
         }))}
       />
     </div>
