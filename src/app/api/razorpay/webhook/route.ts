@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
-import { PaymentStatus } from "@prisma/client";
 import { NextResponse } from "next/server";
 
+import { PaymentStatus } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 type RazorpayWebhookPayload = {

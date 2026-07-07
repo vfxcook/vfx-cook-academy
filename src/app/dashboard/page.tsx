@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { PaymentStatus } from "@prisma/client";
 
+import { PaymentStatus } from "@/generated/prisma";
 import { LicenseActivationForm } from "@/components/LicenseActivationForm";
 import { SignOutButton } from "@/components/SignOutButton";
 import { auth } from "@/lib/auth";
