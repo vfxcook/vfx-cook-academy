@@ -28,3 +28,8 @@ pnpm-debug.log*
 # prisma sqlite
 /prisma/dev.db
 /prisma/dev.db-journal
+/prisma/prisma/dev.db
+/prisma/prisma/dev.db-journal
+
+# prisma engine temp artifacts on Windows
+src/generated/prisma/query_engine-windows.dll.node.tmp*
