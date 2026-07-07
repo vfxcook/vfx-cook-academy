@@ -1958,11 +1958,13 @@ export namespace Prisma {
   export type VideoCountOutputType = {
     comments: number
     progresses: number
+    resources: number
   }
 
   export type VideoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | VideoCountOutputTypeCountCommentsArgs
     progresses?: boolean | VideoCountOutputTypeCountProgressesArgs
+    resources?: boolean | VideoCountOutputTypeCountResourcesArgs
   }
 
   // Custom InputTypes
@@ -1988,6 +1990,13 @@ export namespace Prisma {
    */
   export type VideoCountOutputTypeCountProgressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VideoProgressWhereInput
+  }
+
+  /**
+   * VideoCountOutputType without action
+   */
+  export type VideoCountOutputTypeCountResourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CourseResourceWhereInput
   }
 
 
@@ -7957,6 +7966,7 @@ export namespace Prisma {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     comments?: boolean | Video$commentsArgs<ExtArgs>
     progresses?: boolean | Video$progressesArgs<ExtArgs>
+    resources?: boolean | Video$resourcesArgs<ExtArgs>
     _count?: boolean | VideoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["video"]>
 
@@ -8003,6 +8013,7 @@ export namespace Prisma {
     course?: boolean | CourseDefaultArgs<ExtArgs>
     comments?: boolean | Video$commentsArgs<ExtArgs>
     progresses?: boolean | Video$progressesArgs<ExtArgs>
+    resources?: boolean | Video$resourcesArgs<ExtArgs>
     _count?: boolean | VideoCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VideoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8018,6 +8029,7 @@ export namespace Prisma {
       course: Prisma.$CoursePayload<ExtArgs>
       comments: Prisma.$TimestampCommentPayload<ExtArgs>[]
       progresses: Prisma.$VideoProgressPayload<ExtArgs>[]
+      resources: Prisma.$CourseResourcePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8426,6 +8438,7 @@ export namespace Prisma {
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     comments<T extends Video$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Video$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimestampCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     progresses<T extends Video$progressesArgs<ExtArgs> = {}>(args?: Subset<T, Video$progressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    resources<T extends Video$resourcesArgs<ExtArgs> = {}>(args?: Subset<T, Video$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourseResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8905,6 +8918,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VideoProgressScalarFieldEnum | VideoProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Video.resources
+   */
+  export type Video$resourcesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CourseResource
+     */
+    select?: CourseResourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CourseResource
+     */
+    omit?: CourseResourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseResourceInclude<ExtArgs> | null
+    where?: CourseResourceWhereInput
+    orderBy?: CourseResourceOrderByWithRelationInput | CourseResourceOrderByWithRelationInput[]
+    cursor?: CourseResourceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CourseResourceScalarFieldEnum | CourseResourceScalarFieldEnum[]
   }
 
   /**
@@ -13487,6 +13524,7 @@ export namespace Prisma {
   export type CourseResourceMinAggregateOutputType = {
     id: string | null
     courseId: string | null
+    videoId: string | null
     title: string | null
     description: string | null
     fileUrl: string | null
@@ -13498,6 +13536,7 @@ export namespace Prisma {
   export type CourseResourceMaxAggregateOutputType = {
     id: string | null
     courseId: string | null
+    videoId: string | null
     title: string | null
     description: string | null
     fileUrl: string | null
@@ -13509,6 +13548,7 @@ export namespace Prisma {
   export type CourseResourceCountAggregateOutputType = {
     id: number
     courseId: number
+    videoId: number
     title: number
     description: number
     fileUrl: number
@@ -13522,6 +13562,7 @@ export namespace Prisma {
   export type CourseResourceMinAggregateInputType = {
     id?: true
     courseId?: true
+    videoId?: true
     title?: true
     description?: true
     fileUrl?: true
@@ -13533,6 +13574,7 @@ export namespace Prisma {
   export type CourseResourceMaxAggregateInputType = {
     id?: true
     courseId?: true
+    videoId?: true
     title?: true
     description?: true
     fileUrl?: true
@@ -13544,6 +13586,7 @@ export namespace Prisma {
   export type CourseResourceCountAggregateInputType = {
     id?: true
     courseId?: true
+    videoId?: true
     title?: true
     description?: true
     fileUrl?: true
@@ -13628,6 +13671,7 @@ export namespace Prisma {
   export type CourseResourceGroupByOutputType = {
     id: string
     courseId: string
+    videoId: string | null
     title: string
     description: string | null
     fileUrl: string
@@ -13656,6 +13700,7 @@ export namespace Prisma {
   export type CourseResourceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
+    videoId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
@@ -13663,11 +13708,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }, ExtArgs["result"]["courseResource"]>
 
   export type CourseResourceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
+    videoId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
@@ -13675,11 +13722,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }, ExtArgs["result"]["courseResource"]>
 
   export type CourseResourceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     courseId?: boolean
+    videoId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
@@ -13687,11 +13736,13 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }, ExtArgs["result"]["courseResource"]>
 
   export type CourseResourceSelectScalar = {
     id?: boolean
     courseId?: boolean
+    videoId?: boolean
     title?: boolean
     description?: boolean
     fileUrl?: boolean
@@ -13700,25 +13751,30 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type CourseResourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "title" | "description" | "fileUrl" | "fileType" | "createdAt" | "updatedAt", ExtArgs["result"]["courseResource"]>
+  export type CourseResourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "courseId" | "videoId" | "title" | "description" | "fileUrl" | "fileType" | "createdAt" | "updatedAt", ExtArgs["result"]["courseResource"]>
   export type CourseResourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }
   export type CourseResourceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }
   export type CourseResourceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     course?: boolean | CourseDefaultArgs<ExtArgs>
+    video?: boolean | CourseResource$videoArgs<ExtArgs>
   }
 
   export type $CourseResourcePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CourseResource"
     objects: {
       course: Prisma.$CoursePayload<ExtArgs>
+      video: Prisma.$VideoPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       courseId: string
+      videoId: string | null
       title: string
       description: string | null
       fileUrl: string
@@ -14120,6 +14176,7 @@ export namespace Prisma {
   export interface Prisma__CourseResourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    video<T extends CourseResource$videoArgs<ExtArgs> = {}>(args?: Subset<T, CourseResource$videoArgs<ExtArgs>>): Prisma__VideoClient<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14151,6 +14208,7 @@ export namespace Prisma {
   interface CourseResourceFieldRefs {
     readonly id: FieldRef<"CourseResource", 'String'>
     readonly courseId: FieldRef<"CourseResource", 'String'>
+    readonly videoId: FieldRef<"CourseResource", 'String'>
     readonly title: FieldRef<"CourseResource", 'String'>
     readonly description: FieldRef<"CourseResource", 'String'>
     readonly fileUrl: FieldRef<"CourseResource", 'String'>
@@ -14553,6 +14611,25 @@ export namespace Prisma {
   }
 
   /**
+   * CourseResource.video
+   */
+  export type CourseResource$videoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Video
+     */
+    select?: VideoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Video
+     */
+    omit?: VideoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoInclude<ExtArgs> | null
+    where?: VideoWhereInput
+  }
+
+  /**
    * CourseResource without action
    */
   export type CourseResourceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14730,6 +14807,7 @@ export namespace Prisma {
   export const CourseResourceScalarFieldEnum: {
     id: 'id',
     courseId: 'courseId',
+    videoId: 'videoId',
     title: 'title',
     description: 'description',
     fileUrl: 'fileUrl',
@@ -15252,6 +15330,7 @@ export namespace Prisma {
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     comments?: TimestampCommentListRelationFilter
     progresses?: VideoProgressListRelationFilter
+    resources?: CourseResourceListRelationFilter
   }
 
   export type VideoOrderByWithRelationInput = {
@@ -15267,6 +15346,7 @@ export namespace Prisma {
     course?: CourseOrderByWithRelationInput
     comments?: TimestampCommentOrderByRelationAggregateInput
     progresses?: VideoProgressOrderByRelationAggregateInput
+    resources?: CourseResourceOrderByRelationAggregateInput
   }
 
   export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -15285,6 +15365,7 @@ export namespace Prisma {
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
     comments?: TimestampCommentListRelationFilter
     progresses?: VideoProgressListRelationFilter
+    resources?: CourseResourceListRelationFilter
   }, "id">
 
   export type VideoOrderByWithAggregationInput = {
@@ -15635,6 +15716,7 @@ export namespace Prisma {
     NOT?: CourseResourceWhereInput | CourseResourceWhereInput[]
     id?: StringFilter<"CourseResource"> | string
     courseId?: StringFilter<"CourseResource"> | string
+    videoId?: StringNullableFilter<"CourseResource"> | string | null
     title?: StringFilter<"CourseResource"> | string
     description?: StringNullableFilter<"CourseResource"> | string | null
     fileUrl?: StringFilter<"CourseResource"> | string
@@ -15642,11 +15724,13 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"CourseResource"> | Date | string
     updatedAt?: DateTimeFilter<"CourseResource"> | Date | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    video?: XOR<VideoNullableScalarRelationFilter, VideoWhereInput> | null
   }
 
   export type CourseResourceOrderByWithRelationInput = {
     id?: SortOrder
     courseId?: SortOrder
+    videoId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     fileUrl?: SortOrder
@@ -15654,6 +15738,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     course?: CourseOrderByWithRelationInput
+    video?: VideoOrderByWithRelationInput
   }
 
   export type CourseResourceWhereUniqueInput = Prisma.AtLeast<{
@@ -15662,6 +15747,7 @@ export namespace Prisma {
     OR?: CourseResourceWhereInput[]
     NOT?: CourseResourceWhereInput | CourseResourceWhereInput[]
     courseId?: StringFilter<"CourseResource"> | string
+    videoId?: StringNullableFilter<"CourseResource"> | string | null
     title?: StringFilter<"CourseResource"> | string
     description?: StringNullableFilter<"CourseResource"> | string | null
     fileUrl?: StringFilter<"CourseResource"> | string
@@ -15669,11 +15755,13 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"CourseResource"> | Date | string
     updatedAt?: DateTimeFilter<"CourseResource"> | Date | string
     course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    video?: XOR<VideoNullableScalarRelationFilter, VideoWhereInput> | null
   }, "id">
 
   export type CourseResourceOrderByWithAggregationInput = {
     id?: SortOrder
     courseId?: SortOrder
+    videoId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     fileUrl?: SortOrder
@@ -15691,6 +15779,7 @@ export namespace Prisma {
     NOT?: CourseResourceScalarWhereWithAggregatesInput | CourseResourceScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"CourseResource"> | string
     courseId?: StringWithAggregatesFilter<"CourseResource"> | string
+    videoId?: StringNullableWithAggregatesFilter<"CourseResource"> | string | null
     title?: StringWithAggregatesFilter<"CourseResource"> | string
     description?: StringNullableWithAggregatesFilter<"CourseResource"> | string | null
     fileUrl?: StringWithAggregatesFilter<"CourseResource"> | string
@@ -16127,6 +16216,7 @@ export namespace Prisma {
     course: CourseCreateNestedOneWithoutVideosInput
     comments?: TimestampCommentCreateNestedManyWithoutVideoInput
     progresses?: VideoProgressCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateInput = {
@@ -16141,6 +16231,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: TimestampCommentUncheckedCreateNestedManyWithoutVideoInput
     progresses?: VideoProgressUncheckedCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUpdateInput = {
@@ -16155,6 +16246,7 @@ export namespace Prisma {
     course?: CourseUpdateOneRequiredWithoutVideosNestedInput
     comments?: TimestampCommentUpdateManyWithoutVideoNestedInput
     progresses?: VideoProgressUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateInput = {
@@ -16169,6 +16261,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: TimestampCommentUncheckedUpdateManyWithoutVideoNestedInput
     progresses?: VideoProgressUncheckedUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoCreateManyInput = {
@@ -16529,11 +16622,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutResourcesInput
+    video?: VideoCreateNestedOneWithoutResourcesInput
   }
 
   export type CourseResourceUncheckedCreateInput = {
     id?: string
     courseId: string
+    videoId?: string | null
     title: string
     description?: string | null
     fileUrl: string
@@ -16551,11 +16646,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutResourcesNestedInput
+    video?: VideoUpdateOneWithoutResourcesNestedInput
   }
 
   export type CourseResourceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: StringFieldUpdateOperationsInput | string
@@ -16567,6 +16664,7 @@ export namespace Prisma {
   export type CourseResourceCreateManyInput = {
     id?: string
     courseId: string
+    videoId?: string | null
     title: string
     description?: string | null
     fileUrl: string
@@ -16588,6 +16686,7 @@ export namespace Prisma {
   export type CourseResourceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     courseId?: StringFieldUpdateOperationsInput | string
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: StringFieldUpdateOperationsInput | string
@@ -17319,9 +17418,15 @@ export namespace Prisma {
     progressPercent?: SortOrder
   }
 
+  export type VideoNullableScalarRelationFilter = {
+    is?: VideoWhereInput | null
+    isNot?: VideoWhereInput | null
+  }
+
   export type CourseResourceCountOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
+    videoId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
@@ -17333,6 +17438,7 @@ export namespace Prisma {
   export type CourseResourceMaxOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
+    videoId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
@@ -17344,6 +17450,7 @@ export namespace Prisma {
   export type CourseResourceMinOrderByAggregateInput = {
     id?: SortOrder
     courseId?: SortOrder
+    videoId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     fileUrl?: SortOrder
@@ -17860,6 +17967,13 @@ export namespace Prisma {
     connect?: VideoProgressWhereUniqueInput | VideoProgressWhereUniqueInput[]
   }
 
+  export type CourseResourceCreateNestedManyWithoutVideoInput = {
+    create?: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput> | CourseResourceCreateWithoutVideoInput[] | CourseResourceUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: CourseResourceCreateOrConnectWithoutVideoInput | CourseResourceCreateOrConnectWithoutVideoInput[]
+    createMany?: CourseResourceCreateManyVideoInputEnvelope
+    connect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+  }
+
   export type TimestampCommentUncheckedCreateNestedManyWithoutVideoInput = {
     create?: XOR<TimestampCommentCreateWithoutVideoInput, TimestampCommentUncheckedCreateWithoutVideoInput> | TimestampCommentCreateWithoutVideoInput[] | TimestampCommentUncheckedCreateWithoutVideoInput[]
     connectOrCreate?: TimestampCommentCreateOrConnectWithoutVideoInput | TimestampCommentCreateOrConnectWithoutVideoInput[]
@@ -17872,6 +17986,13 @@ export namespace Prisma {
     connectOrCreate?: VideoProgressCreateOrConnectWithoutVideoInput | VideoProgressCreateOrConnectWithoutVideoInput[]
     createMany?: VideoProgressCreateManyVideoInputEnvelope
     connect?: VideoProgressWhereUniqueInput | VideoProgressWhereUniqueInput[]
+  }
+
+  export type CourseResourceUncheckedCreateNestedManyWithoutVideoInput = {
+    create?: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput> | CourseResourceCreateWithoutVideoInput[] | CourseResourceUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: CourseResourceCreateOrConnectWithoutVideoInput | CourseResourceCreateOrConnectWithoutVideoInput[]
+    createMany?: CourseResourceCreateManyVideoInputEnvelope
+    connect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
   }
 
   export type CourseUpdateOneRequiredWithoutVideosNestedInput = {
@@ -17910,6 +18031,20 @@ export namespace Prisma {
     deleteMany?: VideoProgressScalarWhereInput | VideoProgressScalarWhereInput[]
   }
 
+  export type CourseResourceUpdateManyWithoutVideoNestedInput = {
+    create?: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput> | CourseResourceCreateWithoutVideoInput[] | CourseResourceUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: CourseResourceCreateOrConnectWithoutVideoInput | CourseResourceCreateOrConnectWithoutVideoInput[]
+    upsert?: CourseResourceUpsertWithWhereUniqueWithoutVideoInput | CourseResourceUpsertWithWhereUniqueWithoutVideoInput[]
+    createMany?: CourseResourceCreateManyVideoInputEnvelope
+    set?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    disconnect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    delete?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    connect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    update?: CourseResourceUpdateWithWhereUniqueWithoutVideoInput | CourseResourceUpdateWithWhereUniqueWithoutVideoInput[]
+    updateMany?: CourseResourceUpdateManyWithWhereWithoutVideoInput | CourseResourceUpdateManyWithWhereWithoutVideoInput[]
+    deleteMany?: CourseResourceScalarWhereInput | CourseResourceScalarWhereInput[]
+  }
+
   export type TimestampCommentUncheckedUpdateManyWithoutVideoNestedInput = {
     create?: XOR<TimestampCommentCreateWithoutVideoInput, TimestampCommentUncheckedCreateWithoutVideoInput> | TimestampCommentCreateWithoutVideoInput[] | TimestampCommentUncheckedCreateWithoutVideoInput[]
     connectOrCreate?: TimestampCommentCreateOrConnectWithoutVideoInput | TimestampCommentCreateOrConnectWithoutVideoInput[]
@@ -17936,6 +18071,20 @@ export namespace Prisma {
     update?: VideoProgressUpdateWithWhereUniqueWithoutVideoInput | VideoProgressUpdateWithWhereUniqueWithoutVideoInput[]
     updateMany?: VideoProgressUpdateManyWithWhereWithoutVideoInput | VideoProgressUpdateManyWithWhereWithoutVideoInput[]
     deleteMany?: VideoProgressScalarWhereInput | VideoProgressScalarWhereInput[]
+  }
+
+  export type CourseResourceUncheckedUpdateManyWithoutVideoNestedInput = {
+    create?: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput> | CourseResourceCreateWithoutVideoInput[] | CourseResourceUncheckedCreateWithoutVideoInput[]
+    connectOrCreate?: CourseResourceCreateOrConnectWithoutVideoInput | CourseResourceCreateOrConnectWithoutVideoInput[]
+    upsert?: CourseResourceUpsertWithWhereUniqueWithoutVideoInput | CourseResourceUpsertWithWhereUniqueWithoutVideoInput[]
+    createMany?: CourseResourceCreateManyVideoInputEnvelope
+    set?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    disconnect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    delete?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    connect?: CourseResourceWhereUniqueInput | CourseResourceWhereUniqueInput[]
+    update?: CourseResourceUpdateWithWhereUniqueWithoutVideoInput | CourseResourceUpdateWithWhereUniqueWithoutVideoInput[]
+    updateMany?: CourseResourceUpdateManyWithWhereWithoutVideoInput | CourseResourceUpdateManyWithWhereWithoutVideoInput[]
+    deleteMany?: CourseResourceScalarWhereInput | CourseResourceScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutEnrollmentsInput = {
@@ -18060,12 +18209,28 @@ export namespace Prisma {
     connect?: CourseWhereUniqueInput
   }
 
+  export type VideoCreateNestedOneWithoutResourcesInput = {
+    create?: XOR<VideoCreateWithoutResourcesInput, VideoUncheckedCreateWithoutResourcesInput>
+    connectOrCreate?: VideoCreateOrConnectWithoutResourcesInput
+    connect?: VideoWhereUniqueInput
+  }
+
   export type CourseUpdateOneRequiredWithoutResourcesNestedInput = {
     create?: XOR<CourseCreateWithoutResourcesInput, CourseUncheckedCreateWithoutResourcesInput>
     connectOrCreate?: CourseCreateOrConnectWithoutResourcesInput
     upsert?: CourseUpsertWithoutResourcesInput
     connect?: CourseWhereUniqueInput
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutResourcesInput, CourseUpdateWithoutResourcesInput>, CourseUncheckedUpdateWithoutResourcesInput>
+  }
+
+  export type VideoUpdateOneWithoutResourcesNestedInput = {
+    create?: XOR<VideoCreateWithoutResourcesInput, VideoUncheckedCreateWithoutResourcesInput>
+    connectOrCreate?: VideoCreateOrConnectWithoutResourcesInput
+    upsert?: VideoUpsertWithoutResourcesInput
+    disconnect?: VideoWhereInput | boolean
+    delete?: VideoWhereInput | boolean
+    connect?: VideoWhereUniqueInput
+    update?: XOR<XOR<VideoUpdateToOneWithWhereWithoutResourcesInput, VideoUpdateWithoutResourcesInput>, VideoUncheckedUpdateWithoutResourcesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -18856,6 +19021,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: TimestampCommentCreateNestedManyWithoutVideoInput
     progresses?: VideoProgressCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateWithoutCourseInput = {
@@ -18869,6 +19035,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     comments?: TimestampCommentUncheckedCreateNestedManyWithoutVideoInput
     progresses?: VideoProgressUncheckedCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoCreateOrConnectWithoutCourseInput = {
@@ -18957,10 +19124,12 @@ export namespace Prisma {
     fileType: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    video?: VideoCreateNestedOneWithoutResourcesInput
   }
 
   export type CourseResourceUncheckedCreateWithoutCourseInput = {
     id?: string
+    videoId?: string | null
     title: string
     description?: string | null
     fileUrl: string
@@ -19064,6 +19233,7 @@ export namespace Prisma {
     NOT?: CourseResourceScalarWhereInput | CourseResourceScalarWhereInput[]
     id?: StringFilter<"CourseResource"> | string
     courseId?: StringFilter<"CourseResource"> | string
+    videoId?: StringNullableFilter<"CourseResource"> | string | null
     title?: StringFilter<"CourseResource"> | string
     description?: StringNullableFilter<"CourseResource"> | string | null
     fileUrl?: StringFilter<"CourseResource"> | string
@@ -19165,6 +19335,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CourseResourceCreateWithoutVideoInput = {
+    id?: string
+    title: string
+    description?: string | null
+    fileUrl: string
+    fileType: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutResourcesInput
+  }
+
+  export type CourseResourceUncheckedCreateWithoutVideoInput = {
+    id?: string
+    courseId: string
+    title: string
+    description?: string | null
+    fileUrl: string
+    fileType: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CourseResourceCreateOrConnectWithoutVideoInput = {
+    where: CourseResourceWhereUniqueInput
+    create: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput>
+  }
+
+  export type CourseResourceCreateManyVideoInputEnvelope = {
+    data: CourseResourceCreateManyVideoInput | CourseResourceCreateManyVideoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CourseUpsertWithoutVideosInput = {
     update: XOR<CourseUpdateWithoutVideosInput, CourseUncheckedUpdateWithoutVideosInput>
     create: XOR<CourseCreateWithoutVideosInput, CourseUncheckedCreateWithoutVideosInput>
@@ -19238,6 +19440,22 @@ export namespace Prisma {
   export type VideoProgressUpdateManyWithWhereWithoutVideoInput = {
     where: VideoProgressScalarWhereInput
     data: XOR<VideoProgressUpdateManyMutationInput, VideoProgressUncheckedUpdateManyWithoutVideoInput>
+  }
+
+  export type CourseResourceUpsertWithWhereUniqueWithoutVideoInput = {
+    where: CourseResourceWhereUniqueInput
+    update: XOR<CourseResourceUpdateWithoutVideoInput, CourseResourceUncheckedUpdateWithoutVideoInput>
+    create: XOR<CourseResourceCreateWithoutVideoInput, CourseResourceUncheckedCreateWithoutVideoInput>
+  }
+
+  export type CourseResourceUpdateWithWhereUniqueWithoutVideoInput = {
+    where: CourseResourceWhereUniqueInput
+    data: XOR<CourseResourceUpdateWithoutVideoInput, CourseResourceUncheckedUpdateWithoutVideoInput>
+  }
+
+  export type CourseResourceUpdateManyWithWhereWithoutVideoInput = {
+    where: CourseResourceScalarWhereInput
+    data: XOR<CourseResourceUpdateManyMutationInput, CourseResourceUncheckedUpdateManyWithoutVideoInput>
   }
 
   export type UserCreateWithoutEnrollmentsInput = {
@@ -19460,6 +19678,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutVideosInput
     progresses?: VideoProgressCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateWithoutCommentsInput = {
@@ -19473,6 +19692,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     progresses?: VideoProgressUncheckedCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoCreateOrConnectWithoutCommentsInput = {
@@ -19549,6 +19769,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutVideosNestedInput
     progresses?: VideoProgressUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateWithoutCommentsInput = {
@@ -19562,6 +19783,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     progresses?: VideoProgressUncheckedUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -19784,6 +20006,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutVideosInput
     comments?: TimestampCommentCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceCreateNestedManyWithoutVideoInput
   }
 
   export type VideoUncheckedCreateWithoutProgressesInput = {
@@ -19797,6 +20020,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: TimestampCommentUncheckedCreateNestedManyWithoutVideoInput
+    resources?: CourseResourceUncheckedCreateNestedManyWithoutVideoInput
   }
 
   export type VideoCreateOrConnectWithoutProgressesInput = {
@@ -19873,6 +20097,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutVideosNestedInput
     comments?: TimestampCommentUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateWithoutProgressesInput = {
@@ -19886,6 +20111,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: TimestampCommentUncheckedUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type CourseCreateWithoutResourcesInput = {
@@ -19923,6 +20149,39 @@ export namespace Prisma {
   export type CourseCreateOrConnectWithoutResourcesInput = {
     where: CourseWhereUniqueInput
     create: XOR<CourseCreateWithoutResourcesInput, CourseUncheckedCreateWithoutResourcesInput>
+  }
+
+  export type VideoCreateWithoutResourcesInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl: string
+    order?: number
+    durationSec?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutVideosInput
+    comments?: TimestampCommentCreateNestedManyWithoutVideoInput
+    progresses?: VideoProgressCreateNestedManyWithoutVideoInput
+  }
+
+  export type VideoUncheckedCreateWithoutResourcesInput = {
+    id?: string
+    courseId: string
+    title: string
+    description?: string | null
+    videoUrl: string
+    order?: number
+    durationSec?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutVideoInput
+    progresses?: VideoProgressUncheckedCreateNestedManyWithoutVideoInput
+  }
+
+  export type VideoCreateOrConnectWithoutResourcesInput = {
+    where: VideoWhereUniqueInput
+    create: XOR<VideoCreateWithoutResourcesInput, VideoUncheckedCreateWithoutResourcesInput>
   }
 
   export type CourseUpsertWithoutResourcesInput = {
@@ -19966,6 +20225,45 @@ export namespace Prisma {
     videos?: VideoUncheckedUpdateManyWithoutCourseNestedInput
     enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
     paymentRequest?: PaymentRequestUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type VideoUpsertWithoutResourcesInput = {
+    update: XOR<VideoUpdateWithoutResourcesInput, VideoUncheckedUpdateWithoutResourcesInput>
+    create: XOR<VideoCreateWithoutResourcesInput, VideoUncheckedCreateWithoutResourcesInput>
+    where?: VideoWhereInput
+  }
+
+  export type VideoUpdateToOneWithWhereWithoutResourcesInput = {
+    where?: VideoWhereInput
+    data: XOR<VideoUpdateWithoutResourcesInput, VideoUncheckedUpdateWithoutResourcesInput>
+  }
+
+  export type VideoUpdateWithoutResourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    durationSec?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutVideosNestedInput
+    comments?: TimestampCommentUpdateManyWithoutVideoNestedInput
+    progresses?: VideoProgressUpdateManyWithoutVideoNestedInput
+  }
+
+  export type VideoUncheckedUpdateWithoutResourcesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    durationSec?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: TimestampCommentUncheckedUpdateManyWithoutVideoNestedInput
+    progresses?: VideoProgressUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -20253,6 +20551,7 @@ export namespace Prisma {
 
   export type CourseResourceCreateManyCourseInput = {
     id?: string
+    videoId?: string | null
     title: string
     description?: string | null
     fileUrl: string
@@ -20272,6 +20571,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: TimestampCommentUpdateManyWithoutVideoNestedInput
     progresses?: VideoProgressUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateWithoutCourseInput = {
@@ -20285,6 +20585,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: TimestampCommentUncheckedUpdateManyWithoutVideoNestedInput
     progresses?: VideoProgressUncheckedUpdateManyWithoutVideoNestedInput
+    resources?: CourseResourceUncheckedUpdateManyWithoutVideoNestedInput
   }
 
   export type VideoUncheckedUpdateManyWithoutCourseInput = {
@@ -20378,10 +20679,12 @@ export namespace Prisma {
     fileType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    video?: VideoUpdateOneWithoutResourcesNestedInput
   }
 
   export type CourseResourceUncheckedUpdateWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: StringFieldUpdateOperationsInput | string
@@ -20392,6 +20695,7 @@ export namespace Prisma {
 
   export type CourseResourceUncheckedUpdateManyWithoutCourseInput = {
     id?: StringFieldUpdateOperationsInput | string
+    videoId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     fileUrl?: StringFieldUpdateOperationsInput | string
@@ -20416,6 +20720,17 @@ export namespace Prisma {
     isCompleted?: boolean
     updatedAt?: Date | string
     createdAt?: Date | string
+  }
+
+  export type CourseResourceCreateManyVideoInput = {
+    id?: string
+    courseId: string
+    title: string
+    description?: string | null
+    fileUrl: string
+    fileType: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TimestampCommentUpdateWithoutVideoInput = {
@@ -20470,6 +20785,39 @@ export namespace Prisma {
     isCompleted?: BoolFieldUpdateOperationsInput | boolean
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourseResourceUpdateWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutResourcesNestedInput
+  }
+
+  export type CourseResourceUncheckedUpdateWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CourseResourceUncheckedUpdateManyWithoutVideoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    fileUrl?: StringFieldUpdateOperationsInput | string
+    fileType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

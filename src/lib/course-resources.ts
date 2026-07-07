@@ -1,6 +1,4 @@
-import { randomUUID } from "crypto";
-import { promises as fs } from "fs";
-import path from "path";
+import { prisma } from "@/lib/prisma";
 
 export type CourseResource = {
   id: string;
@@ -13,25 +11,24 @@ export type CourseResource = {
   createdAt: string;
 };
 
-const resourceFilePath = path.join(process.cwd(), "data", "course-resources.json");
-
-async function ensureStore() {
-  await fs.mkdir(path.dirname(resourceFilePath), { recursive: true });
-  try {
-    await fs.access(resourceFilePath);
-  } catch {
-    await fs.writeFile(resourceFilePath, "[]", "utf8");
-  }
-}
-
 export async function getAllCourseResources(): Promise<CourseResource[]> {
-  await ensureStore();
-  const content = await fs.readFile(resourceFilePath, "utf8");
-  try {
-    return JSON.parse(content) as CourseResource[];
-  } catch {
-    return [];
-  }
+  const rows = await prisma.courseResource.findMany({
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      courseId: true,
+      videoId: true,
+      title: true,
+      description: true,
+      fileUrl: true,
+      fileType: true,
+      createdAt: true,
+    },
+  });
+  return rows.map((row) => ({
+    ...row,
+    createdAt: row.createdAt.toISOString(),
+  }));
 }
 
 export async function getCourseResources(courseId: string): Promise<CourseResource[]> {
@@ -47,16 +44,14 @@ export async function addCourseResource(input: {
   fileUrl: string;
   fileType: string;
 }) {
-  const rows = await getAllCourseResources();
-  rows.unshift({
-    id: randomUUID(),
-    courseId: input.courseId,
-    videoId: input.videoId?.trim() || null,
-    title: input.title,
-    description: input.description?.trim() || null,
-    fileUrl: input.fileUrl,
-    fileType: input.fileType,
-    createdAt: new Date().toISOString(),
+  await prisma.courseResource.create({
+    data: {
+      courseId: input.courseId,
+      videoId: input.videoId?.trim() || null,
+      title: input.title,
+      description: input.description?.trim() || null,
+      fileUrl: input.fileUrl,
+      fileType: input.fileType,
+    },
   });
-  await fs.writeFile(resourceFilePath, JSON.stringify(rows, null, 2), "utf8");
 }

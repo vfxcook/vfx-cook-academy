@@ -235,6 +235,7 @@ exports.Prisma.VideoProgressScalarFieldEnum = {
 exports.Prisma.CourseResourceScalarFieldEnum = {
   id: 'id',
   courseId: 'courseId',
+  videoId: 'videoId',
   title: 'title',
   description: 'description',
   fileUrl: 'fileUrl',

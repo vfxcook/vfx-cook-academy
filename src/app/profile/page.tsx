@@ -1,11 +1,9 @@
-import { randomUUID } from "crypto";
-import { promises as fs } from "fs";
-import path from "path";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth";
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { prisma } from "@/lib/prisma";
+import { saveUploadFile } from "@/lib/storage";
 
 const MAX_PROFILE_IMAGE_BYTES = 5 * 1024 * 1024;
 
@@ -45,12 +43,7 @@ export default async function ProfilePage() {
       if (imageFile.size > MAX_PROFILE_IMAGE_BYTES) {
         throw new Error("Profile image is too large. Please upload under 5MB.");
       }
-      const ext = path.extname(imageFile.name) || ".jpg";
-      const fileName = `${Date.now()}-${randomUUID()}${ext.toLowerCase()}`;
-      const targetDir = path.join(process.cwd(), "public", "uploads", "profiles");
-      await fs.mkdir(targetDir, { recursive: true });
-      await fs.writeFile(path.join(targetDir, fileName), Buffer.from(await imageFile.arrayBuffer()));
-      image = `/uploads/profiles/${fileName}`;
+      image = await saveUploadFile(imageFile, "profiles");
     }
     await prisma.user.update({
       where: { id: userId },
