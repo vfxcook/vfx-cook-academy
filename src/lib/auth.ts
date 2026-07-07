@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import GoogleProvider from "next-auth/providers/google";
 
-import { verifyPassword } from "@/lib/password";
+import { hashPassword, verifyPassword } from "@/lib/password";
 import { prisma } from "@/lib/prisma";
 
 const providers: NextAuthOptions["providers"] = [];
@@ -56,6 +56,43 @@ providers.push(
         return null;
       }
 
+      const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+      const adminPassword = process.env.ADMIN_PASSWORD;
+      if (adminEmail && adminPassword && email === adminEmail && password === adminPassword) {
+        try {
+          const adminHash = await hashPassword(adminPassword);
+          const adminUser = await prisma.user.upsert({
+            where: { email: adminEmail },
+            update: {
+              role: "ADMIN",
+              passwordHash: adminHash,
+              name: "VFX Cook Admin",
+            },
+            create: {
+              email: adminEmail,
+              role: "ADMIN",
+              passwordHash: adminHash,
+              name: "VFX Cook Admin",
+              phone: "9999999999",
+            },
+          });
+          return {
+            id: adminUser.id,
+            email: adminUser.email,
+            name: adminUser.name,
+            image: adminUser.image,
+          };
+        } catch (error) {
+          console.error("Failed to upsert admin account from env credentials", error);
+          return {
+            id: `admin-env-${adminEmail}`,
+            email: adminEmail,
+            name: "VFX Cook Admin",
+            image: null,
+          };
+        }
+      }
+
       const user = await prisma.user.findUnique({
         where: { email },
       });
@@ -89,13 +126,24 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
       }
-      if (token.id) {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: String(token.id) },
-          select: { phone: true, role: true },
-        });
-        token.phone = dbUser?.phone ?? null;
-        token.role = dbUser?.role ?? "STUDENT";
+      if (token.id && !String(token.id).startsWith("admin-env-")) {
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: String(token.id) },
+            select: { phone: true, role: true },
+          });
+          token.phone = dbUser?.phone ?? null;
+          token.role = dbUser?.role ?? "STUDENT";
+        } catch (error) {
+          console.error("Failed to load user role/phone from database", error);
+        }
+      } else if (
+        token.email &&
+        process.env.ADMIN_EMAIL &&
+        String(token.email).toLowerCase() === process.env.ADMIN_EMAIL.trim().toLowerCase()
+      ) {
+        token.phone = token.phone ?? null;
+        token.role = "ADMIN";
       }
       return token;
     },
