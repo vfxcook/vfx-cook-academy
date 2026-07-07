@@ -18,16 +18,19 @@ async function ensureSupabaseBucket() {
     Authorization: `Bearer ${serviceRoleKey}`,
   };
 
-  const bucketRes = await fetch(`${supabaseUrl}/storage/v1/bucket/${UPLOAD_BUCKET}`, {
+  const bucketRes = await fetch(`${supabaseUrl}/storage/v1/bucket`, {
     headers,
     cache: "no-store",
   });
-  if (bucketRes.ok) {
+  if (!bucketRes.ok) {
+    const reason = await bucketRes.text();
+    throw new Error(`Failed to query Supabase buckets (${bucketRes.status}): ${reason}`);
+  }
+  const buckets = (await bucketRes.json()) as Array<{ id?: string; name?: string }>;
+  const hasBucket = buckets.some((bucket) => bucket.id === UPLOAD_BUCKET || bucket.name === UPLOAD_BUCKET);
+  if (hasBucket) {
     bucketReady = true;
     return;
-  }
-  if (bucketRes.status !== 404) {
-    throw new Error("Failed to verify Supabase uploads bucket.");
   }
 
   const createRes = await fetch(`${supabaseUrl}/storage/v1/bucket`, {
@@ -43,7 +46,8 @@ async function ensureSupabaseBucket() {
     }),
   });
   if (!createRes.ok) {
-    throw new Error("Failed to create Supabase uploads bucket.");
+    const reason = await createRes.text();
+    throw new Error(`Failed to create Supabase uploads bucket (${createRes.status}): ${reason}`);
   }
   bucketReady = true;
 }
@@ -68,7 +72,8 @@ export async function saveUploadFile(file: File, folder: "thumbnails" | "profile
       body: Buffer.from(await file.arrayBuffer()),
     });
     if (!uploadRes.ok) {
-      throw new Error("Supabase file upload failed.");
+      const reason = await uploadRes.text();
+      throw new Error(`Supabase file upload failed (${uploadRes.status}): ${reason}`);
     }
     return `${supabaseUrl}/storage/v1/object/public/${UPLOAD_BUCKET}/${objectPath}`;
   }
