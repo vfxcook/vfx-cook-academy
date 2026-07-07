@@ -5,6 +5,7 @@
   "description": "Lightweight video course platform MVP",
   "scripts": {
     "dev": "node node_modules/next/dist/bin/next dev",
+    "prebuild": "node node_modules/prisma/build/index.js generate --schema prisma/schema.prisma",
     "build": "node node_modules/next/dist/bin/next build",
     "start": "node node_modules/next/dist/bin/next start",
     "lint": "node -e \"console.log('Lint is optional for this MVP build.')\"",
