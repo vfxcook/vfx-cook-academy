@@ -33,3 +33,5 @@ pnpm-debug.log*
 
 # prisma engine temp artifacts on Windows
 src/generated/prisma/query_engine-windows.dll.node.tmp*
+
+.vercel
