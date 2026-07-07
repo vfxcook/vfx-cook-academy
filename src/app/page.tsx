@@ -9,7 +9,7 @@ import {
   learningItems,
   valueProps,
 } from "@/lib/landing";
-import { prisma } from "@/lib/prisma";
+import { getPublishedCoursesCached } from "@/lib/public-data";
 import { formatInr } from "@/lib/utils";
 
 export default async function HomePage() {
@@ -27,11 +27,7 @@ export default async function HomePage() {
     videos: Array<{ id: string }>;
   }> = [];
   try {
-    courses = await prisma.course.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: "desc" },
-      include: { videos: { select: { id: true } } },
-    });
+    courses = await getPublishedCoursesCached();
   } catch (error) {
     console.error("Failed to load published courses on homepage", error);
   }

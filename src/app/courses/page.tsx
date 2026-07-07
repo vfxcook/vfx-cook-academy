@@ -1,6 +1,6 @@
 import { CoursesCatalogClient } from "@/components/CoursesCatalogClient";
 import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { getPublishedCoursesCached } from "@/lib/public-data";
 
 export default async function CoursesPage() {
   const session = await auth();
@@ -15,15 +15,7 @@ export default async function CoursesPage() {
     videos: Array<{ id: string }>;
   }> = [];
   try {
-    courses = await prisma.course.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: "desc" },
-      include: {
-        videos: {
-          select: { id: true },
-        },
-      },
-    });
+    courses = await getPublishedCoursesCached();
   } catch (error) {
     console.error("Failed to load courses catalog", error);
   }

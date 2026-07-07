@@ -54,42 +54,44 @@ export default async function CoursePage({
   const canOpenClassroom = hasAccess && (isReleased || isAdmin);
   const firstVideo = course.videos[0];
   const videoIds = course.videos.map((video) => video.id);
-  const progressRows = session?.user?.id
-    ? await prisma.videoProgress.findMany({
-        where: {
-          userId: session.user.id,
-          videoId: { in: videoIds },
-          isCompleted: true,
+  const [progressRows, activeMembers, completionCounts, resources] = await Promise.all([
+    session?.user?.id
+      ? prisma.videoProgress.findMany({
+          where: {
+            userId: session.user.id,
+            videoId: { in: videoIds },
+            isCompleted: true,
+          },
+          select: { videoId: true },
+        })
+      : Promise.resolve([]),
+    prisma.enrollment.findMany({
+      where: {
+        courseId: course.id,
+        isActive: true,
+      },
+      include: {
+        user: {
+          select: { name: true, email: true },
         },
-        select: { videoId: true },
-      })
-    : [];
+      },
+    }),
+    prisma.videoProgress.groupBy({
+      by: ["userId"],
+      where: {
+        isCompleted: true,
+        video: {
+          courseId: course.id,
+        },
+      },
+      _count: {
+        _all: true,
+      },
+    }),
+    getCourseResources(course.id),
+  ]);
   const completedVideoIds = progressRows.map((row) => row.videoId);
   const totalLessons = course.videos.length;
-
-  const activeMembers = await prisma.enrollment.findMany({
-    where: {
-      courseId: course.id,
-      isActive: true,
-    },
-    include: {
-      user: {
-        select: { name: true, email: true },
-      },
-    },
-  });
-  const completionCounts = await prisma.videoProgress.groupBy({
-    by: ["userId"],
-    where: {
-      isCompleted: true,
-      video: {
-        courseId: course.id,
-      },
-    },
-    _count: {
-      _all: true,
-    },
-  });
   const completionMap = new Map(completionCounts.map((row) => [row.userId, row._count._all]));
   const leaderboardRows = activeMembers
     .map((member) => {
@@ -104,7 +106,6 @@ export default async function CoursePage({
       };
     })
     .sort((a, b) => b.progressPercent - a.progressPercent);
-  const resources = await getCourseResources(course.id);
 
   return (
     <div style={{ display: "grid", gap: "1rem" }}>

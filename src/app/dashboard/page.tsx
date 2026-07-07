@@ -43,6 +43,24 @@ export default async function DashboardPage() {
     },
     orderBy: { createdAt: "desc" },
   });
+  const completedProgressRows = await prisma.videoProgress.findMany({
+    where: {
+      userId: session.user.id,
+      isCompleted: true,
+    },
+    select: {
+      video: {
+        select: {
+          courseId: true,
+        },
+      },
+    },
+  });
+  const completedByCourse = completedProgressRows.reduce<Record<string, number>>((acc, row) => {
+    const courseId = row.video.courseId;
+    acc[courseId] = (acc[courseId] ?? 0) + 1;
+    return acc;
+  }, {});
 
   return (
     <div style={{ display: "grid", gap: "1rem" }}>
@@ -62,18 +80,9 @@ export default async function DashboardPage() {
           {enrollments.length === 0 ? (
             <p className="muted">No enrollments yet. Buy a course from home page.</p>
           ) : (
-            await Promise.all(
-              enrollments.map(async (item) => {
+            enrollments.map((item) => {
                 const totalVideos = item.course.videos.length;
-                const completedCount = await prisma.videoProgress.count({
-                  where: {
-                    userId: session.user.id,
-                    isCompleted: true,
-                    video: {
-                      courseId: item.courseId,
-                    },
-                  },
-                });
+                const completedCount = completedByCourse[item.courseId] ?? 0;
                 const progressPercent =
                   totalVideos > 0 ? Math.round((completedCount / totalVideos) * 100) : 0;
                 const isReleased =
@@ -130,8 +139,7 @@ export default async function DashboardPage() {
                     </div>
                   </article>
                 );
-              }),
-            )
+              })
           )}
         </div>
       </section>
