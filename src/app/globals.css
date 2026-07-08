@@ -1368,14 +1368,15 @@ a {
   border-radius: 10px;
   display: grid;
   gap: 0.75rem;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: 1fr;
   padding: 0.7rem;
 }
 
 .admin-course-main {
   display: grid;
   gap: 0.7rem;
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  align-items: start;
 }
 
 .admin-course-main > div {
@@ -1452,7 +1453,7 @@ a {
   align-content: start;
   display: grid;
   gap: 0.4rem;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   min-width: 0;
 }
 
@@ -1470,6 +1471,7 @@ a {
 
 .admin-course-actions .btn {
   width: 100%;
+  white-space: nowrap;
 }
 
 .admin-course-editor {
@@ -1549,8 +1551,8 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .admin-course-row {
-    grid-template-columns: 1fr;
+  .admin-course-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1589,6 +1591,7 @@ a {
   }
 
   .admin-course-actions {
+    grid-template-columns: 1fr;
     min-width: 0;
   }
 }
