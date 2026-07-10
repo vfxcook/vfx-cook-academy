@@ -4,6 +4,75 @@ import { hashPassword } from "../src/lib/password";
 import { coursePriceInr } from "../src/lib/course-offer";
 
 const prisma = new PrismaClient();
+const keralaStudentNames = [
+  "Aarav Nair",
+  "Adithya Menon",
+  "Akhil Raj",
+  "Amal Krishna",
+  "Anand Mohan",
+  "Arjun Suresh",
+  "Ashwin Prasad",
+  "Avinash Babu",
+  "Basil Mathew",
+  "Devanand Pillai",
+  "Edwin Thomas",
+  "Gokul Rajan",
+  "Harikrishnan Nair",
+  "Joel Varghese",
+  "Kiran Jose",
+  "Manu Mohan",
+  "Nikhil Ramesh",
+  "Rahul Narayanan",
+  "Rohit Balan",
+  "Sanjay Krishnan",
+  "Sidharth Menon",
+  "Vishnu Prasad",
+  "Abhinav Shaji",
+  "Alwin Francis",
+  "Nivin Joseph",
+  "Jithin Das",
+  "Rohan Mathew",
+  "Sreehari Nair",
+  "Muhammed Ameen",
+  "Fasil Rahman",
+  "Ijas Ahmed",
+  "Shamil Ali",
+  "Archa Nair",
+  "Anagha Suresh",
+  "Anjana Raj",
+  "Aparna Menon",
+  "Ardra Mohan",
+  "Arya Krishna",
+  "Aswathy Pillai",
+  "Devika Prasad",
+  "Diya Mathew",
+  "Fathima Noor",
+  "Gayathri Nair",
+  "Gopika Ramesh",
+  "Hannah Thomas",
+  "Keerthana Babu",
+  "Lakshmi Narayanan",
+  "Meera Suresh",
+  "Neha Joseph",
+  "Nandana Rajan",
+  "Parvathy Menon",
+  "Riya Varghese",
+  "Sandra Thomas",
+  "Sneha Raj",
+  "Swathy Mohan",
+  "Tanvi Nair",
+  "Vaishnavi Prasad",
+  "Anitta Jose",
+  "Diya Mary",
+  "Aleena Francis",
+  "Shahana Rahman",
+  "Aisha Fathima",
+  "Nila Krishna",
+  "Malavika Suresh",
+  "Kavya Nair",
+  "Teresa Mathew",
+  "Ziya Ahmed",
+];
 
 async function main() {
   const course = await prisma.course.upsert({
@@ -67,6 +136,43 @@ async function main() {
     },
   });
   console.log(`Seeded admin: ${adminEmail}`);
+
+  for (const [index, fullName] of keralaStudentNames.entries()) {
+    const emailLocal = fullName.toLowerCase().replace(/[^a-z]+/g, ".").replace(/(^\.|\.$)/g, "");
+    const email = `${emailLocal}.${index + 1}@learn.vfxcookacademy.com`;
+    const student = await prisma.user.upsert({
+      where: { email },
+      update: {
+        name: fullName,
+        role: "STUDENT",
+      },
+      create: {
+        email,
+        name: fullName,
+        role: "STUDENT",
+      },
+    });
+
+    await prisma.enrollment.upsert({
+      where: {
+        userId_courseId: {
+          userId: student.id,
+          courseId: course.id,
+        },
+      },
+      update: {
+        isActive: true,
+        activatedAt: new Date(),
+      },
+      create: {
+        userId: student.id,
+        courseId: course.id,
+        isActive: true,
+        activatedAt: new Date(),
+      },
+    });
+  }
+  console.log(`Seeded ${keralaStudentNames.length} Kerala students and activated enrollments`);
 }
 
 main()

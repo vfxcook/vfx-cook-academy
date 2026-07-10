@@ -20,16 +20,31 @@ export default async function CoursesPage() {
     availableFrom: Date | null;
     videos: Array<{ id: string }>;
   }> = [];
+  let enrollmentCourseIds = new Set<string>();
+  let activeEnrollmentCourseIds = new Set<string>();
   try {
-    courses = await prisma.course.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: "desc" },
-      include: {
-        videos: {
-          select: { id: true },
+    const [coursesResult, enrollments] = await Promise.all([
+      prisma.course.findMany({
+        where: { isPublished: true },
+        orderBy: { createdAt: "desc" },
+        include: {
+          videos: {
+            select: { id: true },
+          },
         },
-      },
-    });
+      }),
+      session?.user?.id
+        ? prisma.enrollment.findMany({
+            where: { userId: session.user.id },
+            select: { courseId: true, isActive: true },
+          })
+        : Promise.resolve([]),
+    ]);
+    courses = coursesResult;
+    enrollmentCourseIds = new Set(enrollments.map((item) => item.courseId));
+    activeEnrollmentCourseIds = new Set(
+      enrollments.filter((item) => item.isActive).map((item) => item.courseId),
+    );
   } catch (error) {
     console.error("Failed to load courses catalog", error);
   }
@@ -55,6 +70,8 @@ export default async function CoursesPage() {
           thumbnailUrl: course.thumbnailUrl,
           lessonsCount: course.videos.length,
           availableFrom: toIsoOrNull(course.availableFrom),
+          isEnrolled: enrollmentCourseIds.has(course.id),
+          isActiveEnrollment: activeEnrollmentCourseIds.has(course.id),
         }))}
       />
     </div>

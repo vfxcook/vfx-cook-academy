@@ -75,15 +75,14 @@ export default async function CheckoutPage({
         </div>
         <RazorpayCheckoutButton courseId={course.id} />
         <p className="muted" style={{ margin: 0 }}>
-          After successful payment, webhook auto-activates your enrollment. You can refresh this page
-          or open dashboard to continue.
+          After successful payment, signature verification activates your enrollment automatically.
         </p>
         <Link className="btn btn-secondary" href="/dashboard">
           Go to dashboard
         </Link>
         {query.status ? (
           <p className="muted" style={{ margin: 0 }}>
-            Razorpay callback received. Waiting for webhook confirmation...
+            Razorpay callback received. You can continue from dashboard.
           </p>
         ) : null}
       </section>

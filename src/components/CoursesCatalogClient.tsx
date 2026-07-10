@@ -14,15 +14,32 @@ type CourseCard = {
   thumbnailUrl: string | null;
   lessonsCount: number;
   availableFrom: string | null;
+  isEnrolled: boolean;
+  isActiveEnrollment: boolean;
 };
 
 const FEATURED_PREVIEW_VIDEO =
   "https://player.vimeo.com/video/1207857088?title=0&byline=0&portrait=0&speed=0&dnt=1";
 
-function getJoinHref(slug: string, isLoggedIn: boolean, isAdmin: boolean) {
+function getPrimaryHref(
+  slug: string,
+  isLoggedIn: boolean,
+  isAdmin: boolean,
+  isEnrolled: boolean,
+  isActiveEnrollment: boolean,
+) {
   if (isAdmin) return `/course/${slug}`;
+  if (isActiveEnrollment) return `/course/${slug}`;
+  if (isEnrolled) return `/checkout/${slug}`;
   if (isLoggedIn) return `/checkout/${slug}`;
   return `/register?next=${encodeURIComponent(`/checkout/${slug}`)}`;
+}
+
+function getPrimaryLabel(isLoggedIn: boolean, isAdmin: boolean, isEnrolled: boolean, isActiveEnrollment: boolean) {
+  if (isAdmin || isActiveEnrollment) return "View Course";
+  if (isEnrolled) return "Complete Payment";
+  if (isLoggedIn) return "Join Now";
+  return "Join Now";
 }
 
 export function CoursesCatalogClient({
@@ -87,8 +104,17 @@ export function CoursesCatalogClient({
                 </div>
               </div>
               <div className="course-vertical-actions">
-                <Link className="btn btn-primary" href={getJoinHref(course.slug, isLoggedIn, isAdmin)}>
-                  Join Now
+                <Link
+                  className="btn btn-primary"
+                  href={getPrimaryHref(
+                    course.slug,
+                    isLoggedIn,
+                    isAdmin,
+                    course.isEnrolled,
+                    course.isActiveEnrollment,
+                  )}
+                >
+                  {getPrimaryLabel(isLoggedIn, isAdmin, course.isEnrolled, course.isActiveEnrollment)}
                 </Link>
                 <button className="btn btn-secondary" type="button" onClick={() => setSelectedCourseId(course.id)}>
                   View Details
@@ -137,8 +163,22 @@ export function CoursesCatalogClient({
               )}
             </div>
             <div className="course-vertical-actions">
-              <Link className="btn btn-primary" href={getJoinHref(selectedCourse.slug, isLoggedIn, isAdmin)}>
-                Join Now
+              <Link
+                className="btn btn-primary"
+                href={getPrimaryHref(
+                  selectedCourse.slug,
+                  isLoggedIn,
+                  isAdmin,
+                  selectedCourse.isEnrolled,
+                  selectedCourse.isActiveEnrollment,
+                )}
+              >
+                {getPrimaryLabel(
+                  isLoggedIn,
+                  isAdmin,
+                  selectedCourse.isEnrolled,
+                  selectedCourse.isActiveEnrollment,
+                )}
               </Link>
               <button className="btn btn-secondary" type="button" onClick={() => setSelectedCourseId(null)}>
                 Close

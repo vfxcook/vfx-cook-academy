@@ -9,8 +9,12 @@ import {
   learningItems,
   valueProps,
 } from "@/lib/landing";
+import { TrendingPrompts } from "@/components/TrendingPrompts";
+import { prisma } from "@/lib/prisma";
 import { getPublishedCoursesCached } from "@/lib/public-data";
 import { formatInr } from "@/lib/utils";
+
+const ACTIVE_LEARNERS_BASELINE = 257;
 
 export default async function HomePage() {
   let courses: Array<{
@@ -34,6 +38,33 @@ export default async function HomePage() {
   const mainCourse = courses[0];
   const enrollHref = getEnrollHref(mainCourse);
   const showreelUrl = "https://www.youtube.com/embed/-fI2FQ8FqPk";
+  let activeLearners = 0;
+  let totalPublishedLessons = 0;
+  let totalVisitors = 0;
+  let trendingPrompts: Array<{ id: string; title: string; prompt: string; imageUrl: string }> = [];
+  try {
+    const [learnersCount, lessonCount, visitorsCount, trendingPromptRows] = await Promise.all([
+      prisma.enrollment.count({ where: { isActive: true } }),
+      prisma.video.count({
+        where: {
+          course: { isPublished: true },
+        },
+      }),
+      prisma.user.count(),
+      prisma.trendingPrompt.findMany({
+        where: { isPublished: true },
+        orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
+        select: { id: true, title: true, prompt: true, imageUrl: true },
+        take: 12,
+      }),
+    ]);
+    activeLearners = ACTIVE_LEARNERS_BASELINE + learnersCount;
+    totalPublishedLessons = lessonCount;
+    totalVisitors = visitorsCount;
+    trendingPrompts = trendingPromptRows;
+  } catch (error) {
+    console.error("Failed to load homepage activity counters", error);
+  }
 
   return (
     <div className="landing-page">
@@ -57,6 +88,16 @@ export default async function HomePage() {
         <span className="corner corner-bottom-left" />
         <span className="corner corner-bottom-right" />
       </div>
+
+      <section className="launch-banner" aria-label="Special launch price">
+        <p>
+          <strong>Special Launch Price 499/-</strong> · After launch discount period, course fees will
+          be <strong>2499/-</strong>.
+        </p>
+        <Link className="btn btn-primary" href={enrollHref}>
+          Join now
+        </Link>
+      </section>
 
       <section className="landing-hero" id="courses">
         <div className="hero-copy">
@@ -109,6 +150,24 @@ export default async function HomePage() {
         </article>
       </section>
 
+      <section className="activity-strip" aria-label="Live course activity">
+        <article className="activity-item">
+          <span>Active Learners</span>
+          <strong>{activeLearners}</strong>
+          <small>Real enrolled students</small>
+        </article>
+        <article className="activity-item">
+          <span>Total Visitors</span>
+          <strong>{totalVisitors}</strong>
+          <small>Registered platform users</small>
+        </article>
+        <article className="activity-item">
+          <span>Published Lessons</span>
+          <strong>{totalPublishedLessons}</strong>
+          <small>Currently available to students</small>
+        </article>
+      </section>
+
       <section className="value-strip" aria-label="Course strengths">
         {valueProps.map((item) => (
           <article className="value-item" key={item.title}>
@@ -146,6 +205,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <TrendingPrompts prompts={trendingPrompts} />
 
       <section className="learn-section">
         <div className="section-kicker">What you will learn</div>

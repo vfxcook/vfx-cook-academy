@@ -22,6 +22,47 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
+  if (session.user.role === "ADMIN") {
+    const allCourses = await prisma.course.findMany({
+      select: { id: true },
+    });
+    if (allCourses.length > 0) {
+      const courseIds = allCourses.map((course) => course.id);
+      const existingEnrollments = await prisma.enrollment.findMany({
+        where: {
+          userId: session.user.id,
+          courseId: { in: courseIds },
+        },
+        select: { courseId: true, isActive: true },
+      });
+      const existingCourseIds = new Set(existingEnrollments.map((item) => item.courseId));
+      const missingCourseIds = courseIds.filter((courseId) => !existingCourseIds.has(courseId));
+
+      if (missingCourseIds.length > 0) {
+        await prisma.enrollment.createMany({
+          data: missingCourseIds.map((courseId) => ({
+            userId: session.user.id,
+            courseId,
+            isActive: true,
+            activatedAt: new Date(),
+          })),
+        });
+      }
+
+      await prisma.enrollment.updateMany({
+        where: {
+          userId: session.user.id,
+          courseId: { in: courseIds },
+          isActive: false,
+        },
+        data: {
+          isActive: true,
+          activatedAt: new Date(),
+        },
+      });
+    }
+  }
+
   const enrollments = await prisma.enrollment.findMany({
     where: { userId: session.user.id },
     include: {

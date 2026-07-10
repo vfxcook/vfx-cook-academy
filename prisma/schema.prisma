@@ -20,6 +20,20 @@ enum UserRole {
   ADMIN
 }
 
+enum CommunityReactionType {
+  LIKE
+  FIRE
+  CLAP
+}
+
+enum NotificationType {
+  REACTION_ON_POST
+  COMMENT_ON_POST
+  REPLY_ON_COMMENT
+  NEW_VIDEO_IN_ENROLLED_COURSE
+  NEW_POST_IN_ENROLLED_COURSE
+}
+
 model User {
   id            String           @id @default(cuid())
   name          String?
@@ -35,8 +49,14 @@ model User {
   sessions      Session[]
   enrollments   Enrollment[]
   comments      TimestampComment[]
+  timestampCommentLikes TimestampCommentLike[]
   payments      PaymentRequest[]
   videoProgress VideoProgress[]
+  communityPosts          CommunityPost[]
+  communityPostComments   CommunityPostComment[]
+  communityPostReactions  CommunityPostReaction[]
+  notifications           Notification[]      @relation("UserNotifications")
+  triggeredNotifications  Notification[]      @relation("ActorNotifications")
 }
 
 model Account {
@@ -81,6 +101,7 @@ model Course {
   priceInr       Int
   thumbnailUrl   String?
   availableFrom  DateTime?
+  freePreviewFirstLesson Boolean    @default(false)
   isPublished    Boolean            @default(false)
   createdAt      DateTime           @default(now())
   updatedAt      DateTime           @updatedAt
@@ -88,6 +109,8 @@ model Course {
   enrollments    Enrollment[]
   paymentRequest PaymentRequest[]
   resources      CourseResource[]
+  communityPosts CommunityPost[]
+  notifications  Notification[]
 }
 
 model Video {
@@ -104,6 +127,7 @@ model Video {
   comments    TimestampComment[]
   progresses  VideoProgress[]
   resources   CourseResource[]
+  notifications Notification[]
 }
 
 model Enrollment {
@@ -126,12 +150,27 @@ model TimestampComment {
   id          String   @id @default(cuid())
   userId      String
   videoId     String
+  parentId    String?
   timestamp   Int
   text        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   video       Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  parent      TimestampComment?  @relation("TimestampCommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     TimestampComment[] @relation("TimestampCommentReplies")
+  likes       TimestampCommentLike[]
+}
+
+model TimestampCommentLike {
+  id        String   @id @default(cuid())
+  commentId String
+  userId    String
+  createdAt DateTime @default(now())
+  comment   TimestampComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commentId, userId])
 }
 
 model PaymentRequest {
@@ -176,4 +215,83 @@ model CourseResource {
   updatedAt   DateTime @updatedAt
   course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   video       Video?   @relation(fields: [videoId], references: [id], onDelete: SetNull)
+}
+
+model TrendingPrompt {
+  id          String   @id @default(cuid())
+  title       String
+  prompt      String
+  imageUrl    String
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CommunityPost {
+  id          String                  @id @default(cuid())
+  userId      String
+  courseId    String
+  title       String
+  caption     String
+  mediaUrl    String?
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  user        User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course      Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  comments    CommunityPostComment[]
+  reactions   CommunityPostReaction[]
+  notifications Notification[]
+}
+
+model CommunityPostComment {
+  id          String                  @id @default(cuid())
+  postId      String
+  userId      String
+  parentId    String?
+  content     String
+  createdAt   DateTime                @default(now())
+  updatedAt   DateTime                @updatedAt
+  post        CommunityPost           @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user        User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent      CommunityPostComment?   @relation("CommunityCommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     CommunityPostComment[]  @relation("CommunityCommentReplies")
+  notifications Notification[]
+}
+
+model CommunityPostReaction {
+  id        String                 @id @default(cuid())
+  postId    String
+  userId    String
+  type      CommunityReactionType
+  createdAt DateTime               @default(now())
+  post      CommunityPost          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId, type])
+}
+
+model Notification {
+  id          String            @id @default(cuid())
+  userId      String
+  actorUserId String?
+  type        NotificationType
+  title       String
+  message     String
+  isRead      Boolean           @default(false)
+  readAt      DateTime?
+  courseId    String?
+  postId      String?
+  commentId   String?
+  videoId     String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  user        User              @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  actorUser   User?             @relation("ActorNotifications", fields: [actorUserId], references: [id], onDelete: SetNull)
+  course      Course?           @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  post        CommunityPost?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+  comment     CommunityPostComment? @relation(fields: [commentId], references: [id], onDelete: SetNull)
+  video       Video?            @relation(fields: [videoId], references: [id], onDelete: SetNull)
+
+  @@index([userId, isRead, createdAt])
 }

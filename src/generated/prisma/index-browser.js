@@ -169,6 +169,7 @@ exports.Prisma.CourseScalarFieldEnum = {
   priceInr: 'priceInr',
   thumbnailUrl: 'thumbnailUrl',
   availableFrom: 'availableFrom',
+  freePreviewFirstLesson: 'freePreviewFirstLesson',
   isPublished: 'isPublished',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -202,10 +203,18 @@ exports.Prisma.TimestampCommentScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   videoId: 'videoId',
+  parentId: 'parentId',
   timestamp: 'timestamp',
   text: 'text',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TimestampCommentLikeScalarFieldEnum = {
+  id: 'id',
+  commentId: 'commentId',
+  userId: 'userId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.PaymentRequestScalarFieldEnum = {
@@ -244,6 +253,63 @@ exports.Prisma.CourseResourceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TrendingPromptScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  prompt: 'prompt',
+  imageUrl: 'imageUrl',
+  isPublished: 'isPublished',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommunityPostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  title: 'title',
+  caption: 'caption',
+  mediaUrl: 'mediaUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommunityPostCommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  parentId: 'parentId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommunityPostReactionScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  actorUserId: 'actorUserId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  isRead: 'isRead',
+  readAt: 'readAt',
+  courseId: 'courseId',
+  postId: 'postId',
+  commentId: 'commentId',
+  videoId: 'videoId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -269,6 +335,20 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   REJECTED: 'REJECTED'
 };
 
+exports.CommunityReactionType = exports.$Enums.CommunityReactionType = {
+  LIKE: 'LIKE',
+  FIRE: 'FIRE',
+  CLAP: 'CLAP'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  REACTION_ON_POST: 'REACTION_ON_POST',
+  COMMENT_ON_POST: 'COMMENT_ON_POST',
+  REPLY_ON_COMMENT: 'REPLY_ON_COMMENT',
+  NEW_VIDEO_IN_ENROLLED_COURSE: 'NEW_VIDEO_IN_ENROLLED_COURSE',
+  NEW_POST_IN_ENROLLED_COURSE: 'NEW_POST_IN_ENROLLED_COURSE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
@@ -278,9 +358,15 @@ exports.Prisma.ModelName = {
   Video: 'Video',
   Enrollment: 'Enrollment',
   TimestampComment: 'TimestampComment',
+  TimestampCommentLike: 'TimestampCommentLike',
   PaymentRequest: 'PaymentRequest',
   VideoProgress: 'VideoProgress',
-  CourseResource: 'CourseResource'
+  CourseResource: 'CourseResource',
+  TrendingPrompt: 'TrendingPrompt',
+  CommunityPost: 'CommunityPost',
+  CommunityPostComment: 'CommunityPostComment',
+  CommunityPostReaction: 'CommunityPostReaction',
+  Notification: 'Notification'
 };
 
 /**

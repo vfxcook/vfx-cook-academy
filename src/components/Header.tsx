@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { auth } from "@/lib/auth";
 import { landingBrand } from "@/lib/landing";
+import { NotificationBell } from "@/components/NotificationBell";
 
 export async function Header() {
   const session = await auth();
@@ -24,6 +25,7 @@ export async function Header() {
         <div className="header-actions">
           {session?.user ? (
             <>
+              <NotificationBell />
               <Link className="header-login" href="/dashboard">
                 Dashboard
               </Link>

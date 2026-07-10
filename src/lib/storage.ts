@@ -52,7 +52,10 @@ async function ensureSupabaseBucket() {
   bucketReady = true;
 }
 
-export async function saveUploadFile(file: File, folder: "thumbnails" | "profiles" | "videos" | "resources") {
+export async function saveUploadFile(
+  file: File,
+  folder: "thumbnails" | "profiles" | "videos" | "resources" | "community" | "prompts",
+) {
   const ext = path.extname(file.name) || "";
   const fileName = `${Date.now()}-${randomUUID()}${ext.toLowerCase()}`;
   const objectPath = `${folder}/${fileName}`;
