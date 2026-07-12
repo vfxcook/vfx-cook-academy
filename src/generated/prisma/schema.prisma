@@ -84,6 +84,8 @@ model User {
   studioCreditLedger     StudioCreditLedger[]
   studioWorkflows        StudioWorkflow[]
   studioGenerations      StudioGeneration[]
+  purchasedGifts         GiftCoupon[]            @relation("PurchasedGifts")
+  redeemedGifts          GiftCoupon[]            @relation("RedeemedGifts")
 }
 
 model Account {
@@ -138,6 +140,7 @@ model Course {
   resources              CourseResource[]
   communityPosts         CommunityPost[]
   notifications          Notification[]
+  giftCoupons            GiftCoupon[]
 }
 
 model Video {
@@ -210,6 +213,7 @@ model PaymentRequest {
   status         PaymentStatus @default(PENDING)
   reviewedAt     DateTime?
   reviewedBy     String?
+  isGift         Boolean       @default(false)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
   user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -422,4 +426,29 @@ model Notification {
   video       Video?                @relation(fields: [videoId], references: [id], onDelete: SetNull)
 
   @@index([userId, isRead, createdAt])
+}
+
+model AppSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model GiftCoupon {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  courseId    String
+  purchaserId String
+  amountInr   Int
+  isRedeemed  Boolean   @default(false)
+  redeemerId  String?
+  redeemedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  course    Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  purchaser User   @relation("PurchasedGifts", fields: [purchaserId], references: [id], onDelete: Cascade)
+  redeemer  User?  @relation("RedeemedGifts", fields: [redeemerId], references: [id], onDelete: SetNull)
+
+  @@index([code])
 }

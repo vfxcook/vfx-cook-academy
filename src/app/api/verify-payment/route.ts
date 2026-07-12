@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await prisma.$transaction(async (tx) => {
+    const redirectUrl = await prisma.$transaction(async (tx) => {
       const pending = await tx.paymentRequest.findFirst({
         where: {
           userId: session.user.id,
