@@ -34,6 +34,28 @@ enum NotificationType {
   NEW_POST_IN_ENROLLED_COURSE
 }
 
+enum StudioPurchaseStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum StudioLedgerType {
+  PURCHASE
+  GENERATION_DEBIT
+  REFUND
+  ADMIN_ADJUSTMENT
+}
+
+enum StudioGenerationStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
 model User {
   id                     String                  @id @default(cuid())
   name                   String?
@@ -57,6 +79,11 @@ model User {
   communityPostReactions CommunityPostReaction[]
   notifications          Notification[]          @relation("UserNotifications")
   triggeredNotifications Notification[]          @relation("ActorNotifications")
+  studioCreditBalance    StudioCreditBalance?
+  studioCreditPurchases  StudioCreditPurchase[]
+  studioCreditLedger     StudioCreditLedger[]
+  studioWorkflows        StudioWorkflow[]
+  studioGenerations      StudioGeneration[]
 }
 
 model Account {
@@ -226,6 +253,107 @@ model TrendingPrompt {
   sortOrder   Int      @default(1)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model StudioCreditBalance {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  availableCredits         Int      @default(0)
+  lifetimePurchasedCredits Int      @default(0)
+  lifetimeUsedCredits      Int      @default(0)
+  updatedAt                DateTime @updatedAt
+  createdAt                DateTime @default(now())
+  user                     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudioCreditPack {
+  id                String                 @id @default(cuid())
+  name              String
+  description       String?
+  credits           Int
+  amountInr         Int
+  providerCostUsd   Float
+  providerCostInr   Int
+  platformMarginInr Int                    @default(100)
+  isActive          Boolean                @default(true)
+  sortOrder         Int                    @default(1)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  purchases         StudioCreditPurchase[]
+}
+
+model StudioCreditPurchase {
+  id                String               @id @default(cuid())
+  userId            String
+  packId            String
+  amountInr         Int
+  credits           Int
+  razorpayOrderId   String?              @unique
+  razorpayPaymentId String?
+  status            StudioPurchaseStatus @default(PENDING)
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  user              User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pack              StudioCreditPack     @relation(fields: [packId], references: [id], onDelete: Restrict)
+}
+
+model StudioCreditLedger {
+  id           String           @id @default(cuid())
+  userId       String
+  type         StudioLedgerType
+  deltaCredits Int
+  balanceAfter Int
+  referenceId  String?
+  note         String?
+  createdAt    DateTime         @default(now())
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model StudioModelPricing {
+  id              String             @id @default(cuid())
+  providerModelId String             @unique
+  displayName     String
+  category        String
+  providerCredits Int
+  isEnabled       Boolean            @default(true)
+  sortOrder       Int                @default(1)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  generations     StudioGeneration[]
+}
+
+model StudioWorkflow {
+  id          String             @id @default(cuid())
+  userId      String
+  title       String
+  canvasJson  Json
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  generations StudioGeneration[]
+
+  @@index([userId, updatedAt])
+}
+
+model StudioGeneration {
+  id             String                 @id @default(cuid())
+  userId         String
+  workflowId     String?
+  modelPricingId String?
+  prompt         String
+  status         StudioGenerationStatus @default(QUEUED)
+  creditsCharged Int
+  outputUrl      String?
+  errorMessage   String?
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  user           User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workflow       StudioWorkflow?        @relation(fields: [workflowId], references: [id], onDelete: SetNull)
+  modelPricing   StudioModelPricing?    @relation(fields: [modelPricingId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
 }
 
 model CommunityPost {

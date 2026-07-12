@@ -2,6 +2,7 @@ import { PrismaClient } from "../src/generated/prisma";
 import { hashPassword } from "../src/lib/password";
 
 import { coursePriceInr } from "../src/lib/course-offer";
+import { ensureStudioDefaults } from "../src/lib/studio-pricing";
 
 const prisma = new PrismaClient();
 const keralaStudentNames = [
@@ -173,6 +174,9 @@ async function main() {
     });
   }
   console.log(`Seeded ${keralaStudentNames.length} Kerala students and activated enrollments`);
+
+  await ensureStudioDefaults(prisma);
+  console.log("Seeded VFX COOK AI STUDIO credit packs and model pricing");
 }
 
 main()

@@ -56,32 +56,53 @@ export default async function CheckoutPage({
   }
 
   return (
-    <div style={{ display: "grid", gap: "1rem", maxWidth: 760, margin: "0 auto" }}>
-      <section className="card" style={{ display: "grid", gap: "0.5rem" }}>
-        <h1 style={{ margin: 0 }}>Checkout</h1>
-        <p className="muted" style={{ margin: 0 }}>
-          You are one step away from course access.
+    <div className="checkout-shell">
+      <section className="card checkout-hero">
+        <p className="admin-eyebrow">Secure Enrollment</p>
+        <h1>Complete your VFX Cook Academy access</h1>
+        <p className="muted">
+          Pay once, verify automatically, and continue from your dashboard after Razorpay confirms the payment.
         </p>
       </section>
 
-      <section className="card" style={{ display: "grid", gap: "0.8rem" }}>
-        <h2 style={{ margin: 0 }}>{course.title}</h2>
-        <p className="muted" style={{ margin: 0 }}>
-          {course.description}
-        </p>
-        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
-          <span className="muted">Total</span>
-          <strong>{formatInr(course.priceInr)}</strong>
+      <section className="card checkout-card">
+        <div className="checkout-summary">
+          <div>
+            <span className="muted">Course</span>
+            <h2>{course.title}</h2>
+            <p className="muted">{course.description}</p>
+          </div>
+          <div className="checkout-total">
+            <span>Total</span>
+            <strong>{formatInr(course.priceInr)}</strong>
+          </div>
         </div>
-        <RazorpayCheckoutButton courseId={course.id} />
-        <p className="muted" style={{ margin: 0 }}>
-          After successful payment, signature verification activates your enrollment automatically.
-        </p>
-        <Link className="btn btn-secondary" href="/dashboard">
-          Go to dashboard
-        </Link>
+
+        <ul className="checkout-trust-list" aria-label="What happens after payment">
+          <li>Instant enrollment after Razorpay signature verification.</li>
+          <li>Dashboard access unlocks your course, progress, comments, and community.</li>
+          <li>Payment issues can be handled through WhatsApp support with your registered email.</li>
+        </ul>
+
+        <div className="checkout-actions">
+          <RazorpayCheckoutButton courseId={course.id} />
+          <Link className="btn btn-secondary" href="/dashboard">
+            Go to dashboard
+          </Link>
+        </div>
+
+        <div className="checkout-help">
+          <strong>Need help?</strong>
+          <p className="muted">
+            If payment succeeds but access does not appear, message us on WhatsApp and we will verify it manually.
+          </p>
+          <a className="btn btn-secondary" href="https://wa.me/919353720487" target="_blank" rel="noopener noreferrer">
+            WhatsApp Support
+          </a>
+        </div>
+
         {query.status ? (
-          <p className="muted" style={{ margin: 0 }}>
+          <p className="muted" style={{ margin: 0 }} aria-live="polite">
             Razorpay callback received. You can continue from dashboard.
           </p>
         ) : null}

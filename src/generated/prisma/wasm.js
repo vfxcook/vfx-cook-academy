@@ -264,6 +264,90 @@ exports.Prisma.TrendingPromptScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.StudioCreditBalanceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  availableCredits: 'availableCredits',
+  lifetimePurchasedCredits: 'lifetimePurchasedCredits',
+  lifetimeUsedCredits: 'lifetimeUsedCredits',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.StudioCreditPackScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  credits: 'credits',
+  amountInr: 'amountInr',
+  providerCostUsd: 'providerCostUsd',
+  providerCostInr: 'providerCostInr',
+  platformMarginInr: 'platformMarginInr',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudioCreditPurchaseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  packId: 'packId',
+  amountInr: 'amountInr',
+  credits: 'credits',
+  razorpayOrderId: 'razorpayOrderId',
+  razorpayPaymentId: 'razorpayPaymentId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudioCreditLedgerScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  deltaCredits: 'deltaCredits',
+  balanceAfter: 'balanceAfter',
+  referenceId: 'referenceId',
+  note: 'note',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.StudioModelPricingScalarFieldEnum = {
+  id: 'id',
+  providerModelId: 'providerModelId',
+  displayName: 'displayName',
+  category: 'category',
+  providerCredits: 'providerCredits',
+  isEnabled: 'isEnabled',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudioWorkflowScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  canvasJson: 'canvasJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudioGenerationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  workflowId: 'workflowId',
+  modelPricingId: 'modelPricingId',
+  prompt: 'prompt',
+  status: 'status',
+  creditsCharged: 'creditsCharged',
+  outputUrl: 'outputUrl',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.CommunityPostScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -310,9 +394,19 @@ exports.Prisma.NotificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AppSettingScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -324,6 +418,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.UserRole = exports.$Enums.UserRole = {
   STUDENT: 'STUDENT',
   ADMIN: 'ADMIN'
@@ -333,6 +433,28 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED'
+};
+
+exports.StudioPurchaseStatus = exports.$Enums.StudioPurchaseStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.StudioLedgerType = exports.$Enums.StudioLedgerType = {
+  PURCHASE: 'PURCHASE',
+  GENERATION_DEBIT: 'GENERATION_DEBIT',
+  REFUND: 'REFUND',
+  ADMIN_ADJUSTMENT: 'ADMIN_ADJUSTMENT'
+};
+
+exports.StudioGenerationStatus = exports.$Enums.StudioGenerationStatus = {
+  QUEUED: 'QUEUED',
+  RUNNING: 'RUNNING',
+  SUCCEEDED: 'SUCCEEDED',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
 };
 
 exports.CommunityReactionType = exports.$Enums.CommunityReactionType = {
@@ -363,10 +485,18 @@ exports.Prisma.ModelName = {
   VideoProgress: 'VideoProgress',
   CourseResource: 'CourseResource',
   TrendingPrompt: 'TrendingPrompt',
+  StudioCreditBalance: 'StudioCreditBalance',
+  StudioCreditPack: 'StudioCreditPack',
+  StudioCreditPurchase: 'StudioCreditPurchase',
+  StudioCreditLedger: 'StudioCreditLedger',
+  StudioModelPricing: 'StudioModelPricing',
+  StudioWorkflow: 'StudioWorkflow',
+  StudioGeneration: 'StudioGeneration',
   CommunityPost: 'CommunityPost',
   CommunityPostComment: 'CommunityPostComment',
   CommunityPostReaction: 'CommunityPostReaction',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  AppSetting: 'AppSetting'
 };
 
 /**

@@ -120,39 +120,6 @@ export default async function CoursePage({
 
   return (
     <div style={{ display: "grid", gap: "1rem" }}>
-      <section
-        className="card course-detail-hero"
-        style={{
-          display: "grid",
-          gap: "0.5rem",
-          backgroundImage:
-            "linear-gradient(rgba(6,10,18,0.72), rgba(6,10,18,0.72)), url('https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&w=1400&q=80')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <h1 className="course-detail-title" style={{ margin: 0 }}>{course.title}</h1>
-        <span className="mobile-course-detail-hint">Course details collapsed. Start learning below.</span>
-        <p className="muted" style={{ margin: 0, maxWidth: 780 }}>
-          {course.description}
-        </p>
-        <div className="course-detail-summary" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-          <strong>{formatInr(course.priceInr)}</strong>
-          {hasFullAccess ? <span>Access: Active</span> : <span>Access: Locked</span>}
-          {previewFirstLessonOnly ? <span className="muted">First lesson free preview</span> : null}
-          {isAdmin ? <span className="muted">Admin bypass enabled</span> : null}
-          {!isReleased ? (
-            <span className="begin-highlight">
-              Begins on{" "}
-              {course.availableFrom?.toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "long",
-              })}
-            </span>
-          ) : null}
-        </div>
-      </section>
-
       {!session?.user ? (
         <section className="card">
           <p style={{ marginTop: 0 }}>Login required to purchase or view this course.</p>

@@ -248,7 +248,7 @@ export default async function HomePage() {
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp before joining"
       >
-        <span aria-hidden="true">💬</span>
+        <span aria-hidden="true">WA</span>
       </a>
     </div>
   );

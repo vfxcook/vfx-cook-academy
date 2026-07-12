@@ -401,7 +401,9 @@ export function ClassroomPlayer({
             className="lesson-comment-avatar"
           />
         ) : (
-          <div className="lesson-comment-avatar lesson-comment-avatar-fallback">{initial}</div>
+          <div className="lesson-comment-avatar lesson-comment-avatar-fallback" aria-hidden="true">
+            {initial}
+          </div>
         )}
         <div className="lesson-comment-body">
           <div className="lesson-comment-meta">
@@ -434,6 +436,7 @@ export function ClassroomPlayer({
             <form className="lesson-reply-form" onSubmit={(event) => postComment(event, comment.id)}>
               <input
                 className="input"
+                aria-label={`Reply to ${userLabel}`}
                 value={replyDrafts[comment.id] ?? ""}
                 onChange={(event) =>
                   setReplyDrafts((prev) => ({ ...prev, [comment.id]: event.target.value }))
@@ -467,51 +470,29 @@ export function ClassroomPlayer({
 
   return (
     <div style={{ display: "grid", gap: "0.8rem" }}>
-      <section
-        className="card classroom-intro-card"
-        style={{
-          background:
-            "linear-gradient(100deg, rgba(7,16,31,0.92), rgba(15,33,72,0.88), rgba(9,15,33,0.92)), url('https://images.unsplash.com/photo-1485841890310-6a055c88698a?auto=format&fit=crop&w=1600&q=80') center/cover",
-          borderColor: "#324b7f",
-          padding: "1rem 1.1rem",
-        }}
-      >
-        <span className="muted" style={{ fontSize: "0.72rem", fontWeight: 700 }}>
-          MALAYALAM BATCH
-        </span>
-        <h1 style={{ margin: "0.25rem 0 0.4rem", fontSize: "2.1rem" }}>AI Video Creation Masterclass</h1>
-        <p className="muted" style={{ marginTop: 0, maxWidth: 700 }}>
-          Learn cinematic AI workflows through weekly lessons, real project breakdowns, doubts, and
-          creator challenges.
-        </p>
-        <div style={{ display: "flex", gap: "0.45rem", flexWrap: "wrap" }}>
-          {["36M+ Views", "July 13 Batch", "Weekly New Lessons", "Community Feedback"].map((chip) => (
-            <span
-              key={chip}
-              style={{
-                borderRadius: 999,
-                border: "1px solid #516ca3",
-                background: "rgba(11,20,36,0.8)",
-                padding: "0.32rem 0.6rem",
-                fontSize: "0.78rem",
-                fontWeight: 700,
-              }}
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
-      </section>
-
       <div className="classroom-tab-row" style={{ display: "flex", gap: "0.55rem", flexWrap: "wrap" }}>
-        <button className="btn" style={navBtn(activeTab === "classroom")} onClick={() => setActiveTab("classroom")}>
+        <button
+          className="btn"
+          type="button"
+          aria-pressed={activeTab === "classroom"}
+          style={navBtn(activeTab === "classroom")}
+          onClick={() => setActiveTab("classroom")}
+        >
           Classroom
         </button>
-        <button className="btn" style={navBtn(activeTab === "community")} onClick={() => setActiveTab("community")}>
+        <button
+          className="btn"
+          type="button"
+          aria-pressed={activeTab === "community"}
+          style={navBtn(activeTab === "community")}
+          onClick={() => setActiveTab("community")}
+        >
           Community
         </button>
         <button
           className="btn"
+          type="button"
+          aria-pressed={activeTab === "leaderboard"}
           style={navBtn(activeTab === "leaderboard")}
           onClick={() => setActiveTab("leaderboard")}
         >
@@ -547,6 +528,7 @@ export function ClassroomPlayer({
                   <div style={{ display: "grid", gap: "0.45rem" }}>
                     <select
                       className="select"
+                      aria-label="Select lesson for doubt"
                       value={activeVideoId}
                       onChange={(event) => setActiveVideoId(event.target.value)}
                     >
@@ -559,6 +541,7 @@ export function ClassroomPlayer({
                   </div>
                   <textarea
                     className="textarea"
+                    aria-label="Doubt details"
                     rows={3}
                     value={commentText}
                     onChange={(event) => setCommentText(event.target.value)}
@@ -663,9 +646,9 @@ export function ClassroomPlayer({
                       <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
                         {(
                           [
-                            { type: "LIKE", emoji: "👍" },
-                            { type: "FIRE", emoji: "🔥" },
-                            { type: "CLAP", emoji: "👏" },
+                            { type: "LIKE", label: "Like" },
+                            { type: "FIRE", label: "Inspired" },
+                            { type: "CLAP", label: "Applaud" },
                           ] as const
                         ).map((reaction) => (
                           <button
@@ -677,7 +660,7 @@ export function ClassroomPlayer({
                             }}
                             onClick={() => reactToPost(post.id, reaction.type)}
                           >
-                            {reaction.emoji} {reactionCount(reaction.type)}
+                            {reaction.label} {reactionCount(reaction.type)}
                           </button>
                         ))}
                       </div>
@@ -699,6 +682,7 @@ export function ClassroomPlayer({
                               <div style={{ display: "flex", gap: "0.35rem" }}>
                                 <input
                                   className="input"
+                                  aria-label={`Reply to ${comment.user.name ?? comment.user.email ?? "student"}`}
                                   value={postReplyDrafts[`${post.id}:${comment.id}`] ?? ""}
                                   onChange={(event) =>
                                     setPostReplyDrafts((prev) => ({
@@ -722,6 +706,7 @@ export function ClassroomPlayer({
                         <div style={{ display: "flex", gap: "0.35rem" }}>
                           <input
                             className="input"
+                            aria-label={`Add comment to ${post.title}`}
                             value={postCommentDrafts[post.id] ?? ""}
                             onChange={(event) =>
                               setPostCommentDrafts((prev) => ({ ...prev, [post.id]: event.target.value }))
@@ -745,6 +730,7 @@ export function ClassroomPlayer({
                 <form onSubmit={createCommunityPost} style={{ display: "grid", gap: "0.45rem" }}>
                   <input
                     className="input"
+                    aria-label="Creation title"
                     value={newPostTitle}
                     onChange={(event) => setNewPostTitle(event.target.value)}
                     placeholder="Title (e.g. Car Commercial Shot in Rain)"
@@ -752,6 +738,7 @@ export function ClassroomPlayer({
                   />
                   <textarea
                     className="textarea"
+                    aria-label="Creation workflow and feedback request"
                     rows={3}
                     value={newPostCaption}
                     onChange={(event) => setNewPostCaption(event.target.value)}
@@ -760,12 +747,14 @@ export function ClassroomPlayer({
                   />
                   <input
                     className="input"
+                    aria-label="Optional media link"
                     value={newPostMediaUrl}
                     onChange={(event) => setNewPostMediaUrl(event.target.value)}
                     placeholder="Optional media link (Drive/Vimeo/YouTube)"
                   />
                   <input
                     className="input"
+                    aria-label="Upload creation image"
                     type="file"
                     accept="image/*"
                     onChange={(event) => setNewPostImageFile(event.target.files?.[0] ?? null)}
@@ -793,7 +782,7 @@ export function ClassroomPlayer({
             )}
           </section>
 
-          <aside className="card" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
+          <aside className="card classroom-sidebar" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
             <h3 style={{ marginTop: 0 }}>Community Signals</h3>
             <p className="muted">Live community updates based on real posts and discussions.</p>
             <div style={{ borderTop: "1px solid #223454", marginTop: "0.8rem", paddingTop: "0.75rem" }}>
@@ -831,7 +820,7 @@ export function ClassroomPlayer({
 
       {activeTab === "classroom" ? (
         <div className="classroom-layout" style={{ display: "grid", gridTemplateColumns: "285px minmax(0,1fr)", gap: "0.75rem" }}>
-          <aside className="card" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
+          <aside className="card classroom-sidebar" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
             <h3 style={{ marginTop: 0 }}>{courseTitle}</h3>
             <div style={{ height: 9, borderRadius: 999, overflow: "hidden", background: "#1d2a43", marginBottom: "0.4rem" }}>
               <div
@@ -845,13 +834,16 @@ export function ClassroomPlayer({
             <p className="muted" style={{ marginTop: 0 }}>
               {progressPercent}% complete
             </p>
-            <div style={{ display: "grid", gap: "0.4rem" }}>
+            <div className="lesson-list" style={{ display: "grid", gap: "0.4rem" }}>
               {orderedVideos.map((video) => {
                 const unlocked = unlockedVideoIds.has(video.id);
+                const videoDone = completedIds.includes(video.id);
                 return (
                   <button
                     key={video.id}
-                    className="btn"
+                    className="btn lesson-list-button"
+                    type="button"
+                    aria-current={video.id === activeVideo.id ? "true" : undefined}
                     style={{
                       justifyContent: "space-between",
                       textAlign: "left",
@@ -867,14 +859,14 @@ export function ClassroomPlayer({
                     <span>
                       L{video.order} - {video.title}
                     </span>
-                    <span>{completedIds.includes(video.id) ? "✅" : unlocked ? "•" : "🔒"}</span>
+                    <span className="lesson-status-pill">{videoDone ? "Done" : unlocked ? "Open" : "Locked"}</span>
                   </button>
                 );
               })}
             </div>
           </aside>
 
-          <section className="card" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
+          <section className="card classroom-content-card" style={{ background: "rgba(7,13,26,0.9)", borderColor: "#283a60" }}>
             <h2 style={{ marginTop: 0 }}>
               L{activeVideo.order} - {activeVideo.title}
             </h2>
@@ -914,7 +906,7 @@ export function ClassroomPlayer({
                 </a>
               </div>
             )}
-            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginTop: "0.7rem", flexWrap: "wrap" }}>
+            <div className="classroom-action-bar" style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginTop: "0.7rem", flexWrap: "wrap" }}>
               <button
                 className="btn btn-primary"
                 onClick={markComplete}
@@ -965,6 +957,7 @@ export function ClassroomPlayer({
                 <div style={{ display: "grid", gap: "0.45rem" }}>
                   <input
                     className="input"
+                    aria-label="Write a lesson comment"
                     value={commentText}
                     onChange={(event) => setCommentText(event.target.value)}
                     placeholder="Write a comment..."
@@ -976,7 +969,7 @@ export function ClassroomPlayer({
                     Post Comment
                   </button>
                 </div>
-                {message ? <p className="muted" style={{ margin: 0 }}>{message}</p> : null}
+                {message ? <p className="muted" style={{ margin: 0 }} aria-live="polite">{message}</p> : null}
               </form>
 
               <div className="lesson-comments-list">

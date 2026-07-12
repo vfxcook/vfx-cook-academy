@@ -135,7 +135,7 @@ export function RazorpayCheckoutButton({ courseId }: { courseId: string }) {
         {loading ? "Preparing payment..." : "Pay with Razorpay"}
       </button>
       {message ? (
-        <p className="muted" style={{ margin: 0 }}>
+        <p className="muted" style={{ margin: 0 }} aria-live="polite">
           {message}
         </p>
       ) : null}

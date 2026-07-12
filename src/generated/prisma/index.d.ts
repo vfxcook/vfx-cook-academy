@@ -79,6 +79,41 @@ export type CourseResource = $Result.DefaultSelection<Prisma.$CourseResourcePayl
  */
 export type TrendingPrompt = $Result.DefaultSelection<Prisma.$TrendingPromptPayload>
 /**
+ * Model StudioCreditBalance
+ * 
+ */
+export type StudioCreditBalance = $Result.DefaultSelection<Prisma.$StudioCreditBalancePayload>
+/**
+ * Model StudioCreditPack
+ * 
+ */
+export type StudioCreditPack = $Result.DefaultSelection<Prisma.$StudioCreditPackPayload>
+/**
+ * Model StudioCreditPurchase
+ * 
+ */
+export type StudioCreditPurchase = $Result.DefaultSelection<Prisma.$StudioCreditPurchasePayload>
+/**
+ * Model StudioCreditLedger
+ * 
+ */
+export type StudioCreditLedger = $Result.DefaultSelection<Prisma.$StudioCreditLedgerPayload>
+/**
+ * Model StudioModelPricing
+ * 
+ */
+export type StudioModelPricing = $Result.DefaultSelection<Prisma.$StudioModelPricingPayload>
+/**
+ * Model StudioWorkflow
+ * 
+ */
+export type StudioWorkflow = $Result.DefaultSelection<Prisma.$StudioWorkflowPayload>
+/**
+ * Model StudioGeneration
+ * 
+ */
+export type StudioGeneration = $Result.DefaultSelection<Prisma.$StudioGenerationPayload>
+/**
  * Model CommunityPost
  * 
  */
@@ -98,6 +133,11 @@ export type CommunityPostReaction = $Result.DefaultSelection<Prisma.$CommunityPo
  * 
  */
 export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
+/**
+ * Model AppSetting
+ * 
+ */
+export type AppSetting = $Result.DefaultSelection<Prisma.$AppSettingPayload>
 
 /**
  * Enums
@@ -139,6 +179,37 @@ export const NotificationType: {
 
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
+
+export const StudioPurchaseStatus: {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type StudioPurchaseStatus = (typeof StudioPurchaseStatus)[keyof typeof StudioPurchaseStatus]
+
+
+export const StudioLedgerType: {
+  PURCHASE: 'PURCHASE',
+  GENERATION_DEBIT: 'GENERATION_DEBIT',
+  REFUND: 'REFUND',
+  ADMIN_ADJUSTMENT: 'ADMIN_ADJUSTMENT'
+};
+
+export type StudioLedgerType = (typeof StudioLedgerType)[keyof typeof StudioLedgerType]
+
+
+export const StudioGenerationStatus: {
+  QUEUED: 'QUEUED',
+  RUNNING: 'RUNNING',
+  SUCCEEDED: 'SUCCEEDED',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+};
+
+export type StudioGenerationStatus = (typeof StudioGenerationStatus)[keyof typeof StudioGenerationStatus]
+
 }
 
 export type PaymentStatus = $Enums.PaymentStatus
@@ -156,6 +227,18 @@ export const CommunityReactionType: typeof $Enums.CommunityReactionType
 export type NotificationType = $Enums.NotificationType
 
 export const NotificationType: typeof $Enums.NotificationType
+
+export type StudioPurchaseStatus = $Enums.StudioPurchaseStatus
+
+export const StudioPurchaseStatus: typeof $Enums.StudioPurchaseStatus
+
+export type StudioLedgerType = $Enums.StudioLedgerType
+
+export const StudioLedgerType: typeof $Enums.StudioLedgerType
+
+export type StudioGenerationStatus = $Enums.StudioGenerationStatus
+
+export const StudioGenerationStatus: typeof $Enums.StudioGenerationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -413,6 +496,76 @@ export class PrismaClient<
   get trendingPrompt(): Prisma.TrendingPromptDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.studioCreditBalance`: Exposes CRUD operations for the **StudioCreditBalance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioCreditBalances
+    * const studioCreditBalances = await prisma.studioCreditBalance.findMany()
+    * ```
+    */
+  get studioCreditBalance(): Prisma.StudioCreditBalanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioCreditPack`: Exposes CRUD operations for the **StudioCreditPack** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioCreditPacks
+    * const studioCreditPacks = await prisma.studioCreditPack.findMany()
+    * ```
+    */
+  get studioCreditPack(): Prisma.StudioCreditPackDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioCreditPurchase`: Exposes CRUD operations for the **StudioCreditPurchase** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioCreditPurchases
+    * const studioCreditPurchases = await prisma.studioCreditPurchase.findMany()
+    * ```
+    */
+  get studioCreditPurchase(): Prisma.StudioCreditPurchaseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioCreditLedger`: Exposes CRUD operations for the **StudioCreditLedger** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioCreditLedgers
+    * const studioCreditLedgers = await prisma.studioCreditLedger.findMany()
+    * ```
+    */
+  get studioCreditLedger(): Prisma.StudioCreditLedgerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioModelPricing`: Exposes CRUD operations for the **StudioModelPricing** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioModelPricings
+    * const studioModelPricings = await prisma.studioModelPricing.findMany()
+    * ```
+    */
+  get studioModelPricing(): Prisma.StudioModelPricingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioWorkflow`: Exposes CRUD operations for the **StudioWorkflow** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioWorkflows
+    * const studioWorkflows = await prisma.studioWorkflow.findMany()
+    * ```
+    */
+  get studioWorkflow(): Prisma.StudioWorkflowDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.studioGeneration`: Exposes CRUD operations for the **StudioGeneration** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StudioGenerations
+    * const studioGenerations = await prisma.studioGeneration.findMany()
+    * ```
+    */
+  get studioGeneration(): Prisma.StudioGenerationDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.communityPost`: Exposes CRUD operations for the **CommunityPost** model.
     * Example usage:
     * ```ts
@@ -451,6 +604,16 @@ export class PrismaClient<
     * ```
     */
   get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.appSetting`: Exposes CRUD operations for the **AppSetting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AppSettings
+    * const appSettings = await prisma.appSetting.findMany()
+    * ```
+    */
+  get appSetting(): Prisma.AppSettingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -904,10 +1067,18 @@ export namespace Prisma {
     VideoProgress: 'VideoProgress',
     CourseResource: 'CourseResource',
     TrendingPrompt: 'TrendingPrompt',
+    StudioCreditBalance: 'StudioCreditBalance',
+    StudioCreditPack: 'StudioCreditPack',
+    StudioCreditPurchase: 'StudioCreditPurchase',
+    StudioCreditLedger: 'StudioCreditLedger',
+    StudioModelPricing: 'StudioModelPricing',
+    StudioWorkflow: 'StudioWorkflow',
+    StudioGeneration: 'StudioGeneration',
     CommunityPost: 'CommunityPost',
     CommunityPostComment: 'CommunityPostComment',
     CommunityPostReaction: 'CommunityPostReaction',
-    Notification: 'Notification'
+    Notification: 'Notification',
+    AppSetting: 'AppSetting'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -926,7 +1097,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "course" | "video" | "enrollment" | "timestampComment" | "timestampCommentLike" | "paymentRequest" | "videoProgress" | "courseResource" | "trendingPrompt" | "communityPost" | "communityPostComment" | "communityPostReaction" | "notification"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "course" | "video" | "enrollment" | "timestampComment" | "timestampCommentLike" | "paymentRequest" | "videoProgress" | "courseResource" | "trendingPrompt" | "studioCreditBalance" | "studioCreditPack" | "studioCreditPurchase" | "studioCreditLedger" | "studioModelPricing" | "studioWorkflow" | "studioGeneration" | "communityPost" | "communityPostComment" | "communityPostReaction" | "notification" | "appSetting"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1892,6 +2063,524 @@ export namespace Prisma {
           }
         }
       }
+      StudioCreditBalance: {
+        payload: Prisma.$StudioCreditBalancePayload<ExtArgs>
+        fields: Prisma.StudioCreditBalanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioCreditBalanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioCreditBalanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          findFirst: {
+            args: Prisma.StudioCreditBalanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioCreditBalanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          findMany: {
+            args: Prisma.StudioCreditBalanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>[]
+          }
+          create: {
+            args: Prisma.StudioCreditBalanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          createMany: {
+            args: Prisma.StudioCreditBalanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioCreditBalanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>[]
+          }
+          delete: {
+            args: Prisma.StudioCreditBalanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          update: {
+            args: Prisma.StudioCreditBalanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioCreditBalanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioCreditBalanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioCreditBalanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioCreditBalanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditBalancePayload>
+          }
+          aggregate: {
+            args: Prisma.StudioCreditBalanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioCreditBalance>
+          }
+          groupBy: {
+            args: Prisma.StudioCreditBalanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditBalanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioCreditBalanceCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditBalanceCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioCreditPack: {
+        payload: Prisma.$StudioCreditPackPayload<ExtArgs>
+        fields: Prisma.StudioCreditPackFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioCreditPackFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioCreditPackFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          findFirst: {
+            args: Prisma.StudioCreditPackFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioCreditPackFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          findMany: {
+            args: Prisma.StudioCreditPackFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>[]
+          }
+          create: {
+            args: Prisma.StudioCreditPackCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          createMany: {
+            args: Prisma.StudioCreditPackCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioCreditPackCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>[]
+          }
+          delete: {
+            args: Prisma.StudioCreditPackDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          update: {
+            args: Prisma.StudioCreditPackUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioCreditPackDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioCreditPackUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioCreditPackUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioCreditPackUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPackPayload>
+          }
+          aggregate: {
+            args: Prisma.StudioCreditPackAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioCreditPack>
+          }
+          groupBy: {
+            args: Prisma.StudioCreditPackGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditPackGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioCreditPackCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditPackCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioCreditPurchase: {
+        payload: Prisma.$StudioCreditPurchasePayload<ExtArgs>
+        fields: Prisma.StudioCreditPurchaseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioCreditPurchaseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioCreditPurchaseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          findFirst: {
+            args: Prisma.StudioCreditPurchaseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioCreditPurchaseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          findMany: {
+            args: Prisma.StudioCreditPurchaseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>[]
+          }
+          create: {
+            args: Prisma.StudioCreditPurchaseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          createMany: {
+            args: Prisma.StudioCreditPurchaseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioCreditPurchaseCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>[]
+          }
+          delete: {
+            args: Prisma.StudioCreditPurchaseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          update: {
+            args: Prisma.StudioCreditPurchaseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioCreditPurchaseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioCreditPurchaseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioCreditPurchaseUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioCreditPurchaseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditPurchasePayload>
+          }
+          aggregate: {
+            args: Prisma.StudioCreditPurchaseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioCreditPurchase>
+          }
+          groupBy: {
+            args: Prisma.StudioCreditPurchaseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditPurchaseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioCreditPurchaseCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditPurchaseCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioCreditLedger: {
+        payload: Prisma.$StudioCreditLedgerPayload<ExtArgs>
+        fields: Prisma.StudioCreditLedgerFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioCreditLedgerFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioCreditLedgerFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          findFirst: {
+            args: Prisma.StudioCreditLedgerFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioCreditLedgerFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          findMany: {
+            args: Prisma.StudioCreditLedgerFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>[]
+          }
+          create: {
+            args: Prisma.StudioCreditLedgerCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          createMany: {
+            args: Prisma.StudioCreditLedgerCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioCreditLedgerCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>[]
+          }
+          delete: {
+            args: Prisma.StudioCreditLedgerDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          update: {
+            args: Prisma.StudioCreditLedgerUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioCreditLedgerDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioCreditLedgerUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioCreditLedgerUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioCreditLedgerUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioCreditLedgerPayload>
+          }
+          aggregate: {
+            args: Prisma.StudioCreditLedgerAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioCreditLedger>
+          }
+          groupBy: {
+            args: Prisma.StudioCreditLedgerGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditLedgerGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioCreditLedgerCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioCreditLedgerCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioModelPricing: {
+        payload: Prisma.$StudioModelPricingPayload<ExtArgs>
+        fields: Prisma.StudioModelPricingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioModelPricingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioModelPricingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          findFirst: {
+            args: Prisma.StudioModelPricingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioModelPricingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          findMany: {
+            args: Prisma.StudioModelPricingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>[]
+          }
+          create: {
+            args: Prisma.StudioModelPricingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          createMany: {
+            args: Prisma.StudioModelPricingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioModelPricingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>[]
+          }
+          delete: {
+            args: Prisma.StudioModelPricingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          update: {
+            args: Prisma.StudioModelPricingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioModelPricingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioModelPricingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioModelPricingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioModelPricingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioModelPricingPayload>
+          }
+          aggregate: {
+            args: Prisma.StudioModelPricingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioModelPricing>
+          }
+          groupBy: {
+            args: Prisma.StudioModelPricingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioModelPricingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioModelPricingCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioModelPricingCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioWorkflow: {
+        payload: Prisma.$StudioWorkflowPayload<ExtArgs>
+        fields: Prisma.StudioWorkflowFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioWorkflowFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioWorkflowFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          findFirst: {
+            args: Prisma.StudioWorkflowFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioWorkflowFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          findMany: {
+            args: Prisma.StudioWorkflowFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>[]
+          }
+          create: {
+            args: Prisma.StudioWorkflowCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          createMany: {
+            args: Prisma.StudioWorkflowCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioWorkflowCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>[]
+          }
+          delete: {
+            args: Prisma.StudioWorkflowDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          update: {
+            args: Prisma.StudioWorkflowUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioWorkflowDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioWorkflowUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioWorkflowUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioWorkflowUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioWorkflowPayload>
+          }
+          aggregate: {
+            args: Prisma.StudioWorkflowAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioWorkflow>
+          }
+          groupBy: {
+            args: Prisma.StudioWorkflowGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioWorkflowGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioWorkflowCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioWorkflowCountAggregateOutputType> | number
+          }
+        }
+      }
+      StudioGeneration: {
+        payload: Prisma.$StudioGenerationPayload<ExtArgs>
+        fields: Prisma.StudioGenerationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StudioGenerationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StudioGenerationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          findFirst: {
+            args: Prisma.StudioGenerationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StudioGenerationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          findMany: {
+            args: Prisma.StudioGenerationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>[]
+          }
+          create: {
+            args: Prisma.StudioGenerationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          createMany: {
+            args: Prisma.StudioGenerationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StudioGenerationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>[]
+          }
+          delete: {
+            args: Prisma.StudioGenerationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          update: {
+            args: Prisma.StudioGenerationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          deleteMany: {
+            args: Prisma.StudioGenerationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StudioGenerationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StudioGenerationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>[]
+          }
+          upsert: {
+            args: Prisma.StudioGenerationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StudioGenerationPayload>
+          }
+          aggregate: {
+            args: Prisma.StudioGenerationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStudioGeneration>
+          }
+          groupBy: {
+            args: Prisma.StudioGenerationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StudioGenerationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StudioGenerationCountArgs<ExtArgs>
+            result: $Utils.Optional<StudioGenerationCountAggregateOutputType> | number
+          }
+        }
+      }
       CommunityPost: {
         payload: Prisma.$CommunityPostPayload<ExtArgs>
         fields: Prisma.CommunityPostFieldRefs
@@ -2188,6 +2877,80 @@ export namespace Prisma {
           }
         }
       }
+      AppSetting: {
+        payload: Prisma.$AppSettingPayload<ExtArgs>
+        fields: Prisma.AppSettingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AppSettingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AppSettingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          findFirst: {
+            args: Prisma.AppSettingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AppSettingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          findMany: {
+            args: Prisma.AppSettingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>[]
+          }
+          create: {
+            args: Prisma.AppSettingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          createMany: {
+            args: Prisma.AppSettingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AppSettingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>[]
+          }
+          delete: {
+            args: Prisma.AppSettingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          update: {
+            args: Prisma.AppSettingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          deleteMany: {
+            args: Prisma.AppSettingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AppSettingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AppSettingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>[]
+          }
+          upsert: {
+            args: Prisma.AppSettingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AppSettingPayload>
+          }
+          aggregate: {
+            args: Prisma.AppSettingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAppSetting>
+          }
+          groupBy: {
+            args: Prisma.AppSettingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AppSettingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AppSettingCountArgs<ExtArgs>
+            result: $Utils.Optional<AppSettingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2293,10 +3056,18 @@ export namespace Prisma {
     videoProgress?: VideoProgressOmit
     courseResource?: CourseResourceOmit
     trendingPrompt?: TrendingPromptOmit
+    studioCreditBalance?: StudioCreditBalanceOmit
+    studioCreditPack?: StudioCreditPackOmit
+    studioCreditPurchase?: StudioCreditPurchaseOmit
+    studioCreditLedger?: StudioCreditLedgerOmit
+    studioModelPricing?: StudioModelPricingOmit
+    studioWorkflow?: StudioWorkflowOmit
+    studioGeneration?: StudioGenerationOmit
     communityPost?: CommunityPostOmit
     communityPostComment?: CommunityPostCommentOmit
     communityPostReaction?: CommunityPostReactionOmit
     notification?: NotificationOmit
+    appSetting?: AppSettingOmit
   }
 
   /* Types for Logging */
@@ -2408,6 +3179,10 @@ export namespace Prisma {
     communityPostReactions: number
     notifications: number
     triggeredNotifications: number
+    studioCreditPurchases: number
+    studioCreditLedger: number
+    studioWorkflows: number
+    studioGenerations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2423,6 +3198,10 @@ export namespace Prisma {
     communityPostReactions?: boolean | UserCountOutputTypeCountCommunityPostReactionsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     triggeredNotifications?: boolean | UserCountOutputTypeCountTriggeredNotificationsArgs
+    studioCreditPurchases?: boolean | UserCountOutputTypeCountStudioCreditPurchasesArgs
+    studioCreditLedger?: boolean | UserCountOutputTypeCountStudioCreditLedgerArgs
+    studioWorkflows?: boolean | UserCountOutputTypeCountStudioWorkflowsArgs
+    studioGenerations?: boolean | UserCountOutputTypeCountStudioGenerationsArgs
   }
 
   // Custom InputTypes
@@ -2518,6 +3297,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountTriggeredNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStudioCreditPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditPurchaseWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStudioCreditLedgerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditLedgerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStudioWorkflowsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioWorkflowWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountStudioGenerationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioGenerationWhereInput
   }
 
 
@@ -2692,6 +3499,99 @@ export namespace Prisma {
    */
   export type TimestampCommentCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TimestampCommentLikeWhereInput
+  }
+
+
+  /**
+   * Count Type StudioCreditPackCountOutputType
+   */
+
+  export type StudioCreditPackCountOutputType = {
+    purchases: number
+  }
+
+  export type StudioCreditPackCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchases?: boolean | StudioCreditPackCountOutputTypeCountPurchasesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StudioCreditPackCountOutputType without action
+   */
+  export type StudioCreditPackCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPackCountOutputType
+     */
+    select?: StudioCreditPackCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditPackCountOutputType without action
+   */
+  export type StudioCreditPackCountOutputTypeCountPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditPurchaseWhereInput
+  }
+
+
+  /**
+   * Count Type StudioModelPricingCountOutputType
+   */
+
+  export type StudioModelPricingCountOutputType = {
+    generations: number
+  }
+
+  export type StudioModelPricingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | StudioModelPricingCountOutputTypeCountGenerationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StudioModelPricingCountOutputType without action
+   */
+  export type StudioModelPricingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricingCountOutputType
+     */
+    select?: StudioModelPricingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StudioModelPricingCountOutputType without action
+   */
+  export type StudioModelPricingCountOutputTypeCountGenerationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioGenerationWhereInput
+  }
+
+
+  /**
+   * Count Type StudioWorkflowCountOutputType
+   */
+
+  export type StudioWorkflowCountOutputType = {
+    generations: number
+  }
+
+  export type StudioWorkflowCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | StudioWorkflowCountOutputTypeCountGenerationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * StudioWorkflowCountOutputType without action
+   */
+  export type StudioWorkflowCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflowCountOutputType
+     */
+    select?: StudioWorkflowCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * StudioWorkflowCountOutputType without action
+   */
+  export type StudioWorkflowCountOutputTypeCountGenerationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioGenerationWhereInput
   }
 
 
@@ -3004,6 +3904,11 @@ export namespace Prisma {
     communityPostReactions?: boolean | User$communityPostReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     triggeredNotifications?: boolean | User$triggeredNotificationsArgs<ExtArgs>
+    studioCreditBalance?: boolean | User$studioCreditBalanceArgs<ExtArgs>
+    studioCreditPurchases?: boolean | User$studioCreditPurchasesArgs<ExtArgs>
+    studioCreditLedger?: boolean | User$studioCreditLedgerArgs<ExtArgs>
+    studioWorkflows?: boolean | User$studioWorkflowsArgs<ExtArgs>
+    studioGenerations?: boolean | User$studioGenerationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3060,6 +3965,11 @@ export namespace Prisma {
     communityPostReactions?: boolean | User$communityPostReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     triggeredNotifications?: boolean | User$triggeredNotificationsArgs<ExtArgs>
+    studioCreditBalance?: boolean | User$studioCreditBalanceArgs<ExtArgs>
+    studioCreditPurchases?: boolean | User$studioCreditPurchasesArgs<ExtArgs>
+    studioCreditLedger?: boolean | User$studioCreditLedgerArgs<ExtArgs>
+    studioWorkflows?: boolean | User$studioWorkflowsArgs<ExtArgs>
+    studioGenerations?: boolean | User$studioGenerationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3080,6 +3990,11 @@ export namespace Prisma {
       communityPostReactions: Prisma.$CommunityPostReactionPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       triggeredNotifications: Prisma.$NotificationPayload<ExtArgs>[]
+      studioCreditBalance: Prisma.$StudioCreditBalancePayload<ExtArgs> | null
+      studioCreditPurchases: Prisma.$StudioCreditPurchasePayload<ExtArgs>[]
+      studioCreditLedger: Prisma.$StudioCreditLedgerPayload<ExtArgs>[]
+      studioWorkflows: Prisma.$StudioWorkflowPayload<ExtArgs>[]
+      studioGenerations: Prisma.$StudioGenerationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3498,6 +4413,11 @@ export namespace Prisma {
     communityPostReactions<T extends User$communityPostReactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$communityPostReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     triggeredNotifications<T extends User$triggeredNotificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$triggeredNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    studioCreditBalance<T extends User$studioCreditBalanceArgs<ExtArgs> = {}>(args?: Subset<T, User$studioCreditBalanceArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    studioCreditPurchases<T extends User$studioCreditPurchasesArgs<ExtArgs> = {}>(args?: Subset<T, User$studioCreditPurchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    studioCreditLedger<T extends User$studioCreditLedgerArgs<ExtArgs> = {}>(args?: Subset<T, User$studioCreditLedgerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    studioWorkflows<T extends User$studioWorkflowsArgs<ExtArgs> = {}>(args?: Subset<T, User$studioWorkflowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    studioGenerations<T extends User$studioGenerationsArgs<ExtArgs> = {}>(args?: Subset<T, User$studioGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4210,6 +5130,121 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.studioCreditBalance
+   */
+  export type User$studioCreditBalanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    where?: StudioCreditBalanceWhereInput
+  }
+
+  /**
+   * User.studioCreditPurchases
+   */
+  export type User$studioCreditPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    where?: StudioCreditPurchaseWhereInput
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioCreditPurchaseScalarFieldEnum | StudioCreditPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * User.studioCreditLedger
+   */
+  export type User$studioCreditLedgerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    where?: StudioCreditLedgerWhereInput
+    orderBy?: StudioCreditLedgerOrderByWithRelationInput | StudioCreditLedgerOrderByWithRelationInput[]
+    cursor?: StudioCreditLedgerWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioCreditLedgerScalarFieldEnum | StudioCreditLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * User.studioWorkflows
+   */
+  export type User$studioWorkflowsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    where?: StudioWorkflowWhereInput
+    orderBy?: StudioWorkflowOrderByWithRelationInput | StudioWorkflowOrderByWithRelationInput[]
+    cursor?: StudioWorkflowWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioWorkflowScalarFieldEnum | StudioWorkflowScalarFieldEnum[]
+  }
+
+  /**
+   * User.studioGenerations
+   */
+  export type User$studioGenerationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    where?: StudioGenerationWhereInput
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    cursor?: StudioGenerationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
   }
 
   /**
@@ -17917,6 +18952,8132 @@ export namespace Prisma {
 
 
   /**
+   * Model StudioCreditBalance
+   */
+
+  export type AggregateStudioCreditBalance = {
+    _count: StudioCreditBalanceCountAggregateOutputType | null
+    _avg: StudioCreditBalanceAvgAggregateOutputType | null
+    _sum: StudioCreditBalanceSumAggregateOutputType | null
+    _min: StudioCreditBalanceMinAggregateOutputType | null
+    _max: StudioCreditBalanceMaxAggregateOutputType | null
+  }
+
+  export type StudioCreditBalanceAvgAggregateOutputType = {
+    availableCredits: number | null
+    lifetimePurchasedCredits: number | null
+    lifetimeUsedCredits: number | null
+  }
+
+  export type StudioCreditBalanceSumAggregateOutputType = {
+    availableCredits: number | null
+    lifetimePurchasedCredits: number | null
+    lifetimeUsedCredits: number | null
+  }
+
+  export type StudioCreditBalanceMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    availableCredits: number | null
+    lifetimePurchasedCredits: number | null
+    lifetimeUsedCredits: number | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type StudioCreditBalanceMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    availableCredits: number | null
+    lifetimePurchasedCredits: number | null
+    lifetimeUsedCredits: number | null
+    updatedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type StudioCreditBalanceCountAggregateOutputType = {
+    id: number
+    userId: number
+    availableCredits: number
+    lifetimePurchasedCredits: number
+    lifetimeUsedCredits: number
+    updatedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StudioCreditBalanceAvgAggregateInputType = {
+    availableCredits?: true
+    lifetimePurchasedCredits?: true
+    lifetimeUsedCredits?: true
+  }
+
+  export type StudioCreditBalanceSumAggregateInputType = {
+    availableCredits?: true
+    lifetimePurchasedCredits?: true
+    lifetimeUsedCredits?: true
+  }
+
+  export type StudioCreditBalanceMinAggregateInputType = {
+    id?: true
+    userId?: true
+    availableCredits?: true
+    lifetimePurchasedCredits?: true
+    lifetimeUsedCredits?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type StudioCreditBalanceMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    availableCredits?: true
+    lifetimePurchasedCredits?: true
+    lifetimeUsedCredits?: true
+    updatedAt?: true
+    createdAt?: true
+  }
+
+  export type StudioCreditBalanceCountAggregateInputType = {
+    id?: true
+    userId?: true
+    availableCredits?: true
+    lifetimePurchasedCredits?: true
+    lifetimeUsedCredits?: true
+    updatedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StudioCreditBalanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditBalance to aggregate.
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditBalances to fetch.
+     */
+    orderBy?: StudioCreditBalanceOrderByWithRelationInput | StudioCreditBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioCreditBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioCreditBalances
+    **/
+    _count?: true | StudioCreditBalanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioCreditBalanceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioCreditBalanceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioCreditBalanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioCreditBalanceMaxAggregateInputType
+  }
+
+  export type GetStudioCreditBalanceAggregateType<T extends StudioCreditBalanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioCreditBalance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioCreditBalance[P]>
+      : GetScalarType<T[P], AggregateStudioCreditBalance[P]>
+  }
+
+
+
+
+  export type StudioCreditBalanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditBalanceWhereInput
+    orderBy?: StudioCreditBalanceOrderByWithAggregationInput | StudioCreditBalanceOrderByWithAggregationInput[]
+    by: StudioCreditBalanceScalarFieldEnum[] | StudioCreditBalanceScalarFieldEnum
+    having?: StudioCreditBalanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioCreditBalanceCountAggregateInputType | true
+    _avg?: StudioCreditBalanceAvgAggregateInputType
+    _sum?: StudioCreditBalanceSumAggregateInputType
+    _min?: StudioCreditBalanceMinAggregateInputType
+    _max?: StudioCreditBalanceMaxAggregateInputType
+  }
+
+  export type StudioCreditBalanceGroupByOutputType = {
+    id: string
+    userId: string
+    availableCredits: number
+    lifetimePurchasedCredits: number
+    lifetimeUsedCredits: number
+    updatedAt: Date
+    createdAt: Date
+    _count: StudioCreditBalanceCountAggregateOutputType | null
+    _avg: StudioCreditBalanceAvgAggregateOutputType | null
+    _sum: StudioCreditBalanceSumAggregateOutputType | null
+    _min: StudioCreditBalanceMinAggregateOutputType | null
+    _max: StudioCreditBalanceMaxAggregateOutputType | null
+  }
+
+  type GetStudioCreditBalanceGroupByPayload<T extends StudioCreditBalanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioCreditBalanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioCreditBalanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioCreditBalanceGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioCreditBalanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioCreditBalanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    availableCredits?: boolean
+    lifetimePurchasedCredits?: boolean
+    lifetimeUsedCredits?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditBalance"]>
+
+  export type StudioCreditBalanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    availableCredits?: boolean
+    lifetimePurchasedCredits?: boolean
+    lifetimeUsedCredits?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditBalance"]>
+
+  export type StudioCreditBalanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    availableCredits?: boolean
+    lifetimePurchasedCredits?: boolean
+    lifetimeUsedCredits?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditBalance"]>
+
+  export type StudioCreditBalanceSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    availableCredits?: boolean
+    lifetimePurchasedCredits?: boolean
+    lifetimeUsedCredits?: boolean
+    updatedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type StudioCreditBalanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "availableCredits" | "lifetimePurchasedCredits" | "lifetimeUsedCredits" | "updatedAt" | "createdAt", ExtArgs["result"]["studioCreditBalance"]>
+  export type StudioCreditBalanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditBalanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditBalanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StudioCreditBalancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioCreditBalance"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      availableCredits: number
+      lifetimePurchasedCredits: number
+      lifetimeUsedCredits: number
+      updatedAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["studioCreditBalance"]>
+    composites: {}
+  }
+
+  type StudioCreditBalanceGetPayload<S extends boolean | null | undefined | StudioCreditBalanceDefaultArgs> = $Result.GetResult<Prisma.$StudioCreditBalancePayload, S>
+
+  type StudioCreditBalanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioCreditBalanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioCreditBalanceCountAggregateInputType | true
+    }
+
+  export interface StudioCreditBalanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioCreditBalance'], meta: { name: 'StudioCreditBalance' } }
+    /**
+     * Find zero or one StudioCreditBalance that matches the filter.
+     * @param {StudioCreditBalanceFindUniqueArgs} args - Arguments to find a StudioCreditBalance
+     * @example
+     * // Get one StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioCreditBalanceFindUniqueArgs>(args: SelectSubset<T, StudioCreditBalanceFindUniqueArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioCreditBalance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioCreditBalanceFindUniqueOrThrowArgs} args - Arguments to find a StudioCreditBalance
+     * @example
+     * // Get one StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioCreditBalanceFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioCreditBalanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditBalance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceFindFirstArgs} args - Arguments to find a StudioCreditBalance
+     * @example
+     * // Get one StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioCreditBalanceFindFirstArgs>(args?: SelectSubset<T, StudioCreditBalanceFindFirstArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditBalance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceFindFirstOrThrowArgs} args - Arguments to find a StudioCreditBalance
+     * @example
+     * // Get one StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioCreditBalanceFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioCreditBalanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioCreditBalances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioCreditBalances
+     * const studioCreditBalances = await prisma.studioCreditBalance.findMany()
+     * 
+     * // Get first 10 StudioCreditBalances
+     * const studioCreditBalances = await prisma.studioCreditBalance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioCreditBalanceWithIdOnly = await prisma.studioCreditBalance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioCreditBalanceFindManyArgs>(args?: SelectSubset<T, StudioCreditBalanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioCreditBalance.
+     * @param {StudioCreditBalanceCreateArgs} args - Arguments to create a StudioCreditBalance.
+     * @example
+     * // Create one StudioCreditBalance
+     * const StudioCreditBalance = await prisma.studioCreditBalance.create({
+     *   data: {
+     *     // ... data to create a StudioCreditBalance
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioCreditBalanceCreateArgs>(args: SelectSubset<T, StudioCreditBalanceCreateArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioCreditBalances.
+     * @param {StudioCreditBalanceCreateManyArgs} args - Arguments to create many StudioCreditBalances.
+     * @example
+     * // Create many StudioCreditBalances
+     * const studioCreditBalance = await prisma.studioCreditBalance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioCreditBalanceCreateManyArgs>(args?: SelectSubset<T, StudioCreditBalanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioCreditBalances and returns the data saved in the database.
+     * @param {StudioCreditBalanceCreateManyAndReturnArgs} args - Arguments to create many StudioCreditBalances.
+     * @example
+     * // Create many StudioCreditBalances
+     * const studioCreditBalance = await prisma.studioCreditBalance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioCreditBalances and only return the `id`
+     * const studioCreditBalanceWithIdOnly = await prisma.studioCreditBalance.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioCreditBalanceCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioCreditBalanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioCreditBalance.
+     * @param {StudioCreditBalanceDeleteArgs} args - Arguments to delete one StudioCreditBalance.
+     * @example
+     * // Delete one StudioCreditBalance
+     * const StudioCreditBalance = await prisma.studioCreditBalance.delete({
+     *   where: {
+     *     // ... filter to delete one StudioCreditBalance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioCreditBalanceDeleteArgs>(args: SelectSubset<T, StudioCreditBalanceDeleteArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioCreditBalance.
+     * @param {StudioCreditBalanceUpdateArgs} args - Arguments to update one StudioCreditBalance.
+     * @example
+     * // Update one StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioCreditBalanceUpdateArgs>(args: SelectSubset<T, StudioCreditBalanceUpdateArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioCreditBalances.
+     * @param {StudioCreditBalanceDeleteManyArgs} args - Arguments to filter StudioCreditBalances to delete.
+     * @example
+     * // Delete a few StudioCreditBalances
+     * const { count } = await prisma.studioCreditBalance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioCreditBalanceDeleteManyArgs>(args?: SelectSubset<T, StudioCreditBalanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditBalances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioCreditBalances
+     * const studioCreditBalance = await prisma.studioCreditBalance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioCreditBalanceUpdateManyArgs>(args: SelectSubset<T, StudioCreditBalanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditBalances and returns the data updated in the database.
+     * @param {StudioCreditBalanceUpdateManyAndReturnArgs} args - Arguments to update many StudioCreditBalances.
+     * @example
+     * // Update many StudioCreditBalances
+     * const studioCreditBalance = await prisma.studioCreditBalance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioCreditBalances and only return the `id`
+     * const studioCreditBalanceWithIdOnly = await prisma.studioCreditBalance.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioCreditBalanceUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioCreditBalanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioCreditBalance.
+     * @param {StudioCreditBalanceUpsertArgs} args - Arguments to update or create a StudioCreditBalance.
+     * @example
+     * // Update or create a StudioCreditBalance
+     * const studioCreditBalance = await prisma.studioCreditBalance.upsert({
+     *   create: {
+     *     // ... data to create a StudioCreditBalance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioCreditBalance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioCreditBalanceUpsertArgs>(args: SelectSubset<T, StudioCreditBalanceUpsertArgs<ExtArgs>>): Prisma__StudioCreditBalanceClient<$Result.GetResult<Prisma.$StudioCreditBalancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioCreditBalances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceCountArgs} args - Arguments to filter StudioCreditBalances to count.
+     * @example
+     * // Count the number of StudioCreditBalances
+     * const count = await prisma.studioCreditBalance.count({
+     *   where: {
+     *     // ... the filter for the StudioCreditBalances we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioCreditBalanceCountArgs>(
+      args?: Subset<T, StudioCreditBalanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioCreditBalanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioCreditBalance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioCreditBalanceAggregateArgs>(args: Subset<T, StudioCreditBalanceAggregateArgs>): Prisma.PrismaPromise<GetStudioCreditBalanceAggregateType<T>>
+
+    /**
+     * Group by StudioCreditBalance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditBalanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioCreditBalanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioCreditBalanceGroupByArgs['orderBy'] }
+        : { orderBy?: StudioCreditBalanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioCreditBalanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioCreditBalanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioCreditBalance model
+   */
+  readonly fields: StudioCreditBalanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioCreditBalance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioCreditBalanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioCreditBalance model
+   */
+  interface StudioCreditBalanceFieldRefs {
+    readonly id: FieldRef<"StudioCreditBalance", 'String'>
+    readonly userId: FieldRef<"StudioCreditBalance", 'String'>
+    readonly availableCredits: FieldRef<"StudioCreditBalance", 'Int'>
+    readonly lifetimePurchasedCredits: FieldRef<"StudioCreditBalance", 'Int'>
+    readonly lifetimeUsedCredits: FieldRef<"StudioCreditBalance", 'Int'>
+    readonly updatedAt: FieldRef<"StudioCreditBalance", 'DateTime'>
+    readonly createdAt: FieldRef<"StudioCreditBalance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioCreditBalance findUnique
+   */
+  export type StudioCreditBalanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditBalance to fetch.
+     */
+    where: StudioCreditBalanceWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditBalance findUniqueOrThrow
+   */
+  export type StudioCreditBalanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditBalance to fetch.
+     */
+    where: StudioCreditBalanceWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditBalance findFirst
+   */
+  export type StudioCreditBalanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditBalance to fetch.
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditBalances to fetch.
+     */
+    orderBy?: StudioCreditBalanceOrderByWithRelationInput | StudioCreditBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditBalances.
+     */
+    cursor?: StudioCreditBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditBalances.
+     */
+    distinct?: StudioCreditBalanceScalarFieldEnum | StudioCreditBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditBalance findFirstOrThrow
+   */
+  export type StudioCreditBalanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditBalance to fetch.
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditBalances to fetch.
+     */
+    orderBy?: StudioCreditBalanceOrderByWithRelationInput | StudioCreditBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditBalances.
+     */
+    cursor?: StudioCreditBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditBalances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditBalances.
+     */
+    distinct?: StudioCreditBalanceScalarFieldEnum | StudioCreditBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditBalance findMany
+   */
+  export type StudioCreditBalanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditBalances to fetch.
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditBalances to fetch.
+     */
+    orderBy?: StudioCreditBalanceOrderByWithRelationInput | StudioCreditBalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioCreditBalances.
+     */
+    cursor?: StudioCreditBalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditBalances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditBalances.
+     */
+    skip?: number
+    distinct?: StudioCreditBalanceScalarFieldEnum | StudioCreditBalanceScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditBalance create
+   */
+  export type StudioCreditBalanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioCreditBalance.
+     */
+    data: XOR<StudioCreditBalanceCreateInput, StudioCreditBalanceUncheckedCreateInput>
+  }
+
+  /**
+   * StudioCreditBalance createMany
+   */
+  export type StudioCreditBalanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioCreditBalances.
+     */
+    data: StudioCreditBalanceCreateManyInput | StudioCreditBalanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioCreditBalance createManyAndReturn
+   */
+  export type StudioCreditBalanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioCreditBalances.
+     */
+    data: StudioCreditBalanceCreateManyInput | StudioCreditBalanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditBalance update
+   */
+  export type StudioCreditBalanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioCreditBalance.
+     */
+    data: XOR<StudioCreditBalanceUpdateInput, StudioCreditBalanceUncheckedUpdateInput>
+    /**
+     * Choose, which StudioCreditBalance to update.
+     */
+    where: StudioCreditBalanceWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditBalance updateMany
+   */
+  export type StudioCreditBalanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioCreditBalances.
+     */
+    data: XOR<StudioCreditBalanceUpdateManyMutationInput, StudioCreditBalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditBalances to update
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * Limit how many StudioCreditBalances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditBalance updateManyAndReturn
+   */
+  export type StudioCreditBalanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioCreditBalances.
+     */
+    data: XOR<StudioCreditBalanceUpdateManyMutationInput, StudioCreditBalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditBalances to update
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * Limit how many StudioCreditBalances to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditBalance upsert
+   */
+  export type StudioCreditBalanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioCreditBalance to update in case it exists.
+     */
+    where: StudioCreditBalanceWhereUniqueInput
+    /**
+     * In case the StudioCreditBalance found by the `where` argument doesn't exist, create a new StudioCreditBalance with this data.
+     */
+    create: XOR<StudioCreditBalanceCreateInput, StudioCreditBalanceUncheckedCreateInput>
+    /**
+     * In case the StudioCreditBalance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioCreditBalanceUpdateInput, StudioCreditBalanceUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioCreditBalance delete
+   */
+  export type StudioCreditBalanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+    /**
+     * Filter which StudioCreditBalance to delete.
+     */
+    where: StudioCreditBalanceWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditBalance deleteMany
+   */
+  export type StudioCreditBalanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditBalances to delete
+     */
+    where?: StudioCreditBalanceWhereInput
+    /**
+     * Limit how many StudioCreditBalances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditBalance without action
+   */
+  export type StudioCreditBalanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditBalance
+     */
+    select?: StudioCreditBalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditBalance
+     */
+    omit?: StudioCreditBalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditBalanceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioCreditPack
+   */
+
+  export type AggregateStudioCreditPack = {
+    _count: StudioCreditPackCountAggregateOutputType | null
+    _avg: StudioCreditPackAvgAggregateOutputType | null
+    _sum: StudioCreditPackSumAggregateOutputType | null
+    _min: StudioCreditPackMinAggregateOutputType | null
+    _max: StudioCreditPackMaxAggregateOutputType | null
+  }
+
+  export type StudioCreditPackAvgAggregateOutputType = {
+    credits: number | null
+    amountInr: number | null
+    providerCostUsd: number | null
+    providerCostInr: number | null
+    platformMarginInr: number | null
+    sortOrder: number | null
+  }
+
+  export type StudioCreditPackSumAggregateOutputType = {
+    credits: number | null
+    amountInr: number | null
+    providerCostUsd: number | null
+    providerCostInr: number | null
+    platformMarginInr: number | null
+    sortOrder: number | null
+  }
+
+  export type StudioCreditPackMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    credits: number | null
+    amountInr: number | null
+    providerCostUsd: number | null
+    providerCostInr: number | null
+    platformMarginInr: number | null
+    isActive: boolean | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioCreditPackMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    credits: number | null
+    amountInr: number | null
+    providerCostUsd: number | null
+    providerCostInr: number | null
+    platformMarginInr: number | null
+    isActive: boolean | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioCreditPackCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr: number
+    isActive: number
+    sortOrder: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StudioCreditPackAvgAggregateInputType = {
+    credits?: true
+    amountInr?: true
+    providerCostUsd?: true
+    providerCostInr?: true
+    platformMarginInr?: true
+    sortOrder?: true
+  }
+
+  export type StudioCreditPackSumAggregateInputType = {
+    credits?: true
+    amountInr?: true
+    providerCostUsd?: true
+    providerCostInr?: true
+    platformMarginInr?: true
+    sortOrder?: true
+  }
+
+  export type StudioCreditPackMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    credits?: true
+    amountInr?: true
+    providerCostUsd?: true
+    providerCostInr?: true
+    platformMarginInr?: true
+    isActive?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioCreditPackMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    credits?: true
+    amountInr?: true
+    providerCostUsd?: true
+    providerCostInr?: true
+    platformMarginInr?: true
+    isActive?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioCreditPackCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    credits?: true
+    amountInr?: true
+    providerCostUsd?: true
+    providerCostInr?: true
+    platformMarginInr?: true
+    isActive?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StudioCreditPackAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditPack to aggregate.
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPacks to fetch.
+     */
+    orderBy?: StudioCreditPackOrderByWithRelationInput | StudioCreditPackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioCreditPackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioCreditPacks
+    **/
+    _count?: true | StudioCreditPackCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioCreditPackAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioCreditPackSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioCreditPackMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioCreditPackMaxAggregateInputType
+  }
+
+  export type GetStudioCreditPackAggregateType<T extends StudioCreditPackAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioCreditPack]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioCreditPack[P]>
+      : GetScalarType<T[P], AggregateStudioCreditPack[P]>
+  }
+
+
+
+
+  export type StudioCreditPackGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditPackWhereInput
+    orderBy?: StudioCreditPackOrderByWithAggregationInput | StudioCreditPackOrderByWithAggregationInput[]
+    by: StudioCreditPackScalarFieldEnum[] | StudioCreditPackScalarFieldEnum
+    having?: StudioCreditPackScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioCreditPackCountAggregateInputType | true
+    _avg?: StudioCreditPackAvgAggregateInputType
+    _sum?: StudioCreditPackSumAggregateInputType
+    _min?: StudioCreditPackMinAggregateInputType
+    _max?: StudioCreditPackMaxAggregateInputType
+  }
+
+  export type StudioCreditPackGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr: number
+    isActive: boolean
+    sortOrder: number
+    createdAt: Date
+    updatedAt: Date
+    _count: StudioCreditPackCountAggregateOutputType | null
+    _avg: StudioCreditPackAvgAggregateOutputType | null
+    _sum: StudioCreditPackSumAggregateOutputType | null
+    _min: StudioCreditPackMinAggregateOutputType | null
+    _max: StudioCreditPackMaxAggregateOutputType | null
+  }
+
+  type GetStudioCreditPackGroupByPayload<T extends StudioCreditPackGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioCreditPackGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioCreditPackGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioCreditPackGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioCreditPackGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioCreditPackSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    credits?: boolean
+    amountInr?: boolean
+    providerCostUsd?: boolean
+    providerCostInr?: boolean
+    platformMarginInr?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    purchases?: boolean | StudioCreditPack$purchasesArgs<ExtArgs>
+    _count?: boolean | StudioCreditPackCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditPack"]>
+
+  export type StudioCreditPackSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    credits?: boolean
+    amountInr?: boolean
+    providerCostUsd?: boolean
+    providerCostInr?: boolean
+    platformMarginInr?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["studioCreditPack"]>
+
+  export type StudioCreditPackSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    credits?: boolean
+    amountInr?: boolean
+    providerCostUsd?: boolean
+    providerCostInr?: boolean
+    platformMarginInr?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["studioCreditPack"]>
+
+  export type StudioCreditPackSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    credits?: boolean
+    amountInr?: boolean
+    providerCostUsd?: boolean
+    providerCostInr?: boolean
+    platformMarginInr?: boolean
+    isActive?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StudioCreditPackOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "credits" | "amountInr" | "providerCostUsd" | "providerCostInr" | "platformMarginInr" | "isActive" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["studioCreditPack"]>
+  export type StudioCreditPackInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    purchases?: boolean | StudioCreditPack$purchasesArgs<ExtArgs>
+    _count?: boolean | StudioCreditPackCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditPackIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StudioCreditPackIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $StudioCreditPackPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioCreditPack"
+    objects: {
+      purchases: Prisma.$StudioCreditPurchasePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      credits: number
+      amountInr: number
+      providerCostUsd: number
+      providerCostInr: number
+      platformMarginInr: number
+      isActive: boolean
+      sortOrder: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["studioCreditPack"]>
+    composites: {}
+  }
+
+  type StudioCreditPackGetPayload<S extends boolean | null | undefined | StudioCreditPackDefaultArgs> = $Result.GetResult<Prisma.$StudioCreditPackPayload, S>
+
+  type StudioCreditPackCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioCreditPackFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioCreditPackCountAggregateInputType | true
+    }
+
+  export interface StudioCreditPackDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioCreditPack'], meta: { name: 'StudioCreditPack' } }
+    /**
+     * Find zero or one StudioCreditPack that matches the filter.
+     * @param {StudioCreditPackFindUniqueArgs} args - Arguments to find a StudioCreditPack
+     * @example
+     * // Get one StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioCreditPackFindUniqueArgs>(args: SelectSubset<T, StudioCreditPackFindUniqueArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioCreditPack that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioCreditPackFindUniqueOrThrowArgs} args - Arguments to find a StudioCreditPack
+     * @example
+     * // Get one StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioCreditPackFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioCreditPackFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditPack that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackFindFirstArgs} args - Arguments to find a StudioCreditPack
+     * @example
+     * // Get one StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioCreditPackFindFirstArgs>(args?: SelectSubset<T, StudioCreditPackFindFirstArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditPack that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackFindFirstOrThrowArgs} args - Arguments to find a StudioCreditPack
+     * @example
+     * // Get one StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioCreditPackFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioCreditPackFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioCreditPacks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioCreditPacks
+     * const studioCreditPacks = await prisma.studioCreditPack.findMany()
+     * 
+     * // Get first 10 StudioCreditPacks
+     * const studioCreditPacks = await prisma.studioCreditPack.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioCreditPackWithIdOnly = await prisma.studioCreditPack.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioCreditPackFindManyArgs>(args?: SelectSubset<T, StudioCreditPackFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioCreditPack.
+     * @param {StudioCreditPackCreateArgs} args - Arguments to create a StudioCreditPack.
+     * @example
+     * // Create one StudioCreditPack
+     * const StudioCreditPack = await prisma.studioCreditPack.create({
+     *   data: {
+     *     // ... data to create a StudioCreditPack
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioCreditPackCreateArgs>(args: SelectSubset<T, StudioCreditPackCreateArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioCreditPacks.
+     * @param {StudioCreditPackCreateManyArgs} args - Arguments to create many StudioCreditPacks.
+     * @example
+     * // Create many StudioCreditPacks
+     * const studioCreditPack = await prisma.studioCreditPack.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioCreditPackCreateManyArgs>(args?: SelectSubset<T, StudioCreditPackCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioCreditPacks and returns the data saved in the database.
+     * @param {StudioCreditPackCreateManyAndReturnArgs} args - Arguments to create many StudioCreditPacks.
+     * @example
+     * // Create many StudioCreditPacks
+     * const studioCreditPack = await prisma.studioCreditPack.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioCreditPacks and only return the `id`
+     * const studioCreditPackWithIdOnly = await prisma.studioCreditPack.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioCreditPackCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioCreditPackCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioCreditPack.
+     * @param {StudioCreditPackDeleteArgs} args - Arguments to delete one StudioCreditPack.
+     * @example
+     * // Delete one StudioCreditPack
+     * const StudioCreditPack = await prisma.studioCreditPack.delete({
+     *   where: {
+     *     // ... filter to delete one StudioCreditPack
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioCreditPackDeleteArgs>(args: SelectSubset<T, StudioCreditPackDeleteArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioCreditPack.
+     * @param {StudioCreditPackUpdateArgs} args - Arguments to update one StudioCreditPack.
+     * @example
+     * // Update one StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioCreditPackUpdateArgs>(args: SelectSubset<T, StudioCreditPackUpdateArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioCreditPacks.
+     * @param {StudioCreditPackDeleteManyArgs} args - Arguments to filter StudioCreditPacks to delete.
+     * @example
+     * // Delete a few StudioCreditPacks
+     * const { count } = await prisma.studioCreditPack.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioCreditPackDeleteManyArgs>(args?: SelectSubset<T, StudioCreditPackDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditPacks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioCreditPacks
+     * const studioCreditPack = await prisma.studioCreditPack.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioCreditPackUpdateManyArgs>(args: SelectSubset<T, StudioCreditPackUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditPacks and returns the data updated in the database.
+     * @param {StudioCreditPackUpdateManyAndReturnArgs} args - Arguments to update many StudioCreditPacks.
+     * @example
+     * // Update many StudioCreditPacks
+     * const studioCreditPack = await prisma.studioCreditPack.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioCreditPacks and only return the `id`
+     * const studioCreditPackWithIdOnly = await prisma.studioCreditPack.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioCreditPackUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioCreditPackUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioCreditPack.
+     * @param {StudioCreditPackUpsertArgs} args - Arguments to update or create a StudioCreditPack.
+     * @example
+     * // Update or create a StudioCreditPack
+     * const studioCreditPack = await prisma.studioCreditPack.upsert({
+     *   create: {
+     *     // ... data to create a StudioCreditPack
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioCreditPack we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioCreditPackUpsertArgs>(args: SelectSubset<T, StudioCreditPackUpsertArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioCreditPacks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackCountArgs} args - Arguments to filter StudioCreditPacks to count.
+     * @example
+     * // Count the number of StudioCreditPacks
+     * const count = await prisma.studioCreditPack.count({
+     *   where: {
+     *     // ... the filter for the StudioCreditPacks we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioCreditPackCountArgs>(
+      args?: Subset<T, StudioCreditPackCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioCreditPackCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioCreditPack.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioCreditPackAggregateArgs>(args: Subset<T, StudioCreditPackAggregateArgs>): Prisma.PrismaPromise<GetStudioCreditPackAggregateType<T>>
+
+    /**
+     * Group by StudioCreditPack.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPackGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioCreditPackGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioCreditPackGroupByArgs['orderBy'] }
+        : { orderBy?: StudioCreditPackGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioCreditPackGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioCreditPackGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioCreditPack model
+   */
+  readonly fields: StudioCreditPackFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioCreditPack.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioCreditPackClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    purchases<T extends StudioCreditPack$purchasesArgs<ExtArgs> = {}>(args?: Subset<T, StudioCreditPack$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioCreditPack model
+   */
+  interface StudioCreditPackFieldRefs {
+    readonly id: FieldRef<"StudioCreditPack", 'String'>
+    readonly name: FieldRef<"StudioCreditPack", 'String'>
+    readonly description: FieldRef<"StudioCreditPack", 'String'>
+    readonly credits: FieldRef<"StudioCreditPack", 'Int'>
+    readonly amountInr: FieldRef<"StudioCreditPack", 'Int'>
+    readonly providerCostUsd: FieldRef<"StudioCreditPack", 'Float'>
+    readonly providerCostInr: FieldRef<"StudioCreditPack", 'Int'>
+    readonly platformMarginInr: FieldRef<"StudioCreditPack", 'Int'>
+    readonly isActive: FieldRef<"StudioCreditPack", 'Boolean'>
+    readonly sortOrder: FieldRef<"StudioCreditPack", 'Int'>
+    readonly createdAt: FieldRef<"StudioCreditPack", 'DateTime'>
+    readonly updatedAt: FieldRef<"StudioCreditPack", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioCreditPack findUnique
+   */
+  export type StudioCreditPackFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPack to fetch.
+     */
+    where: StudioCreditPackWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPack findUniqueOrThrow
+   */
+  export type StudioCreditPackFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPack to fetch.
+     */
+    where: StudioCreditPackWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPack findFirst
+   */
+  export type StudioCreditPackFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPack to fetch.
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPacks to fetch.
+     */
+    orderBy?: StudioCreditPackOrderByWithRelationInput | StudioCreditPackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditPacks.
+     */
+    cursor?: StudioCreditPackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditPacks.
+     */
+    distinct?: StudioCreditPackScalarFieldEnum | StudioCreditPackScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPack findFirstOrThrow
+   */
+  export type StudioCreditPackFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPack to fetch.
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPacks to fetch.
+     */
+    orderBy?: StudioCreditPackOrderByWithRelationInput | StudioCreditPackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditPacks.
+     */
+    cursor?: StudioCreditPackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPacks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditPacks.
+     */
+    distinct?: StudioCreditPackScalarFieldEnum | StudioCreditPackScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPack findMany
+   */
+  export type StudioCreditPackFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPacks to fetch.
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPacks to fetch.
+     */
+    orderBy?: StudioCreditPackOrderByWithRelationInput | StudioCreditPackOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioCreditPacks.
+     */
+    cursor?: StudioCreditPackWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPacks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPacks.
+     */
+    skip?: number
+    distinct?: StudioCreditPackScalarFieldEnum | StudioCreditPackScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPack create
+   */
+  export type StudioCreditPackCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioCreditPack.
+     */
+    data: XOR<StudioCreditPackCreateInput, StudioCreditPackUncheckedCreateInput>
+  }
+
+  /**
+   * StudioCreditPack createMany
+   */
+  export type StudioCreditPackCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioCreditPacks.
+     */
+    data: StudioCreditPackCreateManyInput | StudioCreditPackCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioCreditPack createManyAndReturn
+   */
+  export type StudioCreditPackCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioCreditPacks.
+     */
+    data: StudioCreditPackCreateManyInput | StudioCreditPackCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioCreditPack update
+   */
+  export type StudioCreditPackUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioCreditPack.
+     */
+    data: XOR<StudioCreditPackUpdateInput, StudioCreditPackUncheckedUpdateInput>
+    /**
+     * Choose, which StudioCreditPack to update.
+     */
+    where: StudioCreditPackWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPack updateMany
+   */
+  export type StudioCreditPackUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioCreditPacks.
+     */
+    data: XOR<StudioCreditPackUpdateManyMutationInput, StudioCreditPackUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditPacks to update
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * Limit how many StudioCreditPacks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditPack updateManyAndReturn
+   */
+  export type StudioCreditPackUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioCreditPacks.
+     */
+    data: XOR<StudioCreditPackUpdateManyMutationInput, StudioCreditPackUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditPacks to update
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * Limit how many StudioCreditPacks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditPack upsert
+   */
+  export type StudioCreditPackUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioCreditPack to update in case it exists.
+     */
+    where: StudioCreditPackWhereUniqueInput
+    /**
+     * In case the StudioCreditPack found by the `where` argument doesn't exist, create a new StudioCreditPack with this data.
+     */
+    create: XOR<StudioCreditPackCreateInput, StudioCreditPackUncheckedCreateInput>
+    /**
+     * In case the StudioCreditPack was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioCreditPackUpdateInput, StudioCreditPackUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioCreditPack delete
+   */
+  export type StudioCreditPackDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+    /**
+     * Filter which StudioCreditPack to delete.
+     */
+    where: StudioCreditPackWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPack deleteMany
+   */
+  export type StudioCreditPackDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditPacks to delete
+     */
+    where?: StudioCreditPackWhereInput
+    /**
+     * Limit how many StudioCreditPacks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditPack.purchases
+   */
+  export type StudioCreditPack$purchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    where?: StudioCreditPurchaseWhereInput
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioCreditPurchaseScalarFieldEnum | StudioCreditPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPack without action
+   */
+  export type StudioCreditPackDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPack
+     */
+    select?: StudioCreditPackSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPack
+     */
+    omit?: StudioCreditPackOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPackInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioCreditPurchase
+   */
+
+  export type AggregateStudioCreditPurchase = {
+    _count: StudioCreditPurchaseCountAggregateOutputType | null
+    _avg: StudioCreditPurchaseAvgAggregateOutputType | null
+    _sum: StudioCreditPurchaseSumAggregateOutputType | null
+    _min: StudioCreditPurchaseMinAggregateOutputType | null
+    _max: StudioCreditPurchaseMaxAggregateOutputType | null
+  }
+
+  export type StudioCreditPurchaseAvgAggregateOutputType = {
+    amountInr: number | null
+    credits: number | null
+  }
+
+  export type StudioCreditPurchaseSumAggregateOutputType = {
+    amountInr: number | null
+    credits: number | null
+  }
+
+  export type StudioCreditPurchaseMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    packId: string | null
+    amountInr: number | null
+    credits: number | null
+    razorpayOrderId: string | null
+    razorpayPaymentId: string | null
+    status: $Enums.StudioPurchaseStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioCreditPurchaseMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    packId: string | null
+    amountInr: number | null
+    credits: number | null
+    razorpayOrderId: string | null
+    razorpayPaymentId: string | null
+    status: $Enums.StudioPurchaseStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioCreditPurchaseCountAggregateOutputType = {
+    id: number
+    userId: number
+    packId: number
+    amountInr: number
+    credits: number
+    razorpayOrderId: number
+    razorpayPaymentId: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StudioCreditPurchaseAvgAggregateInputType = {
+    amountInr?: true
+    credits?: true
+  }
+
+  export type StudioCreditPurchaseSumAggregateInputType = {
+    amountInr?: true
+    credits?: true
+  }
+
+  export type StudioCreditPurchaseMinAggregateInputType = {
+    id?: true
+    userId?: true
+    packId?: true
+    amountInr?: true
+    credits?: true
+    razorpayOrderId?: true
+    razorpayPaymentId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioCreditPurchaseMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    packId?: true
+    amountInr?: true
+    credits?: true
+    razorpayOrderId?: true
+    razorpayPaymentId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioCreditPurchaseCountAggregateInputType = {
+    id?: true
+    userId?: true
+    packId?: true
+    amountInr?: true
+    credits?: true
+    razorpayOrderId?: true
+    razorpayPaymentId?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StudioCreditPurchaseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditPurchase to aggregate.
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPurchases to fetch.
+     */
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioCreditPurchases
+    **/
+    _count?: true | StudioCreditPurchaseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioCreditPurchaseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioCreditPurchaseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioCreditPurchaseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioCreditPurchaseMaxAggregateInputType
+  }
+
+  export type GetStudioCreditPurchaseAggregateType<T extends StudioCreditPurchaseAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioCreditPurchase]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioCreditPurchase[P]>
+      : GetScalarType<T[P], AggregateStudioCreditPurchase[P]>
+  }
+
+
+
+
+  export type StudioCreditPurchaseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditPurchaseWhereInput
+    orderBy?: StudioCreditPurchaseOrderByWithAggregationInput | StudioCreditPurchaseOrderByWithAggregationInput[]
+    by: StudioCreditPurchaseScalarFieldEnum[] | StudioCreditPurchaseScalarFieldEnum
+    having?: StudioCreditPurchaseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioCreditPurchaseCountAggregateInputType | true
+    _avg?: StudioCreditPurchaseAvgAggregateInputType
+    _sum?: StudioCreditPurchaseSumAggregateInputType
+    _min?: StudioCreditPurchaseMinAggregateInputType
+    _max?: StudioCreditPurchaseMaxAggregateInputType
+  }
+
+  export type StudioCreditPurchaseGroupByOutputType = {
+    id: string
+    userId: string
+    packId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId: string | null
+    razorpayPaymentId: string | null
+    status: $Enums.StudioPurchaseStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: StudioCreditPurchaseCountAggregateOutputType | null
+    _avg: StudioCreditPurchaseAvgAggregateOutputType | null
+    _sum: StudioCreditPurchaseSumAggregateOutputType | null
+    _min: StudioCreditPurchaseMinAggregateOutputType | null
+    _max: StudioCreditPurchaseMaxAggregateOutputType | null
+  }
+
+  type GetStudioCreditPurchaseGroupByPayload<T extends StudioCreditPurchaseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioCreditPurchaseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioCreditPurchaseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioCreditPurchaseGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioCreditPurchaseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioCreditPurchaseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    packId?: boolean
+    amountInr?: boolean
+    credits?: boolean
+    razorpayOrderId?: boolean
+    razorpayPaymentId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditPurchase"]>
+
+  export type StudioCreditPurchaseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    packId?: boolean
+    amountInr?: boolean
+    credits?: boolean
+    razorpayOrderId?: boolean
+    razorpayPaymentId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditPurchase"]>
+
+  export type StudioCreditPurchaseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    packId?: boolean
+    amountInr?: boolean
+    credits?: boolean
+    razorpayOrderId?: boolean
+    razorpayPaymentId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditPurchase"]>
+
+  export type StudioCreditPurchaseSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    packId?: boolean
+    amountInr?: boolean
+    credits?: boolean
+    razorpayOrderId?: boolean
+    razorpayPaymentId?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StudioCreditPurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "packId" | "amountInr" | "credits" | "razorpayOrderId" | "razorpayPaymentId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["studioCreditPurchase"]>
+  export type StudioCreditPurchaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditPurchaseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditPurchaseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    pack?: boolean | StudioCreditPackDefaultArgs<ExtArgs>
+  }
+
+  export type $StudioCreditPurchasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioCreditPurchase"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      pack: Prisma.$StudioCreditPackPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      packId: string
+      amountInr: number
+      credits: number
+      razorpayOrderId: string | null
+      razorpayPaymentId: string | null
+      status: $Enums.StudioPurchaseStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["studioCreditPurchase"]>
+    composites: {}
+  }
+
+  type StudioCreditPurchaseGetPayload<S extends boolean | null | undefined | StudioCreditPurchaseDefaultArgs> = $Result.GetResult<Prisma.$StudioCreditPurchasePayload, S>
+
+  type StudioCreditPurchaseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioCreditPurchaseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioCreditPurchaseCountAggregateInputType | true
+    }
+
+  export interface StudioCreditPurchaseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioCreditPurchase'], meta: { name: 'StudioCreditPurchase' } }
+    /**
+     * Find zero or one StudioCreditPurchase that matches the filter.
+     * @param {StudioCreditPurchaseFindUniqueArgs} args - Arguments to find a StudioCreditPurchase
+     * @example
+     * // Get one StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioCreditPurchaseFindUniqueArgs>(args: SelectSubset<T, StudioCreditPurchaseFindUniqueArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioCreditPurchase that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioCreditPurchaseFindUniqueOrThrowArgs} args - Arguments to find a StudioCreditPurchase
+     * @example
+     * // Get one StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioCreditPurchaseFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioCreditPurchaseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditPurchase that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseFindFirstArgs} args - Arguments to find a StudioCreditPurchase
+     * @example
+     * // Get one StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioCreditPurchaseFindFirstArgs>(args?: SelectSubset<T, StudioCreditPurchaseFindFirstArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditPurchase that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseFindFirstOrThrowArgs} args - Arguments to find a StudioCreditPurchase
+     * @example
+     * // Get one StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioCreditPurchaseFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioCreditPurchaseFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioCreditPurchases that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioCreditPurchases
+     * const studioCreditPurchases = await prisma.studioCreditPurchase.findMany()
+     * 
+     * // Get first 10 StudioCreditPurchases
+     * const studioCreditPurchases = await prisma.studioCreditPurchase.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioCreditPurchaseWithIdOnly = await prisma.studioCreditPurchase.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioCreditPurchaseFindManyArgs>(args?: SelectSubset<T, StudioCreditPurchaseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioCreditPurchase.
+     * @param {StudioCreditPurchaseCreateArgs} args - Arguments to create a StudioCreditPurchase.
+     * @example
+     * // Create one StudioCreditPurchase
+     * const StudioCreditPurchase = await prisma.studioCreditPurchase.create({
+     *   data: {
+     *     // ... data to create a StudioCreditPurchase
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioCreditPurchaseCreateArgs>(args: SelectSubset<T, StudioCreditPurchaseCreateArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioCreditPurchases.
+     * @param {StudioCreditPurchaseCreateManyArgs} args - Arguments to create many StudioCreditPurchases.
+     * @example
+     * // Create many StudioCreditPurchases
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioCreditPurchaseCreateManyArgs>(args?: SelectSubset<T, StudioCreditPurchaseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioCreditPurchases and returns the data saved in the database.
+     * @param {StudioCreditPurchaseCreateManyAndReturnArgs} args - Arguments to create many StudioCreditPurchases.
+     * @example
+     * // Create many StudioCreditPurchases
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioCreditPurchases and only return the `id`
+     * const studioCreditPurchaseWithIdOnly = await prisma.studioCreditPurchase.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioCreditPurchaseCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioCreditPurchaseCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioCreditPurchase.
+     * @param {StudioCreditPurchaseDeleteArgs} args - Arguments to delete one StudioCreditPurchase.
+     * @example
+     * // Delete one StudioCreditPurchase
+     * const StudioCreditPurchase = await prisma.studioCreditPurchase.delete({
+     *   where: {
+     *     // ... filter to delete one StudioCreditPurchase
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioCreditPurchaseDeleteArgs>(args: SelectSubset<T, StudioCreditPurchaseDeleteArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioCreditPurchase.
+     * @param {StudioCreditPurchaseUpdateArgs} args - Arguments to update one StudioCreditPurchase.
+     * @example
+     * // Update one StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioCreditPurchaseUpdateArgs>(args: SelectSubset<T, StudioCreditPurchaseUpdateArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioCreditPurchases.
+     * @param {StudioCreditPurchaseDeleteManyArgs} args - Arguments to filter StudioCreditPurchases to delete.
+     * @example
+     * // Delete a few StudioCreditPurchases
+     * const { count } = await prisma.studioCreditPurchase.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioCreditPurchaseDeleteManyArgs>(args?: SelectSubset<T, StudioCreditPurchaseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioCreditPurchases
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioCreditPurchaseUpdateManyArgs>(args: SelectSubset<T, StudioCreditPurchaseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditPurchases and returns the data updated in the database.
+     * @param {StudioCreditPurchaseUpdateManyAndReturnArgs} args - Arguments to update many StudioCreditPurchases.
+     * @example
+     * // Update many StudioCreditPurchases
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioCreditPurchases and only return the `id`
+     * const studioCreditPurchaseWithIdOnly = await prisma.studioCreditPurchase.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioCreditPurchaseUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioCreditPurchaseUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioCreditPurchase.
+     * @param {StudioCreditPurchaseUpsertArgs} args - Arguments to update or create a StudioCreditPurchase.
+     * @example
+     * // Update or create a StudioCreditPurchase
+     * const studioCreditPurchase = await prisma.studioCreditPurchase.upsert({
+     *   create: {
+     *     // ... data to create a StudioCreditPurchase
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioCreditPurchase we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioCreditPurchaseUpsertArgs>(args: SelectSubset<T, StudioCreditPurchaseUpsertArgs<ExtArgs>>): Prisma__StudioCreditPurchaseClient<$Result.GetResult<Prisma.$StudioCreditPurchasePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioCreditPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseCountArgs} args - Arguments to filter StudioCreditPurchases to count.
+     * @example
+     * // Count the number of StudioCreditPurchases
+     * const count = await prisma.studioCreditPurchase.count({
+     *   where: {
+     *     // ... the filter for the StudioCreditPurchases we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioCreditPurchaseCountArgs>(
+      args?: Subset<T, StudioCreditPurchaseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioCreditPurchaseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioCreditPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioCreditPurchaseAggregateArgs>(args: Subset<T, StudioCreditPurchaseAggregateArgs>): Prisma.PrismaPromise<GetStudioCreditPurchaseAggregateType<T>>
+
+    /**
+     * Group by StudioCreditPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditPurchaseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioCreditPurchaseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioCreditPurchaseGroupByArgs['orderBy'] }
+        : { orderBy?: StudioCreditPurchaseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioCreditPurchaseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioCreditPurchaseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioCreditPurchase model
+   */
+  readonly fields: StudioCreditPurchaseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioCreditPurchase.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioCreditPurchaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    pack<T extends StudioCreditPackDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudioCreditPackDefaultArgs<ExtArgs>>): Prisma__StudioCreditPackClient<$Result.GetResult<Prisma.$StudioCreditPackPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioCreditPurchase model
+   */
+  interface StudioCreditPurchaseFieldRefs {
+    readonly id: FieldRef<"StudioCreditPurchase", 'String'>
+    readonly userId: FieldRef<"StudioCreditPurchase", 'String'>
+    readonly packId: FieldRef<"StudioCreditPurchase", 'String'>
+    readonly amountInr: FieldRef<"StudioCreditPurchase", 'Int'>
+    readonly credits: FieldRef<"StudioCreditPurchase", 'Int'>
+    readonly razorpayOrderId: FieldRef<"StudioCreditPurchase", 'String'>
+    readonly razorpayPaymentId: FieldRef<"StudioCreditPurchase", 'String'>
+    readonly status: FieldRef<"StudioCreditPurchase", 'StudioPurchaseStatus'>
+    readonly createdAt: FieldRef<"StudioCreditPurchase", 'DateTime'>
+    readonly updatedAt: FieldRef<"StudioCreditPurchase", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioCreditPurchase findUnique
+   */
+  export type StudioCreditPurchaseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPurchase to fetch.
+     */
+    where: StudioCreditPurchaseWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPurchase findUniqueOrThrow
+   */
+  export type StudioCreditPurchaseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPurchase to fetch.
+     */
+    where: StudioCreditPurchaseWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPurchase findFirst
+   */
+  export type StudioCreditPurchaseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPurchase to fetch.
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPurchases to fetch.
+     */
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditPurchases.
+     */
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditPurchases.
+     */
+    distinct?: StudioCreditPurchaseScalarFieldEnum | StudioCreditPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPurchase findFirstOrThrow
+   */
+  export type StudioCreditPurchaseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPurchase to fetch.
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPurchases to fetch.
+     */
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditPurchases.
+     */
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditPurchases.
+     */
+    distinct?: StudioCreditPurchaseScalarFieldEnum | StudioCreditPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPurchase findMany
+   */
+  export type StudioCreditPurchaseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditPurchases to fetch.
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditPurchases to fetch.
+     */
+    orderBy?: StudioCreditPurchaseOrderByWithRelationInput | StudioCreditPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioCreditPurchases.
+     */
+    cursor?: StudioCreditPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditPurchases.
+     */
+    skip?: number
+    distinct?: StudioCreditPurchaseScalarFieldEnum | StudioCreditPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditPurchase create
+   */
+  export type StudioCreditPurchaseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioCreditPurchase.
+     */
+    data: XOR<StudioCreditPurchaseCreateInput, StudioCreditPurchaseUncheckedCreateInput>
+  }
+
+  /**
+   * StudioCreditPurchase createMany
+   */
+  export type StudioCreditPurchaseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioCreditPurchases.
+     */
+    data: StudioCreditPurchaseCreateManyInput | StudioCreditPurchaseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioCreditPurchase createManyAndReturn
+   */
+  export type StudioCreditPurchaseCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioCreditPurchases.
+     */
+    data: StudioCreditPurchaseCreateManyInput | StudioCreditPurchaseCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditPurchase update
+   */
+  export type StudioCreditPurchaseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioCreditPurchase.
+     */
+    data: XOR<StudioCreditPurchaseUpdateInput, StudioCreditPurchaseUncheckedUpdateInput>
+    /**
+     * Choose, which StudioCreditPurchase to update.
+     */
+    where: StudioCreditPurchaseWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPurchase updateMany
+   */
+  export type StudioCreditPurchaseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioCreditPurchases.
+     */
+    data: XOR<StudioCreditPurchaseUpdateManyMutationInput, StudioCreditPurchaseUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditPurchases to update
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * Limit how many StudioCreditPurchases to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditPurchase updateManyAndReturn
+   */
+  export type StudioCreditPurchaseUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioCreditPurchases.
+     */
+    data: XOR<StudioCreditPurchaseUpdateManyMutationInput, StudioCreditPurchaseUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditPurchases to update
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * Limit how many StudioCreditPurchases to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditPurchase upsert
+   */
+  export type StudioCreditPurchaseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioCreditPurchase to update in case it exists.
+     */
+    where: StudioCreditPurchaseWhereUniqueInput
+    /**
+     * In case the StudioCreditPurchase found by the `where` argument doesn't exist, create a new StudioCreditPurchase with this data.
+     */
+    create: XOR<StudioCreditPurchaseCreateInput, StudioCreditPurchaseUncheckedCreateInput>
+    /**
+     * In case the StudioCreditPurchase was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioCreditPurchaseUpdateInput, StudioCreditPurchaseUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioCreditPurchase delete
+   */
+  export type StudioCreditPurchaseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter which StudioCreditPurchase to delete.
+     */
+    where: StudioCreditPurchaseWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditPurchase deleteMany
+   */
+  export type StudioCreditPurchaseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditPurchases to delete
+     */
+    where?: StudioCreditPurchaseWhereInput
+    /**
+     * Limit how many StudioCreditPurchases to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditPurchase without action
+   */
+  export type StudioCreditPurchaseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditPurchase
+     */
+    select?: StudioCreditPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditPurchase
+     */
+    omit?: StudioCreditPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditPurchaseInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioCreditLedger
+   */
+
+  export type AggregateStudioCreditLedger = {
+    _count: StudioCreditLedgerCountAggregateOutputType | null
+    _avg: StudioCreditLedgerAvgAggregateOutputType | null
+    _sum: StudioCreditLedgerSumAggregateOutputType | null
+    _min: StudioCreditLedgerMinAggregateOutputType | null
+    _max: StudioCreditLedgerMaxAggregateOutputType | null
+  }
+
+  export type StudioCreditLedgerAvgAggregateOutputType = {
+    deltaCredits: number | null
+    balanceAfter: number | null
+  }
+
+  export type StudioCreditLedgerSumAggregateOutputType = {
+    deltaCredits: number | null
+    balanceAfter: number | null
+  }
+
+  export type StudioCreditLedgerMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: $Enums.StudioLedgerType | null
+    deltaCredits: number | null
+    balanceAfter: number | null
+    referenceId: string | null
+    note: string | null
+    createdAt: Date | null
+  }
+
+  export type StudioCreditLedgerMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: $Enums.StudioLedgerType | null
+    deltaCredits: number | null
+    balanceAfter: number | null
+    referenceId: string | null
+    note: string | null
+    createdAt: Date | null
+  }
+
+  export type StudioCreditLedgerCountAggregateOutputType = {
+    id: number
+    userId: number
+    type: number
+    deltaCredits: number
+    balanceAfter: number
+    referenceId: number
+    note: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type StudioCreditLedgerAvgAggregateInputType = {
+    deltaCredits?: true
+    balanceAfter?: true
+  }
+
+  export type StudioCreditLedgerSumAggregateInputType = {
+    deltaCredits?: true
+    balanceAfter?: true
+  }
+
+  export type StudioCreditLedgerMinAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    deltaCredits?: true
+    balanceAfter?: true
+    referenceId?: true
+    note?: true
+    createdAt?: true
+  }
+
+  export type StudioCreditLedgerMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    deltaCredits?: true
+    balanceAfter?: true
+    referenceId?: true
+    note?: true
+    createdAt?: true
+  }
+
+  export type StudioCreditLedgerCountAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    deltaCredits?: true
+    balanceAfter?: true
+    referenceId?: true
+    note?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type StudioCreditLedgerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditLedger to aggregate.
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditLedgers to fetch.
+     */
+    orderBy?: StudioCreditLedgerOrderByWithRelationInput | StudioCreditLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioCreditLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioCreditLedgers
+    **/
+    _count?: true | StudioCreditLedgerCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioCreditLedgerAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioCreditLedgerSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioCreditLedgerMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioCreditLedgerMaxAggregateInputType
+  }
+
+  export type GetStudioCreditLedgerAggregateType<T extends StudioCreditLedgerAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioCreditLedger]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioCreditLedger[P]>
+      : GetScalarType<T[P], AggregateStudioCreditLedger[P]>
+  }
+
+
+
+
+  export type StudioCreditLedgerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioCreditLedgerWhereInput
+    orderBy?: StudioCreditLedgerOrderByWithAggregationInput | StudioCreditLedgerOrderByWithAggregationInput[]
+    by: StudioCreditLedgerScalarFieldEnum[] | StudioCreditLedgerScalarFieldEnum
+    having?: StudioCreditLedgerScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioCreditLedgerCountAggregateInputType | true
+    _avg?: StudioCreditLedgerAvgAggregateInputType
+    _sum?: StudioCreditLedgerSumAggregateInputType
+    _min?: StudioCreditLedgerMinAggregateInputType
+    _max?: StudioCreditLedgerMaxAggregateInputType
+  }
+
+  export type StudioCreditLedgerGroupByOutputType = {
+    id: string
+    userId: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId: string | null
+    note: string | null
+    createdAt: Date
+    _count: StudioCreditLedgerCountAggregateOutputType | null
+    _avg: StudioCreditLedgerAvgAggregateOutputType | null
+    _sum: StudioCreditLedgerSumAggregateOutputType | null
+    _min: StudioCreditLedgerMinAggregateOutputType | null
+    _max: StudioCreditLedgerMaxAggregateOutputType | null
+  }
+
+  type GetStudioCreditLedgerGroupByPayload<T extends StudioCreditLedgerGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioCreditLedgerGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioCreditLedgerGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioCreditLedgerGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioCreditLedgerGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioCreditLedgerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    deltaCredits?: boolean
+    balanceAfter?: boolean
+    referenceId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditLedger"]>
+
+  export type StudioCreditLedgerSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    deltaCredits?: boolean
+    balanceAfter?: boolean
+    referenceId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditLedger"]>
+
+  export type StudioCreditLedgerSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    deltaCredits?: boolean
+    balanceAfter?: boolean
+    referenceId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioCreditLedger"]>
+
+  export type StudioCreditLedgerSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    deltaCredits?: boolean
+    balanceAfter?: boolean
+    referenceId?: boolean
+    note?: boolean
+    createdAt?: boolean
+  }
+
+  export type StudioCreditLedgerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "deltaCredits" | "balanceAfter" | "referenceId" | "note" | "createdAt", ExtArgs["result"]["studioCreditLedger"]>
+  export type StudioCreditLedgerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditLedgerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StudioCreditLedgerIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StudioCreditLedgerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioCreditLedger"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      type: $Enums.StudioLedgerType
+      deltaCredits: number
+      balanceAfter: number
+      referenceId: string | null
+      note: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["studioCreditLedger"]>
+    composites: {}
+  }
+
+  type StudioCreditLedgerGetPayload<S extends boolean | null | undefined | StudioCreditLedgerDefaultArgs> = $Result.GetResult<Prisma.$StudioCreditLedgerPayload, S>
+
+  type StudioCreditLedgerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioCreditLedgerFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioCreditLedgerCountAggregateInputType | true
+    }
+
+  export interface StudioCreditLedgerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioCreditLedger'], meta: { name: 'StudioCreditLedger' } }
+    /**
+     * Find zero or one StudioCreditLedger that matches the filter.
+     * @param {StudioCreditLedgerFindUniqueArgs} args - Arguments to find a StudioCreditLedger
+     * @example
+     * // Get one StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioCreditLedgerFindUniqueArgs>(args: SelectSubset<T, StudioCreditLedgerFindUniqueArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioCreditLedger that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioCreditLedgerFindUniqueOrThrowArgs} args - Arguments to find a StudioCreditLedger
+     * @example
+     * // Get one StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioCreditLedgerFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioCreditLedgerFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditLedger that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerFindFirstArgs} args - Arguments to find a StudioCreditLedger
+     * @example
+     * // Get one StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioCreditLedgerFindFirstArgs>(args?: SelectSubset<T, StudioCreditLedgerFindFirstArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioCreditLedger that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerFindFirstOrThrowArgs} args - Arguments to find a StudioCreditLedger
+     * @example
+     * // Get one StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioCreditLedgerFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioCreditLedgerFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioCreditLedgers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioCreditLedgers
+     * const studioCreditLedgers = await prisma.studioCreditLedger.findMany()
+     * 
+     * // Get first 10 StudioCreditLedgers
+     * const studioCreditLedgers = await prisma.studioCreditLedger.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioCreditLedgerWithIdOnly = await prisma.studioCreditLedger.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioCreditLedgerFindManyArgs>(args?: SelectSubset<T, StudioCreditLedgerFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioCreditLedger.
+     * @param {StudioCreditLedgerCreateArgs} args - Arguments to create a StudioCreditLedger.
+     * @example
+     * // Create one StudioCreditLedger
+     * const StudioCreditLedger = await prisma.studioCreditLedger.create({
+     *   data: {
+     *     // ... data to create a StudioCreditLedger
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioCreditLedgerCreateArgs>(args: SelectSubset<T, StudioCreditLedgerCreateArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioCreditLedgers.
+     * @param {StudioCreditLedgerCreateManyArgs} args - Arguments to create many StudioCreditLedgers.
+     * @example
+     * // Create many StudioCreditLedgers
+     * const studioCreditLedger = await prisma.studioCreditLedger.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioCreditLedgerCreateManyArgs>(args?: SelectSubset<T, StudioCreditLedgerCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioCreditLedgers and returns the data saved in the database.
+     * @param {StudioCreditLedgerCreateManyAndReturnArgs} args - Arguments to create many StudioCreditLedgers.
+     * @example
+     * // Create many StudioCreditLedgers
+     * const studioCreditLedger = await prisma.studioCreditLedger.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioCreditLedgers and only return the `id`
+     * const studioCreditLedgerWithIdOnly = await prisma.studioCreditLedger.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioCreditLedgerCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioCreditLedgerCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioCreditLedger.
+     * @param {StudioCreditLedgerDeleteArgs} args - Arguments to delete one StudioCreditLedger.
+     * @example
+     * // Delete one StudioCreditLedger
+     * const StudioCreditLedger = await prisma.studioCreditLedger.delete({
+     *   where: {
+     *     // ... filter to delete one StudioCreditLedger
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioCreditLedgerDeleteArgs>(args: SelectSubset<T, StudioCreditLedgerDeleteArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioCreditLedger.
+     * @param {StudioCreditLedgerUpdateArgs} args - Arguments to update one StudioCreditLedger.
+     * @example
+     * // Update one StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioCreditLedgerUpdateArgs>(args: SelectSubset<T, StudioCreditLedgerUpdateArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioCreditLedgers.
+     * @param {StudioCreditLedgerDeleteManyArgs} args - Arguments to filter StudioCreditLedgers to delete.
+     * @example
+     * // Delete a few StudioCreditLedgers
+     * const { count } = await prisma.studioCreditLedger.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioCreditLedgerDeleteManyArgs>(args?: SelectSubset<T, StudioCreditLedgerDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioCreditLedgers
+     * const studioCreditLedger = await prisma.studioCreditLedger.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioCreditLedgerUpdateManyArgs>(args: SelectSubset<T, StudioCreditLedgerUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioCreditLedgers and returns the data updated in the database.
+     * @param {StudioCreditLedgerUpdateManyAndReturnArgs} args - Arguments to update many StudioCreditLedgers.
+     * @example
+     * // Update many StudioCreditLedgers
+     * const studioCreditLedger = await prisma.studioCreditLedger.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioCreditLedgers and only return the `id`
+     * const studioCreditLedgerWithIdOnly = await prisma.studioCreditLedger.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioCreditLedgerUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioCreditLedgerUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioCreditLedger.
+     * @param {StudioCreditLedgerUpsertArgs} args - Arguments to update or create a StudioCreditLedger.
+     * @example
+     * // Update or create a StudioCreditLedger
+     * const studioCreditLedger = await prisma.studioCreditLedger.upsert({
+     *   create: {
+     *     // ... data to create a StudioCreditLedger
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioCreditLedger we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioCreditLedgerUpsertArgs>(args: SelectSubset<T, StudioCreditLedgerUpsertArgs<ExtArgs>>): Prisma__StudioCreditLedgerClient<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioCreditLedgers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerCountArgs} args - Arguments to filter StudioCreditLedgers to count.
+     * @example
+     * // Count the number of StudioCreditLedgers
+     * const count = await prisma.studioCreditLedger.count({
+     *   where: {
+     *     // ... the filter for the StudioCreditLedgers we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioCreditLedgerCountArgs>(
+      args?: Subset<T, StudioCreditLedgerCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioCreditLedgerCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioCreditLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioCreditLedgerAggregateArgs>(args: Subset<T, StudioCreditLedgerAggregateArgs>): Prisma.PrismaPromise<GetStudioCreditLedgerAggregateType<T>>
+
+    /**
+     * Group by StudioCreditLedger.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioCreditLedgerGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioCreditLedgerGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioCreditLedgerGroupByArgs['orderBy'] }
+        : { orderBy?: StudioCreditLedgerGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioCreditLedgerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioCreditLedgerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioCreditLedger model
+   */
+  readonly fields: StudioCreditLedgerFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioCreditLedger.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioCreditLedgerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioCreditLedger model
+   */
+  interface StudioCreditLedgerFieldRefs {
+    readonly id: FieldRef<"StudioCreditLedger", 'String'>
+    readonly userId: FieldRef<"StudioCreditLedger", 'String'>
+    readonly type: FieldRef<"StudioCreditLedger", 'StudioLedgerType'>
+    readonly deltaCredits: FieldRef<"StudioCreditLedger", 'Int'>
+    readonly balanceAfter: FieldRef<"StudioCreditLedger", 'Int'>
+    readonly referenceId: FieldRef<"StudioCreditLedger", 'String'>
+    readonly note: FieldRef<"StudioCreditLedger", 'String'>
+    readonly createdAt: FieldRef<"StudioCreditLedger", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioCreditLedger findUnique
+   */
+  export type StudioCreditLedgerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditLedger to fetch.
+     */
+    where: StudioCreditLedgerWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditLedger findUniqueOrThrow
+   */
+  export type StudioCreditLedgerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditLedger to fetch.
+     */
+    where: StudioCreditLedgerWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditLedger findFirst
+   */
+  export type StudioCreditLedgerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditLedger to fetch.
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditLedgers to fetch.
+     */
+    orderBy?: StudioCreditLedgerOrderByWithRelationInput | StudioCreditLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditLedgers.
+     */
+    cursor?: StudioCreditLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditLedgers.
+     */
+    distinct?: StudioCreditLedgerScalarFieldEnum | StudioCreditLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditLedger findFirstOrThrow
+   */
+  export type StudioCreditLedgerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditLedger to fetch.
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditLedgers to fetch.
+     */
+    orderBy?: StudioCreditLedgerOrderByWithRelationInput | StudioCreditLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioCreditLedgers.
+     */
+    cursor?: StudioCreditLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditLedgers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioCreditLedgers.
+     */
+    distinct?: StudioCreditLedgerScalarFieldEnum | StudioCreditLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditLedger findMany
+   */
+  export type StudioCreditLedgerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioCreditLedgers to fetch.
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioCreditLedgers to fetch.
+     */
+    orderBy?: StudioCreditLedgerOrderByWithRelationInput | StudioCreditLedgerOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioCreditLedgers.
+     */
+    cursor?: StudioCreditLedgerWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioCreditLedgers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioCreditLedgers.
+     */
+    skip?: number
+    distinct?: StudioCreditLedgerScalarFieldEnum | StudioCreditLedgerScalarFieldEnum[]
+  }
+
+  /**
+   * StudioCreditLedger create
+   */
+  export type StudioCreditLedgerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioCreditLedger.
+     */
+    data: XOR<StudioCreditLedgerCreateInput, StudioCreditLedgerUncheckedCreateInput>
+  }
+
+  /**
+   * StudioCreditLedger createMany
+   */
+  export type StudioCreditLedgerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioCreditLedgers.
+     */
+    data: StudioCreditLedgerCreateManyInput | StudioCreditLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioCreditLedger createManyAndReturn
+   */
+  export type StudioCreditLedgerCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioCreditLedgers.
+     */
+    data: StudioCreditLedgerCreateManyInput | StudioCreditLedgerCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditLedger update
+   */
+  export type StudioCreditLedgerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioCreditLedger.
+     */
+    data: XOR<StudioCreditLedgerUpdateInput, StudioCreditLedgerUncheckedUpdateInput>
+    /**
+     * Choose, which StudioCreditLedger to update.
+     */
+    where: StudioCreditLedgerWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditLedger updateMany
+   */
+  export type StudioCreditLedgerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioCreditLedgers.
+     */
+    data: XOR<StudioCreditLedgerUpdateManyMutationInput, StudioCreditLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditLedgers to update
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * Limit how many StudioCreditLedgers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditLedger updateManyAndReturn
+   */
+  export type StudioCreditLedgerUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioCreditLedgers.
+     */
+    data: XOR<StudioCreditLedgerUpdateManyMutationInput, StudioCreditLedgerUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioCreditLedgers to update
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * Limit how many StudioCreditLedgers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioCreditLedger upsert
+   */
+  export type StudioCreditLedgerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioCreditLedger to update in case it exists.
+     */
+    where: StudioCreditLedgerWhereUniqueInput
+    /**
+     * In case the StudioCreditLedger found by the `where` argument doesn't exist, create a new StudioCreditLedger with this data.
+     */
+    create: XOR<StudioCreditLedgerCreateInput, StudioCreditLedgerUncheckedCreateInput>
+    /**
+     * In case the StudioCreditLedger was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioCreditLedgerUpdateInput, StudioCreditLedgerUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioCreditLedger delete
+   */
+  export type StudioCreditLedgerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+    /**
+     * Filter which StudioCreditLedger to delete.
+     */
+    where: StudioCreditLedgerWhereUniqueInput
+  }
+
+  /**
+   * StudioCreditLedger deleteMany
+   */
+  export type StudioCreditLedgerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioCreditLedgers to delete
+     */
+    where?: StudioCreditLedgerWhereInput
+    /**
+     * Limit how many StudioCreditLedgers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioCreditLedger without action
+   */
+  export type StudioCreditLedgerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioCreditLedger
+     */
+    select?: StudioCreditLedgerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioCreditLedger
+     */
+    omit?: StudioCreditLedgerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioCreditLedgerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioModelPricing
+   */
+
+  export type AggregateStudioModelPricing = {
+    _count: StudioModelPricingCountAggregateOutputType | null
+    _avg: StudioModelPricingAvgAggregateOutputType | null
+    _sum: StudioModelPricingSumAggregateOutputType | null
+    _min: StudioModelPricingMinAggregateOutputType | null
+    _max: StudioModelPricingMaxAggregateOutputType | null
+  }
+
+  export type StudioModelPricingAvgAggregateOutputType = {
+    providerCredits: number | null
+    sortOrder: number | null
+  }
+
+  export type StudioModelPricingSumAggregateOutputType = {
+    providerCredits: number | null
+    sortOrder: number | null
+  }
+
+  export type StudioModelPricingMinAggregateOutputType = {
+    id: string | null
+    providerModelId: string | null
+    displayName: string | null
+    category: string | null
+    providerCredits: number | null
+    isEnabled: boolean | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioModelPricingMaxAggregateOutputType = {
+    id: string | null
+    providerModelId: string | null
+    displayName: string | null
+    category: string | null
+    providerCredits: number | null
+    isEnabled: boolean | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioModelPricingCountAggregateOutputType = {
+    id: number
+    providerModelId: number
+    displayName: number
+    category: number
+    providerCredits: number
+    isEnabled: number
+    sortOrder: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StudioModelPricingAvgAggregateInputType = {
+    providerCredits?: true
+    sortOrder?: true
+  }
+
+  export type StudioModelPricingSumAggregateInputType = {
+    providerCredits?: true
+    sortOrder?: true
+  }
+
+  export type StudioModelPricingMinAggregateInputType = {
+    id?: true
+    providerModelId?: true
+    displayName?: true
+    category?: true
+    providerCredits?: true
+    isEnabled?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioModelPricingMaxAggregateInputType = {
+    id?: true
+    providerModelId?: true
+    displayName?: true
+    category?: true
+    providerCredits?: true
+    isEnabled?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioModelPricingCountAggregateInputType = {
+    id?: true
+    providerModelId?: true
+    displayName?: true
+    category?: true
+    providerCredits?: true
+    isEnabled?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StudioModelPricingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioModelPricing to aggregate.
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioModelPricings to fetch.
+     */
+    orderBy?: StudioModelPricingOrderByWithRelationInput | StudioModelPricingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioModelPricingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioModelPricings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioModelPricings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioModelPricings
+    **/
+    _count?: true | StudioModelPricingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioModelPricingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioModelPricingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioModelPricingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioModelPricingMaxAggregateInputType
+  }
+
+  export type GetStudioModelPricingAggregateType<T extends StudioModelPricingAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioModelPricing]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioModelPricing[P]>
+      : GetScalarType<T[P], AggregateStudioModelPricing[P]>
+  }
+
+
+
+
+  export type StudioModelPricingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioModelPricingWhereInput
+    orderBy?: StudioModelPricingOrderByWithAggregationInput | StudioModelPricingOrderByWithAggregationInput[]
+    by: StudioModelPricingScalarFieldEnum[] | StudioModelPricingScalarFieldEnum
+    having?: StudioModelPricingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioModelPricingCountAggregateInputType | true
+    _avg?: StudioModelPricingAvgAggregateInputType
+    _sum?: StudioModelPricingSumAggregateInputType
+    _min?: StudioModelPricingMinAggregateInputType
+    _max?: StudioModelPricingMaxAggregateInputType
+  }
+
+  export type StudioModelPricingGroupByOutputType = {
+    id: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled: boolean
+    sortOrder: number
+    createdAt: Date
+    updatedAt: Date
+    _count: StudioModelPricingCountAggregateOutputType | null
+    _avg: StudioModelPricingAvgAggregateOutputType | null
+    _sum: StudioModelPricingSumAggregateOutputType | null
+    _min: StudioModelPricingMinAggregateOutputType | null
+    _max: StudioModelPricingMaxAggregateOutputType | null
+  }
+
+  type GetStudioModelPricingGroupByPayload<T extends StudioModelPricingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioModelPricingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioModelPricingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioModelPricingGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioModelPricingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioModelPricingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    providerModelId?: boolean
+    displayName?: boolean
+    category?: boolean
+    providerCredits?: boolean
+    isEnabled?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    generations?: boolean | StudioModelPricing$generationsArgs<ExtArgs>
+    _count?: boolean | StudioModelPricingCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioModelPricing"]>
+
+  export type StudioModelPricingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    providerModelId?: boolean
+    displayName?: boolean
+    category?: boolean
+    providerCredits?: boolean
+    isEnabled?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["studioModelPricing"]>
+
+  export type StudioModelPricingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    providerModelId?: boolean
+    displayName?: boolean
+    category?: boolean
+    providerCredits?: boolean
+    isEnabled?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["studioModelPricing"]>
+
+  export type StudioModelPricingSelectScalar = {
+    id?: boolean
+    providerModelId?: boolean
+    displayName?: boolean
+    category?: boolean
+    providerCredits?: boolean
+    isEnabled?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StudioModelPricingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "providerModelId" | "displayName" | "category" | "providerCredits" | "isEnabled" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["studioModelPricing"]>
+  export type StudioModelPricingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | StudioModelPricing$generationsArgs<ExtArgs>
+    _count?: boolean | StudioModelPricingCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StudioModelPricingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type StudioModelPricingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $StudioModelPricingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioModelPricing"
+    objects: {
+      generations: Prisma.$StudioGenerationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      providerModelId: string
+      displayName: string
+      category: string
+      providerCredits: number
+      isEnabled: boolean
+      sortOrder: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["studioModelPricing"]>
+    composites: {}
+  }
+
+  type StudioModelPricingGetPayload<S extends boolean | null | undefined | StudioModelPricingDefaultArgs> = $Result.GetResult<Prisma.$StudioModelPricingPayload, S>
+
+  type StudioModelPricingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioModelPricingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioModelPricingCountAggregateInputType | true
+    }
+
+  export interface StudioModelPricingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioModelPricing'], meta: { name: 'StudioModelPricing' } }
+    /**
+     * Find zero or one StudioModelPricing that matches the filter.
+     * @param {StudioModelPricingFindUniqueArgs} args - Arguments to find a StudioModelPricing
+     * @example
+     * // Get one StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioModelPricingFindUniqueArgs>(args: SelectSubset<T, StudioModelPricingFindUniqueArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioModelPricing that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioModelPricingFindUniqueOrThrowArgs} args - Arguments to find a StudioModelPricing
+     * @example
+     * // Get one StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioModelPricingFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioModelPricingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioModelPricing that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingFindFirstArgs} args - Arguments to find a StudioModelPricing
+     * @example
+     * // Get one StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioModelPricingFindFirstArgs>(args?: SelectSubset<T, StudioModelPricingFindFirstArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioModelPricing that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingFindFirstOrThrowArgs} args - Arguments to find a StudioModelPricing
+     * @example
+     * // Get one StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioModelPricingFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioModelPricingFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioModelPricings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioModelPricings
+     * const studioModelPricings = await prisma.studioModelPricing.findMany()
+     * 
+     * // Get first 10 StudioModelPricings
+     * const studioModelPricings = await prisma.studioModelPricing.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioModelPricingWithIdOnly = await prisma.studioModelPricing.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioModelPricingFindManyArgs>(args?: SelectSubset<T, StudioModelPricingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioModelPricing.
+     * @param {StudioModelPricingCreateArgs} args - Arguments to create a StudioModelPricing.
+     * @example
+     * // Create one StudioModelPricing
+     * const StudioModelPricing = await prisma.studioModelPricing.create({
+     *   data: {
+     *     // ... data to create a StudioModelPricing
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioModelPricingCreateArgs>(args: SelectSubset<T, StudioModelPricingCreateArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioModelPricings.
+     * @param {StudioModelPricingCreateManyArgs} args - Arguments to create many StudioModelPricings.
+     * @example
+     * // Create many StudioModelPricings
+     * const studioModelPricing = await prisma.studioModelPricing.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioModelPricingCreateManyArgs>(args?: SelectSubset<T, StudioModelPricingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioModelPricings and returns the data saved in the database.
+     * @param {StudioModelPricingCreateManyAndReturnArgs} args - Arguments to create many StudioModelPricings.
+     * @example
+     * // Create many StudioModelPricings
+     * const studioModelPricing = await prisma.studioModelPricing.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioModelPricings and only return the `id`
+     * const studioModelPricingWithIdOnly = await prisma.studioModelPricing.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioModelPricingCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioModelPricingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioModelPricing.
+     * @param {StudioModelPricingDeleteArgs} args - Arguments to delete one StudioModelPricing.
+     * @example
+     * // Delete one StudioModelPricing
+     * const StudioModelPricing = await prisma.studioModelPricing.delete({
+     *   where: {
+     *     // ... filter to delete one StudioModelPricing
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioModelPricingDeleteArgs>(args: SelectSubset<T, StudioModelPricingDeleteArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioModelPricing.
+     * @param {StudioModelPricingUpdateArgs} args - Arguments to update one StudioModelPricing.
+     * @example
+     * // Update one StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioModelPricingUpdateArgs>(args: SelectSubset<T, StudioModelPricingUpdateArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioModelPricings.
+     * @param {StudioModelPricingDeleteManyArgs} args - Arguments to filter StudioModelPricings to delete.
+     * @example
+     * // Delete a few StudioModelPricings
+     * const { count } = await prisma.studioModelPricing.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioModelPricingDeleteManyArgs>(args?: SelectSubset<T, StudioModelPricingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioModelPricings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioModelPricings
+     * const studioModelPricing = await prisma.studioModelPricing.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioModelPricingUpdateManyArgs>(args: SelectSubset<T, StudioModelPricingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioModelPricings and returns the data updated in the database.
+     * @param {StudioModelPricingUpdateManyAndReturnArgs} args - Arguments to update many StudioModelPricings.
+     * @example
+     * // Update many StudioModelPricings
+     * const studioModelPricing = await prisma.studioModelPricing.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioModelPricings and only return the `id`
+     * const studioModelPricingWithIdOnly = await prisma.studioModelPricing.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioModelPricingUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioModelPricingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioModelPricing.
+     * @param {StudioModelPricingUpsertArgs} args - Arguments to update or create a StudioModelPricing.
+     * @example
+     * // Update or create a StudioModelPricing
+     * const studioModelPricing = await prisma.studioModelPricing.upsert({
+     *   create: {
+     *     // ... data to create a StudioModelPricing
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioModelPricing we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioModelPricingUpsertArgs>(args: SelectSubset<T, StudioModelPricingUpsertArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioModelPricings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingCountArgs} args - Arguments to filter StudioModelPricings to count.
+     * @example
+     * // Count the number of StudioModelPricings
+     * const count = await prisma.studioModelPricing.count({
+     *   where: {
+     *     // ... the filter for the StudioModelPricings we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioModelPricingCountArgs>(
+      args?: Subset<T, StudioModelPricingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioModelPricingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioModelPricing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioModelPricingAggregateArgs>(args: Subset<T, StudioModelPricingAggregateArgs>): Prisma.PrismaPromise<GetStudioModelPricingAggregateType<T>>
+
+    /**
+     * Group by StudioModelPricing.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioModelPricingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioModelPricingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioModelPricingGroupByArgs['orderBy'] }
+        : { orderBy?: StudioModelPricingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioModelPricingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioModelPricingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioModelPricing model
+   */
+  readonly fields: StudioModelPricingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioModelPricing.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioModelPricingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    generations<T extends StudioModelPricing$generationsArgs<ExtArgs> = {}>(args?: Subset<T, StudioModelPricing$generationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioModelPricing model
+   */
+  interface StudioModelPricingFieldRefs {
+    readonly id: FieldRef<"StudioModelPricing", 'String'>
+    readonly providerModelId: FieldRef<"StudioModelPricing", 'String'>
+    readonly displayName: FieldRef<"StudioModelPricing", 'String'>
+    readonly category: FieldRef<"StudioModelPricing", 'String'>
+    readonly providerCredits: FieldRef<"StudioModelPricing", 'Int'>
+    readonly isEnabled: FieldRef<"StudioModelPricing", 'Boolean'>
+    readonly sortOrder: FieldRef<"StudioModelPricing", 'Int'>
+    readonly createdAt: FieldRef<"StudioModelPricing", 'DateTime'>
+    readonly updatedAt: FieldRef<"StudioModelPricing", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioModelPricing findUnique
+   */
+  export type StudioModelPricingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioModelPricing to fetch.
+     */
+    where: StudioModelPricingWhereUniqueInput
+  }
+
+  /**
+   * StudioModelPricing findUniqueOrThrow
+   */
+  export type StudioModelPricingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioModelPricing to fetch.
+     */
+    where: StudioModelPricingWhereUniqueInput
+  }
+
+  /**
+   * StudioModelPricing findFirst
+   */
+  export type StudioModelPricingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioModelPricing to fetch.
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioModelPricings to fetch.
+     */
+    orderBy?: StudioModelPricingOrderByWithRelationInput | StudioModelPricingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioModelPricings.
+     */
+    cursor?: StudioModelPricingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioModelPricings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioModelPricings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioModelPricings.
+     */
+    distinct?: StudioModelPricingScalarFieldEnum | StudioModelPricingScalarFieldEnum[]
+  }
+
+  /**
+   * StudioModelPricing findFirstOrThrow
+   */
+  export type StudioModelPricingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioModelPricing to fetch.
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioModelPricings to fetch.
+     */
+    orderBy?: StudioModelPricingOrderByWithRelationInput | StudioModelPricingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioModelPricings.
+     */
+    cursor?: StudioModelPricingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioModelPricings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioModelPricings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioModelPricings.
+     */
+    distinct?: StudioModelPricingScalarFieldEnum | StudioModelPricingScalarFieldEnum[]
+  }
+
+  /**
+   * StudioModelPricing findMany
+   */
+  export type StudioModelPricingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioModelPricings to fetch.
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioModelPricings to fetch.
+     */
+    orderBy?: StudioModelPricingOrderByWithRelationInput | StudioModelPricingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioModelPricings.
+     */
+    cursor?: StudioModelPricingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioModelPricings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioModelPricings.
+     */
+    skip?: number
+    distinct?: StudioModelPricingScalarFieldEnum | StudioModelPricingScalarFieldEnum[]
+  }
+
+  /**
+   * StudioModelPricing create
+   */
+  export type StudioModelPricingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioModelPricing.
+     */
+    data: XOR<StudioModelPricingCreateInput, StudioModelPricingUncheckedCreateInput>
+  }
+
+  /**
+   * StudioModelPricing createMany
+   */
+  export type StudioModelPricingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioModelPricings.
+     */
+    data: StudioModelPricingCreateManyInput | StudioModelPricingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioModelPricing createManyAndReturn
+   */
+  export type StudioModelPricingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioModelPricings.
+     */
+    data: StudioModelPricingCreateManyInput | StudioModelPricingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioModelPricing update
+   */
+  export type StudioModelPricingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioModelPricing.
+     */
+    data: XOR<StudioModelPricingUpdateInput, StudioModelPricingUncheckedUpdateInput>
+    /**
+     * Choose, which StudioModelPricing to update.
+     */
+    where: StudioModelPricingWhereUniqueInput
+  }
+
+  /**
+   * StudioModelPricing updateMany
+   */
+  export type StudioModelPricingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioModelPricings.
+     */
+    data: XOR<StudioModelPricingUpdateManyMutationInput, StudioModelPricingUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioModelPricings to update
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * Limit how many StudioModelPricings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioModelPricing updateManyAndReturn
+   */
+  export type StudioModelPricingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioModelPricings.
+     */
+    data: XOR<StudioModelPricingUpdateManyMutationInput, StudioModelPricingUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioModelPricings to update
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * Limit how many StudioModelPricings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioModelPricing upsert
+   */
+  export type StudioModelPricingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioModelPricing to update in case it exists.
+     */
+    where: StudioModelPricingWhereUniqueInput
+    /**
+     * In case the StudioModelPricing found by the `where` argument doesn't exist, create a new StudioModelPricing with this data.
+     */
+    create: XOR<StudioModelPricingCreateInput, StudioModelPricingUncheckedCreateInput>
+    /**
+     * In case the StudioModelPricing was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioModelPricingUpdateInput, StudioModelPricingUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioModelPricing delete
+   */
+  export type StudioModelPricingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    /**
+     * Filter which StudioModelPricing to delete.
+     */
+    where: StudioModelPricingWhereUniqueInput
+  }
+
+  /**
+   * StudioModelPricing deleteMany
+   */
+  export type StudioModelPricingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioModelPricings to delete
+     */
+    where?: StudioModelPricingWhereInput
+    /**
+     * Limit how many StudioModelPricings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioModelPricing.generations
+   */
+  export type StudioModelPricing$generationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    where?: StudioGenerationWhereInput
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    cursor?: StudioGenerationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * StudioModelPricing without action
+   */
+  export type StudioModelPricingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioWorkflow
+   */
+
+  export type AggregateStudioWorkflow = {
+    _count: StudioWorkflowCountAggregateOutputType | null
+    _min: StudioWorkflowMinAggregateOutputType | null
+    _max: StudioWorkflowMaxAggregateOutputType | null
+  }
+
+  export type StudioWorkflowMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioWorkflowMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioWorkflowCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    canvasJson: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StudioWorkflowMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioWorkflowMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioWorkflowCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    canvasJson?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StudioWorkflowAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioWorkflow to aggregate.
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioWorkflows to fetch.
+     */
+    orderBy?: StudioWorkflowOrderByWithRelationInput | StudioWorkflowOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioWorkflowWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioWorkflows from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioWorkflows.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioWorkflows
+    **/
+    _count?: true | StudioWorkflowCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioWorkflowMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioWorkflowMaxAggregateInputType
+  }
+
+  export type GetStudioWorkflowAggregateType<T extends StudioWorkflowAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioWorkflow]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioWorkflow[P]>
+      : GetScalarType<T[P], AggregateStudioWorkflow[P]>
+  }
+
+
+
+
+  export type StudioWorkflowGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioWorkflowWhereInput
+    orderBy?: StudioWorkflowOrderByWithAggregationInput | StudioWorkflowOrderByWithAggregationInput[]
+    by: StudioWorkflowScalarFieldEnum[] | StudioWorkflowScalarFieldEnum
+    having?: StudioWorkflowScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioWorkflowCountAggregateInputType | true
+    _min?: StudioWorkflowMinAggregateInputType
+    _max?: StudioWorkflowMaxAggregateInputType
+  }
+
+  export type StudioWorkflowGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    canvasJson: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: StudioWorkflowCountAggregateOutputType | null
+    _min: StudioWorkflowMinAggregateOutputType | null
+    _max: StudioWorkflowMaxAggregateOutputType | null
+  }
+
+  type GetStudioWorkflowGroupByPayload<T extends StudioWorkflowGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioWorkflowGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioWorkflowGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioWorkflowGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioWorkflowGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioWorkflowSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    canvasJson?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    generations?: boolean | StudioWorkflow$generationsArgs<ExtArgs>
+    _count?: boolean | StudioWorkflowCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioWorkflow"]>
+
+  export type StudioWorkflowSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    canvasJson?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioWorkflow"]>
+
+  export type StudioWorkflowSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    canvasJson?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["studioWorkflow"]>
+
+  export type StudioWorkflowSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    canvasJson?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StudioWorkflowOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "canvasJson" | "createdAt" | "updatedAt", ExtArgs["result"]["studioWorkflow"]>
+  export type StudioWorkflowInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    generations?: boolean | StudioWorkflow$generationsArgs<ExtArgs>
+    _count?: boolean | StudioWorkflowCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type StudioWorkflowIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type StudioWorkflowIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $StudioWorkflowPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioWorkflow"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      generations: Prisma.$StudioGenerationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      canvasJson: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["studioWorkflow"]>
+    composites: {}
+  }
+
+  type StudioWorkflowGetPayload<S extends boolean | null | undefined | StudioWorkflowDefaultArgs> = $Result.GetResult<Prisma.$StudioWorkflowPayload, S>
+
+  type StudioWorkflowCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioWorkflowFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioWorkflowCountAggregateInputType | true
+    }
+
+  export interface StudioWorkflowDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioWorkflow'], meta: { name: 'StudioWorkflow' } }
+    /**
+     * Find zero or one StudioWorkflow that matches the filter.
+     * @param {StudioWorkflowFindUniqueArgs} args - Arguments to find a StudioWorkflow
+     * @example
+     * // Get one StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioWorkflowFindUniqueArgs>(args: SelectSubset<T, StudioWorkflowFindUniqueArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioWorkflow that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioWorkflowFindUniqueOrThrowArgs} args - Arguments to find a StudioWorkflow
+     * @example
+     * // Get one StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioWorkflowFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioWorkflowFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioWorkflow that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowFindFirstArgs} args - Arguments to find a StudioWorkflow
+     * @example
+     * // Get one StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioWorkflowFindFirstArgs>(args?: SelectSubset<T, StudioWorkflowFindFirstArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioWorkflow that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowFindFirstOrThrowArgs} args - Arguments to find a StudioWorkflow
+     * @example
+     * // Get one StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioWorkflowFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioWorkflowFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioWorkflows that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioWorkflows
+     * const studioWorkflows = await prisma.studioWorkflow.findMany()
+     * 
+     * // Get first 10 StudioWorkflows
+     * const studioWorkflows = await prisma.studioWorkflow.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioWorkflowWithIdOnly = await prisma.studioWorkflow.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioWorkflowFindManyArgs>(args?: SelectSubset<T, StudioWorkflowFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioWorkflow.
+     * @param {StudioWorkflowCreateArgs} args - Arguments to create a StudioWorkflow.
+     * @example
+     * // Create one StudioWorkflow
+     * const StudioWorkflow = await prisma.studioWorkflow.create({
+     *   data: {
+     *     // ... data to create a StudioWorkflow
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioWorkflowCreateArgs>(args: SelectSubset<T, StudioWorkflowCreateArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioWorkflows.
+     * @param {StudioWorkflowCreateManyArgs} args - Arguments to create many StudioWorkflows.
+     * @example
+     * // Create many StudioWorkflows
+     * const studioWorkflow = await prisma.studioWorkflow.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioWorkflowCreateManyArgs>(args?: SelectSubset<T, StudioWorkflowCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioWorkflows and returns the data saved in the database.
+     * @param {StudioWorkflowCreateManyAndReturnArgs} args - Arguments to create many StudioWorkflows.
+     * @example
+     * // Create many StudioWorkflows
+     * const studioWorkflow = await prisma.studioWorkflow.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioWorkflows and only return the `id`
+     * const studioWorkflowWithIdOnly = await prisma.studioWorkflow.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioWorkflowCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioWorkflowCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioWorkflow.
+     * @param {StudioWorkflowDeleteArgs} args - Arguments to delete one StudioWorkflow.
+     * @example
+     * // Delete one StudioWorkflow
+     * const StudioWorkflow = await prisma.studioWorkflow.delete({
+     *   where: {
+     *     // ... filter to delete one StudioWorkflow
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioWorkflowDeleteArgs>(args: SelectSubset<T, StudioWorkflowDeleteArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioWorkflow.
+     * @param {StudioWorkflowUpdateArgs} args - Arguments to update one StudioWorkflow.
+     * @example
+     * // Update one StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioWorkflowUpdateArgs>(args: SelectSubset<T, StudioWorkflowUpdateArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioWorkflows.
+     * @param {StudioWorkflowDeleteManyArgs} args - Arguments to filter StudioWorkflows to delete.
+     * @example
+     * // Delete a few StudioWorkflows
+     * const { count } = await prisma.studioWorkflow.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioWorkflowDeleteManyArgs>(args?: SelectSubset<T, StudioWorkflowDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioWorkflows.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioWorkflows
+     * const studioWorkflow = await prisma.studioWorkflow.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioWorkflowUpdateManyArgs>(args: SelectSubset<T, StudioWorkflowUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioWorkflows and returns the data updated in the database.
+     * @param {StudioWorkflowUpdateManyAndReturnArgs} args - Arguments to update many StudioWorkflows.
+     * @example
+     * // Update many StudioWorkflows
+     * const studioWorkflow = await prisma.studioWorkflow.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioWorkflows and only return the `id`
+     * const studioWorkflowWithIdOnly = await prisma.studioWorkflow.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioWorkflowUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioWorkflowUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioWorkflow.
+     * @param {StudioWorkflowUpsertArgs} args - Arguments to update or create a StudioWorkflow.
+     * @example
+     * // Update or create a StudioWorkflow
+     * const studioWorkflow = await prisma.studioWorkflow.upsert({
+     *   create: {
+     *     // ... data to create a StudioWorkflow
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioWorkflow we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioWorkflowUpsertArgs>(args: SelectSubset<T, StudioWorkflowUpsertArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioWorkflows.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowCountArgs} args - Arguments to filter StudioWorkflows to count.
+     * @example
+     * // Count the number of StudioWorkflows
+     * const count = await prisma.studioWorkflow.count({
+     *   where: {
+     *     // ... the filter for the StudioWorkflows we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioWorkflowCountArgs>(
+      args?: Subset<T, StudioWorkflowCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioWorkflowCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioWorkflow.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioWorkflowAggregateArgs>(args: Subset<T, StudioWorkflowAggregateArgs>): Prisma.PrismaPromise<GetStudioWorkflowAggregateType<T>>
+
+    /**
+     * Group by StudioWorkflow.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioWorkflowGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioWorkflowGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioWorkflowGroupByArgs['orderBy'] }
+        : { orderBy?: StudioWorkflowGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioWorkflowGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioWorkflowGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioWorkflow model
+   */
+  readonly fields: StudioWorkflowFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioWorkflow.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioWorkflowClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    generations<T extends StudioWorkflow$generationsArgs<ExtArgs> = {}>(args?: Subset<T, StudioWorkflow$generationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioWorkflow model
+   */
+  interface StudioWorkflowFieldRefs {
+    readonly id: FieldRef<"StudioWorkflow", 'String'>
+    readonly userId: FieldRef<"StudioWorkflow", 'String'>
+    readonly title: FieldRef<"StudioWorkflow", 'String'>
+    readonly canvasJson: FieldRef<"StudioWorkflow", 'Json'>
+    readonly createdAt: FieldRef<"StudioWorkflow", 'DateTime'>
+    readonly updatedAt: FieldRef<"StudioWorkflow", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioWorkflow findUnique
+   */
+  export type StudioWorkflowFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioWorkflow to fetch.
+     */
+    where: StudioWorkflowWhereUniqueInput
+  }
+
+  /**
+   * StudioWorkflow findUniqueOrThrow
+   */
+  export type StudioWorkflowFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioWorkflow to fetch.
+     */
+    where: StudioWorkflowWhereUniqueInput
+  }
+
+  /**
+   * StudioWorkflow findFirst
+   */
+  export type StudioWorkflowFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioWorkflow to fetch.
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioWorkflows to fetch.
+     */
+    orderBy?: StudioWorkflowOrderByWithRelationInput | StudioWorkflowOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioWorkflows.
+     */
+    cursor?: StudioWorkflowWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioWorkflows from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioWorkflows.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioWorkflows.
+     */
+    distinct?: StudioWorkflowScalarFieldEnum | StudioWorkflowScalarFieldEnum[]
+  }
+
+  /**
+   * StudioWorkflow findFirstOrThrow
+   */
+  export type StudioWorkflowFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioWorkflow to fetch.
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioWorkflows to fetch.
+     */
+    orderBy?: StudioWorkflowOrderByWithRelationInput | StudioWorkflowOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioWorkflows.
+     */
+    cursor?: StudioWorkflowWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioWorkflows from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioWorkflows.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioWorkflows.
+     */
+    distinct?: StudioWorkflowScalarFieldEnum | StudioWorkflowScalarFieldEnum[]
+  }
+
+  /**
+   * StudioWorkflow findMany
+   */
+  export type StudioWorkflowFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioWorkflows to fetch.
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioWorkflows to fetch.
+     */
+    orderBy?: StudioWorkflowOrderByWithRelationInput | StudioWorkflowOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioWorkflows.
+     */
+    cursor?: StudioWorkflowWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioWorkflows from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioWorkflows.
+     */
+    skip?: number
+    distinct?: StudioWorkflowScalarFieldEnum | StudioWorkflowScalarFieldEnum[]
+  }
+
+  /**
+   * StudioWorkflow create
+   */
+  export type StudioWorkflowCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioWorkflow.
+     */
+    data: XOR<StudioWorkflowCreateInput, StudioWorkflowUncheckedCreateInput>
+  }
+
+  /**
+   * StudioWorkflow createMany
+   */
+  export type StudioWorkflowCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioWorkflows.
+     */
+    data: StudioWorkflowCreateManyInput | StudioWorkflowCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioWorkflow createManyAndReturn
+   */
+  export type StudioWorkflowCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioWorkflows.
+     */
+    data: StudioWorkflowCreateManyInput | StudioWorkflowCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioWorkflow update
+   */
+  export type StudioWorkflowUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioWorkflow.
+     */
+    data: XOR<StudioWorkflowUpdateInput, StudioWorkflowUncheckedUpdateInput>
+    /**
+     * Choose, which StudioWorkflow to update.
+     */
+    where: StudioWorkflowWhereUniqueInput
+  }
+
+  /**
+   * StudioWorkflow updateMany
+   */
+  export type StudioWorkflowUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioWorkflows.
+     */
+    data: XOR<StudioWorkflowUpdateManyMutationInput, StudioWorkflowUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioWorkflows to update
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * Limit how many StudioWorkflows to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioWorkflow updateManyAndReturn
+   */
+  export type StudioWorkflowUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioWorkflows.
+     */
+    data: XOR<StudioWorkflowUpdateManyMutationInput, StudioWorkflowUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioWorkflows to update
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * Limit how many StudioWorkflows to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioWorkflow upsert
+   */
+  export type StudioWorkflowUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioWorkflow to update in case it exists.
+     */
+    where: StudioWorkflowWhereUniqueInput
+    /**
+     * In case the StudioWorkflow found by the `where` argument doesn't exist, create a new StudioWorkflow with this data.
+     */
+    create: XOR<StudioWorkflowCreateInput, StudioWorkflowUncheckedCreateInput>
+    /**
+     * In case the StudioWorkflow was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioWorkflowUpdateInput, StudioWorkflowUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioWorkflow delete
+   */
+  export type StudioWorkflowDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    /**
+     * Filter which StudioWorkflow to delete.
+     */
+    where: StudioWorkflowWhereUniqueInput
+  }
+
+  /**
+   * StudioWorkflow deleteMany
+   */
+  export type StudioWorkflowDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioWorkflows to delete
+     */
+    where?: StudioWorkflowWhereInput
+    /**
+     * Limit how many StudioWorkflows to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioWorkflow.generations
+   */
+  export type StudioWorkflow$generationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    where?: StudioGenerationWhereInput
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    cursor?: StudioGenerationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * StudioWorkflow without action
+   */
+  export type StudioWorkflowDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StudioGeneration
+   */
+
+  export type AggregateStudioGeneration = {
+    _count: StudioGenerationCountAggregateOutputType | null
+    _avg: StudioGenerationAvgAggregateOutputType | null
+    _sum: StudioGenerationSumAggregateOutputType | null
+    _min: StudioGenerationMinAggregateOutputType | null
+    _max: StudioGenerationMaxAggregateOutputType | null
+  }
+
+  export type StudioGenerationAvgAggregateOutputType = {
+    creditsCharged: number | null
+  }
+
+  export type StudioGenerationSumAggregateOutputType = {
+    creditsCharged: number | null
+  }
+
+  export type StudioGenerationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    workflowId: string | null
+    modelPricingId: string | null
+    prompt: string | null
+    status: $Enums.StudioGenerationStatus | null
+    creditsCharged: number | null
+    outputUrl: string | null
+    errorMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioGenerationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    workflowId: string | null
+    modelPricingId: string | null
+    prompt: string | null
+    status: $Enums.StudioGenerationStatus | null
+    creditsCharged: number | null
+    outputUrl: string | null
+    errorMessage: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type StudioGenerationCountAggregateOutputType = {
+    id: number
+    userId: number
+    workflowId: number
+    modelPricingId: number
+    prompt: number
+    status: number
+    creditsCharged: number
+    outputUrl: number
+    errorMessage: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type StudioGenerationAvgAggregateInputType = {
+    creditsCharged?: true
+  }
+
+  export type StudioGenerationSumAggregateInputType = {
+    creditsCharged?: true
+  }
+
+  export type StudioGenerationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    workflowId?: true
+    modelPricingId?: true
+    prompt?: true
+    status?: true
+    creditsCharged?: true
+    outputUrl?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioGenerationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    workflowId?: true
+    modelPricingId?: true
+    prompt?: true
+    status?: true
+    creditsCharged?: true
+    outputUrl?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type StudioGenerationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    workflowId?: true
+    modelPricingId?: true
+    prompt?: true
+    status?: true
+    creditsCharged?: true
+    outputUrl?: true
+    errorMessage?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type StudioGenerationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioGeneration to aggregate.
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioGenerations to fetch.
+     */
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StudioGenerationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioGenerations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioGenerations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StudioGenerations
+    **/
+    _count?: true | StudioGenerationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StudioGenerationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StudioGenerationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StudioGenerationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StudioGenerationMaxAggregateInputType
+  }
+
+  export type GetStudioGenerationAggregateType<T extends StudioGenerationAggregateArgs> = {
+        [P in keyof T & keyof AggregateStudioGeneration]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStudioGeneration[P]>
+      : GetScalarType<T[P], AggregateStudioGeneration[P]>
+  }
+
+
+
+
+  export type StudioGenerationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StudioGenerationWhereInput
+    orderBy?: StudioGenerationOrderByWithAggregationInput | StudioGenerationOrderByWithAggregationInput[]
+    by: StudioGenerationScalarFieldEnum[] | StudioGenerationScalarFieldEnum
+    having?: StudioGenerationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StudioGenerationCountAggregateInputType | true
+    _avg?: StudioGenerationAvgAggregateInputType
+    _sum?: StudioGenerationSumAggregateInputType
+    _min?: StudioGenerationMinAggregateInputType
+    _max?: StudioGenerationMaxAggregateInputType
+  }
+
+  export type StudioGenerationGroupByOutputType = {
+    id: string
+    userId: string
+    workflowId: string | null
+    modelPricingId: string | null
+    prompt: string
+    status: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl: string | null
+    errorMessage: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: StudioGenerationCountAggregateOutputType | null
+    _avg: StudioGenerationAvgAggregateOutputType | null
+    _sum: StudioGenerationSumAggregateOutputType | null
+    _min: StudioGenerationMinAggregateOutputType | null
+    _max: StudioGenerationMaxAggregateOutputType | null
+  }
+
+  type GetStudioGenerationGroupByPayload<T extends StudioGenerationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StudioGenerationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StudioGenerationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StudioGenerationGroupByOutputType[P]>
+            : GetScalarType<T[P], StudioGenerationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StudioGenerationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    workflowId?: boolean
+    modelPricingId?: boolean
+    prompt?: boolean
+    status?: boolean
+    creditsCharged?: boolean
+    outputUrl?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }, ExtArgs["result"]["studioGeneration"]>
+
+  export type StudioGenerationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    workflowId?: boolean
+    modelPricingId?: boolean
+    prompt?: boolean
+    status?: boolean
+    creditsCharged?: boolean
+    outputUrl?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }, ExtArgs["result"]["studioGeneration"]>
+
+  export type StudioGenerationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    workflowId?: boolean
+    modelPricingId?: boolean
+    prompt?: boolean
+    status?: boolean
+    creditsCharged?: boolean
+    outputUrl?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }, ExtArgs["result"]["studioGeneration"]>
+
+  export type StudioGenerationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    workflowId?: boolean
+    modelPricingId?: boolean
+    prompt?: boolean
+    status?: boolean
+    creditsCharged?: boolean
+    outputUrl?: boolean
+    errorMessage?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type StudioGenerationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "workflowId" | "modelPricingId" | "prompt" | "status" | "creditsCharged" | "outputUrl" | "errorMessage" | "createdAt" | "updatedAt", ExtArgs["result"]["studioGeneration"]>
+  export type StudioGenerationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }
+  export type StudioGenerationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }
+  export type StudioGenerationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    workflow?: boolean | StudioGeneration$workflowArgs<ExtArgs>
+    modelPricing?: boolean | StudioGeneration$modelPricingArgs<ExtArgs>
+  }
+
+  export type $StudioGenerationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StudioGeneration"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      workflow: Prisma.$StudioWorkflowPayload<ExtArgs> | null
+      modelPricing: Prisma.$StudioModelPricingPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      workflowId: string | null
+      modelPricingId: string | null
+      prompt: string
+      status: $Enums.StudioGenerationStatus
+      creditsCharged: number
+      outputUrl: string | null
+      errorMessage: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["studioGeneration"]>
+    composites: {}
+  }
+
+  type StudioGenerationGetPayload<S extends boolean | null | undefined | StudioGenerationDefaultArgs> = $Result.GetResult<Prisma.$StudioGenerationPayload, S>
+
+  type StudioGenerationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StudioGenerationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StudioGenerationCountAggregateInputType | true
+    }
+
+  export interface StudioGenerationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StudioGeneration'], meta: { name: 'StudioGeneration' } }
+    /**
+     * Find zero or one StudioGeneration that matches the filter.
+     * @param {StudioGenerationFindUniqueArgs} args - Arguments to find a StudioGeneration
+     * @example
+     * // Get one StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StudioGenerationFindUniqueArgs>(args: SelectSubset<T, StudioGenerationFindUniqueArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StudioGeneration that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StudioGenerationFindUniqueOrThrowArgs} args - Arguments to find a StudioGeneration
+     * @example
+     * // Get one StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StudioGenerationFindUniqueOrThrowArgs>(args: SelectSubset<T, StudioGenerationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioGeneration that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationFindFirstArgs} args - Arguments to find a StudioGeneration
+     * @example
+     * // Get one StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StudioGenerationFindFirstArgs>(args?: SelectSubset<T, StudioGenerationFindFirstArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StudioGeneration that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationFindFirstOrThrowArgs} args - Arguments to find a StudioGeneration
+     * @example
+     * // Get one StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StudioGenerationFindFirstOrThrowArgs>(args?: SelectSubset<T, StudioGenerationFindFirstOrThrowArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StudioGenerations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StudioGenerations
+     * const studioGenerations = await prisma.studioGeneration.findMany()
+     * 
+     * // Get first 10 StudioGenerations
+     * const studioGenerations = await prisma.studioGeneration.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const studioGenerationWithIdOnly = await prisma.studioGeneration.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StudioGenerationFindManyArgs>(args?: SelectSubset<T, StudioGenerationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StudioGeneration.
+     * @param {StudioGenerationCreateArgs} args - Arguments to create a StudioGeneration.
+     * @example
+     * // Create one StudioGeneration
+     * const StudioGeneration = await prisma.studioGeneration.create({
+     *   data: {
+     *     // ... data to create a StudioGeneration
+     *   }
+     * })
+     * 
+     */
+    create<T extends StudioGenerationCreateArgs>(args: SelectSubset<T, StudioGenerationCreateArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StudioGenerations.
+     * @param {StudioGenerationCreateManyArgs} args - Arguments to create many StudioGenerations.
+     * @example
+     * // Create many StudioGenerations
+     * const studioGeneration = await prisma.studioGeneration.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StudioGenerationCreateManyArgs>(args?: SelectSubset<T, StudioGenerationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StudioGenerations and returns the data saved in the database.
+     * @param {StudioGenerationCreateManyAndReturnArgs} args - Arguments to create many StudioGenerations.
+     * @example
+     * // Create many StudioGenerations
+     * const studioGeneration = await prisma.studioGeneration.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StudioGenerations and only return the `id`
+     * const studioGenerationWithIdOnly = await prisma.studioGeneration.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StudioGenerationCreateManyAndReturnArgs>(args?: SelectSubset<T, StudioGenerationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StudioGeneration.
+     * @param {StudioGenerationDeleteArgs} args - Arguments to delete one StudioGeneration.
+     * @example
+     * // Delete one StudioGeneration
+     * const StudioGeneration = await prisma.studioGeneration.delete({
+     *   where: {
+     *     // ... filter to delete one StudioGeneration
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StudioGenerationDeleteArgs>(args: SelectSubset<T, StudioGenerationDeleteArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StudioGeneration.
+     * @param {StudioGenerationUpdateArgs} args - Arguments to update one StudioGeneration.
+     * @example
+     * // Update one StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StudioGenerationUpdateArgs>(args: SelectSubset<T, StudioGenerationUpdateArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StudioGenerations.
+     * @param {StudioGenerationDeleteManyArgs} args - Arguments to filter StudioGenerations to delete.
+     * @example
+     * // Delete a few StudioGenerations
+     * const { count } = await prisma.studioGeneration.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StudioGenerationDeleteManyArgs>(args?: SelectSubset<T, StudioGenerationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioGenerations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StudioGenerations
+     * const studioGeneration = await prisma.studioGeneration.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StudioGenerationUpdateManyArgs>(args: SelectSubset<T, StudioGenerationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StudioGenerations and returns the data updated in the database.
+     * @param {StudioGenerationUpdateManyAndReturnArgs} args - Arguments to update many StudioGenerations.
+     * @example
+     * // Update many StudioGenerations
+     * const studioGeneration = await prisma.studioGeneration.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StudioGenerations and only return the `id`
+     * const studioGenerationWithIdOnly = await prisma.studioGeneration.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StudioGenerationUpdateManyAndReturnArgs>(args: SelectSubset<T, StudioGenerationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StudioGeneration.
+     * @param {StudioGenerationUpsertArgs} args - Arguments to update or create a StudioGeneration.
+     * @example
+     * // Update or create a StudioGeneration
+     * const studioGeneration = await prisma.studioGeneration.upsert({
+     *   create: {
+     *     // ... data to create a StudioGeneration
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StudioGeneration we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StudioGenerationUpsertArgs>(args: SelectSubset<T, StudioGenerationUpsertArgs<ExtArgs>>): Prisma__StudioGenerationClient<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StudioGenerations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationCountArgs} args - Arguments to filter StudioGenerations to count.
+     * @example
+     * // Count the number of StudioGenerations
+     * const count = await prisma.studioGeneration.count({
+     *   where: {
+     *     // ... the filter for the StudioGenerations we want to count
+     *   }
+     * })
+    **/
+    count<T extends StudioGenerationCountArgs>(
+      args?: Subset<T, StudioGenerationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StudioGenerationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StudioGeneration.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StudioGenerationAggregateArgs>(args: Subset<T, StudioGenerationAggregateArgs>): Prisma.PrismaPromise<GetStudioGenerationAggregateType<T>>
+
+    /**
+     * Group by StudioGeneration.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StudioGenerationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StudioGenerationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StudioGenerationGroupByArgs['orderBy'] }
+        : { orderBy?: StudioGenerationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StudioGenerationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStudioGenerationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StudioGeneration model
+   */
+  readonly fields: StudioGenerationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StudioGeneration.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StudioGenerationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    workflow<T extends StudioGeneration$workflowArgs<ExtArgs> = {}>(args?: Subset<T, StudioGeneration$workflowArgs<ExtArgs>>): Prisma__StudioWorkflowClient<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    modelPricing<T extends StudioGeneration$modelPricingArgs<ExtArgs> = {}>(args?: Subset<T, StudioGeneration$modelPricingArgs<ExtArgs>>): Prisma__StudioModelPricingClient<$Result.GetResult<Prisma.$StudioModelPricingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StudioGeneration model
+   */
+  interface StudioGenerationFieldRefs {
+    readonly id: FieldRef<"StudioGeneration", 'String'>
+    readonly userId: FieldRef<"StudioGeneration", 'String'>
+    readonly workflowId: FieldRef<"StudioGeneration", 'String'>
+    readonly modelPricingId: FieldRef<"StudioGeneration", 'String'>
+    readonly prompt: FieldRef<"StudioGeneration", 'String'>
+    readonly status: FieldRef<"StudioGeneration", 'StudioGenerationStatus'>
+    readonly creditsCharged: FieldRef<"StudioGeneration", 'Int'>
+    readonly outputUrl: FieldRef<"StudioGeneration", 'String'>
+    readonly errorMessage: FieldRef<"StudioGeneration", 'String'>
+    readonly createdAt: FieldRef<"StudioGeneration", 'DateTime'>
+    readonly updatedAt: FieldRef<"StudioGeneration", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StudioGeneration findUnique
+   */
+  export type StudioGenerationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioGeneration to fetch.
+     */
+    where: StudioGenerationWhereUniqueInput
+  }
+
+  /**
+   * StudioGeneration findUniqueOrThrow
+   */
+  export type StudioGenerationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioGeneration to fetch.
+     */
+    where: StudioGenerationWhereUniqueInput
+  }
+
+  /**
+   * StudioGeneration findFirst
+   */
+  export type StudioGenerationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioGeneration to fetch.
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioGenerations to fetch.
+     */
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioGenerations.
+     */
+    cursor?: StudioGenerationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioGenerations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioGenerations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioGenerations.
+     */
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * StudioGeneration findFirstOrThrow
+   */
+  export type StudioGenerationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioGeneration to fetch.
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioGenerations to fetch.
+     */
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StudioGenerations.
+     */
+    cursor?: StudioGenerationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioGenerations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioGenerations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StudioGenerations.
+     */
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * StudioGeneration findMany
+   */
+  export type StudioGenerationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter, which StudioGenerations to fetch.
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StudioGenerations to fetch.
+     */
+    orderBy?: StudioGenerationOrderByWithRelationInput | StudioGenerationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StudioGenerations.
+     */
+    cursor?: StudioGenerationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StudioGenerations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StudioGenerations.
+     */
+    skip?: number
+    distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * StudioGeneration create
+   */
+  export type StudioGenerationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StudioGeneration.
+     */
+    data: XOR<StudioGenerationCreateInput, StudioGenerationUncheckedCreateInput>
+  }
+
+  /**
+   * StudioGeneration createMany
+   */
+  export type StudioGenerationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StudioGenerations.
+     */
+    data: StudioGenerationCreateManyInput | StudioGenerationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StudioGeneration createManyAndReturn
+   */
+  export type StudioGenerationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * The data used to create many StudioGenerations.
+     */
+    data: StudioGenerationCreateManyInput | StudioGenerationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioGeneration update
+   */
+  export type StudioGenerationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StudioGeneration.
+     */
+    data: XOR<StudioGenerationUpdateInput, StudioGenerationUncheckedUpdateInput>
+    /**
+     * Choose, which StudioGeneration to update.
+     */
+    where: StudioGenerationWhereUniqueInput
+  }
+
+  /**
+   * StudioGeneration updateMany
+   */
+  export type StudioGenerationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StudioGenerations.
+     */
+    data: XOR<StudioGenerationUpdateManyMutationInput, StudioGenerationUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioGenerations to update
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * Limit how many StudioGenerations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioGeneration updateManyAndReturn
+   */
+  export type StudioGenerationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * The data used to update StudioGenerations.
+     */
+    data: XOR<StudioGenerationUpdateManyMutationInput, StudioGenerationUncheckedUpdateManyInput>
+    /**
+     * Filter which StudioGenerations to update
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * Limit how many StudioGenerations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StudioGeneration upsert
+   */
+  export type StudioGenerationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StudioGeneration to update in case it exists.
+     */
+    where: StudioGenerationWhereUniqueInput
+    /**
+     * In case the StudioGeneration found by the `where` argument doesn't exist, create a new StudioGeneration with this data.
+     */
+    create: XOR<StudioGenerationCreateInput, StudioGenerationUncheckedCreateInput>
+    /**
+     * In case the StudioGeneration was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StudioGenerationUpdateInput, StudioGenerationUncheckedUpdateInput>
+  }
+
+  /**
+   * StudioGeneration delete
+   */
+  export type StudioGenerationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+    /**
+     * Filter which StudioGeneration to delete.
+     */
+    where: StudioGenerationWhereUniqueInput
+  }
+
+  /**
+   * StudioGeneration deleteMany
+   */
+  export type StudioGenerationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StudioGenerations to delete
+     */
+    where?: StudioGenerationWhereInput
+    /**
+     * Limit how many StudioGenerations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StudioGeneration.workflow
+   */
+  export type StudioGeneration$workflowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioWorkflow
+     */
+    select?: StudioWorkflowSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioWorkflow
+     */
+    omit?: StudioWorkflowOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioWorkflowInclude<ExtArgs> | null
+    where?: StudioWorkflowWhereInput
+  }
+
+  /**
+   * StudioGeneration.modelPricing
+   */
+  export type StudioGeneration$modelPricingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioModelPricing
+     */
+    select?: StudioModelPricingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioModelPricing
+     */
+    omit?: StudioModelPricingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioModelPricingInclude<ExtArgs> | null
+    where?: StudioModelPricingWhereInput
+  }
+
+  /**
+   * StudioGeneration without action
+   */
+  export type StudioGenerationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StudioGeneration
+     */
+    select?: StudioGenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StudioGeneration
+     */
+    omit?: StudioGenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StudioGenerationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model CommunityPost
    */
 
@@ -22661,6 +31822,975 @@ export namespace Prisma {
 
 
   /**
+   * Model AppSetting
+   */
+
+  export type AggregateAppSetting = {
+    _count: AppSettingCountAggregateOutputType | null
+    _min: AppSettingMinAggregateOutputType | null
+    _max: AppSettingMaxAggregateOutputType | null
+  }
+
+  export type AppSettingMinAggregateOutputType = {
+    key: string | null
+    value: string | null
+    updatedAt: Date | null
+  }
+
+  export type AppSettingMaxAggregateOutputType = {
+    key: string | null
+    value: string | null
+    updatedAt: Date | null
+  }
+
+  export type AppSettingCountAggregateOutputType = {
+    key: number
+    value: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AppSettingMinAggregateInputType = {
+    key?: true
+    value?: true
+    updatedAt?: true
+  }
+
+  export type AppSettingMaxAggregateInputType = {
+    key?: true
+    value?: true
+    updatedAt?: true
+  }
+
+  export type AppSettingCountAggregateInputType = {
+    key?: true
+    value?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AppSettingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppSetting to aggregate.
+     */
+    where?: AppSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppSettings to fetch.
+     */
+    orderBy?: AppSettingOrderByWithRelationInput | AppSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AppSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AppSettings
+    **/
+    _count?: true | AppSettingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AppSettingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AppSettingMaxAggregateInputType
+  }
+
+  export type GetAppSettingAggregateType<T extends AppSettingAggregateArgs> = {
+        [P in keyof T & keyof AggregateAppSetting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAppSetting[P]>
+      : GetScalarType<T[P], AggregateAppSetting[P]>
+  }
+
+
+
+
+  export type AppSettingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AppSettingWhereInput
+    orderBy?: AppSettingOrderByWithAggregationInput | AppSettingOrderByWithAggregationInput[]
+    by: AppSettingScalarFieldEnum[] | AppSettingScalarFieldEnum
+    having?: AppSettingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AppSettingCountAggregateInputType | true
+    _min?: AppSettingMinAggregateInputType
+    _max?: AppSettingMaxAggregateInputType
+  }
+
+  export type AppSettingGroupByOutputType = {
+    key: string
+    value: string
+    updatedAt: Date
+    _count: AppSettingCountAggregateOutputType | null
+    _min: AppSettingMinAggregateOutputType | null
+    _max: AppSettingMaxAggregateOutputType | null
+  }
+
+  type GetAppSettingGroupByPayload<T extends AppSettingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AppSettingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AppSettingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AppSettingGroupByOutputType[P]>
+            : GetScalarType<T[P], AppSettingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AppSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    value?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["appSetting"]>
+
+  export type AppSettingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    value?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["appSetting"]>
+
+  export type AppSettingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    value?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["appSetting"]>
+
+  export type AppSettingSelectScalar = {
+    key?: boolean
+    value?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AppSettingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "value" | "updatedAt", ExtArgs["result"]["appSetting"]>
+
+  export type $AppSettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AppSetting"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      key: string
+      value: string
+      updatedAt: Date
+    }, ExtArgs["result"]["appSetting"]>
+    composites: {}
+  }
+
+  type AppSettingGetPayload<S extends boolean | null | undefined | AppSettingDefaultArgs> = $Result.GetResult<Prisma.$AppSettingPayload, S>
+
+  type AppSettingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AppSettingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AppSettingCountAggregateInputType | true
+    }
+
+  export interface AppSettingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AppSetting'], meta: { name: 'AppSetting' } }
+    /**
+     * Find zero or one AppSetting that matches the filter.
+     * @param {AppSettingFindUniqueArgs} args - Arguments to find a AppSetting
+     * @example
+     * // Get one AppSetting
+     * const appSetting = await prisma.appSetting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AppSettingFindUniqueArgs>(args: SelectSubset<T, AppSettingFindUniqueArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AppSetting that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AppSettingFindUniqueOrThrowArgs} args - Arguments to find a AppSetting
+     * @example
+     * // Get one AppSetting
+     * const appSetting = await prisma.appSetting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AppSettingFindUniqueOrThrowArgs>(args: SelectSubset<T, AppSettingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppSetting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingFindFirstArgs} args - Arguments to find a AppSetting
+     * @example
+     * // Get one AppSetting
+     * const appSetting = await prisma.appSetting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AppSettingFindFirstArgs>(args?: SelectSubset<T, AppSettingFindFirstArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AppSetting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingFindFirstOrThrowArgs} args - Arguments to find a AppSetting
+     * @example
+     * // Get one AppSetting
+     * const appSetting = await prisma.appSetting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AppSettingFindFirstOrThrowArgs>(args?: SelectSubset<T, AppSettingFindFirstOrThrowArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AppSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AppSettings
+     * const appSettings = await prisma.appSetting.findMany()
+     * 
+     * // Get first 10 AppSettings
+     * const appSettings = await prisma.appSetting.findMany({ take: 10 })
+     * 
+     * // Only select the `key`
+     * const appSettingWithKeyOnly = await prisma.appSetting.findMany({ select: { key: true } })
+     * 
+     */
+    findMany<T extends AppSettingFindManyArgs>(args?: SelectSubset<T, AppSettingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AppSetting.
+     * @param {AppSettingCreateArgs} args - Arguments to create a AppSetting.
+     * @example
+     * // Create one AppSetting
+     * const AppSetting = await prisma.appSetting.create({
+     *   data: {
+     *     // ... data to create a AppSetting
+     *   }
+     * })
+     * 
+     */
+    create<T extends AppSettingCreateArgs>(args: SelectSubset<T, AppSettingCreateArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AppSettings.
+     * @param {AppSettingCreateManyArgs} args - Arguments to create many AppSettings.
+     * @example
+     * // Create many AppSettings
+     * const appSetting = await prisma.appSetting.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AppSettingCreateManyArgs>(args?: SelectSubset<T, AppSettingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AppSettings and returns the data saved in the database.
+     * @param {AppSettingCreateManyAndReturnArgs} args - Arguments to create many AppSettings.
+     * @example
+     * // Create many AppSettings
+     * const appSetting = await prisma.appSetting.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AppSettings and only return the `key`
+     * const appSettingWithKeyOnly = await prisma.appSetting.createManyAndReturn({
+     *   select: { key: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AppSettingCreateManyAndReturnArgs>(args?: SelectSubset<T, AppSettingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AppSetting.
+     * @param {AppSettingDeleteArgs} args - Arguments to delete one AppSetting.
+     * @example
+     * // Delete one AppSetting
+     * const AppSetting = await prisma.appSetting.delete({
+     *   where: {
+     *     // ... filter to delete one AppSetting
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AppSettingDeleteArgs>(args: SelectSubset<T, AppSettingDeleteArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AppSetting.
+     * @param {AppSettingUpdateArgs} args - Arguments to update one AppSetting.
+     * @example
+     * // Update one AppSetting
+     * const appSetting = await prisma.appSetting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AppSettingUpdateArgs>(args: SelectSubset<T, AppSettingUpdateArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AppSettings.
+     * @param {AppSettingDeleteManyArgs} args - Arguments to filter AppSettings to delete.
+     * @example
+     * // Delete a few AppSettings
+     * const { count } = await prisma.appSetting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AppSettingDeleteManyArgs>(args?: SelectSubset<T, AppSettingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AppSettings
+     * const appSetting = await prisma.appSetting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AppSettingUpdateManyArgs>(args: SelectSubset<T, AppSettingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AppSettings and returns the data updated in the database.
+     * @param {AppSettingUpdateManyAndReturnArgs} args - Arguments to update many AppSettings.
+     * @example
+     * // Update many AppSettings
+     * const appSetting = await prisma.appSetting.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AppSettings and only return the `key`
+     * const appSettingWithKeyOnly = await prisma.appSetting.updateManyAndReturn({
+     *   select: { key: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AppSettingUpdateManyAndReturnArgs>(args: SelectSubset<T, AppSettingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AppSetting.
+     * @param {AppSettingUpsertArgs} args - Arguments to update or create a AppSetting.
+     * @example
+     * // Update or create a AppSetting
+     * const appSetting = await prisma.appSetting.upsert({
+     *   create: {
+     *     // ... data to create a AppSetting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AppSetting we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AppSettingUpsertArgs>(args: SelectSubset<T, AppSettingUpsertArgs<ExtArgs>>): Prisma__AppSettingClient<$Result.GetResult<Prisma.$AppSettingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AppSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingCountArgs} args - Arguments to filter AppSettings to count.
+     * @example
+     * // Count the number of AppSettings
+     * const count = await prisma.appSetting.count({
+     *   where: {
+     *     // ... the filter for the AppSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends AppSettingCountArgs>(
+      args?: Subset<T, AppSettingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AppSettingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AppSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AppSettingAggregateArgs>(args: Subset<T, AppSettingAggregateArgs>): Prisma.PrismaPromise<GetAppSettingAggregateType<T>>
+
+    /**
+     * Group by AppSetting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AppSettingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AppSettingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AppSettingGroupByArgs['orderBy'] }
+        : { orderBy?: AppSettingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AppSettingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAppSettingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AppSetting model
+   */
+  readonly fields: AppSettingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AppSetting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AppSettingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AppSetting model
+   */
+  interface AppSettingFieldRefs {
+    readonly key: FieldRef<"AppSetting", 'String'>
+    readonly value: FieldRef<"AppSetting", 'String'>
+    readonly updatedAt: FieldRef<"AppSetting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AppSetting findUnique
+   */
+  export type AppSettingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which AppSetting to fetch.
+     */
+    where: AppSettingWhereUniqueInput
+  }
+
+  /**
+   * AppSetting findUniqueOrThrow
+   */
+  export type AppSettingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which AppSetting to fetch.
+     */
+    where: AppSettingWhereUniqueInput
+  }
+
+  /**
+   * AppSetting findFirst
+   */
+  export type AppSettingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which AppSetting to fetch.
+     */
+    where?: AppSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppSettings to fetch.
+     */
+    orderBy?: AppSettingOrderByWithRelationInput | AppSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppSettings.
+     */
+    cursor?: AppSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppSettings.
+     */
+    distinct?: AppSettingScalarFieldEnum | AppSettingScalarFieldEnum[]
+  }
+
+  /**
+   * AppSetting findFirstOrThrow
+   */
+  export type AppSettingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which AppSetting to fetch.
+     */
+    where?: AppSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppSettings to fetch.
+     */
+    orderBy?: AppSettingOrderByWithRelationInput | AppSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AppSettings.
+     */
+    cursor?: AppSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AppSettings.
+     */
+    distinct?: AppSettingScalarFieldEnum | AppSettingScalarFieldEnum[]
+  }
+
+  /**
+   * AppSetting findMany
+   */
+  export type AppSettingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter, which AppSettings to fetch.
+     */
+    where?: AppSettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AppSettings to fetch.
+     */
+    orderBy?: AppSettingOrderByWithRelationInput | AppSettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AppSettings.
+     */
+    cursor?: AppSettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AppSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AppSettings.
+     */
+    skip?: number
+    distinct?: AppSettingScalarFieldEnum | AppSettingScalarFieldEnum[]
+  }
+
+  /**
+   * AppSetting create
+   */
+  export type AppSettingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AppSetting.
+     */
+    data: XOR<AppSettingCreateInput, AppSettingUncheckedCreateInput>
+  }
+
+  /**
+   * AppSetting createMany
+   */
+  export type AppSettingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AppSettings.
+     */
+    data: AppSettingCreateManyInput | AppSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AppSetting createManyAndReturn
+   */
+  export type AppSettingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * The data used to create many AppSettings.
+     */
+    data: AppSettingCreateManyInput | AppSettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AppSetting update
+   */
+  export type AppSettingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AppSetting.
+     */
+    data: XOR<AppSettingUpdateInput, AppSettingUncheckedUpdateInput>
+    /**
+     * Choose, which AppSetting to update.
+     */
+    where: AppSettingWhereUniqueInput
+  }
+
+  /**
+   * AppSetting updateMany
+   */
+  export type AppSettingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AppSettings.
+     */
+    data: XOR<AppSettingUpdateManyMutationInput, AppSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which AppSettings to update
+     */
+    where?: AppSettingWhereInput
+    /**
+     * Limit how many AppSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppSetting updateManyAndReturn
+   */
+  export type AppSettingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * The data used to update AppSettings.
+     */
+    data: XOR<AppSettingUpdateManyMutationInput, AppSettingUncheckedUpdateManyInput>
+    /**
+     * Filter which AppSettings to update
+     */
+    where?: AppSettingWhereInput
+    /**
+     * Limit how many AppSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppSetting upsert
+   */
+  export type AppSettingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AppSetting to update in case it exists.
+     */
+    where: AppSettingWhereUniqueInput
+    /**
+     * In case the AppSetting found by the `where` argument doesn't exist, create a new AppSetting with this data.
+     */
+    create: XOR<AppSettingCreateInput, AppSettingUncheckedCreateInput>
+    /**
+     * In case the AppSetting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AppSettingUpdateInput, AppSettingUncheckedUpdateInput>
+  }
+
+  /**
+   * AppSetting delete
+   */
+  export type AppSettingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+    /**
+     * Filter which AppSetting to delete.
+     */
+    where: AppSettingWhereUniqueInput
+  }
+
+  /**
+   * AppSetting deleteMany
+   */
+  export type AppSettingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AppSettings to delete
+     */
+    where?: AppSettingWhereInput
+    /**
+     * Limit how many AppSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AppSetting without action
+   */
+  export type AppSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AppSetting
+     */
+    select?: AppSettingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AppSetting
+     */
+    omit?: AppSettingOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22857,6 +32987,111 @@ export namespace Prisma {
   export type TrendingPromptScalarFieldEnum = (typeof TrendingPromptScalarFieldEnum)[keyof typeof TrendingPromptScalarFieldEnum]
 
 
+  export const StudioCreditBalanceScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    availableCredits: 'availableCredits',
+    lifetimePurchasedCredits: 'lifetimePurchasedCredits',
+    lifetimeUsedCredits: 'lifetimeUsedCredits',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type StudioCreditBalanceScalarFieldEnum = (typeof StudioCreditBalanceScalarFieldEnum)[keyof typeof StudioCreditBalanceScalarFieldEnum]
+
+
+  export const StudioCreditPackScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    credits: 'credits',
+    amountInr: 'amountInr',
+    providerCostUsd: 'providerCostUsd',
+    providerCostInr: 'providerCostInr',
+    platformMarginInr: 'platformMarginInr',
+    isActive: 'isActive',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StudioCreditPackScalarFieldEnum = (typeof StudioCreditPackScalarFieldEnum)[keyof typeof StudioCreditPackScalarFieldEnum]
+
+
+  export const StudioCreditPurchaseScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    packId: 'packId',
+    amountInr: 'amountInr',
+    credits: 'credits',
+    razorpayOrderId: 'razorpayOrderId',
+    razorpayPaymentId: 'razorpayPaymentId',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StudioCreditPurchaseScalarFieldEnum = (typeof StudioCreditPurchaseScalarFieldEnum)[keyof typeof StudioCreditPurchaseScalarFieldEnum]
+
+
+  export const StudioCreditLedgerScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    type: 'type',
+    deltaCredits: 'deltaCredits',
+    balanceAfter: 'balanceAfter',
+    referenceId: 'referenceId',
+    note: 'note',
+    createdAt: 'createdAt'
+  };
+
+  export type StudioCreditLedgerScalarFieldEnum = (typeof StudioCreditLedgerScalarFieldEnum)[keyof typeof StudioCreditLedgerScalarFieldEnum]
+
+
+  export const StudioModelPricingScalarFieldEnum: {
+    id: 'id',
+    providerModelId: 'providerModelId',
+    displayName: 'displayName',
+    category: 'category',
+    providerCredits: 'providerCredits',
+    isEnabled: 'isEnabled',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StudioModelPricingScalarFieldEnum = (typeof StudioModelPricingScalarFieldEnum)[keyof typeof StudioModelPricingScalarFieldEnum]
+
+
+  export const StudioWorkflowScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    canvasJson: 'canvasJson',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StudioWorkflowScalarFieldEnum = (typeof StudioWorkflowScalarFieldEnum)[keyof typeof StudioWorkflowScalarFieldEnum]
+
+
+  export const StudioGenerationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    workflowId: 'workflowId',
+    modelPricingId: 'modelPricingId',
+    prompt: 'prompt',
+    status: 'status',
+    creditsCharged: 'creditsCharged',
+    outputUrl: 'outputUrl',
+    errorMessage: 'errorMessage',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type StudioGenerationScalarFieldEnum = (typeof StudioGenerationScalarFieldEnum)[keyof typeof StudioGenerationScalarFieldEnum]
+
+
   export const CommunityPostScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -22915,12 +33150,28 @@ export namespace Prisma {
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
+  export const AppSettingScalarFieldEnum: {
+    key: 'key',
+    value: 'value',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AppSettingScalarFieldEnum = (typeof AppSettingScalarFieldEnum)[keyof typeof AppSettingScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -22937,6 +33188,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -23022,6 +33282,76 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioPurchaseStatus'
+   */
+  export type EnumStudioPurchaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioPurchaseStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioPurchaseStatus[]'
+   */
+  export type ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioPurchaseStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioLedgerType'
+   */
+  export type EnumStudioLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioLedgerType'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioLedgerType[]'
+   */
+  export type ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioLedgerType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioGenerationStatus'
+   */
+  export type EnumStudioGenerationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioGenerationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'StudioGenerationStatus[]'
+   */
+  export type ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudioGenerationStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'CommunityReactionType'
    */
   export type EnumCommunityReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CommunityReactionType'>
@@ -23046,20 +33376,6 @@ export namespace Prisma {
    * Reference to a field of type 'NotificationType[]'
    */
   export type ListEnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -23092,6 +33408,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionListRelationFilter
     notifications?: NotificationListRelationFilter
     triggeredNotifications?: NotificationListRelationFilter
+    studioCreditBalance?: XOR<StudioCreditBalanceNullableScalarRelationFilter, StudioCreditBalanceWhereInput> | null
+    studioCreditPurchases?: StudioCreditPurchaseListRelationFilter
+    studioCreditLedger?: StudioCreditLedgerListRelationFilter
+    studioWorkflows?: StudioWorkflowListRelationFilter
+    studioGenerations?: StudioGenerationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -23117,6 +33438,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     triggeredNotifications?: NotificationOrderByRelationAggregateInput
+    studioCreditBalance?: StudioCreditBalanceOrderByWithRelationInput
+    studioCreditPurchases?: StudioCreditPurchaseOrderByRelationAggregateInput
+    studioCreditLedger?: StudioCreditLedgerOrderByRelationAggregateInput
+    studioWorkflows?: StudioWorkflowOrderByRelationAggregateInput
+    studioGenerations?: StudioGenerationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -23145,6 +33471,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionListRelationFilter
     notifications?: NotificationListRelationFilter
     triggeredNotifications?: NotificationListRelationFilter
+    studioCreditBalance?: XOR<StudioCreditBalanceNullableScalarRelationFilter, StudioCreditBalanceWhereInput> | null
+    studioCreditPurchases?: StudioCreditPurchaseListRelationFilter
+    studioCreditLedger?: StudioCreditLedgerListRelationFilter
+    studioWorkflows?: StudioWorkflowListRelationFilter
+    studioGenerations?: StudioGenerationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -24081,6 +34412,555 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"TrendingPrompt"> | Date | string
   }
 
+  export type StudioCreditBalanceWhereInput = {
+    AND?: StudioCreditBalanceWhereInput | StudioCreditBalanceWhereInput[]
+    OR?: StudioCreditBalanceWhereInput[]
+    NOT?: StudioCreditBalanceWhereInput | StudioCreditBalanceWhereInput[]
+    id?: StringFilter<"StudioCreditBalance"> | string
+    userId?: StringFilter<"StudioCreditBalance"> | string
+    availableCredits?: IntFilter<"StudioCreditBalance"> | number
+    lifetimePurchasedCredits?: IntFilter<"StudioCreditBalance"> | number
+    lifetimeUsedCredits?: IntFilter<"StudioCreditBalance"> | number
+    updatedAt?: DateTimeFilter<"StudioCreditBalance"> | Date | string
+    createdAt?: DateTimeFilter<"StudioCreditBalance"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type StudioCreditBalanceOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type StudioCreditBalanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: StudioCreditBalanceWhereInput | StudioCreditBalanceWhereInput[]
+    OR?: StudioCreditBalanceWhereInput[]
+    NOT?: StudioCreditBalanceWhereInput | StudioCreditBalanceWhereInput[]
+    availableCredits?: IntFilter<"StudioCreditBalance"> | number
+    lifetimePurchasedCredits?: IntFilter<"StudioCreditBalance"> | number
+    lifetimeUsedCredits?: IntFilter<"StudioCreditBalance"> | number
+    updatedAt?: DateTimeFilter<"StudioCreditBalance"> | Date | string
+    createdAt?: DateTimeFilter<"StudioCreditBalance"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type StudioCreditBalanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: StudioCreditBalanceCountOrderByAggregateInput
+    _avg?: StudioCreditBalanceAvgOrderByAggregateInput
+    _max?: StudioCreditBalanceMaxOrderByAggregateInput
+    _min?: StudioCreditBalanceMinOrderByAggregateInput
+    _sum?: StudioCreditBalanceSumOrderByAggregateInput
+  }
+
+  export type StudioCreditBalanceScalarWhereWithAggregatesInput = {
+    AND?: StudioCreditBalanceScalarWhereWithAggregatesInput | StudioCreditBalanceScalarWhereWithAggregatesInput[]
+    OR?: StudioCreditBalanceScalarWhereWithAggregatesInput[]
+    NOT?: StudioCreditBalanceScalarWhereWithAggregatesInput | StudioCreditBalanceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioCreditBalance"> | string
+    userId?: StringWithAggregatesFilter<"StudioCreditBalance"> | string
+    availableCredits?: IntWithAggregatesFilter<"StudioCreditBalance"> | number
+    lifetimePurchasedCredits?: IntWithAggregatesFilter<"StudioCreditBalance"> | number
+    lifetimeUsedCredits?: IntWithAggregatesFilter<"StudioCreditBalance"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioCreditBalance"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"StudioCreditBalance"> | Date | string
+  }
+
+  export type StudioCreditPackWhereInput = {
+    AND?: StudioCreditPackWhereInput | StudioCreditPackWhereInput[]
+    OR?: StudioCreditPackWhereInput[]
+    NOT?: StudioCreditPackWhereInput | StudioCreditPackWhereInput[]
+    id?: StringFilter<"StudioCreditPack"> | string
+    name?: StringFilter<"StudioCreditPack"> | string
+    description?: StringNullableFilter<"StudioCreditPack"> | string | null
+    credits?: IntFilter<"StudioCreditPack"> | number
+    amountInr?: IntFilter<"StudioCreditPack"> | number
+    providerCostUsd?: FloatFilter<"StudioCreditPack"> | number
+    providerCostInr?: IntFilter<"StudioCreditPack"> | number
+    platformMarginInr?: IntFilter<"StudioCreditPack"> | number
+    isActive?: BoolFilter<"StudioCreditPack"> | boolean
+    sortOrder?: IntFilter<"StudioCreditPack"> | number
+    createdAt?: DateTimeFilter<"StudioCreditPack"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioCreditPack"> | Date | string
+    purchases?: StudioCreditPurchaseListRelationFilter
+  }
+
+  export type StudioCreditPackOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    purchases?: StudioCreditPurchaseOrderByRelationAggregateInput
+  }
+
+  export type StudioCreditPackWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StudioCreditPackWhereInput | StudioCreditPackWhereInput[]
+    OR?: StudioCreditPackWhereInput[]
+    NOT?: StudioCreditPackWhereInput | StudioCreditPackWhereInput[]
+    name?: StringFilter<"StudioCreditPack"> | string
+    description?: StringNullableFilter<"StudioCreditPack"> | string | null
+    credits?: IntFilter<"StudioCreditPack"> | number
+    amountInr?: IntFilter<"StudioCreditPack"> | number
+    providerCostUsd?: FloatFilter<"StudioCreditPack"> | number
+    providerCostInr?: IntFilter<"StudioCreditPack"> | number
+    platformMarginInr?: IntFilter<"StudioCreditPack"> | number
+    isActive?: BoolFilter<"StudioCreditPack"> | boolean
+    sortOrder?: IntFilter<"StudioCreditPack"> | number
+    createdAt?: DateTimeFilter<"StudioCreditPack"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioCreditPack"> | Date | string
+    purchases?: StudioCreditPurchaseListRelationFilter
+  }, "id">
+
+  export type StudioCreditPackOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StudioCreditPackCountOrderByAggregateInput
+    _avg?: StudioCreditPackAvgOrderByAggregateInput
+    _max?: StudioCreditPackMaxOrderByAggregateInput
+    _min?: StudioCreditPackMinOrderByAggregateInput
+    _sum?: StudioCreditPackSumOrderByAggregateInput
+  }
+
+  export type StudioCreditPackScalarWhereWithAggregatesInput = {
+    AND?: StudioCreditPackScalarWhereWithAggregatesInput | StudioCreditPackScalarWhereWithAggregatesInput[]
+    OR?: StudioCreditPackScalarWhereWithAggregatesInput[]
+    NOT?: StudioCreditPackScalarWhereWithAggregatesInput | StudioCreditPackScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioCreditPack"> | string
+    name?: StringWithAggregatesFilter<"StudioCreditPack"> | string
+    description?: StringNullableWithAggregatesFilter<"StudioCreditPack"> | string | null
+    credits?: IntWithAggregatesFilter<"StudioCreditPack"> | number
+    amountInr?: IntWithAggregatesFilter<"StudioCreditPack"> | number
+    providerCostUsd?: FloatWithAggregatesFilter<"StudioCreditPack"> | number
+    providerCostInr?: IntWithAggregatesFilter<"StudioCreditPack"> | number
+    platformMarginInr?: IntWithAggregatesFilter<"StudioCreditPack"> | number
+    isActive?: BoolWithAggregatesFilter<"StudioCreditPack"> | boolean
+    sortOrder?: IntWithAggregatesFilter<"StudioCreditPack"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"StudioCreditPack"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioCreditPack"> | Date | string
+  }
+
+  export type StudioCreditPurchaseWhereInput = {
+    AND?: StudioCreditPurchaseWhereInput | StudioCreditPurchaseWhereInput[]
+    OR?: StudioCreditPurchaseWhereInput[]
+    NOT?: StudioCreditPurchaseWhereInput | StudioCreditPurchaseWhereInput[]
+    id?: StringFilter<"StudioCreditPurchase"> | string
+    userId?: StringFilter<"StudioCreditPurchase"> | string
+    packId?: StringFilter<"StudioCreditPurchase"> | string
+    amountInr?: IntFilter<"StudioCreditPurchase"> | number
+    credits?: IntFilter<"StudioCreditPurchase"> | number
+    razorpayOrderId?: StringNullableFilter<"StudioCreditPurchase"> | string | null
+    razorpayPaymentId?: StringNullableFilter<"StudioCreditPurchase"> | string | null
+    status?: EnumStudioPurchaseStatusFilter<"StudioCreditPurchase"> | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    pack?: XOR<StudioCreditPackScalarRelationFilter, StudioCreditPackWhereInput>
+  }
+
+  export type StudioCreditPurchaseOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    packId?: SortOrder
+    amountInr?: SortOrder
+    credits?: SortOrder
+    razorpayOrderId?: SortOrderInput | SortOrder
+    razorpayPaymentId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    pack?: StudioCreditPackOrderByWithRelationInput
+  }
+
+  export type StudioCreditPurchaseWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    razorpayOrderId?: string
+    AND?: StudioCreditPurchaseWhereInput | StudioCreditPurchaseWhereInput[]
+    OR?: StudioCreditPurchaseWhereInput[]
+    NOT?: StudioCreditPurchaseWhereInput | StudioCreditPurchaseWhereInput[]
+    userId?: StringFilter<"StudioCreditPurchase"> | string
+    packId?: StringFilter<"StudioCreditPurchase"> | string
+    amountInr?: IntFilter<"StudioCreditPurchase"> | number
+    credits?: IntFilter<"StudioCreditPurchase"> | number
+    razorpayPaymentId?: StringNullableFilter<"StudioCreditPurchase"> | string | null
+    status?: EnumStudioPurchaseStatusFilter<"StudioCreditPurchase"> | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    pack?: XOR<StudioCreditPackScalarRelationFilter, StudioCreditPackWhereInput>
+  }, "id" | "razorpayOrderId">
+
+  export type StudioCreditPurchaseOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    packId?: SortOrder
+    amountInr?: SortOrder
+    credits?: SortOrder
+    razorpayOrderId?: SortOrderInput | SortOrder
+    razorpayPaymentId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StudioCreditPurchaseCountOrderByAggregateInput
+    _avg?: StudioCreditPurchaseAvgOrderByAggregateInput
+    _max?: StudioCreditPurchaseMaxOrderByAggregateInput
+    _min?: StudioCreditPurchaseMinOrderByAggregateInput
+    _sum?: StudioCreditPurchaseSumOrderByAggregateInput
+  }
+
+  export type StudioCreditPurchaseScalarWhereWithAggregatesInput = {
+    AND?: StudioCreditPurchaseScalarWhereWithAggregatesInput | StudioCreditPurchaseScalarWhereWithAggregatesInput[]
+    OR?: StudioCreditPurchaseScalarWhereWithAggregatesInput[]
+    NOT?: StudioCreditPurchaseScalarWhereWithAggregatesInput | StudioCreditPurchaseScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioCreditPurchase"> | string
+    userId?: StringWithAggregatesFilter<"StudioCreditPurchase"> | string
+    packId?: StringWithAggregatesFilter<"StudioCreditPurchase"> | string
+    amountInr?: IntWithAggregatesFilter<"StudioCreditPurchase"> | number
+    credits?: IntWithAggregatesFilter<"StudioCreditPurchase"> | number
+    razorpayOrderId?: StringNullableWithAggregatesFilter<"StudioCreditPurchase"> | string | null
+    razorpayPaymentId?: StringNullableWithAggregatesFilter<"StudioCreditPurchase"> | string | null
+    status?: EnumStudioPurchaseStatusWithAggregatesFilter<"StudioCreditPurchase"> | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeWithAggregatesFilter<"StudioCreditPurchase"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioCreditPurchase"> | Date | string
+  }
+
+  export type StudioCreditLedgerWhereInput = {
+    AND?: StudioCreditLedgerWhereInput | StudioCreditLedgerWhereInput[]
+    OR?: StudioCreditLedgerWhereInput[]
+    NOT?: StudioCreditLedgerWhereInput | StudioCreditLedgerWhereInput[]
+    id?: StringFilter<"StudioCreditLedger"> | string
+    userId?: StringFilter<"StudioCreditLedger"> | string
+    type?: EnumStudioLedgerTypeFilter<"StudioCreditLedger"> | $Enums.StudioLedgerType
+    deltaCredits?: IntFilter<"StudioCreditLedger"> | number
+    balanceAfter?: IntFilter<"StudioCreditLedger"> | number
+    referenceId?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    note?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    createdAt?: DateTimeFilter<"StudioCreditLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type StudioCreditLedgerOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+    referenceId?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type StudioCreditLedgerWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StudioCreditLedgerWhereInput | StudioCreditLedgerWhereInput[]
+    OR?: StudioCreditLedgerWhereInput[]
+    NOT?: StudioCreditLedgerWhereInput | StudioCreditLedgerWhereInput[]
+    userId?: StringFilter<"StudioCreditLedger"> | string
+    type?: EnumStudioLedgerTypeFilter<"StudioCreditLedger"> | $Enums.StudioLedgerType
+    deltaCredits?: IntFilter<"StudioCreditLedger"> | number
+    balanceAfter?: IntFilter<"StudioCreditLedger"> | number
+    referenceId?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    note?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    createdAt?: DateTimeFilter<"StudioCreditLedger"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type StudioCreditLedgerOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+    referenceId?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: StudioCreditLedgerCountOrderByAggregateInput
+    _avg?: StudioCreditLedgerAvgOrderByAggregateInput
+    _max?: StudioCreditLedgerMaxOrderByAggregateInput
+    _min?: StudioCreditLedgerMinOrderByAggregateInput
+    _sum?: StudioCreditLedgerSumOrderByAggregateInput
+  }
+
+  export type StudioCreditLedgerScalarWhereWithAggregatesInput = {
+    AND?: StudioCreditLedgerScalarWhereWithAggregatesInput | StudioCreditLedgerScalarWhereWithAggregatesInput[]
+    OR?: StudioCreditLedgerScalarWhereWithAggregatesInput[]
+    NOT?: StudioCreditLedgerScalarWhereWithAggregatesInput | StudioCreditLedgerScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioCreditLedger"> | string
+    userId?: StringWithAggregatesFilter<"StudioCreditLedger"> | string
+    type?: EnumStudioLedgerTypeWithAggregatesFilter<"StudioCreditLedger"> | $Enums.StudioLedgerType
+    deltaCredits?: IntWithAggregatesFilter<"StudioCreditLedger"> | number
+    balanceAfter?: IntWithAggregatesFilter<"StudioCreditLedger"> | number
+    referenceId?: StringNullableWithAggregatesFilter<"StudioCreditLedger"> | string | null
+    note?: StringNullableWithAggregatesFilter<"StudioCreditLedger"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StudioCreditLedger"> | Date | string
+  }
+
+  export type StudioModelPricingWhereInput = {
+    AND?: StudioModelPricingWhereInput | StudioModelPricingWhereInput[]
+    OR?: StudioModelPricingWhereInput[]
+    NOT?: StudioModelPricingWhereInput | StudioModelPricingWhereInput[]
+    id?: StringFilter<"StudioModelPricing"> | string
+    providerModelId?: StringFilter<"StudioModelPricing"> | string
+    displayName?: StringFilter<"StudioModelPricing"> | string
+    category?: StringFilter<"StudioModelPricing"> | string
+    providerCredits?: IntFilter<"StudioModelPricing"> | number
+    isEnabled?: BoolFilter<"StudioModelPricing"> | boolean
+    sortOrder?: IntFilter<"StudioModelPricing"> | number
+    createdAt?: DateTimeFilter<"StudioModelPricing"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioModelPricing"> | Date | string
+    generations?: StudioGenerationListRelationFilter
+  }
+
+  export type StudioModelPricingOrderByWithRelationInput = {
+    id?: SortOrder
+    providerModelId?: SortOrder
+    displayName?: SortOrder
+    category?: SortOrder
+    providerCredits?: SortOrder
+    isEnabled?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    generations?: StudioGenerationOrderByRelationAggregateInput
+  }
+
+  export type StudioModelPricingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    providerModelId?: string
+    AND?: StudioModelPricingWhereInput | StudioModelPricingWhereInput[]
+    OR?: StudioModelPricingWhereInput[]
+    NOT?: StudioModelPricingWhereInput | StudioModelPricingWhereInput[]
+    displayName?: StringFilter<"StudioModelPricing"> | string
+    category?: StringFilter<"StudioModelPricing"> | string
+    providerCredits?: IntFilter<"StudioModelPricing"> | number
+    isEnabled?: BoolFilter<"StudioModelPricing"> | boolean
+    sortOrder?: IntFilter<"StudioModelPricing"> | number
+    createdAt?: DateTimeFilter<"StudioModelPricing"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioModelPricing"> | Date | string
+    generations?: StudioGenerationListRelationFilter
+  }, "id" | "providerModelId">
+
+  export type StudioModelPricingOrderByWithAggregationInput = {
+    id?: SortOrder
+    providerModelId?: SortOrder
+    displayName?: SortOrder
+    category?: SortOrder
+    providerCredits?: SortOrder
+    isEnabled?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StudioModelPricingCountOrderByAggregateInput
+    _avg?: StudioModelPricingAvgOrderByAggregateInput
+    _max?: StudioModelPricingMaxOrderByAggregateInput
+    _min?: StudioModelPricingMinOrderByAggregateInput
+    _sum?: StudioModelPricingSumOrderByAggregateInput
+  }
+
+  export type StudioModelPricingScalarWhereWithAggregatesInput = {
+    AND?: StudioModelPricingScalarWhereWithAggregatesInput | StudioModelPricingScalarWhereWithAggregatesInput[]
+    OR?: StudioModelPricingScalarWhereWithAggregatesInput[]
+    NOT?: StudioModelPricingScalarWhereWithAggregatesInput | StudioModelPricingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioModelPricing"> | string
+    providerModelId?: StringWithAggregatesFilter<"StudioModelPricing"> | string
+    displayName?: StringWithAggregatesFilter<"StudioModelPricing"> | string
+    category?: StringWithAggregatesFilter<"StudioModelPricing"> | string
+    providerCredits?: IntWithAggregatesFilter<"StudioModelPricing"> | number
+    isEnabled?: BoolWithAggregatesFilter<"StudioModelPricing"> | boolean
+    sortOrder?: IntWithAggregatesFilter<"StudioModelPricing"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"StudioModelPricing"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioModelPricing"> | Date | string
+  }
+
+  export type StudioWorkflowWhereInput = {
+    AND?: StudioWorkflowWhereInput | StudioWorkflowWhereInput[]
+    OR?: StudioWorkflowWhereInput[]
+    NOT?: StudioWorkflowWhereInput | StudioWorkflowWhereInput[]
+    id?: StringFilter<"StudioWorkflow"> | string
+    userId?: StringFilter<"StudioWorkflow"> | string
+    title?: StringFilter<"StudioWorkflow"> | string
+    canvasJson?: JsonFilter<"StudioWorkflow">
+    createdAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    generations?: StudioGenerationListRelationFilter
+  }
+
+  export type StudioWorkflowOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    canvasJson?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    generations?: StudioGenerationOrderByRelationAggregateInput
+  }
+
+  export type StudioWorkflowWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StudioWorkflowWhereInput | StudioWorkflowWhereInput[]
+    OR?: StudioWorkflowWhereInput[]
+    NOT?: StudioWorkflowWhereInput | StudioWorkflowWhereInput[]
+    userId?: StringFilter<"StudioWorkflow"> | string
+    title?: StringFilter<"StudioWorkflow"> | string
+    canvasJson?: JsonFilter<"StudioWorkflow">
+    createdAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    generations?: StudioGenerationListRelationFilter
+  }, "id">
+
+  export type StudioWorkflowOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    canvasJson?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StudioWorkflowCountOrderByAggregateInput
+    _max?: StudioWorkflowMaxOrderByAggregateInput
+    _min?: StudioWorkflowMinOrderByAggregateInput
+  }
+
+  export type StudioWorkflowScalarWhereWithAggregatesInput = {
+    AND?: StudioWorkflowScalarWhereWithAggregatesInput | StudioWorkflowScalarWhereWithAggregatesInput[]
+    OR?: StudioWorkflowScalarWhereWithAggregatesInput[]
+    NOT?: StudioWorkflowScalarWhereWithAggregatesInput | StudioWorkflowScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioWorkflow"> | string
+    userId?: StringWithAggregatesFilter<"StudioWorkflow"> | string
+    title?: StringWithAggregatesFilter<"StudioWorkflow"> | string
+    canvasJson?: JsonWithAggregatesFilter<"StudioWorkflow">
+    createdAt?: DateTimeWithAggregatesFilter<"StudioWorkflow"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioWorkflow"> | Date | string
+  }
+
+  export type StudioGenerationWhereInput = {
+    AND?: StudioGenerationWhereInput | StudioGenerationWhereInput[]
+    OR?: StudioGenerationWhereInput[]
+    NOT?: StudioGenerationWhereInput | StudioGenerationWhereInput[]
+    id?: StringFilter<"StudioGeneration"> | string
+    userId?: StringFilter<"StudioGeneration"> | string
+    workflowId?: StringNullableFilter<"StudioGeneration"> | string | null
+    modelPricingId?: StringNullableFilter<"StudioGeneration"> | string | null
+    prompt?: StringFilter<"StudioGeneration"> | string
+    status?: EnumStudioGenerationStatusFilter<"StudioGeneration"> | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFilter<"StudioGeneration"> | number
+    outputUrl?: StringNullableFilter<"StudioGeneration"> | string | null
+    errorMessage?: StringNullableFilter<"StudioGeneration"> | string | null
+    createdAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    workflow?: XOR<StudioWorkflowNullableScalarRelationFilter, StudioWorkflowWhereInput> | null
+    modelPricing?: XOR<StudioModelPricingNullableScalarRelationFilter, StudioModelPricingWhereInput> | null
+  }
+
+  export type StudioGenerationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    workflowId?: SortOrderInput | SortOrder
+    modelPricingId?: SortOrderInput | SortOrder
+    prompt?: SortOrder
+    status?: SortOrder
+    creditsCharged?: SortOrder
+    outputUrl?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    workflow?: StudioWorkflowOrderByWithRelationInput
+    modelPricing?: StudioModelPricingOrderByWithRelationInput
+  }
+
+  export type StudioGenerationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StudioGenerationWhereInput | StudioGenerationWhereInput[]
+    OR?: StudioGenerationWhereInput[]
+    NOT?: StudioGenerationWhereInput | StudioGenerationWhereInput[]
+    userId?: StringFilter<"StudioGeneration"> | string
+    workflowId?: StringNullableFilter<"StudioGeneration"> | string | null
+    modelPricingId?: StringNullableFilter<"StudioGeneration"> | string | null
+    prompt?: StringFilter<"StudioGeneration"> | string
+    status?: EnumStudioGenerationStatusFilter<"StudioGeneration"> | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFilter<"StudioGeneration"> | number
+    outputUrl?: StringNullableFilter<"StudioGeneration"> | string | null
+    errorMessage?: StringNullableFilter<"StudioGeneration"> | string | null
+    createdAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    workflow?: XOR<StudioWorkflowNullableScalarRelationFilter, StudioWorkflowWhereInput> | null
+    modelPricing?: XOR<StudioModelPricingNullableScalarRelationFilter, StudioModelPricingWhereInput> | null
+  }, "id">
+
+  export type StudioGenerationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    workflowId?: SortOrderInput | SortOrder
+    modelPricingId?: SortOrderInput | SortOrder
+    prompt?: SortOrder
+    status?: SortOrder
+    creditsCharged?: SortOrder
+    outputUrl?: SortOrderInput | SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: StudioGenerationCountOrderByAggregateInput
+    _avg?: StudioGenerationAvgOrderByAggregateInput
+    _max?: StudioGenerationMaxOrderByAggregateInput
+    _min?: StudioGenerationMinOrderByAggregateInput
+    _sum?: StudioGenerationSumOrderByAggregateInput
+  }
+
+  export type StudioGenerationScalarWhereWithAggregatesInput = {
+    AND?: StudioGenerationScalarWhereWithAggregatesInput | StudioGenerationScalarWhereWithAggregatesInput[]
+    OR?: StudioGenerationScalarWhereWithAggregatesInput[]
+    NOT?: StudioGenerationScalarWhereWithAggregatesInput | StudioGenerationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StudioGeneration"> | string
+    userId?: StringWithAggregatesFilter<"StudioGeneration"> | string
+    workflowId?: StringNullableWithAggregatesFilter<"StudioGeneration"> | string | null
+    modelPricingId?: StringNullableWithAggregatesFilter<"StudioGeneration"> | string | null
+    prompt?: StringWithAggregatesFilter<"StudioGeneration"> | string
+    status?: EnumStudioGenerationStatusWithAggregatesFilter<"StudioGeneration"> | $Enums.StudioGenerationStatus
+    creditsCharged?: IntWithAggregatesFilter<"StudioGeneration"> | number
+    outputUrl?: StringNullableWithAggregatesFilter<"StudioGeneration"> | string | null
+    errorMessage?: StringNullableWithAggregatesFilter<"StudioGeneration"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"StudioGeneration"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"StudioGeneration"> | Date | string
+  }
+
   export type CommunityPostWhereInput = {
     AND?: CommunityPostWhereInput | CommunityPostWhereInput[]
     OR?: CommunityPostWhereInput[]
@@ -24414,6 +35294,48 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
   }
 
+  export type AppSettingWhereInput = {
+    AND?: AppSettingWhereInput | AppSettingWhereInput[]
+    OR?: AppSettingWhereInput[]
+    NOT?: AppSettingWhereInput | AppSettingWhereInput[]
+    key?: StringFilter<"AppSetting"> | string
+    value?: StringFilter<"AppSetting"> | string
+    updatedAt?: DateTimeFilter<"AppSetting"> | Date | string
+  }
+
+  export type AppSettingOrderByWithRelationInput = {
+    key?: SortOrder
+    value?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AppSettingWhereUniqueInput = Prisma.AtLeast<{
+    key?: string
+    AND?: AppSettingWhereInput | AppSettingWhereInput[]
+    OR?: AppSettingWhereInput[]
+    NOT?: AppSettingWhereInput | AppSettingWhereInput[]
+    value?: StringFilter<"AppSetting"> | string
+    updatedAt?: DateTimeFilter<"AppSetting"> | Date | string
+  }, "key">
+
+  export type AppSettingOrderByWithAggregationInput = {
+    key?: SortOrder
+    value?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AppSettingCountOrderByAggregateInput
+    _max?: AppSettingMaxOrderByAggregateInput
+    _min?: AppSettingMinOrderByAggregateInput
+  }
+
+  export type AppSettingScalarWhereWithAggregatesInput = {
+    AND?: AppSettingScalarWhereWithAggregatesInput | AppSettingScalarWhereWithAggregatesInput[]
+    OR?: AppSettingScalarWhereWithAggregatesInput[]
+    NOT?: AppSettingScalarWhereWithAggregatesInput | AppSettingScalarWhereWithAggregatesInput[]
+    key?: StringWithAggregatesFilter<"AppSetting"> | string
+    value?: StringWithAggregatesFilter<"AppSetting"> | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AppSetting"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -24437,6 +35359,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -24462,6 +35389,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -24487,6 +35419,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24512,6 +35449,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -25502,6 +36444,598 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type StudioCreditBalanceCreateInput = {
+    id?: string
+    availableCredits?: number
+    lifetimePurchasedCredits?: number
+    lifetimeUsedCredits?: number
+    updatedAt?: Date | string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioCreditBalanceInput
+  }
+
+  export type StudioCreditBalanceUncheckedCreateInput = {
+    id?: string
+    userId: string
+    availableCredits?: number
+    lifetimePurchasedCredits?: number
+    lifetimeUsedCredits?: number
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditBalanceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioCreditBalanceNestedInput
+  }
+
+  export type StudioCreditBalanceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditBalanceCreateManyInput = {
+    id?: string
+    userId: string
+    availableCredits?: number
+    lifetimePurchasedCredits?: number
+    lifetimeUsedCredits?: number
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditBalanceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditBalanceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPackCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr?: number
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchases?: StudioCreditPurchaseCreateNestedManyWithoutPackInput
+  }
+
+  export type StudioCreditPackUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr?: number
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutPackInput
+  }
+
+  export type StudioCreditPackUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchases?: StudioCreditPurchaseUpdateManyWithoutPackNestedInput
+  }
+
+  export type StudioCreditPackUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutPackNestedInput
+  }
+
+  export type StudioCreditPackCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr?: number
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPackUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPackUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseCreateInput = {
+    id?: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioCreditPurchasesInput
+    pack: StudioCreditPackCreateNestedOneWithoutPurchasesInput
+  }
+
+  export type StudioCreditPurchaseUncheckedCreateInput = {
+    id?: string
+    userId: string
+    packId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioCreditPurchasesNestedInput
+    pack?: StudioCreditPackUpdateOneRequiredWithoutPurchasesNestedInput
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    packId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseCreateManyInput = {
+    id?: string
+    userId: string
+    packId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    packId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerCreateInput = {
+    id?: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioCreditLedgerInput
+  }
+
+  export type StudioCreditLedgerUncheckedCreateInput = {
+    id?: string
+    userId: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditLedgerUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioCreditLedgerNestedInput
+  }
+
+  export type StudioCreditLedgerUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerCreateManyInput = {
+    id?: string
+    userId: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditLedgerUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioModelPricingCreateInput = {
+    id?: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    generations?: StudioGenerationCreateNestedManyWithoutModelPricingInput
+  }
+
+  export type StudioModelPricingUncheckedCreateInput = {
+    id?: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    generations?: StudioGenerationUncheckedCreateNestedManyWithoutModelPricingInput
+  }
+
+  export type StudioModelPricingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generations?: StudioGenerationUpdateManyWithoutModelPricingNestedInput
+  }
+
+  export type StudioModelPricingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generations?: StudioGenerationUncheckedUpdateManyWithoutModelPricingNestedInput
+  }
+
+  export type StudioModelPricingCreateManyInput = {
+    id?: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioModelPricingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioModelPricingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioWorkflowCreateInput = {
+    id?: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioWorkflowsInput
+    generations?: StudioGenerationCreateNestedManyWithoutWorkflowInput
+  }
+
+  export type StudioWorkflowUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    generations?: StudioGenerationUncheckedCreateNestedManyWithoutWorkflowInput
+  }
+
+  export type StudioWorkflowUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioWorkflowsNestedInput
+    generations?: StudioGenerationUpdateManyWithoutWorkflowNestedInput
+  }
+
+  export type StudioWorkflowUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generations?: StudioGenerationUncheckedUpdateManyWithoutWorkflowNestedInput
+  }
+
+  export type StudioWorkflowCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioWorkflowUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioWorkflowUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationCreateInput = {
+    id?: string
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioGenerationsInput
+    workflow?: StudioWorkflowCreateNestedOneWithoutGenerationsInput
+    modelPricing?: StudioModelPricingCreateNestedOneWithoutGenerationsInput
+  }
+
+  export type StudioGenerationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    workflowId?: string | null
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioGenerationsNestedInput
+    workflow?: StudioWorkflowUpdateOneWithoutGenerationsNestedInput
+    modelPricing?: StudioModelPricingUpdateOneWithoutGenerationsNestedInput
+  }
+
+  export type StudioGenerationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationCreateManyInput = {
+    id?: string
+    userId: string
+    workflowId?: string | null
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CommunityPostCreateInput = {
     id?: string
     title: string
@@ -25831,6 +37365,48 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AppSettingCreateInput = {
+    key: string
+    value: string
+    updatedAt?: Date | string
+  }
+
+  export type AppSettingUncheckedCreateInput = {
+    key: string
+    value: string
+    updatedAt?: Date | string
+  }
+
+  export type AppSettingUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppSettingUncheckedUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppSettingCreateManyInput = {
+    key: string
+    value: string
+    updatedAt?: Date | string
+  }
+
+  export type AppSettingUpdateManyMutationInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AppSettingUncheckedUpdateManyInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -25956,6 +37532,35 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type StudioCreditBalanceNullableScalarRelationFilter = {
+    is?: StudioCreditBalanceWhereInput | null
+    isNot?: StudioCreditBalanceWhereInput | null
+  }
+
+  export type StudioCreditPurchaseListRelationFilter = {
+    every?: StudioCreditPurchaseWhereInput
+    some?: StudioCreditPurchaseWhereInput
+    none?: StudioCreditPurchaseWhereInput
+  }
+
+  export type StudioCreditLedgerListRelationFilter = {
+    every?: StudioCreditLedgerWhereInput
+    some?: StudioCreditLedgerWhereInput
+    none?: StudioCreditLedgerWhereInput
+  }
+
+  export type StudioWorkflowListRelationFilter = {
+    every?: StudioWorkflowWhereInput
+    some?: StudioWorkflowWhereInput
+    none?: StudioWorkflowWhereInput
+  }
+
+  export type StudioGenerationListRelationFilter = {
+    every?: StudioGenerationWhereInput
+    some?: StudioGenerationWhereInput
+    none?: StudioGenerationWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -26002,6 +37607,22 @@ export namespace Prisma {
   }
 
   export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StudioCreditPurchaseOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StudioCreditLedgerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StudioWorkflowOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StudioGenerationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26728,6 +38349,466 @@ export namespace Prisma {
     sortOrder?: SortOrder
   }
 
+  export type StudioCreditBalanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditBalanceAvgOrderByAggregateInput = {
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+  }
+
+  export type StudioCreditBalanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditBalanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+    updatedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditBalanceSumOrderByAggregateInput = {
+    availableCredits?: SortOrder
+    lifetimePurchasedCredits?: SortOrder
+    lifetimeUsedCredits?: SortOrder
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type StudioCreditPackCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPackAvgOrderByAggregateInput = {
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type StudioCreditPackMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPackMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    isActive?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPackSumOrderByAggregateInput = {
+    credits?: SortOrder
+    amountInr?: SortOrder
+    providerCostUsd?: SortOrder
+    providerCostInr?: SortOrder
+    platformMarginInr?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type EnumStudioPurchaseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioPurchaseStatus | EnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel> | $Enums.StudioPurchaseStatus
+  }
+
+  export type StudioCreditPackScalarRelationFilter = {
+    is?: StudioCreditPackWhereInput
+    isNot?: StudioCreditPackWhereInput
+  }
+
+  export type StudioCreditPurchaseCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    packId?: SortOrder
+    amountInr?: SortOrder
+    credits?: SortOrder
+    razorpayOrderId?: SortOrder
+    razorpayPaymentId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPurchaseAvgOrderByAggregateInput = {
+    amountInr?: SortOrder
+    credits?: SortOrder
+  }
+
+  export type StudioCreditPurchaseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    packId?: SortOrder
+    amountInr?: SortOrder
+    credits?: SortOrder
+    razorpayOrderId?: SortOrder
+    razorpayPaymentId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPurchaseMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    packId?: SortOrder
+    amountInr?: SortOrder
+    credits?: SortOrder
+    razorpayOrderId?: SortOrder
+    razorpayPaymentId?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioCreditPurchaseSumOrderByAggregateInput = {
+    amountInr?: SortOrder
+    credits?: SortOrder
+  }
+
+  export type EnumStudioPurchaseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioPurchaseStatus | EnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioPurchaseStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudioPurchaseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel>
+    _max?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel>
+  }
+
+  export type EnumStudioLedgerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioLedgerType | EnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioLedgerTypeFilter<$PrismaModel> | $Enums.StudioLedgerType
+  }
+
+  export type StudioCreditLedgerCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+    referenceId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditLedgerAvgOrderByAggregateInput = {
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+  }
+
+  export type StudioCreditLedgerMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+    referenceId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditLedgerMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+    referenceId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type StudioCreditLedgerSumOrderByAggregateInput = {
+    deltaCredits?: SortOrder
+    balanceAfter?: SortOrder
+  }
+
+  export type EnumStudioLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioLedgerType | EnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioLedgerTypeWithAggregatesFilter<$PrismaModel> | $Enums.StudioLedgerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioLedgerTypeFilter<$PrismaModel>
+    _max?: NestedEnumStudioLedgerTypeFilter<$PrismaModel>
+  }
+
+  export type StudioModelPricingCountOrderByAggregateInput = {
+    id?: SortOrder
+    providerModelId?: SortOrder
+    displayName?: SortOrder
+    category?: SortOrder
+    providerCredits?: SortOrder
+    isEnabled?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioModelPricingAvgOrderByAggregateInput = {
+    providerCredits?: SortOrder
+    sortOrder?: SortOrder
+  }
+
+  export type StudioModelPricingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    providerModelId?: SortOrder
+    displayName?: SortOrder
+    category?: SortOrder
+    providerCredits?: SortOrder
+    isEnabled?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioModelPricingMinOrderByAggregateInput = {
+    id?: SortOrder
+    providerModelId?: SortOrder
+    displayName?: SortOrder
+    category?: SortOrder
+    providerCredits?: SortOrder
+    isEnabled?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioModelPricingSumOrderByAggregateInput = {
+    providerCredits?: SortOrder
+    sortOrder?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type StudioWorkflowCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    canvasJson?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioWorkflowMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioWorkflowMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnumStudioGenerationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioGenerationStatus | EnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioGenerationStatusFilter<$PrismaModel> | $Enums.StudioGenerationStatus
+  }
+
+  export type StudioWorkflowNullableScalarRelationFilter = {
+    is?: StudioWorkflowWhereInput | null
+    isNot?: StudioWorkflowWhereInput | null
+  }
+
+  export type StudioModelPricingNullableScalarRelationFilter = {
+    is?: StudioModelPricingWhereInput | null
+    isNot?: StudioModelPricingWhereInput | null
+  }
+
+  export type StudioGenerationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    workflowId?: SortOrder
+    modelPricingId?: SortOrder
+    prompt?: SortOrder
+    status?: SortOrder
+    creditsCharged?: SortOrder
+    outputUrl?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioGenerationAvgOrderByAggregateInput = {
+    creditsCharged?: SortOrder
+  }
+
+  export type StudioGenerationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    workflowId?: SortOrder
+    modelPricingId?: SortOrder
+    prompt?: SortOrder
+    status?: SortOrder
+    creditsCharged?: SortOrder
+    outputUrl?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioGenerationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    workflowId?: SortOrder
+    modelPricingId?: SortOrder
+    prompt?: SortOrder
+    status?: SortOrder
+    creditsCharged?: SortOrder
+    outputUrl?: SortOrder
+    errorMessage?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StudioGenerationSumOrderByAggregateInput = {
+    creditsCharged?: SortOrder
+  }
+
+  export type EnumStudioGenerationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioGenerationStatus | EnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioGenerationStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudioGenerationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioGenerationStatusFilter<$PrismaModel>
+    _max?: NestedEnumStudioGenerationStatusFilter<$PrismaModel>
+  }
+
   export type CommunityPostCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -26931,6 +39012,24 @@ export namespace Prisma {
     _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
   }
 
+  export type AppSettingCountOrderByAggregateInput = {
+    key?: SortOrder
+    value?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AppSettingMaxOrderByAggregateInput = {
+    key?: SortOrder
+    value?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AppSettingMinOrderByAggregateInput = {
+    key?: SortOrder
+    value?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -27015,6 +39114,40 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type StudioCreditBalanceCreateNestedOneWithoutUserInput = {
+    create?: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudioCreditBalanceCreateOrConnectWithoutUserInput
+    connect?: StudioCreditBalanceWhereUniqueInput
+  }
+
+  export type StudioCreditPurchaseCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput> | StudioCreditPurchaseCreateWithoutUserInput[] | StudioCreditPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutUserInput | StudioCreditPurchaseCreateOrConnectWithoutUserInput[]
+    createMany?: StudioCreditPurchaseCreateManyUserInputEnvelope
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+  }
+
+  export type StudioCreditLedgerCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput> | StudioCreditLedgerCreateWithoutUserInput[] | StudioCreditLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditLedgerCreateOrConnectWithoutUserInput | StudioCreditLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: StudioCreditLedgerCreateManyUserInputEnvelope
+    connect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+  }
+
+  export type StudioWorkflowCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput> | StudioWorkflowCreateWithoutUserInput[] | StudioWorkflowUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutUserInput | StudioWorkflowCreateOrConnectWithoutUserInput[]
+    createMany?: StudioWorkflowCreateManyUserInputEnvelope
+    connect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+  }
+
+  export type StudioGenerationCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput> | StudioGenerationCreateWithoutUserInput[] | StudioGenerationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutUserInput | StudioGenerationCreateOrConnectWithoutUserInput[]
+    createMany?: StudioGenerationCreateManyUserInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -27097,6 +39230,40 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutActorUserInput | NotificationCreateOrConnectWithoutActorUserInput[]
     createMany?: NotificationCreateManyActorUserInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudioCreditBalanceCreateOrConnectWithoutUserInput
+    connect?: StudioCreditBalanceWhereUniqueInput
+  }
+
+  export type StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput> | StudioCreditPurchaseCreateWithoutUserInput[] | StudioCreditPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutUserInput | StudioCreditPurchaseCreateOrConnectWithoutUserInput[]
+    createMany?: StudioCreditPurchaseCreateManyUserInputEnvelope
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+  }
+
+  export type StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput> | StudioCreditLedgerCreateWithoutUserInput[] | StudioCreditLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditLedgerCreateOrConnectWithoutUserInput | StudioCreditLedgerCreateOrConnectWithoutUserInput[]
+    createMany?: StudioCreditLedgerCreateManyUserInputEnvelope
+    connect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+  }
+
+  export type StudioWorkflowUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput> | StudioWorkflowCreateWithoutUserInput[] | StudioWorkflowUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutUserInput | StudioWorkflowCreateOrConnectWithoutUserInput[]
+    createMany?: StudioWorkflowCreateManyUserInputEnvelope
+    connect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+  }
+
+  export type StudioGenerationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput> | StudioGenerationCreateWithoutUserInput[] | StudioGenerationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutUserInput | StudioGenerationCreateOrConnectWithoutUserInput[]
+    createMany?: StudioGenerationCreateManyUserInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -27287,6 +39454,72 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type StudioCreditBalanceUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudioCreditBalanceCreateOrConnectWithoutUserInput
+    upsert?: StudioCreditBalanceUpsertWithoutUserInput
+    disconnect?: StudioCreditBalanceWhereInput | boolean
+    delete?: StudioCreditBalanceWhereInput | boolean
+    connect?: StudioCreditBalanceWhereUniqueInput
+    update?: XOR<XOR<StudioCreditBalanceUpdateToOneWithWhereWithoutUserInput, StudioCreditBalanceUpdateWithoutUserInput>, StudioCreditBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput> | StudioCreditPurchaseCreateWithoutUserInput[] | StudioCreditPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutUserInput | StudioCreditPurchaseCreateOrConnectWithoutUserInput[]
+    upsert?: StudioCreditPurchaseUpsertWithWhereUniqueWithoutUserInput | StudioCreditPurchaseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioCreditPurchaseCreateManyUserInputEnvelope
+    set?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    disconnect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    delete?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    update?: StudioCreditPurchaseUpdateWithWhereUniqueWithoutUserInput | StudioCreditPurchaseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioCreditPurchaseUpdateManyWithWhereWithoutUserInput | StudioCreditPurchaseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+  }
+
+  export type StudioCreditLedgerUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput> | StudioCreditLedgerCreateWithoutUserInput[] | StudioCreditLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditLedgerCreateOrConnectWithoutUserInput | StudioCreditLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: StudioCreditLedgerUpsertWithWhereUniqueWithoutUserInput | StudioCreditLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioCreditLedgerCreateManyUserInputEnvelope
+    set?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    disconnect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    delete?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    connect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    update?: StudioCreditLedgerUpdateWithWhereUniqueWithoutUserInput | StudioCreditLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioCreditLedgerUpdateManyWithWhereWithoutUserInput | StudioCreditLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioCreditLedgerScalarWhereInput | StudioCreditLedgerScalarWhereInput[]
+  }
+
+  export type StudioWorkflowUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput> | StudioWorkflowCreateWithoutUserInput[] | StudioWorkflowUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutUserInput | StudioWorkflowCreateOrConnectWithoutUserInput[]
+    upsert?: StudioWorkflowUpsertWithWhereUniqueWithoutUserInput | StudioWorkflowUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioWorkflowCreateManyUserInputEnvelope
+    set?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    disconnect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    delete?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    connect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    update?: StudioWorkflowUpdateWithWhereUniqueWithoutUserInput | StudioWorkflowUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioWorkflowUpdateManyWithWhereWithoutUserInput | StudioWorkflowUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioWorkflowScalarWhereInput | StudioWorkflowScalarWhereInput[]
+  }
+
+  export type StudioGenerationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput> | StudioGenerationCreateWithoutUserInput[] | StudioGenerationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutUserInput | StudioGenerationCreateOrConnectWithoutUserInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutUserInput | StudioGenerationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioGenerationCreateManyUserInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutUserInput | StudioGenerationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutUserInput | StudioGenerationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -27453,6 +39686,72 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutActorUserInput | NotificationUpdateWithWhereUniqueWithoutActorUserInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutActorUserInput | NotificationUpdateManyWithWhereWithoutActorUserInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+    connectOrCreate?: StudioCreditBalanceCreateOrConnectWithoutUserInput
+    upsert?: StudioCreditBalanceUpsertWithoutUserInput
+    disconnect?: StudioCreditBalanceWhereInput | boolean
+    delete?: StudioCreditBalanceWhereInput | boolean
+    connect?: StudioCreditBalanceWhereUniqueInput
+    update?: XOR<XOR<StudioCreditBalanceUpdateToOneWithWhereWithoutUserInput, StudioCreditBalanceUpdateWithoutUserInput>, StudioCreditBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput> | StudioCreditPurchaseCreateWithoutUserInput[] | StudioCreditPurchaseUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutUserInput | StudioCreditPurchaseCreateOrConnectWithoutUserInput[]
+    upsert?: StudioCreditPurchaseUpsertWithWhereUniqueWithoutUserInput | StudioCreditPurchaseUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioCreditPurchaseCreateManyUserInputEnvelope
+    set?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    disconnect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    delete?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    update?: StudioCreditPurchaseUpdateWithWhereUniqueWithoutUserInput | StudioCreditPurchaseUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioCreditPurchaseUpdateManyWithWhereWithoutUserInput | StudioCreditPurchaseUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+  }
+
+  export type StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput> | StudioCreditLedgerCreateWithoutUserInput[] | StudioCreditLedgerUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioCreditLedgerCreateOrConnectWithoutUserInput | StudioCreditLedgerCreateOrConnectWithoutUserInput[]
+    upsert?: StudioCreditLedgerUpsertWithWhereUniqueWithoutUserInput | StudioCreditLedgerUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioCreditLedgerCreateManyUserInputEnvelope
+    set?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    disconnect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    delete?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    connect?: StudioCreditLedgerWhereUniqueInput | StudioCreditLedgerWhereUniqueInput[]
+    update?: StudioCreditLedgerUpdateWithWhereUniqueWithoutUserInput | StudioCreditLedgerUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioCreditLedgerUpdateManyWithWhereWithoutUserInput | StudioCreditLedgerUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioCreditLedgerScalarWhereInput | StudioCreditLedgerScalarWhereInput[]
+  }
+
+  export type StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput> | StudioWorkflowCreateWithoutUserInput[] | StudioWorkflowUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutUserInput | StudioWorkflowCreateOrConnectWithoutUserInput[]
+    upsert?: StudioWorkflowUpsertWithWhereUniqueWithoutUserInput | StudioWorkflowUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioWorkflowCreateManyUserInputEnvelope
+    set?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    disconnect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    delete?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    connect?: StudioWorkflowWhereUniqueInput | StudioWorkflowWhereUniqueInput[]
+    update?: StudioWorkflowUpdateWithWhereUniqueWithoutUserInput | StudioWorkflowUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioWorkflowUpdateManyWithWhereWithoutUserInput | StudioWorkflowUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioWorkflowScalarWhereInput | StudioWorkflowScalarWhereInput[]
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput> | StudioGenerationCreateWithoutUserInput[] | StudioGenerationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutUserInput | StudioGenerationCreateOrConnectWithoutUserInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutUserInput | StudioGenerationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: StudioGenerationCreateManyUserInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutUserInput | StudioGenerationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutUserInput | StudioGenerationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -28211,6 +40510,268 @@ export namespace Prisma {
     update?: XOR<XOR<VideoUpdateToOneWithWhereWithoutResourcesInput, VideoUpdateWithoutResourcesInput>, VideoUncheckedUpdateWithoutResourcesInput>
   }
 
+  export type UserCreateNestedOneWithoutStudioCreditBalanceInput = {
+    create?: XOR<UserCreateWithoutStudioCreditBalanceInput, UserUncheckedCreateWithoutStudioCreditBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditBalanceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutStudioCreditBalanceNestedInput = {
+    create?: XOR<UserCreateWithoutStudioCreditBalanceInput, UserUncheckedCreateWithoutStudioCreditBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditBalanceInput
+    upsert?: UserUpsertWithoutStudioCreditBalanceInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudioCreditBalanceInput, UserUpdateWithoutStudioCreditBalanceInput>, UserUncheckedUpdateWithoutStudioCreditBalanceInput>
+  }
+
+  export type StudioCreditPurchaseCreateNestedManyWithoutPackInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput> | StudioCreditPurchaseCreateWithoutPackInput[] | StudioCreditPurchaseUncheckedCreateWithoutPackInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutPackInput | StudioCreditPurchaseCreateOrConnectWithoutPackInput[]
+    createMany?: StudioCreditPurchaseCreateManyPackInputEnvelope
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+  }
+
+  export type StudioCreditPurchaseUncheckedCreateNestedManyWithoutPackInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput> | StudioCreditPurchaseCreateWithoutPackInput[] | StudioCreditPurchaseUncheckedCreateWithoutPackInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutPackInput | StudioCreditPurchaseCreateOrConnectWithoutPackInput[]
+    createMany?: StudioCreditPurchaseCreateManyPackInputEnvelope
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type StudioCreditPurchaseUpdateManyWithoutPackNestedInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput> | StudioCreditPurchaseCreateWithoutPackInput[] | StudioCreditPurchaseUncheckedCreateWithoutPackInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutPackInput | StudioCreditPurchaseCreateOrConnectWithoutPackInput[]
+    upsert?: StudioCreditPurchaseUpsertWithWhereUniqueWithoutPackInput | StudioCreditPurchaseUpsertWithWhereUniqueWithoutPackInput[]
+    createMany?: StudioCreditPurchaseCreateManyPackInputEnvelope
+    set?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    disconnect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    delete?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    update?: StudioCreditPurchaseUpdateWithWhereUniqueWithoutPackInput | StudioCreditPurchaseUpdateWithWhereUniqueWithoutPackInput[]
+    updateMany?: StudioCreditPurchaseUpdateManyWithWhereWithoutPackInput | StudioCreditPurchaseUpdateManyWithWhereWithoutPackInput[]
+    deleteMany?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateManyWithoutPackNestedInput = {
+    create?: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput> | StudioCreditPurchaseCreateWithoutPackInput[] | StudioCreditPurchaseUncheckedCreateWithoutPackInput[]
+    connectOrCreate?: StudioCreditPurchaseCreateOrConnectWithoutPackInput | StudioCreditPurchaseCreateOrConnectWithoutPackInput[]
+    upsert?: StudioCreditPurchaseUpsertWithWhereUniqueWithoutPackInput | StudioCreditPurchaseUpsertWithWhereUniqueWithoutPackInput[]
+    createMany?: StudioCreditPurchaseCreateManyPackInputEnvelope
+    set?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    disconnect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    delete?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    connect?: StudioCreditPurchaseWhereUniqueInput | StudioCreditPurchaseWhereUniqueInput[]
+    update?: StudioCreditPurchaseUpdateWithWhereUniqueWithoutPackInput | StudioCreditPurchaseUpdateWithWhereUniqueWithoutPackInput[]
+    updateMany?: StudioCreditPurchaseUpdateManyWithWhereWithoutPackInput | StudioCreditPurchaseUpdateManyWithWhereWithoutPackInput[]
+    deleteMany?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutStudioCreditPurchasesInput = {
+    create?: XOR<UserCreateWithoutStudioCreditPurchasesInput, UserUncheckedCreateWithoutStudioCreditPurchasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditPurchasesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StudioCreditPackCreateNestedOneWithoutPurchasesInput = {
+    create?: XOR<StudioCreditPackCreateWithoutPurchasesInput, StudioCreditPackUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: StudioCreditPackCreateOrConnectWithoutPurchasesInput
+    connect?: StudioCreditPackWhereUniqueInput
+  }
+
+  export type EnumStudioPurchaseStatusFieldUpdateOperationsInput = {
+    set?: $Enums.StudioPurchaseStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutStudioCreditPurchasesNestedInput = {
+    create?: XOR<UserCreateWithoutStudioCreditPurchasesInput, UserUncheckedCreateWithoutStudioCreditPurchasesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditPurchasesInput
+    upsert?: UserUpsertWithoutStudioCreditPurchasesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudioCreditPurchasesInput, UserUpdateWithoutStudioCreditPurchasesInput>, UserUncheckedUpdateWithoutStudioCreditPurchasesInput>
+  }
+
+  export type StudioCreditPackUpdateOneRequiredWithoutPurchasesNestedInput = {
+    create?: XOR<StudioCreditPackCreateWithoutPurchasesInput, StudioCreditPackUncheckedCreateWithoutPurchasesInput>
+    connectOrCreate?: StudioCreditPackCreateOrConnectWithoutPurchasesInput
+    upsert?: StudioCreditPackUpsertWithoutPurchasesInput
+    connect?: StudioCreditPackWhereUniqueInput
+    update?: XOR<XOR<StudioCreditPackUpdateToOneWithWhereWithoutPurchasesInput, StudioCreditPackUpdateWithoutPurchasesInput>, StudioCreditPackUncheckedUpdateWithoutPurchasesInput>
+  }
+
+  export type UserCreateNestedOneWithoutStudioCreditLedgerInput = {
+    create?: XOR<UserCreateWithoutStudioCreditLedgerInput, UserUncheckedCreateWithoutStudioCreditLedgerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditLedgerInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumStudioLedgerTypeFieldUpdateOperationsInput = {
+    set?: $Enums.StudioLedgerType
+  }
+
+  export type UserUpdateOneRequiredWithoutStudioCreditLedgerNestedInput = {
+    create?: XOR<UserCreateWithoutStudioCreditLedgerInput, UserUncheckedCreateWithoutStudioCreditLedgerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioCreditLedgerInput
+    upsert?: UserUpsertWithoutStudioCreditLedgerInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudioCreditLedgerInput, UserUpdateWithoutStudioCreditLedgerInput>, UserUncheckedUpdateWithoutStudioCreditLedgerInput>
+  }
+
+  export type StudioGenerationCreateNestedManyWithoutModelPricingInput = {
+    create?: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput> | StudioGenerationCreateWithoutModelPricingInput[] | StudioGenerationUncheckedCreateWithoutModelPricingInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutModelPricingInput | StudioGenerationCreateOrConnectWithoutModelPricingInput[]
+    createMany?: StudioGenerationCreateManyModelPricingInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
+  export type StudioGenerationUncheckedCreateNestedManyWithoutModelPricingInput = {
+    create?: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput> | StudioGenerationCreateWithoutModelPricingInput[] | StudioGenerationUncheckedCreateWithoutModelPricingInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutModelPricingInput | StudioGenerationCreateOrConnectWithoutModelPricingInput[]
+    createMany?: StudioGenerationCreateManyModelPricingInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
+  export type StudioGenerationUpdateManyWithoutModelPricingNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput> | StudioGenerationCreateWithoutModelPricingInput[] | StudioGenerationUncheckedCreateWithoutModelPricingInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutModelPricingInput | StudioGenerationCreateOrConnectWithoutModelPricingInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutModelPricingInput | StudioGenerationUpsertWithWhereUniqueWithoutModelPricingInput[]
+    createMany?: StudioGenerationCreateManyModelPricingInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutModelPricingInput | StudioGenerationUpdateWithWhereUniqueWithoutModelPricingInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutModelPricingInput | StudioGenerationUpdateManyWithWhereWithoutModelPricingInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutModelPricingNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput> | StudioGenerationCreateWithoutModelPricingInput[] | StudioGenerationUncheckedCreateWithoutModelPricingInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutModelPricingInput | StudioGenerationCreateOrConnectWithoutModelPricingInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutModelPricingInput | StudioGenerationUpsertWithWhereUniqueWithoutModelPricingInput[]
+    createMany?: StudioGenerationCreateManyModelPricingInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutModelPricingInput | StudioGenerationUpdateWithWhereUniqueWithoutModelPricingInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutModelPricingInput | StudioGenerationUpdateManyWithWhereWithoutModelPricingInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutStudioWorkflowsInput = {
+    create?: XOR<UserCreateWithoutStudioWorkflowsInput, UserUncheckedCreateWithoutStudioWorkflowsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioWorkflowsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StudioGenerationCreateNestedManyWithoutWorkflowInput = {
+    create?: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput> | StudioGenerationCreateWithoutWorkflowInput[] | StudioGenerationUncheckedCreateWithoutWorkflowInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutWorkflowInput | StudioGenerationCreateOrConnectWithoutWorkflowInput[]
+    createMany?: StudioGenerationCreateManyWorkflowInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
+  export type StudioGenerationUncheckedCreateNestedManyWithoutWorkflowInput = {
+    create?: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput> | StudioGenerationCreateWithoutWorkflowInput[] | StudioGenerationUncheckedCreateWithoutWorkflowInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutWorkflowInput | StudioGenerationCreateOrConnectWithoutWorkflowInput[]
+    createMany?: StudioGenerationCreateManyWorkflowInputEnvelope
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutStudioWorkflowsNestedInput = {
+    create?: XOR<UserCreateWithoutStudioWorkflowsInput, UserUncheckedCreateWithoutStudioWorkflowsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioWorkflowsInput
+    upsert?: UserUpsertWithoutStudioWorkflowsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudioWorkflowsInput, UserUpdateWithoutStudioWorkflowsInput>, UserUncheckedUpdateWithoutStudioWorkflowsInput>
+  }
+
+  export type StudioGenerationUpdateManyWithoutWorkflowNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput> | StudioGenerationCreateWithoutWorkflowInput[] | StudioGenerationUncheckedCreateWithoutWorkflowInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutWorkflowInput | StudioGenerationCreateOrConnectWithoutWorkflowInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput | StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput[]
+    createMany?: StudioGenerationCreateManyWorkflowInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutWorkflowInput | StudioGenerationUpdateWithWhereUniqueWithoutWorkflowInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutWorkflowInput | StudioGenerationUpdateManyWithWhereWithoutWorkflowInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutWorkflowNestedInput = {
+    create?: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput> | StudioGenerationCreateWithoutWorkflowInput[] | StudioGenerationUncheckedCreateWithoutWorkflowInput[]
+    connectOrCreate?: StudioGenerationCreateOrConnectWithoutWorkflowInput | StudioGenerationCreateOrConnectWithoutWorkflowInput[]
+    upsert?: StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput | StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput[]
+    createMany?: StudioGenerationCreateManyWorkflowInputEnvelope
+    set?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    disconnect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    delete?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+    update?: StudioGenerationUpdateWithWhereUniqueWithoutWorkflowInput | StudioGenerationUpdateWithWhereUniqueWithoutWorkflowInput[]
+    updateMany?: StudioGenerationUpdateManyWithWhereWithoutWorkflowInput | StudioGenerationUpdateManyWithWhereWithoutWorkflowInput[]
+    deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutStudioGenerationsInput = {
+    create?: XOR<UserCreateWithoutStudioGenerationsInput, UserUncheckedCreateWithoutStudioGenerationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioGenerationsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type StudioWorkflowCreateNestedOneWithoutGenerationsInput = {
+    create?: XOR<StudioWorkflowCreateWithoutGenerationsInput, StudioWorkflowUncheckedCreateWithoutGenerationsInput>
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutGenerationsInput
+    connect?: StudioWorkflowWhereUniqueInput
+  }
+
+  export type StudioModelPricingCreateNestedOneWithoutGenerationsInput = {
+    create?: XOR<StudioModelPricingCreateWithoutGenerationsInput, StudioModelPricingUncheckedCreateWithoutGenerationsInput>
+    connectOrCreate?: StudioModelPricingCreateOrConnectWithoutGenerationsInput
+    connect?: StudioModelPricingWhereUniqueInput
+  }
+
+  export type EnumStudioGenerationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.StudioGenerationStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutStudioGenerationsNestedInput = {
+    create?: XOR<UserCreateWithoutStudioGenerationsInput, UserUncheckedCreateWithoutStudioGenerationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutStudioGenerationsInput
+    upsert?: UserUpsertWithoutStudioGenerationsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudioGenerationsInput, UserUpdateWithoutStudioGenerationsInput>, UserUncheckedUpdateWithoutStudioGenerationsInput>
+  }
+
+  export type StudioWorkflowUpdateOneWithoutGenerationsNestedInput = {
+    create?: XOR<StudioWorkflowCreateWithoutGenerationsInput, StudioWorkflowUncheckedCreateWithoutGenerationsInput>
+    connectOrCreate?: StudioWorkflowCreateOrConnectWithoutGenerationsInput
+    upsert?: StudioWorkflowUpsertWithoutGenerationsInput
+    disconnect?: StudioWorkflowWhereInput | boolean
+    delete?: StudioWorkflowWhereInput | boolean
+    connect?: StudioWorkflowWhereUniqueInput
+    update?: XOR<XOR<StudioWorkflowUpdateToOneWithWhereWithoutGenerationsInput, StudioWorkflowUpdateWithoutGenerationsInput>, StudioWorkflowUncheckedUpdateWithoutGenerationsInput>
+  }
+
+  export type StudioModelPricingUpdateOneWithoutGenerationsNestedInput = {
+    create?: XOR<StudioModelPricingCreateWithoutGenerationsInput, StudioModelPricingUncheckedCreateWithoutGenerationsInput>
+    connectOrCreate?: StudioModelPricingCreateOrConnectWithoutGenerationsInput
+    upsert?: StudioModelPricingUpsertWithoutGenerationsInput
+    disconnect?: StudioModelPricingWhereInput | boolean
+    delete?: StudioModelPricingWhereInput | boolean
+    connect?: StudioModelPricingWhereUniqueInput
+    update?: XOR<XOR<StudioModelPricingUpdateToOneWithWhereWithoutGenerationsInput, StudioModelPricingUpdateWithoutGenerationsInput>, StudioModelPricingUncheckedUpdateWithoutGenerationsInput>
+  }
+
   export type UserCreateNestedOneWithoutCommunityPostsInput = {
     create?: XOR<UserCreateWithoutCommunityPostsInput, UserUncheckedCreateWithoutCommunityPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommunityPostsInput
@@ -28858,6 +41419,96 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStudioPurchaseStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioPurchaseStatus | EnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel> | $Enums.StudioPurchaseStatus
+  }
+
+  export type NestedEnumStudioPurchaseStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioPurchaseStatus | EnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioPurchaseStatus[] | ListEnumStudioPurchaseStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioPurchaseStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudioPurchaseStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel>
+    _max?: NestedEnumStudioPurchaseStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStudioLedgerTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioLedgerType | EnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioLedgerTypeFilter<$PrismaModel> | $Enums.StudioLedgerType
+  }
+
+  export type NestedEnumStudioLedgerTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioLedgerType | EnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioLedgerType[] | ListEnumStudioLedgerTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioLedgerTypeWithAggregatesFilter<$PrismaModel> | $Enums.StudioLedgerType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioLedgerTypeFilter<$PrismaModel>
+    _max?: NestedEnumStudioLedgerTypeFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumStudioGenerationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioGenerationStatus | EnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioGenerationStatusFilter<$PrismaModel> | $Enums.StudioGenerationStatus
+  }
+
+  export type NestedEnumStudioGenerationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StudioGenerationStatus | EnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StudioGenerationStatus[] | ListEnumStudioGenerationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStudioGenerationStatusWithAggregatesFilter<$PrismaModel> | $Enums.StudioGenerationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStudioGenerationStatusFilter<$PrismaModel>
+    _max?: NestedEnumStudioGenerationStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumCommunityReactionTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.CommunityReactionType | EnumCommunityReactionTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CommunityReactionType[] | ListEnumCommunityReactionTypeFieldRefInput<$PrismaModel>
@@ -29280,6 +41931,157 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type StudioCreditBalanceCreateWithoutUserInput = {
+    id?: string
+    availableCredits?: number
+    lifetimePurchasedCredits?: number
+    lifetimeUsedCredits?: number
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditBalanceUncheckedCreateWithoutUserInput = {
+    id?: string
+    availableCredits?: number
+    lifetimePurchasedCredits?: number
+    lifetimeUsedCredits?: number
+    updatedAt?: Date | string
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditBalanceCreateOrConnectWithoutUserInput = {
+    where: StudioCreditBalanceWhereUniqueInput
+    create: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseCreateWithoutUserInput = {
+    id?: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    pack: StudioCreditPackCreateNestedOneWithoutPurchasesInput
+  }
+
+  export type StudioCreditPurchaseUncheckedCreateWithoutUserInput = {
+    id?: string
+    packId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseCreateOrConnectWithoutUserInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    create: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseCreateManyUserInputEnvelope = {
+    data: StudioCreditPurchaseCreateManyUserInput | StudioCreditPurchaseCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudioCreditLedgerCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditLedgerUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+  }
+
+  export type StudioCreditLedgerCreateOrConnectWithoutUserInput = {
+    where: StudioCreditLedgerWhereUniqueInput
+    create: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioCreditLedgerCreateManyUserInputEnvelope = {
+    data: StudioCreditLedgerCreateManyUserInput | StudioCreditLedgerCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudioWorkflowCreateWithoutUserInput = {
+    id?: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    generations?: StudioGenerationCreateNestedManyWithoutWorkflowInput
+  }
+
+  export type StudioWorkflowUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    generations?: StudioGenerationUncheckedCreateNestedManyWithoutWorkflowInput
+  }
+
+  export type StudioWorkflowCreateOrConnectWithoutUserInput = {
+    where: StudioWorkflowWhereUniqueInput
+    create: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioWorkflowCreateManyUserInputEnvelope = {
+    data: StudioWorkflowCreateManyUserInput | StudioWorkflowCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudioGenerationCreateWithoutUserInput = {
+    id?: string
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workflow?: StudioWorkflowCreateNestedOneWithoutGenerationsInput
+    modelPricing?: StudioModelPricingCreateNestedOneWithoutGenerationsInput
+  }
+
+  export type StudioGenerationUncheckedCreateWithoutUserInput = {
+    id?: string
+    workflowId?: string | null
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationCreateOrConnectWithoutUserInput = {
+    where: StudioGenerationWhereUniqueInput
+    create: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioGenerationCreateManyUserInputEnvelope = {
+    data: StudioGenerationCreateManyUserInput | StudioGenerationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -29627,6 +42429,158 @@ export namespace Prisma {
     data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutActorUserInput>
   }
 
+  export type StudioCreditBalanceUpsertWithoutUserInput = {
+    update: XOR<StudioCreditBalanceUpdateWithoutUserInput, StudioCreditBalanceUncheckedUpdateWithoutUserInput>
+    create: XOR<StudioCreditBalanceCreateWithoutUserInput, StudioCreditBalanceUncheckedCreateWithoutUserInput>
+    where?: StudioCreditBalanceWhereInput
+  }
+
+  export type StudioCreditBalanceUpdateToOneWithWhereWithoutUserInput = {
+    where?: StudioCreditBalanceWhereInput
+    data: XOR<StudioCreditBalanceUpdateWithoutUserInput, StudioCreditBalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioCreditBalanceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditBalanceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    availableCredits?: IntFieldUpdateOperationsInput | number
+    lifetimePurchasedCredits?: IntFieldUpdateOperationsInput | number
+    lifetimeUsedCredits?: IntFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseUpsertWithWhereUniqueWithoutUserInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    update: XOR<StudioCreditPurchaseUpdateWithoutUserInput, StudioCreditPurchaseUncheckedUpdateWithoutUserInput>
+    create: XOR<StudioCreditPurchaseCreateWithoutUserInput, StudioCreditPurchaseUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseUpdateWithWhereUniqueWithoutUserInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    data: XOR<StudioCreditPurchaseUpdateWithoutUserInput, StudioCreditPurchaseUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseUpdateManyWithWhereWithoutUserInput = {
+    where: StudioCreditPurchaseScalarWhereInput
+    data: XOR<StudioCreditPurchaseUpdateManyMutationInput, StudioCreditPurchaseUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StudioCreditPurchaseScalarWhereInput = {
+    AND?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+    OR?: StudioCreditPurchaseScalarWhereInput[]
+    NOT?: StudioCreditPurchaseScalarWhereInput | StudioCreditPurchaseScalarWhereInput[]
+    id?: StringFilter<"StudioCreditPurchase"> | string
+    userId?: StringFilter<"StudioCreditPurchase"> | string
+    packId?: StringFilter<"StudioCreditPurchase"> | string
+    amountInr?: IntFilter<"StudioCreditPurchase"> | number
+    credits?: IntFilter<"StudioCreditPurchase"> | number
+    razorpayOrderId?: StringNullableFilter<"StudioCreditPurchase"> | string | null
+    razorpayPaymentId?: StringNullableFilter<"StudioCreditPurchase"> | string | null
+    status?: EnumStudioPurchaseStatusFilter<"StudioCreditPurchase"> | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioCreditPurchase"> | Date | string
+  }
+
+  export type StudioCreditLedgerUpsertWithWhereUniqueWithoutUserInput = {
+    where: StudioCreditLedgerWhereUniqueInput
+    update: XOR<StudioCreditLedgerUpdateWithoutUserInput, StudioCreditLedgerUncheckedUpdateWithoutUserInput>
+    create: XOR<StudioCreditLedgerCreateWithoutUserInput, StudioCreditLedgerUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioCreditLedgerUpdateWithWhereUniqueWithoutUserInput = {
+    where: StudioCreditLedgerWhereUniqueInput
+    data: XOR<StudioCreditLedgerUpdateWithoutUserInput, StudioCreditLedgerUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioCreditLedgerUpdateManyWithWhereWithoutUserInput = {
+    where: StudioCreditLedgerScalarWhereInput
+    data: XOR<StudioCreditLedgerUpdateManyMutationInput, StudioCreditLedgerUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StudioCreditLedgerScalarWhereInput = {
+    AND?: StudioCreditLedgerScalarWhereInput | StudioCreditLedgerScalarWhereInput[]
+    OR?: StudioCreditLedgerScalarWhereInput[]
+    NOT?: StudioCreditLedgerScalarWhereInput | StudioCreditLedgerScalarWhereInput[]
+    id?: StringFilter<"StudioCreditLedger"> | string
+    userId?: StringFilter<"StudioCreditLedger"> | string
+    type?: EnumStudioLedgerTypeFilter<"StudioCreditLedger"> | $Enums.StudioLedgerType
+    deltaCredits?: IntFilter<"StudioCreditLedger"> | number
+    balanceAfter?: IntFilter<"StudioCreditLedger"> | number
+    referenceId?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    note?: StringNullableFilter<"StudioCreditLedger"> | string | null
+    createdAt?: DateTimeFilter<"StudioCreditLedger"> | Date | string
+  }
+
+  export type StudioWorkflowUpsertWithWhereUniqueWithoutUserInput = {
+    where: StudioWorkflowWhereUniqueInput
+    update: XOR<StudioWorkflowUpdateWithoutUserInput, StudioWorkflowUncheckedUpdateWithoutUserInput>
+    create: XOR<StudioWorkflowCreateWithoutUserInput, StudioWorkflowUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioWorkflowUpdateWithWhereUniqueWithoutUserInput = {
+    where: StudioWorkflowWhereUniqueInput
+    data: XOR<StudioWorkflowUpdateWithoutUserInput, StudioWorkflowUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioWorkflowUpdateManyWithWhereWithoutUserInput = {
+    where: StudioWorkflowScalarWhereInput
+    data: XOR<StudioWorkflowUpdateManyMutationInput, StudioWorkflowUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StudioWorkflowScalarWhereInput = {
+    AND?: StudioWorkflowScalarWhereInput | StudioWorkflowScalarWhereInput[]
+    OR?: StudioWorkflowScalarWhereInput[]
+    NOT?: StudioWorkflowScalarWhereInput | StudioWorkflowScalarWhereInput[]
+    id?: StringFilter<"StudioWorkflow"> | string
+    userId?: StringFilter<"StudioWorkflow"> | string
+    title?: StringFilter<"StudioWorkflow"> | string
+    canvasJson?: JsonFilter<"StudioWorkflow">
+    createdAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioWorkflow"> | Date | string
+  }
+
+  export type StudioGenerationUpsertWithWhereUniqueWithoutUserInput = {
+    where: StudioGenerationWhereUniqueInput
+    update: XOR<StudioGenerationUpdateWithoutUserInput, StudioGenerationUncheckedUpdateWithoutUserInput>
+    create: XOR<StudioGenerationCreateWithoutUserInput, StudioGenerationUncheckedCreateWithoutUserInput>
+  }
+
+  export type StudioGenerationUpdateWithWhereUniqueWithoutUserInput = {
+    where: StudioGenerationWhereUniqueInput
+    data: XOR<StudioGenerationUpdateWithoutUserInput, StudioGenerationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type StudioGenerationUpdateManyWithWhereWithoutUserInput = {
+    where: StudioGenerationScalarWhereInput
+    data: XOR<StudioGenerationUpdateManyMutationInput, StudioGenerationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type StudioGenerationScalarWhereInput = {
+    AND?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+    OR?: StudioGenerationScalarWhereInput[]
+    NOT?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
+    id?: StringFilter<"StudioGeneration"> | string
+    userId?: StringFilter<"StudioGeneration"> | string
+    workflowId?: StringNullableFilter<"StudioGeneration"> | string | null
+    modelPricingId?: StringNullableFilter<"StudioGeneration"> | string | null
+    prompt?: StringFilter<"StudioGeneration"> | string
+    status?: EnumStudioGenerationStatusFilter<"StudioGeneration"> | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFilter<"StudioGeneration"> | number
+    outputUrl?: StringNullableFilter<"StudioGeneration"> | string | null
+    errorMessage?: StringNullableFilter<"StudioGeneration"> | string | null
+    createdAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+    updatedAt?: DateTimeFilter<"StudioGeneration"> | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -29649,6 +42603,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -29673,6 +42632,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -29713,6 +42677,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -29737,6 +42706,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -29761,6 +42735,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -29785,6 +42764,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -29825,6 +42809,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -29849,6 +42838,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoCreateWithoutCourseInput = {
@@ -30509,6 +43503,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -30533,6 +43532,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -30616,6 +43620,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -30640,6 +43649,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -30713,6 +43727,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -30737,6 +43756,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -30897,6 +43921,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -30921,6 +43950,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoUpsertWithoutCommentsInput = {
@@ -31082,6 +44116,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTimestampCommentLikesInput = {
@@ -31106,6 +44145,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTimestampCommentLikesInput = {
@@ -31181,6 +44225,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTimestampCommentLikesInput = {
@@ -31205,6 +44254,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -31229,6 +44283,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -31253,6 +44312,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -31336,6 +44400,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -31360,6 +44429,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutPaymentRequestInput = {
@@ -31433,6 +44507,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVideoProgressInput = {
@@ -31457,6 +44536,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVideoProgressInput = {
@@ -31532,6 +44616,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideoProgressInput = {
@@ -31556,6 +44645,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type VideoUpsertWithoutProgressesInput = {
@@ -31767,6 +44861,1012 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutVideoNestedInput
   }
 
+  export type UserCreateWithoutStudioCreditBalanceInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStudioCreditBalanceInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStudioCreditBalanceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudioCreditBalanceInput, UserUncheckedCreateWithoutStudioCreditBalanceInput>
+  }
+
+  export type UserUpsertWithoutStudioCreditBalanceInput = {
+    update: XOR<UserUpdateWithoutStudioCreditBalanceInput, UserUncheckedUpdateWithoutStudioCreditBalanceInput>
+    create: XOR<UserCreateWithoutStudioCreditBalanceInput, UserUncheckedCreateWithoutStudioCreditBalanceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudioCreditBalanceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudioCreditBalanceInput, UserUncheckedUpdateWithoutStudioCreditBalanceInput>
+  }
+
+  export type UserUpdateWithoutStudioCreditBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStudioCreditBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StudioCreditPurchaseCreateWithoutPackInput = {
+    id?: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioCreditPurchasesInput
+  }
+
+  export type StudioCreditPurchaseUncheckedCreateWithoutPackInput = {
+    id?: string
+    userId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseCreateOrConnectWithoutPackInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    create: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput>
+  }
+
+  export type StudioCreditPurchaseCreateManyPackInputEnvelope = {
+    data: StudioCreditPurchaseCreateManyPackInput | StudioCreditPurchaseCreateManyPackInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudioCreditPurchaseUpsertWithWhereUniqueWithoutPackInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    update: XOR<StudioCreditPurchaseUpdateWithoutPackInput, StudioCreditPurchaseUncheckedUpdateWithoutPackInput>
+    create: XOR<StudioCreditPurchaseCreateWithoutPackInput, StudioCreditPurchaseUncheckedCreateWithoutPackInput>
+  }
+
+  export type StudioCreditPurchaseUpdateWithWhereUniqueWithoutPackInput = {
+    where: StudioCreditPurchaseWhereUniqueInput
+    data: XOR<StudioCreditPurchaseUpdateWithoutPackInput, StudioCreditPurchaseUncheckedUpdateWithoutPackInput>
+  }
+
+  export type StudioCreditPurchaseUpdateManyWithWhereWithoutPackInput = {
+    where: StudioCreditPurchaseScalarWhereInput
+    data: XOR<StudioCreditPurchaseUpdateManyMutationInput, StudioCreditPurchaseUncheckedUpdateManyWithoutPackInput>
+  }
+
+  export type UserCreateWithoutStudioCreditPurchasesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStudioCreditPurchasesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStudioCreditPurchasesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudioCreditPurchasesInput, UserUncheckedCreateWithoutStudioCreditPurchasesInput>
+  }
+
+  export type StudioCreditPackCreateWithoutPurchasesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr?: number
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPackUncheckedCreateWithoutPurchasesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    credits: number
+    amountInr: number
+    providerCostUsd: number
+    providerCostInr: number
+    platformMarginInr?: number
+    isActive?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPackCreateOrConnectWithoutPurchasesInput = {
+    where: StudioCreditPackWhereUniqueInput
+    create: XOR<StudioCreditPackCreateWithoutPurchasesInput, StudioCreditPackUncheckedCreateWithoutPurchasesInput>
+  }
+
+  export type UserUpsertWithoutStudioCreditPurchasesInput = {
+    update: XOR<UserUpdateWithoutStudioCreditPurchasesInput, UserUncheckedUpdateWithoutStudioCreditPurchasesInput>
+    create: XOR<UserCreateWithoutStudioCreditPurchasesInput, UserUncheckedCreateWithoutStudioCreditPurchasesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudioCreditPurchasesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudioCreditPurchasesInput, UserUncheckedUpdateWithoutStudioCreditPurchasesInput>
+  }
+
+  export type UserUpdateWithoutStudioCreditPurchasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStudioCreditPurchasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StudioCreditPackUpsertWithoutPurchasesInput = {
+    update: XOR<StudioCreditPackUpdateWithoutPurchasesInput, StudioCreditPackUncheckedUpdateWithoutPurchasesInput>
+    create: XOR<StudioCreditPackCreateWithoutPurchasesInput, StudioCreditPackUncheckedCreateWithoutPurchasesInput>
+    where?: StudioCreditPackWhereInput
+  }
+
+  export type StudioCreditPackUpdateToOneWithWhereWithoutPurchasesInput = {
+    where?: StudioCreditPackWhereInput
+    data: XOR<StudioCreditPackUpdateWithoutPurchasesInput, StudioCreditPackUncheckedUpdateWithoutPurchasesInput>
+  }
+
+  export type StudioCreditPackUpdateWithoutPurchasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPackUncheckedUpdateWithoutPurchasesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    credits?: IntFieldUpdateOperationsInput | number
+    amountInr?: IntFieldUpdateOperationsInput | number
+    providerCostUsd?: FloatFieldUpdateOperationsInput | number
+    providerCostInr?: IntFieldUpdateOperationsInput | number
+    platformMarginInr?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutStudioCreditLedgerInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStudioCreditLedgerInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStudioCreditLedgerInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudioCreditLedgerInput, UserUncheckedCreateWithoutStudioCreditLedgerInput>
+  }
+
+  export type UserUpsertWithoutStudioCreditLedgerInput = {
+    update: XOR<UserUpdateWithoutStudioCreditLedgerInput, UserUncheckedUpdateWithoutStudioCreditLedgerInput>
+    create: XOR<UserCreateWithoutStudioCreditLedgerInput, UserUncheckedCreateWithoutStudioCreditLedgerInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudioCreditLedgerInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudioCreditLedgerInput, UserUncheckedUpdateWithoutStudioCreditLedgerInput>
+  }
+
+  export type UserUpdateWithoutStudioCreditLedgerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStudioCreditLedgerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StudioGenerationCreateWithoutModelPricingInput = {
+    id?: string
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioGenerationsInput
+    workflow?: StudioWorkflowCreateNestedOneWithoutGenerationsInput
+  }
+
+  export type StudioGenerationUncheckedCreateWithoutModelPricingInput = {
+    id?: string
+    userId: string
+    workflowId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationCreateOrConnectWithoutModelPricingInput = {
+    where: StudioGenerationWhereUniqueInput
+    create: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput>
+  }
+
+  export type StudioGenerationCreateManyModelPricingInputEnvelope = {
+    data: StudioGenerationCreateManyModelPricingInput | StudioGenerationCreateManyModelPricingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type StudioGenerationUpsertWithWhereUniqueWithoutModelPricingInput = {
+    where: StudioGenerationWhereUniqueInput
+    update: XOR<StudioGenerationUpdateWithoutModelPricingInput, StudioGenerationUncheckedUpdateWithoutModelPricingInput>
+    create: XOR<StudioGenerationCreateWithoutModelPricingInput, StudioGenerationUncheckedCreateWithoutModelPricingInput>
+  }
+
+  export type StudioGenerationUpdateWithWhereUniqueWithoutModelPricingInput = {
+    where: StudioGenerationWhereUniqueInput
+    data: XOR<StudioGenerationUpdateWithoutModelPricingInput, StudioGenerationUncheckedUpdateWithoutModelPricingInput>
+  }
+
+  export type StudioGenerationUpdateManyWithWhereWithoutModelPricingInput = {
+    where: StudioGenerationScalarWhereInput
+    data: XOR<StudioGenerationUpdateManyMutationInput, StudioGenerationUncheckedUpdateManyWithoutModelPricingInput>
+  }
+
+  export type UserCreateWithoutStudioWorkflowsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStudioWorkflowsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStudioWorkflowsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudioWorkflowsInput, UserUncheckedCreateWithoutStudioWorkflowsInput>
+  }
+
+  export type StudioGenerationCreateWithoutWorkflowInput = {
+    id?: string
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioGenerationsInput
+    modelPricing?: StudioModelPricingCreateNestedOneWithoutGenerationsInput
+  }
+
+  export type StudioGenerationUncheckedCreateWithoutWorkflowInput = {
+    id?: string
+    userId: string
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationCreateOrConnectWithoutWorkflowInput = {
+    where: StudioGenerationWhereUniqueInput
+    create: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput>
+  }
+
+  export type StudioGenerationCreateManyWorkflowInputEnvelope = {
+    data: StudioGenerationCreateManyWorkflowInput | StudioGenerationCreateManyWorkflowInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutStudioWorkflowsInput = {
+    update: XOR<UserUpdateWithoutStudioWorkflowsInput, UserUncheckedUpdateWithoutStudioWorkflowsInput>
+    create: XOR<UserCreateWithoutStudioWorkflowsInput, UserUncheckedCreateWithoutStudioWorkflowsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudioWorkflowsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudioWorkflowsInput, UserUncheckedUpdateWithoutStudioWorkflowsInput>
+  }
+
+  export type UserUpdateWithoutStudioWorkflowsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStudioWorkflowsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput = {
+    where: StudioGenerationWhereUniqueInput
+    update: XOR<StudioGenerationUpdateWithoutWorkflowInput, StudioGenerationUncheckedUpdateWithoutWorkflowInput>
+    create: XOR<StudioGenerationCreateWithoutWorkflowInput, StudioGenerationUncheckedCreateWithoutWorkflowInput>
+  }
+
+  export type StudioGenerationUpdateWithWhereUniqueWithoutWorkflowInput = {
+    where: StudioGenerationWhereUniqueInput
+    data: XOR<StudioGenerationUpdateWithoutWorkflowInput, StudioGenerationUncheckedUpdateWithoutWorkflowInput>
+  }
+
+  export type StudioGenerationUpdateManyWithWhereWithoutWorkflowInput = {
+    where: StudioGenerationScalarWhereInput
+    data: XOR<StudioGenerationUpdateManyMutationInput, StudioGenerationUncheckedUpdateManyWithoutWorkflowInput>
+  }
+
+  export type UserCreateWithoutStudioGenerationsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutStudioGenerationsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutStudioGenerationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutStudioGenerationsInput, UserUncheckedCreateWithoutStudioGenerationsInput>
+  }
+
+  export type StudioWorkflowCreateWithoutGenerationsInput = {
+    id?: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutStudioWorkflowsInput
+  }
+
+  export type StudioWorkflowUncheckedCreateWithoutGenerationsInput = {
+    id?: string
+    userId: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioWorkflowCreateOrConnectWithoutGenerationsInput = {
+    where: StudioWorkflowWhereUniqueInput
+    create: XOR<StudioWorkflowCreateWithoutGenerationsInput, StudioWorkflowUncheckedCreateWithoutGenerationsInput>
+  }
+
+  export type StudioModelPricingCreateWithoutGenerationsInput = {
+    id?: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioModelPricingUncheckedCreateWithoutGenerationsInput = {
+    id?: string
+    providerModelId: string
+    displayName: string
+    category: string
+    providerCredits: number
+    isEnabled?: boolean
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioModelPricingCreateOrConnectWithoutGenerationsInput = {
+    where: StudioModelPricingWhereUniqueInput
+    create: XOR<StudioModelPricingCreateWithoutGenerationsInput, StudioModelPricingUncheckedCreateWithoutGenerationsInput>
+  }
+
+  export type UserUpsertWithoutStudioGenerationsInput = {
+    update: XOR<UserUpdateWithoutStudioGenerationsInput, UserUncheckedUpdateWithoutStudioGenerationsInput>
+    create: XOR<UserCreateWithoutStudioGenerationsInput, UserUncheckedCreateWithoutStudioGenerationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutStudioGenerationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutStudioGenerationsInput, UserUncheckedUpdateWithoutStudioGenerationsInput>
+  }
+
+  export type UserUpdateWithoutStudioGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutStudioGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type StudioWorkflowUpsertWithoutGenerationsInput = {
+    update: XOR<StudioWorkflowUpdateWithoutGenerationsInput, StudioWorkflowUncheckedUpdateWithoutGenerationsInput>
+    create: XOR<StudioWorkflowCreateWithoutGenerationsInput, StudioWorkflowUncheckedCreateWithoutGenerationsInput>
+    where?: StudioWorkflowWhereInput
+  }
+
+  export type StudioWorkflowUpdateToOneWithWhereWithoutGenerationsInput = {
+    where?: StudioWorkflowWhereInput
+    data: XOR<StudioWorkflowUpdateWithoutGenerationsInput, StudioWorkflowUncheckedUpdateWithoutGenerationsInput>
+  }
+
+  export type StudioWorkflowUpdateWithoutGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioWorkflowsNestedInput
+  }
+
+  export type StudioWorkflowUncheckedUpdateWithoutGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioModelPricingUpsertWithoutGenerationsInput = {
+    update: XOR<StudioModelPricingUpdateWithoutGenerationsInput, StudioModelPricingUncheckedUpdateWithoutGenerationsInput>
+    create: XOR<StudioModelPricingCreateWithoutGenerationsInput, StudioModelPricingUncheckedCreateWithoutGenerationsInput>
+    where?: StudioModelPricingWhereInput
+  }
+
+  export type StudioModelPricingUpdateToOneWithWhereWithoutGenerationsInput = {
+    where?: StudioModelPricingWhereInput
+    data: XOR<StudioModelPricingUpdateWithoutGenerationsInput, StudioModelPricingUncheckedUpdateWithoutGenerationsInput>
+  }
+
+  export type StudioModelPricingUpdateWithoutGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioModelPricingUncheckedUpdateWithoutGenerationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    providerModelId?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    providerCredits?: IntFieldUpdateOperationsInput | number
+    isEnabled?: BoolFieldUpdateOperationsInput | boolean
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutCommunityPostsInput = {
     id?: string
     name?: string | null
@@ -31789,6 +45889,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostsInput = {
@@ -31813,6 +45918,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostsInput = {
@@ -31994,6 +46104,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostsInput = {
@@ -32018,6 +46133,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutCommunityPostsInput = {
@@ -32170,6 +46290,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostCommentsInput = {
@@ -32194,6 +46319,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostCommentsInput = {
@@ -32372,6 +46502,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostCommentsInput = {
@@ -32396,6 +46531,11 @@ export namespace Prisma {
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CommunityPostCommentUpsertWithoutRepliesInput = {
@@ -32516,6 +46656,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostReactionsInput = {
@@ -32540,6 +46685,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostReactionsInput = {
@@ -32617,6 +46767,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostReactionsInput = {
@@ -32641,6 +46796,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -32665,6 +46825,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -32689,6 +46854,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -32718,6 +46888,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
     communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTriggeredNotificationsInput = {
@@ -32742,6 +46917,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
     communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTriggeredNotificationsInput = {
@@ -32918,6 +47098,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -32942,6 +47127,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutTriggeredNotificationsInput = {
@@ -32977,6 +47167,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
     communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTriggeredNotificationsInput = {
@@ -33001,6 +47196,11 @@ export namespace Prisma {
     communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
     communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CourseUpsertWithoutNotificationsInput = {
@@ -33286,6 +47486,49 @@ export namespace Prisma {
     postId?: string | null
     commentId?: string | null
     videoId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseCreateManyUserInput = {
+    id?: string
+    packId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditLedgerCreateManyUserInput = {
+    id?: string
+    type: $Enums.StudioLedgerType
+    deltaCredits: number
+    balanceAfter: number
+    referenceId?: string | null
+    note?: string | null
+    createdAt?: Date | string
+  }
+
+  export type StudioWorkflowCreateManyUserInput = {
+    id?: string
+    title: string
+    canvasJson: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationCreateManyUserInput = {
+    id?: string
+    workflowId?: string | null
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33681,6 +47924,137 @@ export namespace Prisma {
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
     videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pack?: StudioCreditPackUpdateOneRequiredWithoutPurchasesNestedInput
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    packId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    packId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditLedgerUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumStudioLedgerTypeFieldUpdateOperationsInput | $Enums.StudioLedgerType
+    deltaCredits?: IntFieldUpdateOperationsInput | number
+    balanceAfter?: IntFieldUpdateOperationsInput | number
+    referenceId?: NullableStringFieldUpdateOperationsInput | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioWorkflowUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generations?: StudioGenerationUpdateManyWithoutWorkflowNestedInput
+  }
+
+  export type StudioWorkflowUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    generations?: StudioGenerationUncheckedUpdateManyWithoutWorkflowNestedInput
+  }
+
+  export type StudioWorkflowUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    canvasJson?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workflow?: StudioWorkflowUpdateOneWithoutGenerationsNestedInput
+    modelPricing?: StudioModelPricingUpdateOneWithoutGenerationsNestedInput
+  }
+
+  export type StudioGenerationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34241,6 +48615,158 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseCreateManyPackInput = {
+    id?: string
+    userId: string
+    amountInr: number
+    credits: number
+    razorpayOrderId?: string | null
+    razorpayPaymentId?: string | null
+    status?: $Enums.StudioPurchaseStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioCreditPurchaseUpdateWithoutPackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioCreditPurchasesNestedInput
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateWithoutPackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioCreditPurchaseUncheckedUpdateManyWithoutPackInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    credits?: IntFieldUpdateOperationsInput | number
+    razorpayOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    razorpayPaymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStudioPurchaseStatusFieldUpdateOperationsInput | $Enums.StudioPurchaseStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationCreateManyModelPricingInput = {
+    id?: string
+    userId: string
+    workflowId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationUpdateWithoutModelPricingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioGenerationsNestedInput
+    workflow?: StudioWorkflowUpdateOneWithoutGenerationsNestedInput
+  }
+
+  export type StudioGenerationUncheckedUpdateWithoutModelPricingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutModelPricingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    workflowId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationCreateManyWorkflowInput = {
+    id?: string
+    userId: string
+    modelPricingId?: string | null
+    prompt: string
+    status?: $Enums.StudioGenerationStatus
+    creditsCharged: number
+    outputUrl?: string | null
+    errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type StudioGenerationUpdateWithoutWorkflowInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutStudioGenerationsNestedInput
+    modelPricing?: StudioModelPricingUpdateOneWithoutGenerationsNestedInput
+  }
+
+  export type StudioGenerationUncheckedUpdateWithoutWorkflowInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudioGenerationUncheckedUpdateManyWithoutWorkflowInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    modelPricingId?: NullableStringFieldUpdateOperationsInput | string | null
+    prompt?: StringFieldUpdateOperationsInput | string
+    status?: EnumStudioGenerationStatusFieldUpdateOperationsInput | $Enums.StudioGenerationStatus
+    creditsCharged?: IntFieldUpdateOperationsInput | number
+    outputUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommunityPostCommentCreateManyPostInput = {
