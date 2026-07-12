@@ -138,6 +138,11 @@ export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
  * 
  */
 export type AppSetting = $Result.DefaultSelection<Prisma.$AppSettingPayload>
+/**
+ * Model GiftCoupon
+ * 
+ */
+export type GiftCoupon = $Result.DefaultSelection<Prisma.$GiftCouponPayload>
 
 /**
  * Enums
@@ -614,6 +619,16 @@ export class PrismaClient<
     * ```
     */
   get appSetting(): Prisma.AppSettingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.giftCoupon`: Exposes CRUD operations for the **GiftCoupon** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GiftCoupons
+    * const giftCoupons = await prisma.giftCoupon.findMany()
+    * ```
+    */
+  get giftCoupon(): Prisma.GiftCouponDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1078,7 +1093,8 @@ export namespace Prisma {
     CommunityPostComment: 'CommunityPostComment',
     CommunityPostReaction: 'CommunityPostReaction',
     Notification: 'Notification',
-    AppSetting: 'AppSetting'
+    AppSetting: 'AppSetting',
+    GiftCoupon: 'GiftCoupon'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1097,7 +1113,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "course" | "video" | "enrollment" | "timestampComment" | "timestampCommentLike" | "paymentRequest" | "videoProgress" | "courseResource" | "trendingPrompt" | "studioCreditBalance" | "studioCreditPack" | "studioCreditPurchase" | "studioCreditLedger" | "studioModelPricing" | "studioWorkflow" | "studioGeneration" | "communityPost" | "communityPostComment" | "communityPostReaction" | "notification" | "appSetting"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "course" | "video" | "enrollment" | "timestampComment" | "timestampCommentLike" | "paymentRequest" | "videoProgress" | "courseResource" | "trendingPrompt" | "studioCreditBalance" | "studioCreditPack" | "studioCreditPurchase" | "studioCreditLedger" | "studioModelPricing" | "studioWorkflow" | "studioGeneration" | "communityPost" | "communityPostComment" | "communityPostReaction" | "notification" | "appSetting" | "giftCoupon"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2951,6 +2967,80 @@ export namespace Prisma {
           }
         }
       }
+      GiftCoupon: {
+        payload: Prisma.$GiftCouponPayload<ExtArgs>
+        fields: Prisma.GiftCouponFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GiftCouponFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GiftCouponFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          findFirst: {
+            args: Prisma.GiftCouponFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GiftCouponFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          findMany: {
+            args: Prisma.GiftCouponFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>[]
+          }
+          create: {
+            args: Prisma.GiftCouponCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          createMany: {
+            args: Prisma.GiftCouponCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GiftCouponCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>[]
+          }
+          delete: {
+            args: Prisma.GiftCouponDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          update: {
+            args: Prisma.GiftCouponUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          deleteMany: {
+            args: Prisma.GiftCouponDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GiftCouponUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GiftCouponUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>[]
+          }
+          upsert: {
+            args: Prisma.GiftCouponUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GiftCouponPayload>
+          }
+          aggregate: {
+            args: Prisma.GiftCouponAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGiftCoupon>
+          }
+          groupBy: {
+            args: Prisma.GiftCouponGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GiftCouponGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GiftCouponCountArgs<ExtArgs>
+            result: $Utils.Optional<GiftCouponCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3068,6 +3158,7 @@ export namespace Prisma {
     communityPostReaction?: CommunityPostReactionOmit
     notification?: NotificationOmit
     appSetting?: AppSettingOmit
+    giftCoupon?: GiftCouponOmit
   }
 
   /* Types for Logging */
@@ -3183,6 +3274,8 @@ export namespace Prisma {
     studioCreditLedger: number
     studioWorkflows: number
     studioGenerations: number
+    purchasedGifts: number
+    redeemedGifts: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3202,6 +3295,8 @@ export namespace Prisma {
     studioCreditLedger?: boolean | UserCountOutputTypeCountStudioCreditLedgerArgs
     studioWorkflows?: boolean | UserCountOutputTypeCountStudioWorkflowsArgs
     studioGenerations?: boolean | UserCountOutputTypeCountStudioGenerationsArgs
+    purchasedGifts?: boolean | UserCountOutputTypeCountPurchasedGiftsArgs
+    redeemedGifts?: boolean | UserCountOutputTypeCountRedeemedGiftsArgs
   }
 
   // Custom InputTypes
@@ -3327,6 +3422,20 @@ export namespace Prisma {
     where?: StudioGenerationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPurchasedGiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftCouponWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRedeemedGiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftCouponWhereInput
+  }
+
 
   /**
    * Count Type CourseCountOutputType
@@ -3339,6 +3448,7 @@ export namespace Prisma {
     resources: number
     communityPosts: number
     notifications: number
+    giftCoupons: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3348,6 +3458,7 @@ export namespace Prisma {
     resources?: boolean | CourseCountOutputTypeCountResourcesArgs
     communityPosts?: boolean | CourseCountOutputTypeCountCommunityPostsArgs
     notifications?: boolean | CourseCountOutputTypeCountNotificationsArgs
+    giftCoupons?: boolean | CourseCountOutputTypeCountGiftCouponsArgs
   }
 
   // Custom InputTypes
@@ -3401,6 +3512,13 @@ export namespace Prisma {
    */
   export type CourseCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountGiftCouponsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftCouponWhereInput
   }
 
 
@@ -3909,6 +4027,8 @@ export namespace Prisma {
     studioCreditLedger?: boolean | User$studioCreditLedgerArgs<ExtArgs>
     studioWorkflows?: boolean | User$studioWorkflowsArgs<ExtArgs>
     studioGenerations?: boolean | User$studioGenerationsArgs<ExtArgs>
+    purchasedGifts?: boolean | User$purchasedGiftsArgs<ExtArgs>
+    redeemedGifts?: boolean | User$redeemedGiftsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3970,6 +4090,8 @@ export namespace Prisma {
     studioCreditLedger?: boolean | User$studioCreditLedgerArgs<ExtArgs>
     studioWorkflows?: boolean | User$studioWorkflowsArgs<ExtArgs>
     studioGenerations?: boolean | User$studioGenerationsArgs<ExtArgs>
+    purchasedGifts?: boolean | User$purchasedGiftsArgs<ExtArgs>
+    redeemedGifts?: boolean | User$redeemedGiftsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3995,6 +4117,8 @@ export namespace Prisma {
       studioCreditLedger: Prisma.$StudioCreditLedgerPayload<ExtArgs>[]
       studioWorkflows: Prisma.$StudioWorkflowPayload<ExtArgs>[]
       studioGenerations: Prisma.$StudioGenerationPayload<ExtArgs>[]
+      purchasedGifts: Prisma.$GiftCouponPayload<ExtArgs>[]
+      redeemedGifts: Prisma.$GiftCouponPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4418,6 +4542,8 @@ export namespace Prisma {
     studioCreditLedger<T extends User$studioCreditLedgerArgs<ExtArgs> = {}>(args?: Subset<T, User$studioCreditLedgerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioCreditLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     studioWorkflows<T extends User$studioWorkflowsArgs<ExtArgs> = {}>(args?: Subset<T, User$studioWorkflowsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioWorkflowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     studioGenerations<T extends User$studioGenerationsArgs<ExtArgs> = {}>(args?: Subset<T, User$studioGenerationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudioGenerationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    purchasedGifts<T extends User$purchasedGiftsArgs<ExtArgs> = {}>(args?: Subset<T, User$purchasedGiftsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    redeemedGifts<T extends User$redeemedGiftsArgs<ExtArgs> = {}>(args?: Subset<T, User$redeemedGiftsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5245,6 +5371,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: StudioGenerationScalarFieldEnum | StudioGenerationScalarFieldEnum[]
+  }
+
+  /**
+   * User.purchasedGifts
+   */
+  export type User$purchasedGiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    where?: GiftCouponWhereInput
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    cursor?: GiftCouponWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
+  }
+
+  /**
+   * User.redeemedGifts
+   */
+  export type User$redeemedGiftsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    where?: GiftCouponWhereInput
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    cursor?: GiftCouponWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
   }
 
   /**
@@ -8715,6 +8889,7 @@ export namespace Prisma {
     resources?: boolean | Course$resourcesArgs<ExtArgs>
     communityPosts?: boolean | Course$communityPostsArgs<ExtArgs>
     notifications?: boolean | Course$notificationsArgs<ExtArgs>
+    giftCoupons?: boolean | Course$giftCouponsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
@@ -8768,6 +8943,7 @@ export namespace Prisma {
     resources?: boolean | Course$resourcesArgs<ExtArgs>
     communityPosts?: boolean | Course$communityPostsArgs<ExtArgs>
     notifications?: boolean | Course$notificationsArgs<ExtArgs>
+    giftCoupons?: boolean | Course$giftCouponsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8782,6 +8958,7 @@ export namespace Prisma {
       resources: Prisma.$CourseResourcePayload<ExtArgs>[]
       communityPosts: Prisma.$CommunityPostPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
+      giftCoupons: Prisma.$GiftCouponPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9195,6 +9372,7 @@ export namespace Prisma {
     resources<T extends Course$resourcesArgs<ExtArgs> = {}>(args?: Subset<T, Course$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CourseResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     communityPosts<T extends Course$communityPostsArgs<ExtArgs> = {}>(args?: Subset<T, Course$communityPostsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunityPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends Course$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, Course$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    giftCoupons<T extends Course$giftCouponsArgs<ExtArgs> = {}>(args?: Subset<T, Course$giftCouponsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9764,6 +9942,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Course.giftCoupons
+   */
+  export type Course$giftCouponsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    where?: GiftCouponWhereInput
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    cursor?: GiftCouponWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
   }
 
   /**
@@ -14472,6 +14674,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     reviewedAt: Date | null
     reviewedBy: string | null
+    isGift: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14486,6 +14689,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     reviewedAt: Date | null
     reviewedBy: string | null
+    isGift: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -14500,6 +14704,7 @@ export namespace Prisma {
     status: number
     reviewedAt: number
     reviewedBy: number
+    isGift: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14524,6 +14729,7 @@ export namespace Prisma {
     status?: true
     reviewedAt?: true
     reviewedBy?: true
+    isGift?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -14538,6 +14744,7 @@ export namespace Prisma {
     status?: true
     reviewedAt?: true
     reviewedBy?: true
+    isGift?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -14552,6 +14759,7 @@ export namespace Prisma {
     status?: true
     reviewedAt?: true
     reviewedBy?: true
+    isGift?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -14653,6 +14861,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     reviewedAt: Date | null
     reviewedBy: string | null
+    isGift: boolean
     createdAt: Date
     updatedAt: Date
     _count: PaymentRequestCountAggregateOutputType | null
@@ -14686,6 +14895,7 @@ export namespace Prisma {
     status?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    isGift?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -14702,6 +14912,7 @@ export namespace Prisma {
     status?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    isGift?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -14718,6 +14929,7 @@ export namespace Prisma {
     status?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    isGift?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -14734,11 +14946,12 @@ export namespace Prisma {
     status?: boolean
     reviewedAt?: boolean
     reviewedBy?: boolean
+    isGift?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PaymentRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "courseId" | "amountInr" | "transactionRef" | "note" | "status" | "reviewedAt" | "reviewedBy" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentRequest"]>
+  export type PaymentRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "courseId" | "amountInr" | "transactionRef" | "note" | "status" | "reviewedAt" | "reviewedBy" | "isGift" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentRequest"]>
   export type PaymentRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     course?: boolean | CourseDefaultArgs<ExtArgs>
@@ -14768,6 +14981,7 @@ export namespace Prisma {
       status: $Enums.PaymentStatus
       reviewedAt: Date | null
       reviewedBy: string | null
+      isGift: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["paymentRequest"]>
@@ -15204,6 +15418,7 @@ export namespace Prisma {
     readonly status: FieldRef<"PaymentRequest", 'PaymentStatus'>
     readonly reviewedAt: FieldRef<"PaymentRequest", 'DateTime'>
     readonly reviewedBy: FieldRef<"PaymentRequest", 'String'>
+    readonly isGift: FieldRef<"PaymentRequest", 'Boolean'>
     readonly createdAt: FieldRef<"PaymentRequest", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRequest", 'DateTime'>
   }
@@ -32791,6 +33006,1198 @@ export namespace Prisma {
 
 
   /**
+   * Model GiftCoupon
+   */
+
+  export type AggregateGiftCoupon = {
+    _count: GiftCouponCountAggregateOutputType | null
+    _avg: GiftCouponAvgAggregateOutputType | null
+    _sum: GiftCouponSumAggregateOutputType | null
+    _min: GiftCouponMinAggregateOutputType | null
+    _max: GiftCouponMaxAggregateOutputType | null
+  }
+
+  export type GiftCouponAvgAggregateOutputType = {
+    amountInr: number | null
+  }
+
+  export type GiftCouponSumAggregateOutputType = {
+    amountInr: number | null
+  }
+
+  export type GiftCouponMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    courseId: string | null
+    purchaserId: string | null
+    amountInr: number | null
+    isRedeemed: boolean | null
+    redeemerId: string | null
+    redeemedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GiftCouponMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    courseId: string | null
+    purchaserId: string | null
+    amountInr: number | null
+    isRedeemed: boolean | null
+    redeemerId: string | null
+    redeemedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GiftCouponCountAggregateOutputType = {
+    id: number
+    code: number
+    courseId: number
+    purchaserId: number
+    amountInr: number
+    isRedeemed: number
+    redeemerId: number
+    redeemedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GiftCouponAvgAggregateInputType = {
+    amountInr?: true
+  }
+
+  export type GiftCouponSumAggregateInputType = {
+    amountInr?: true
+  }
+
+  export type GiftCouponMinAggregateInputType = {
+    id?: true
+    code?: true
+    courseId?: true
+    purchaserId?: true
+    amountInr?: true
+    isRedeemed?: true
+    redeemerId?: true
+    redeemedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GiftCouponMaxAggregateInputType = {
+    id?: true
+    code?: true
+    courseId?: true
+    purchaserId?: true
+    amountInr?: true
+    isRedeemed?: true
+    redeemerId?: true
+    redeemedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GiftCouponCountAggregateInputType = {
+    id?: true
+    code?: true
+    courseId?: true
+    purchaserId?: true
+    amountInr?: true
+    isRedeemed?: true
+    redeemerId?: true
+    redeemedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GiftCouponAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GiftCoupon to aggregate.
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GiftCoupons to fetch.
+     */
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GiftCouponWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GiftCoupons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GiftCoupons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GiftCoupons
+    **/
+    _count?: true | GiftCouponCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GiftCouponAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GiftCouponSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GiftCouponMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GiftCouponMaxAggregateInputType
+  }
+
+  export type GetGiftCouponAggregateType<T extends GiftCouponAggregateArgs> = {
+        [P in keyof T & keyof AggregateGiftCoupon]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGiftCoupon[P]>
+      : GetScalarType<T[P], AggregateGiftCoupon[P]>
+  }
+
+
+
+
+  export type GiftCouponGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GiftCouponWhereInput
+    orderBy?: GiftCouponOrderByWithAggregationInput | GiftCouponOrderByWithAggregationInput[]
+    by: GiftCouponScalarFieldEnum[] | GiftCouponScalarFieldEnum
+    having?: GiftCouponScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GiftCouponCountAggregateInputType | true
+    _avg?: GiftCouponAvgAggregateInputType
+    _sum?: GiftCouponSumAggregateInputType
+    _min?: GiftCouponMinAggregateInputType
+    _max?: GiftCouponMaxAggregateInputType
+  }
+
+  export type GiftCouponGroupByOutputType = {
+    id: string
+    code: string
+    courseId: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed: boolean
+    redeemerId: string | null
+    redeemedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GiftCouponCountAggregateOutputType | null
+    _avg: GiftCouponAvgAggregateOutputType | null
+    _sum: GiftCouponSumAggregateOutputType | null
+    _min: GiftCouponMinAggregateOutputType | null
+    _max: GiftCouponMaxAggregateOutputType | null
+  }
+
+  type GetGiftCouponGroupByPayload<T extends GiftCouponGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GiftCouponGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GiftCouponGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GiftCouponGroupByOutputType[P]>
+            : GetScalarType<T[P], GiftCouponGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GiftCouponSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    courseId?: boolean
+    purchaserId?: boolean
+    amountInr?: boolean
+    isRedeemed?: boolean
+    redeemerId?: boolean
+    redeemedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }, ExtArgs["result"]["giftCoupon"]>
+
+  export type GiftCouponSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    courseId?: boolean
+    purchaserId?: boolean
+    amountInr?: boolean
+    isRedeemed?: boolean
+    redeemerId?: boolean
+    redeemedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }, ExtArgs["result"]["giftCoupon"]>
+
+  export type GiftCouponSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    courseId?: boolean
+    purchaserId?: boolean
+    amountInr?: boolean
+    isRedeemed?: boolean
+    redeemerId?: boolean
+    redeemedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }, ExtArgs["result"]["giftCoupon"]>
+
+  export type GiftCouponSelectScalar = {
+    id?: boolean
+    code?: boolean
+    courseId?: boolean
+    purchaserId?: boolean
+    amountInr?: boolean
+    isRedeemed?: boolean
+    redeemerId?: boolean
+    redeemedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GiftCouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "courseId" | "purchaserId" | "amountInr" | "isRedeemed" | "redeemerId" | "redeemedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["giftCoupon"]>
+  export type GiftCouponInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }
+  export type GiftCouponIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }
+  export type GiftCouponIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    purchaser?: boolean | UserDefaultArgs<ExtArgs>
+    redeemer?: boolean | GiftCoupon$redeemerArgs<ExtArgs>
+  }
+
+  export type $GiftCouponPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GiftCoupon"
+    objects: {
+      course: Prisma.$CoursePayload<ExtArgs>
+      purchaser: Prisma.$UserPayload<ExtArgs>
+      redeemer: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      courseId: string
+      purchaserId: string
+      amountInr: number
+      isRedeemed: boolean
+      redeemerId: string | null
+      redeemedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["giftCoupon"]>
+    composites: {}
+  }
+
+  type GiftCouponGetPayload<S extends boolean | null | undefined | GiftCouponDefaultArgs> = $Result.GetResult<Prisma.$GiftCouponPayload, S>
+
+  type GiftCouponCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GiftCouponFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GiftCouponCountAggregateInputType | true
+    }
+
+  export interface GiftCouponDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GiftCoupon'], meta: { name: 'GiftCoupon' } }
+    /**
+     * Find zero or one GiftCoupon that matches the filter.
+     * @param {GiftCouponFindUniqueArgs} args - Arguments to find a GiftCoupon
+     * @example
+     * // Get one GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GiftCouponFindUniqueArgs>(args: SelectSubset<T, GiftCouponFindUniqueArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GiftCoupon that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GiftCouponFindUniqueOrThrowArgs} args - Arguments to find a GiftCoupon
+     * @example
+     * // Get one GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GiftCouponFindUniqueOrThrowArgs>(args: SelectSubset<T, GiftCouponFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GiftCoupon that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponFindFirstArgs} args - Arguments to find a GiftCoupon
+     * @example
+     * // Get one GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GiftCouponFindFirstArgs>(args?: SelectSubset<T, GiftCouponFindFirstArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GiftCoupon that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponFindFirstOrThrowArgs} args - Arguments to find a GiftCoupon
+     * @example
+     * // Get one GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GiftCouponFindFirstOrThrowArgs>(args?: SelectSubset<T, GiftCouponFindFirstOrThrowArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GiftCoupons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GiftCoupons
+     * const giftCoupons = await prisma.giftCoupon.findMany()
+     * 
+     * // Get first 10 GiftCoupons
+     * const giftCoupons = await prisma.giftCoupon.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const giftCouponWithIdOnly = await prisma.giftCoupon.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GiftCouponFindManyArgs>(args?: SelectSubset<T, GiftCouponFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GiftCoupon.
+     * @param {GiftCouponCreateArgs} args - Arguments to create a GiftCoupon.
+     * @example
+     * // Create one GiftCoupon
+     * const GiftCoupon = await prisma.giftCoupon.create({
+     *   data: {
+     *     // ... data to create a GiftCoupon
+     *   }
+     * })
+     * 
+     */
+    create<T extends GiftCouponCreateArgs>(args: SelectSubset<T, GiftCouponCreateArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GiftCoupons.
+     * @param {GiftCouponCreateManyArgs} args - Arguments to create many GiftCoupons.
+     * @example
+     * // Create many GiftCoupons
+     * const giftCoupon = await prisma.giftCoupon.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GiftCouponCreateManyArgs>(args?: SelectSubset<T, GiftCouponCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GiftCoupons and returns the data saved in the database.
+     * @param {GiftCouponCreateManyAndReturnArgs} args - Arguments to create many GiftCoupons.
+     * @example
+     * // Create many GiftCoupons
+     * const giftCoupon = await prisma.giftCoupon.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GiftCoupons and only return the `id`
+     * const giftCouponWithIdOnly = await prisma.giftCoupon.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GiftCouponCreateManyAndReturnArgs>(args?: SelectSubset<T, GiftCouponCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GiftCoupon.
+     * @param {GiftCouponDeleteArgs} args - Arguments to delete one GiftCoupon.
+     * @example
+     * // Delete one GiftCoupon
+     * const GiftCoupon = await prisma.giftCoupon.delete({
+     *   where: {
+     *     // ... filter to delete one GiftCoupon
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GiftCouponDeleteArgs>(args: SelectSubset<T, GiftCouponDeleteArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GiftCoupon.
+     * @param {GiftCouponUpdateArgs} args - Arguments to update one GiftCoupon.
+     * @example
+     * // Update one GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GiftCouponUpdateArgs>(args: SelectSubset<T, GiftCouponUpdateArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GiftCoupons.
+     * @param {GiftCouponDeleteManyArgs} args - Arguments to filter GiftCoupons to delete.
+     * @example
+     * // Delete a few GiftCoupons
+     * const { count } = await prisma.giftCoupon.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GiftCouponDeleteManyArgs>(args?: SelectSubset<T, GiftCouponDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GiftCoupons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GiftCoupons
+     * const giftCoupon = await prisma.giftCoupon.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GiftCouponUpdateManyArgs>(args: SelectSubset<T, GiftCouponUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GiftCoupons and returns the data updated in the database.
+     * @param {GiftCouponUpdateManyAndReturnArgs} args - Arguments to update many GiftCoupons.
+     * @example
+     * // Update many GiftCoupons
+     * const giftCoupon = await prisma.giftCoupon.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GiftCoupons and only return the `id`
+     * const giftCouponWithIdOnly = await prisma.giftCoupon.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GiftCouponUpdateManyAndReturnArgs>(args: SelectSubset<T, GiftCouponUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GiftCoupon.
+     * @param {GiftCouponUpsertArgs} args - Arguments to update or create a GiftCoupon.
+     * @example
+     * // Update or create a GiftCoupon
+     * const giftCoupon = await prisma.giftCoupon.upsert({
+     *   create: {
+     *     // ... data to create a GiftCoupon
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GiftCoupon we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GiftCouponUpsertArgs>(args: SelectSubset<T, GiftCouponUpsertArgs<ExtArgs>>): Prisma__GiftCouponClient<$Result.GetResult<Prisma.$GiftCouponPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GiftCoupons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponCountArgs} args - Arguments to filter GiftCoupons to count.
+     * @example
+     * // Count the number of GiftCoupons
+     * const count = await prisma.giftCoupon.count({
+     *   where: {
+     *     // ... the filter for the GiftCoupons we want to count
+     *   }
+     * })
+    **/
+    count<T extends GiftCouponCountArgs>(
+      args?: Subset<T, GiftCouponCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GiftCouponCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GiftCoupon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GiftCouponAggregateArgs>(args: Subset<T, GiftCouponAggregateArgs>): Prisma.PrismaPromise<GetGiftCouponAggregateType<T>>
+
+    /**
+     * Group by GiftCoupon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GiftCouponGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GiftCouponGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GiftCouponGroupByArgs['orderBy'] }
+        : { orderBy?: GiftCouponGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GiftCouponGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGiftCouponGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GiftCoupon model
+   */
+  readonly fields: GiftCouponFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GiftCoupon.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GiftCouponClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    purchaser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    redeemer<T extends GiftCoupon$redeemerArgs<ExtArgs> = {}>(args?: Subset<T, GiftCoupon$redeemerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GiftCoupon model
+   */
+  interface GiftCouponFieldRefs {
+    readonly id: FieldRef<"GiftCoupon", 'String'>
+    readonly code: FieldRef<"GiftCoupon", 'String'>
+    readonly courseId: FieldRef<"GiftCoupon", 'String'>
+    readonly purchaserId: FieldRef<"GiftCoupon", 'String'>
+    readonly amountInr: FieldRef<"GiftCoupon", 'Int'>
+    readonly isRedeemed: FieldRef<"GiftCoupon", 'Boolean'>
+    readonly redeemerId: FieldRef<"GiftCoupon", 'String'>
+    readonly redeemedAt: FieldRef<"GiftCoupon", 'DateTime'>
+    readonly createdAt: FieldRef<"GiftCoupon", 'DateTime'>
+    readonly updatedAt: FieldRef<"GiftCoupon", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GiftCoupon findUnique
+   */
+  export type GiftCouponFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter, which GiftCoupon to fetch.
+     */
+    where: GiftCouponWhereUniqueInput
+  }
+
+  /**
+   * GiftCoupon findUniqueOrThrow
+   */
+  export type GiftCouponFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter, which GiftCoupon to fetch.
+     */
+    where: GiftCouponWhereUniqueInput
+  }
+
+  /**
+   * GiftCoupon findFirst
+   */
+  export type GiftCouponFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter, which GiftCoupon to fetch.
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GiftCoupons to fetch.
+     */
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GiftCoupons.
+     */
+    cursor?: GiftCouponWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GiftCoupons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GiftCoupons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GiftCoupons.
+     */
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
+  }
+
+  /**
+   * GiftCoupon findFirstOrThrow
+   */
+  export type GiftCouponFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter, which GiftCoupon to fetch.
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GiftCoupons to fetch.
+     */
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GiftCoupons.
+     */
+    cursor?: GiftCouponWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GiftCoupons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GiftCoupons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GiftCoupons.
+     */
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
+  }
+
+  /**
+   * GiftCoupon findMany
+   */
+  export type GiftCouponFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter, which GiftCoupons to fetch.
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GiftCoupons to fetch.
+     */
+    orderBy?: GiftCouponOrderByWithRelationInput | GiftCouponOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GiftCoupons.
+     */
+    cursor?: GiftCouponWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GiftCoupons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GiftCoupons.
+     */
+    skip?: number
+    distinct?: GiftCouponScalarFieldEnum | GiftCouponScalarFieldEnum[]
+  }
+
+  /**
+   * GiftCoupon create
+   */
+  export type GiftCouponCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GiftCoupon.
+     */
+    data: XOR<GiftCouponCreateInput, GiftCouponUncheckedCreateInput>
+  }
+
+  /**
+   * GiftCoupon createMany
+   */
+  export type GiftCouponCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GiftCoupons.
+     */
+    data: GiftCouponCreateManyInput | GiftCouponCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GiftCoupon createManyAndReturn
+   */
+  export type GiftCouponCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * The data used to create many GiftCoupons.
+     */
+    data: GiftCouponCreateManyInput | GiftCouponCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GiftCoupon update
+   */
+  export type GiftCouponUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GiftCoupon.
+     */
+    data: XOR<GiftCouponUpdateInput, GiftCouponUncheckedUpdateInput>
+    /**
+     * Choose, which GiftCoupon to update.
+     */
+    where: GiftCouponWhereUniqueInput
+  }
+
+  /**
+   * GiftCoupon updateMany
+   */
+  export type GiftCouponUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GiftCoupons.
+     */
+    data: XOR<GiftCouponUpdateManyMutationInput, GiftCouponUncheckedUpdateManyInput>
+    /**
+     * Filter which GiftCoupons to update
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * Limit how many GiftCoupons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GiftCoupon updateManyAndReturn
+   */
+  export type GiftCouponUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * The data used to update GiftCoupons.
+     */
+    data: XOR<GiftCouponUpdateManyMutationInput, GiftCouponUncheckedUpdateManyInput>
+    /**
+     * Filter which GiftCoupons to update
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * Limit how many GiftCoupons to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GiftCoupon upsert
+   */
+  export type GiftCouponUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GiftCoupon to update in case it exists.
+     */
+    where: GiftCouponWhereUniqueInput
+    /**
+     * In case the GiftCoupon found by the `where` argument doesn't exist, create a new GiftCoupon with this data.
+     */
+    create: XOR<GiftCouponCreateInput, GiftCouponUncheckedCreateInput>
+    /**
+     * In case the GiftCoupon was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GiftCouponUpdateInput, GiftCouponUncheckedUpdateInput>
+  }
+
+  /**
+   * GiftCoupon delete
+   */
+  export type GiftCouponDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+    /**
+     * Filter which GiftCoupon to delete.
+     */
+    where: GiftCouponWhereUniqueInput
+  }
+
+  /**
+   * GiftCoupon deleteMany
+   */
+  export type GiftCouponDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GiftCoupons to delete
+     */
+    where?: GiftCouponWhereInput
+    /**
+     * Limit how many GiftCoupons to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GiftCoupon.redeemer
+   */
+  export type GiftCoupon$redeemerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * GiftCoupon without action
+   */
+  export type GiftCouponDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GiftCoupon
+     */
+    select?: GiftCouponSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GiftCoupon
+     */
+    omit?: GiftCouponOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GiftCouponInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -32938,6 +34345,7 @@ export namespace Prisma {
     status: 'status',
     reviewedAt: 'reviewedAt',
     reviewedBy: 'reviewedBy',
+    isGift: 'isGift',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -33157,6 +34565,22 @@ export namespace Prisma {
   };
 
   export type AppSettingScalarFieldEnum = (typeof AppSettingScalarFieldEnum)[keyof typeof AppSettingScalarFieldEnum]
+
+
+  export const GiftCouponScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    courseId: 'courseId',
+    purchaserId: 'purchaserId',
+    amountInr: 'amountInr',
+    isRedeemed: 'isRedeemed',
+    redeemerId: 'redeemerId',
+    redeemedAt: 'redeemedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GiftCouponScalarFieldEnum = (typeof GiftCouponScalarFieldEnum)[keyof typeof GiftCouponScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -33413,6 +34837,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerListRelationFilter
     studioWorkflows?: StudioWorkflowListRelationFilter
     studioGenerations?: StudioGenerationListRelationFilter
+    purchasedGifts?: GiftCouponListRelationFilter
+    redeemedGifts?: GiftCouponListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -33443,6 +34869,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerOrderByRelationAggregateInput
     studioWorkflows?: StudioWorkflowOrderByRelationAggregateInput
     studioGenerations?: StudioGenerationOrderByRelationAggregateInput
+    purchasedGifts?: GiftCouponOrderByRelationAggregateInput
+    redeemedGifts?: GiftCouponOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -33476,6 +34904,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerListRelationFilter
     studioWorkflows?: StudioWorkflowListRelationFilter
     studioGenerations?: StudioGenerationListRelationFilter
+    purchasedGifts?: GiftCouponListRelationFilter
+    redeemedGifts?: GiftCouponListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -33717,6 +35147,7 @@ export namespace Prisma {
     resources?: CourseResourceListRelationFilter
     communityPosts?: CommunityPostListRelationFilter
     notifications?: NotificationListRelationFilter
+    giftCoupons?: GiftCouponListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
@@ -33737,6 +35168,7 @@ export namespace Prisma {
     resources?: CourseResourceOrderByRelationAggregateInput
     communityPosts?: CommunityPostOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
+    giftCoupons?: GiftCouponOrderByRelationAggregateInput
   }
 
   export type CourseWhereUniqueInput = Prisma.AtLeast<{
@@ -33760,6 +35192,7 @@ export namespace Prisma {
     resources?: CourseResourceListRelationFilter
     communityPosts?: CommunityPostListRelationFilter
     notifications?: NotificationListRelationFilter
+    giftCoupons?: GiftCouponListRelationFilter
   }, "id" | "slug">
 
   export type CourseOrderByWithAggregationInput = {
@@ -34117,6 +35550,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"PaymentRequest"> | $Enums.PaymentStatus
     reviewedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
     reviewedBy?: StringNullableFilter<"PaymentRequest"> | string | null
+    isGift?: BoolFilter<"PaymentRequest"> | boolean
     createdAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -34133,6 +35567,7 @@ export namespace Prisma {
     status?: SortOrder
     reviewedAt?: SortOrderInput | SortOrder
     reviewedBy?: SortOrderInput | SortOrder
+    isGift?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -34152,6 +35587,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"PaymentRequest"> | $Enums.PaymentStatus
     reviewedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
     reviewedBy?: StringNullableFilter<"PaymentRequest"> | string | null
+    isGift?: BoolFilter<"PaymentRequest"> | boolean
     createdAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -34168,6 +35604,7 @@ export namespace Prisma {
     status?: SortOrder
     reviewedAt?: SortOrderInput | SortOrder
     reviewedBy?: SortOrderInput | SortOrder
+    isGift?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PaymentRequestCountOrderByAggregateInput
@@ -34190,6 +35627,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusWithAggregatesFilter<"PaymentRequest"> | $Enums.PaymentStatus
     reviewedAt?: DateTimeNullableWithAggregatesFilter<"PaymentRequest"> | Date | string | null
     reviewedBy?: StringNullableWithAggregatesFilter<"PaymentRequest"> | string | null
+    isGift?: BoolWithAggregatesFilter<"PaymentRequest"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRequest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRequest"> | Date | string
   }
@@ -35336,6 +36774,94 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"AppSetting"> | Date | string
   }
 
+  export type GiftCouponWhereInput = {
+    AND?: GiftCouponWhereInput | GiftCouponWhereInput[]
+    OR?: GiftCouponWhereInput[]
+    NOT?: GiftCouponWhereInput | GiftCouponWhereInput[]
+    id?: StringFilter<"GiftCoupon"> | string
+    code?: StringFilter<"GiftCoupon"> | string
+    courseId?: StringFilter<"GiftCoupon"> | string
+    purchaserId?: StringFilter<"GiftCoupon"> | string
+    amountInr?: IntFilter<"GiftCoupon"> | number
+    isRedeemed?: BoolFilter<"GiftCoupon"> | boolean
+    redeemerId?: StringNullableFilter<"GiftCoupon"> | string | null
+    redeemedAt?: DateTimeNullableFilter<"GiftCoupon"> | Date | string | null
+    createdAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+    updatedAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    purchaser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    redeemer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type GiftCouponOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    courseId?: SortOrder
+    purchaserId?: SortOrder
+    amountInr?: SortOrder
+    isRedeemed?: SortOrder
+    redeemerId?: SortOrderInput | SortOrder
+    redeemedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    course?: CourseOrderByWithRelationInput
+    purchaser?: UserOrderByWithRelationInput
+    redeemer?: UserOrderByWithRelationInput
+  }
+
+  export type GiftCouponWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: GiftCouponWhereInput | GiftCouponWhereInput[]
+    OR?: GiftCouponWhereInput[]
+    NOT?: GiftCouponWhereInput | GiftCouponWhereInput[]
+    courseId?: StringFilter<"GiftCoupon"> | string
+    purchaserId?: StringFilter<"GiftCoupon"> | string
+    amountInr?: IntFilter<"GiftCoupon"> | number
+    isRedeemed?: BoolFilter<"GiftCoupon"> | boolean
+    redeemerId?: StringNullableFilter<"GiftCoupon"> | string | null
+    redeemedAt?: DateTimeNullableFilter<"GiftCoupon"> | Date | string | null
+    createdAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+    updatedAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    purchaser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    redeemer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id" | "code">
+
+  export type GiftCouponOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    courseId?: SortOrder
+    purchaserId?: SortOrder
+    amountInr?: SortOrder
+    isRedeemed?: SortOrder
+    redeemerId?: SortOrderInput | SortOrder
+    redeemedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GiftCouponCountOrderByAggregateInput
+    _avg?: GiftCouponAvgOrderByAggregateInput
+    _max?: GiftCouponMaxOrderByAggregateInput
+    _min?: GiftCouponMinOrderByAggregateInput
+    _sum?: GiftCouponSumOrderByAggregateInput
+  }
+
+  export type GiftCouponScalarWhereWithAggregatesInput = {
+    AND?: GiftCouponScalarWhereWithAggregatesInput | GiftCouponScalarWhereWithAggregatesInput[]
+    OR?: GiftCouponScalarWhereWithAggregatesInput[]
+    NOT?: GiftCouponScalarWhereWithAggregatesInput | GiftCouponScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GiftCoupon"> | string
+    code?: StringWithAggregatesFilter<"GiftCoupon"> | string
+    courseId?: StringWithAggregatesFilter<"GiftCoupon"> | string
+    purchaserId?: StringWithAggregatesFilter<"GiftCoupon"> | string
+    amountInr?: IntWithAggregatesFilter<"GiftCoupon"> | number
+    isRedeemed?: BoolWithAggregatesFilter<"GiftCoupon"> | boolean
+    redeemerId?: StringNullableWithAggregatesFilter<"GiftCoupon"> | string | null
+    redeemedAt?: DateTimeNullableWithAggregatesFilter<"GiftCoupon"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"GiftCoupon"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GiftCoupon"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -35364,6 +36890,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -35394,6 +36922,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUpdateInput = {
@@ -35424,6 +36954,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -35454,6 +36986,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -35707,6 +37241,7 @@ export namespace Prisma {
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
@@ -35727,6 +37262,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
@@ -35747,6 +37283,7 @@ export namespace Prisma {
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
@@ -35767,6 +37304,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
@@ -36129,6 +37667,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentsInput
@@ -36145,6 +37684,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36157,6 +37697,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
@@ -36173,6 +37714,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36187,6 +37729,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36199,6 +37742,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36213,6 +37757,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37407,6 +38952,94 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GiftCouponCreateInput = {
+    id?: string
+    code: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutGiftCouponsInput
+    purchaser: UserCreateNestedOneWithoutPurchasedGiftsInput
+    redeemer?: UserCreateNestedOneWithoutRedeemedGiftsInput
+  }
+
+  export type GiftCouponUncheckedCreateInput = {
+    id?: string
+    code: string
+    courseId: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutGiftCouponsNestedInput
+    purchaser?: UserUpdateOneRequiredWithoutPurchasedGiftsNestedInput
+    redeemer?: UserUpdateOneWithoutRedeemedGiftsNestedInput
+  }
+
+  export type GiftCouponUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponCreateManyInput = {
+    id?: string
+    code: string
+    courseId: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -37561,6 +39194,12 @@ export namespace Prisma {
     none?: StudioGenerationWhereInput
   }
 
+  export type GiftCouponListRelationFilter = {
+    every?: GiftCouponWhereInput
+    some?: GiftCouponWhereInput
+    none?: GiftCouponWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -37623,6 +39262,10 @@ export namespace Prisma {
   }
 
   export type StudioGenerationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GiftCouponOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38174,6 +39817,7 @@ export namespace Prisma {
     status?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    isGift?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38192,6 +39836,7 @@ export namespace Prisma {
     status?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    isGift?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38206,6 +39851,7 @@ export namespace Prisma {
     status?: SortOrder
     reviewedAt?: SortOrder
     reviewedBy?: SortOrder
+    isGift?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -39030,6 +40676,53 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type GiftCouponCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    courseId?: SortOrder
+    purchaserId?: SortOrder
+    amountInr?: SortOrder
+    isRedeemed?: SortOrder
+    redeemerId?: SortOrder
+    redeemedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GiftCouponAvgOrderByAggregateInput = {
+    amountInr?: SortOrder
+  }
+
+  export type GiftCouponMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    courseId?: SortOrder
+    purchaserId?: SortOrder
+    amountInr?: SortOrder
+    isRedeemed?: SortOrder
+    redeemerId?: SortOrder
+    redeemedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GiftCouponMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    courseId?: SortOrder
+    purchaserId?: SortOrder
+    amountInr?: SortOrder
+    isRedeemed?: SortOrder
+    redeemerId?: SortOrder
+    redeemedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GiftCouponSumOrderByAggregateInput = {
+    amountInr?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -39148,6 +40841,20 @@ export namespace Prisma {
     connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
   }
 
+  export type GiftCouponCreateNestedManyWithoutPurchaserInput = {
+    create?: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput> | GiftCouponCreateWithoutPurchaserInput[] | GiftCouponUncheckedCreateWithoutPurchaserInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutPurchaserInput | GiftCouponCreateOrConnectWithoutPurchaserInput[]
+    createMany?: GiftCouponCreateManyPurchaserInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+  }
+
+  export type GiftCouponCreateNestedManyWithoutRedeemerInput = {
+    create?: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput> | GiftCouponCreateWithoutRedeemerInput[] | GiftCouponUncheckedCreateWithoutRedeemerInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutRedeemerInput | GiftCouponCreateOrConnectWithoutRedeemerInput[]
+    createMany?: GiftCouponCreateManyRedeemerInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -39264,6 +40971,20 @@ export namespace Prisma {
     connectOrCreate?: StudioGenerationCreateOrConnectWithoutUserInput | StudioGenerationCreateOrConnectWithoutUserInput[]
     createMany?: StudioGenerationCreateManyUserInputEnvelope
     connect?: StudioGenerationWhereUniqueInput | StudioGenerationWhereUniqueInput[]
+  }
+
+  export type GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput = {
+    create?: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput> | GiftCouponCreateWithoutPurchaserInput[] | GiftCouponUncheckedCreateWithoutPurchaserInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutPurchaserInput | GiftCouponCreateOrConnectWithoutPurchaserInput[]
+    createMany?: GiftCouponCreateManyPurchaserInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+  }
+
+  export type GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput = {
+    create?: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput> | GiftCouponCreateWithoutRedeemerInput[] | GiftCouponUncheckedCreateWithoutRedeemerInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutRedeemerInput | GiftCouponCreateOrConnectWithoutRedeemerInput[]
+    createMany?: GiftCouponCreateManyRedeemerInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -39520,6 +41241,34 @@ export namespace Prisma {
     deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
   }
 
+  export type GiftCouponUpdateManyWithoutPurchaserNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput> | GiftCouponCreateWithoutPurchaserInput[] | GiftCouponUncheckedCreateWithoutPurchaserInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutPurchaserInput | GiftCouponCreateOrConnectWithoutPurchaserInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutPurchaserInput | GiftCouponUpsertWithWhereUniqueWithoutPurchaserInput[]
+    createMany?: GiftCouponCreateManyPurchaserInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutPurchaserInput | GiftCouponUpdateWithWhereUniqueWithoutPurchaserInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutPurchaserInput | GiftCouponUpdateManyWithWhereWithoutPurchaserInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+  }
+
+  export type GiftCouponUpdateManyWithoutRedeemerNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput> | GiftCouponCreateWithoutRedeemerInput[] | GiftCouponUncheckedCreateWithoutRedeemerInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutRedeemerInput | GiftCouponCreateOrConnectWithoutRedeemerInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutRedeemerInput | GiftCouponUpsertWithWhereUniqueWithoutRedeemerInput[]
+    createMany?: GiftCouponCreateManyRedeemerInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutRedeemerInput | GiftCouponUpdateWithWhereUniqueWithoutRedeemerInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutRedeemerInput | GiftCouponUpdateManyWithWhereWithoutRedeemerInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -39754,6 +41503,34 @@ export namespace Prisma {
     deleteMany?: StudioGenerationScalarWhereInput | StudioGenerationScalarWhereInput[]
   }
 
+  export type GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput> | GiftCouponCreateWithoutPurchaserInput[] | GiftCouponUncheckedCreateWithoutPurchaserInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutPurchaserInput | GiftCouponCreateOrConnectWithoutPurchaserInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutPurchaserInput | GiftCouponUpsertWithWhereUniqueWithoutPurchaserInput[]
+    createMany?: GiftCouponCreateManyPurchaserInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutPurchaserInput | GiftCouponUpdateWithWhereUniqueWithoutPurchaserInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutPurchaserInput | GiftCouponUpdateManyWithWhereWithoutPurchaserInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+  }
+
+  export type GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput> | GiftCouponCreateWithoutRedeemerInput[] | GiftCouponUncheckedCreateWithoutRedeemerInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutRedeemerInput | GiftCouponCreateOrConnectWithoutRedeemerInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutRedeemerInput | GiftCouponUpsertWithWhereUniqueWithoutRedeemerInput[]
+    createMany?: GiftCouponCreateManyRedeemerInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutRedeemerInput | GiftCouponUpdateWithWhereUniqueWithoutRedeemerInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutRedeemerInput | GiftCouponUpdateManyWithWhereWithoutRedeemerInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -39832,6 +41609,13 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type GiftCouponCreateNestedManyWithoutCourseInput = {
+    create?: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput> | GiftCouponCreateWithoutCourseInput[] | GiftCouponUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutCourseInput | GiftCouponCreateOrConnectWithoutCourseInput[]
+    createMany?: GiftCouponCreateManyCourseInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+  }
+
   export type VideoUncheckedCreateNestedManyWithoutCourseInput = {
     create?: XOR<VideoCreateWithoutCourseInput, VideoUncheckedCreateWithoutCourseInput> | VideoCreateWithoutCourseInput[] | VideoUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutCourseInput | VideoCreateOrConnectWithoutCourseInput[]
@@ -39872,6 +41656,13 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutCourseInput | NotificationCreateOrConnectWithoutCourseInput[]
     createMany?: NotificationCreateManyCourseInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type GiftCouponUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput> | GiftCouponCreateWithoutCourseInput[] | GiftCouponUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutCourseInput | GiftCouponCreateOrConnectWithoutCourseInput[]
+    createMany?: GiftCouponCreateManyCourseInputEnvelope
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -39970,6 +41761,20 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type GiftCouponUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput> | GiftCouponCreateWithoutCourseInput[] | GiftCouponUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutCourseInput | GiftCouponCreateOrConnectWithoutCourseInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutCourseInput | GiftCouponUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: GiftCouponCreateManyCourseInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutCourseInput | GiftCouponUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutCourseInput | GiftCouponUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+  }
+
   export type VideoUncheckedUpdateManyWithoutCourseNestedInput = {
     create?: XOR<VideoCreateWithoutCourseInput, VideoUncheckedCreateWithoutCourseInput> | VideoCreateWithoutCourseInput[] | VideoUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: VideoCreateOrConnectWithoutCourseInput | VideoCreateOrConnectWithoutCourseInput[]
@@ -40052,6 +41857,20 @@ export namespace Prisma {
     update?: NotificationUpdateWithWhereUniqueWithoutCourseInput | NotificationUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: NotificationUpdateManyWithWhereWithoutCourseInput | NotificationUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type GiftCouponUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput> | GiftCouponCreateWithoutCourseInput[] | GiftCouponUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: GiftCouponCreateOrConnectWithoutCourseInput | GiftCouponCreateOrConnectWithoutCourseInput[]
+    upsert?: GiftCouponUpsertWithWhereUniqueWithoutCourseInput | GiftCouponUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: GiftCouponCreateManyCourseInputEnvelope
+    set?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    disconnect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    delete?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    connect?: GiftCouponWhereUniqueInput | GiftCouponWhereUniqueInput[]
+    update?: GiftCouponUpdateWithWhereUniqueWithoutCourseInput | GiftCouponUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: GiftCouponUpdateManyWithWhereWithoutCourseInput | GiftCouponUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
   }
 
   export type CourseCreateNestedOneWithoutVideosInput = {
@@ -41184,6 +43003,50 @@ export namespace Prisma {
     update?: XOR<XOR<VideoUpdateToOneWithWhereWithoutNotificationsInput, VideoUpdateWithoutNotificationsInput>, VideoUncheckedUpdateWithoutNotificationsInput>
   }
 
+  export type CourseCreateNestedOneWithoutGiftCouponsInput = {
+    create?: XOR<CourseCreateWithoutGiftCouponsInput, CourseUncheckedCreateWithoutGiftCouponsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutGiftCouponsInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPurchasedGiftsInput = {
+    create?: XOR<UserCreateWithoutPurchasedGiftsInput, UserUncheckedCreateWithoutPurchasedGiftsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPurchasedGiftsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutRedeemedGiftsInput = {
+    create?: XOR<UserCreateWithoutRedeemedGiftsInput, UserUncheckedCreateWithoutRedeemedGiftsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRedeemedGiftsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CourseUpdateOneRequiredWithoutGiftCouponsNestedInput = {
+    create?: XOR<CourseCreateWithoutGiftCouponsInput, CourseUncheckedCreateWithoutGiftCouponsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutGiftCouponsInput
+    upsert?: CourseUpsertWithoutGiftCouponsInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutGiftCouponsInput, CourseUpdateWithoutGiftCouponsInput>, CourseUncheckedUpdateWithoutGiftCouponsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPurchasedGiftsNestedInput = {
+    create?: XOR<UserCreateWithoutPurchasedGiftsInput, UserUncheckedCreateWithoutPurchasedGiftsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPurchasedGiftsInput
+    upsert?: UserUpsertWithoutPurchasedGiftsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPurchasedGiftsInput, UserUpdateWithoutPurchasedGiftsInput>, UserUncheckedUpdateWithoutPurchasedGiftsInput>
+  }
+
+  export type UserUpdateOneWithoutRedeemedGiftsNestedInput = {
+    create?: XOR<UserCreateWithoutRedeemedGiftsInput, UserUncheckedCreateWithoutRedeemedGiftsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRedeemedGiftsInput
+    upsert?: UserUpsertWithoutRedeemedGiftsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRedeemedGiftsInput, UserUpdateWithoutRedeemedGiftsInput>, UserUncheckedUpdateWithoutRedeemedGiftsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -41699,6 +43562,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     course: CourseCreateNestedOneWithoutPaymentRequestInput
@@ -41713,6 +43577,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42082,6 +43947,74 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type GiftCouponCreateWithoutPurchaserInput = {
+    id?: string
+    code: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutGiftCouponsInput
+    redeemer?: UserCreateNestedOneWithoutRedeemedGiftsInput
+  }
+
+  export type GiftCouponUncheckedCreateWithoutPurchaserInput = {
+    id?: string
+    code: string
+    courseId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateOrConnectWithoutPurchaserInput = {
+    where: GiftCouponWhereUniqueInput
+    create: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput>
+  }
+
+  export type GiftCouponCreateManyPurchaserInputEnvelope = {
+    data: GiftCouponCreateManyPurchaserInput | GiftCouponCreateManyPurchaserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GiftCouponCreateWithoutRedeemerInput = {
+    id?: string
+    code: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutGiftCouponsInput
+    purchaser: UserCreateNestedOneWithoutPurchasedGiftsInput
+  }
+
+  export type GiftCouponUncheckedCreateWithoutRedeemerInput = {
+    id?: string
+    code: string
+    courseId: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateOrConnectWithoutRedeemerInput = {
+    where: GiftCouponWhereUniqueInput
+    create: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput>
+  }
+
+  export type GiftCouponCreateManyRedeemerInputEnvelope = {
+    data: GiftCouponCreateManyRedeemerInput | GiftCouponCreateManyRedeemerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -42258,6 +44191,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"PaymentRequest"> | $Enums.PaymentStatus
     reviewedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
     reviewedBy?: StringNullableFilter<"PaymentRequest"> | string | null
+    isGift?: BoolFilter<"PaymentRequest"> | boolean
     createdAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRequest"> | Date | string
   }
@@ -42581,6 +44515,54 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"StudioGeneration"> | Date | string
   }
 
+  export type GiftCouponUpsertWithWhereUniqueWithoutPurchaserInput = {
+    where: GiftCouponWhereUniqueInput
+    update: XOR<GiftCouponUpdateWithoutPurchaserInput, GiftCouponUncheckedUpdateWithoutPurchaserInput>
+    create: XOR<GiftCouponCreateWithoutPurchaserInput, GiftCouponUncheckedCreateWithoutPurchaserInput>
+  }
+
+  export type GiftCouponUpdateWithWhereUniqueWithoutPurchaserInput = {
+    where: GiftCouponWhereUniqueInput
+    data: XOR<GiftCouponUpdateWithoutPurchaserInput, GiftCouponUncheckedUpdateWithoutPurchaserInput>
+  }
+
+  export type GiftCouponUpdateManyWithWhereWithoutPurchaserInput = {
+    where: GiftCouponScalarWhereInput
+    data: XOR<GiftCouponUpdateManyMutationInput, GiftCouponUncheckedUpdateManyWithoutPurchaserInput>
+  }
+
+  export type GiftCouponScalarWhereInput = {
+    AND?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+    OR?: GiftCouponScalarWhereInput[]
+    NOT?: GiftCouponScalarWhereInput | GiftCouponScalarWhereInput[]
+    id?: StringFilter<"GiftCoupon"> | string
+    code?: StringFilter<"GiftCoupon"> | string
+    courseId?: StringFilter<"GiftCoupon"> | string
+    purchaserId?: StringFilter<"GiftCoupon"> | string
+    amountInr?: IntFilter<"GiftCoupon"> | number
+    isRedeemed?: BoolFilter<"GiftCoupon"> | boolean
+    redeemerId?: StringNullableFilter<"GiftCoupon"> | string | null
+    redeemedAt?: DateTimeNullableFilter<"GiftCoupon"> | Date | string | null
+    createdAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+    updatedAt?: DateTimeFilter<"GiftCoupon"> | Date | string
+  }
+
+  export type GiftCouponUpsertWithWhereUniqueWithoutRedeemerInput = {
+    where: GiftCouponWhereUniqueInput
+    update: XOR<GiftCouponUpdateWithoutRedeemerInput, GiftCouponUncheckedUpdateWithoutRedeemerInput>
+    create: XOR<GiftCouponCreateWithoutRedeemerInput, GiftCouponUncheckedCreateWithoutRedeemerInput>
+  }
+
+  export type GiftCouponUpdateWithWhereUniqueWithoutRedeemerInput = {
+    where: GiftCouponWhereUniqueInput
+    data: XOR<GiftCouponUpdateWithoutRedeemerInput, GiftCouponUncheckedUpdateWithoutRedeemerInput>
+  }
+
+  export type GiftCouponUpdateManyWithWhereWithoutRedeemerInput = {
+    where: GiftCouponScalarWhereInput
+    data: XOR<GiftCouponUpdateManyMutationInput, GiftCouponUncheckedUpdateManyWithoutRedeemerInput>
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -42608,6 +44590,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -42637,6 +44621,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -42682,6 +44668,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -42711,6 +44699,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -42740,6 +44730,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -42769,6 +44761,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -42814,6 +44808,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -42843,6 +44839,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type VideoCreateWithoutCourseInput = {
@@ -42925,6 +44923,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentsInput
@@ -42939,6 +44938,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -43060,6 +45060,40 @@ export namespace Prisma {
 
   export type NotificationCreateManyCourseInputEnvelope = {
     data: NotificationCreateManyCourseInput | NotificationCreateManyCourseInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GiftCouponCreateWithoutCourseInput = {
+    id?: string
+    code: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    purchaser: UserCreateNestedOneWithoutPurchasedGiftsInput
+    redeemer?: UserCreateNestedOneWithoutRedeemedGiftsInput
+  }
+
+  export type GiftCouponUncheckedCreateWithoutCourseInput = {
+    id?: string
+    code: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateOrConnectWithoutCourseInput = {
+    where: GiftCouponWhereUniqueInput
+    create: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput>
+  }
+
+  export type GiftCouponCreateManyCourseInputEnvelope = {
+    data: GiftCouponCreateManyCourseInput | GiftCouponCreateManyCourseInput[]
     skipDuplicates?: boolean
   }
 
@@ -43189,6 +45223,22 @@ export namespace Prisma {
     data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutCourseInput>
   }
 
+  export type GiftCouponUpsertWithWhereUniqueWithoutCourseInput = {
+    where: GiftCouponWhereUniqueInput
+    update: XOR<GiftCouponUpdateWithoutCourseInput, GiftCouponUncheckedUpdateWithoutCourseInput>
+    create: XOR<GiftCouponCreateWithoutCourseInput, GiftCouponUncheckedCreateWithoutCourseInput>
+  }
+
+  export type GiftCouponUpdateWithWhereUniqueWithoutCourseInput = {
+    where: GiftCouponWhereUniqueInput
+    data: XOR<GiftCouponUpdateWithoutCourseInput, GiftCouponUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type GiftCouponUpdateManyWithWhereWithoutCourseInput = {
+    where: GiftCouponScalarWhereInput
+    data: XOR<GiftCouponUpdateManyMutationInput, GiftCouponUncheckedUpdateManyWithoutCourseInput>
+  }
+
   export type CourseCreateWithoutVideosInput = {
     id?: string
     slug: string
@@ -43206,6 +45256,7 @@ export namespace Prisma {
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutVideosInput = {
@@ -43225,6 +45276,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutVideosInput = {
@@ -43396,6 +45448,7 @@ export namespace Prisma {
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutVideosInput = {
@@ -43415,6 +45468,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type TimestampCommentUpsertWithWhereUniqueWithoutVideoInput = {
@@ -43508,6 +45562,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutEnrollmentsInput = {
@@ -43537,6 +45593,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutEnrollmentsInput = {
@@ -43561,6 +45619,7 @@ export namespace Prisma {
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutEnrollmentsInput = {
@@ -43580,6 +45639,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutEnrollmentsInput = {
@@ -43625,6 +45685,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEnrollmentsInput = {
@@ -43654,6 +45716,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type CourseUpsertWithoutEnrollmentsInput = {
@@ -43684,6 +45748,7 @@ export namespace Prisma {
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutEnrollmentsInput = {
@@ -43703,6 +45768,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type UserCreateWithoutCommentsInput = {
@@ -43732,6 +45798,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -43761,6 +45829,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -43926,6 +45996,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -43955,6 +46027,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type VideoUpsertWithoutCommentsInput = {
@@ -44121,6 +46195,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutTimestampCommentLikesInput = {
@@ -44150,6 +46226,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutTimestampCommentLikesInput = {
@@ -44230,6 +46308,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTimestampCommentLikesInput = {
@@ -44259,6 +46339,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -44288,6 +46370,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -44317,6 +46401,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -44341,6 +46427,7 @@ export namespace Prisma {
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutPaymentRequestInput = {
@@ -44360,6 +46447,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutPaymentRequestInput = {
@@ -44405,6 +46493,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -44434,6 +46524,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type CourseUpsertWithoutPaymentRequestInput = {
@@ -44464,6 +46556,7 @@ export namespace Prisma {
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutPaymentRequestInput = {
@@ -44483,6 +46576,7 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type UserCreateWithoutVideoProgressInput = {
@@ -44512,6 +46606,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutVideoProgressInput = {
@@ -44541,6 +46637,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutVideoProgressInput = {
@@ -44621,6 +46719,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVideoProgressInput = {
@@ -44650,6 +46750,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type VideoUpsertWithoutProgressesInput = {
@@ -44710,6 +46812,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutResourcesInput = {
@@ -44729,6 +46832,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutResourcesInput = {
@@ -44799,6 +46903,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutResourcesInput = {
@@ -44818,6 +46923,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type VideoUpsertWithoutResourcesInput = {
@@ -44888,6 +46994,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutStudioCreditBalanceInput = {
@@ -44917,6 +47025,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutStudioCreditBalanceInput = {
@@ -44962,6 +47072,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStudioCreditBalanceInput = {
@@ -44991,6 +47103,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type StudioCreditPurchaseCreateWithoutPackInput = {
@@ -45070,6 +47184,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutStudioCreditPurchasesInput = {
@@ -45099,6 +47215,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutStudioCreditPurchasesInput = {
@@ -45179,6 +47297,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStudioCreditPurchasesInput = {
@@ -45208,6 +47328,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type StudioCreditPackUpsertWithoutPurchasesInput = {
@@ -45278,6 +47400,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutStudioCreditLedgerInput = {
@@ -45307,6 +47431,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutStudioCreditLedgerInput = {
@@ -45352,6 +47478,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStudioCreditLedgerInput = {
@@ -45381,6 +47509,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type StudioGenerationCreateWithoutModelPricingInput = {
@@ -45462,6 +47592,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutStudioWorkflowsInput = {
@@ -45491,6 +47623,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutStudioWorkflowsInput = {
@@ -45572,6 +47706,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStudioWorkflowsInput = {
@@ -45601,6 +47737,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type StudioGenerationUpsertWithWhereUniqueWithoutWorkflowInput = {
@@ -45646,6 +47784,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutStudioGenerationsInput = {
@@ -45675,6 +47815,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutStudioGenerationsInput = {
@@ -45772,6 +47914,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStudioGenerationsInput = {
@@ -45801,6 +47945,8 @@ export namespace Prisma {
     studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type StudioWorkflowUpsertWithoutGenerationsInput = {
@@ -45894,6 +48040,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostsInput = {
@@ -45923,6 +48071,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostsInput = {
@@ -45947,6 +48097,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestCreateNestedManyWithoutCourseInput
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     notifications?: NotificationCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutCommunityPostsInput = {
@@ -45966,6 +48117,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedCreateNestedManyWithoutCourseInput
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutCommunityPostsInput = {
@@ -46109,6 +48261,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostsInput = {
@@ -46138,6 +48292,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type CourseUpsertWithoutCommunityPostsInput = {
@@ -46168,6 +48324,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUpdateManyWithoutCourseNestedInput
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutCommunityPostsInput = {
@@ -46187,6 +48344,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedUpdateManyWithoutCourseNestedInput
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CommunityPostCommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -46295,6 +48453,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostCommentsInput = {
@@ -46324,6 +48484,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostCommentsInput = {
@@ -46507,6 +48669,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostCommentsInput = {
@@ -46536,6 +48700,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type CommunityPostCommentUpsertWithoutRepliesInput = {
@@ -46661,6 +48827,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutCommunityPostReactionsInput = {
@@ -46690,6 +48858,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutCommunityPostReactionsInput = {
@@ -46772,6 +48942,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommunityPostReactionsInput = {
@@ -46801,6 +48973,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -46830,6 +49004,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -46859,6 +49035,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -46893,6 +49071,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserUncheckedCreateWithoutTriggeredNotificationsInput = {
@@ -46922,6 +49102,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
     studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
     studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
   }
 
   export type UserCreateOrConnectWithoutTriggeredNotificationsInput = {
@@ -46946,6 +49128,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestCreateNestedManyWithoutCourseInput
     resources?: CourseResourceCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutNotificationsInput = {
@@ -46965,6 +49148,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedCreateNestedManyWithoutCourseInput
     resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
     communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
+    giftCoupons?: GiftCouponUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutNotificationsInput = {
@@ -47103,6 +49287,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -47132,6 +49318,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUpsertWithoutTriggeredNotificationsInput = {
@@ -47172,6 +49360,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTriggeredNotificationsInput = {
@@ -47201,6 +49391,8 @@ export namespace Prisma {
     studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
     studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
     studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
   }
 
   export type CourseUpsertWithoutNotificationsInput = {
@@ -47231,6 +49423,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUpdateManyWithoutCourseNestedInput
     resources?: CourseResourceUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutNotificationsInput = {
@@ -47250,6 +49443,7 @@ export namespace Prisma {
     paymentRequest?: PaymentRequestUncheckedUpdateManyWithoutCourseNestedInput
     resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
     communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
+    giftCoupons?: GiftCouponUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CommunityPostUpsertWithoutNotificationsInput = {
@@ -47363,6 +49557,382 @@ export namespace Prisma {
     resources?: CourseResourceUncheckedUpdateManyWithoutVideoNestedInput
   }
 
+  export type CourseCreateWithoutGiftCouponsInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    priceInr: number
+    thumbnailUrl?: string | null
+    availableFrom?: Date | string | null
+    freePreviewFirstLesson?: boolean
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    videos?: VideoCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentCreateNestedManyWithoutCourseInput
+    paymentRequest?: PaymentRequestCreateNestedManyWithoutCourseInput
+    resources?: CourseResourceCreateNestedManyWithoutCourseInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutCourseInput
+    notifications?: NotificationCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutGiftCouponsInput = {
+    id?: string
+    slug: string
+    title: string
+    description: string
+    priceInr: number
+    thumbnailUrl?: string | null
+    availableFrom?: Date | string | null
+    freePreviewFirstLesson?: boolean
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    videos?: VideoUncheckedCreateNestedManyWithoutCourseInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutCourseInput
+    paymentRequest?: PaymentRequestUncheckedCreateNestedManyWithoutCourseInput
+    resources?: CourseResourceUncheckedCreateNestedManyWithoutCourseInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutCourseInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutGiftCouponsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutGiftCouponsInput, CourseUncheckedCreateWithoutGiftCouponsInput>
+  }
+
+  export type UserCreateWithoutPurchasedGiftsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    redeemedGifts?: GiftCouponCreateNestedManyWithoutRedeemerInput
+  }
+
+  export type UserUncheckedCreateWithoutPurchasedGiftsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    redeemedGifts?: GiftCouponUncheckedCreateNestedManyWithoutRedeemerInput
+  }
+
+  export type UserCreateOrConnectWithoutPurchasedGiftsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPurchasedGiftsInput, UserUncheckedCreateWithoutPurchasedGiftsInput>
+  }
+
+  export type UserCreateWithoutRedeemedGiftsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponCreateNestedManyWithoutPurchaserInput
+  }
+
+  export type UserUncheckedCreateWithoutRedeemedGiftsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    passwordHash?: string | null
+    role?: $Enums.UserRole
+    emailVerified?: Date | string | null
+    image?: string | null
+    phone?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    enrollments?: EnrollmentUncheckedCreateNestedManyWithoutUserInput
+    comments?: TimestampCommentUncheckedCreateNestedManyWithoutUserInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    videoProgress?: VideoProgressUncheckedCreateNestedManyWithoutUserInput
+    communityPosts?: CommunityPostUncheckedCreateNestedManyWithoutUserInput
+    communityPostComments?: CommunityPostCommentUncheckedCreateNestedManyWithoutUserInput
+    communityPostReactions?: CommunityPostReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    triggeredNotifications?: NotificationUncheckedCreateNestedManyWithoutActorUserInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedCreateNestedOneWithoutUserInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedCreateNestedManyWithoutUserInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedCreateNestedManyWithoutUserInput
+    studioWorkflows?: StudioWorkflowUncheckedCreateNestedManyWithoutUserInput
+    studioGenerations?: StudioGenerationUncheckedCreateNestedManyWithoutUserInput
+    purchasedGifts?: GiftCouponUncheckedCreateNestedManyWithoutPurchaserInput
+  }
+
+  export type UserCreateOrConnectWithoutRedeemedGiftsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRedeemedGiftsInput, UserUncheckedCreateWithoutRedeemedGiftsInput>
+  }
+
+  export type CourseUpsertWithoutGiftCouponsInput = {
+    update: XOR<CourseUpdateWithoutGiftCouponsInput, CourseUncheckedUpdateWithoutGiftCouponsInput>
+    create: XOR<CourseCreateWithoutGiftCouponsInput, CourseUncheckedCreateWithoutGiftCouponsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutGiftCouponsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutGiftCouponsInput, CourseUncheckedUpdateWithoutGiftCouponsInput>
+  }
+
+  export type CourseUpdateWithoutGiftCouponsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceInr?: IntFieldUpdateOperationsInput | number
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    availableFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    freePreviewFirstLesson?: BoolFieldUpdateOperationsInput | boolean
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutCourseNestedInput
+    paymentRequest?: PaymentRequestUpdateManyWithoutCourseNestedInput
+    resources?: CourseResourceUpdateManyWithoutCourseNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutCourseNestedInput
+    notifications?: NotificationUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutGiftCouponsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    priceInr?: IntFieldUpdateOperationsInput | number
+    thumbnailUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    availableFrom?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    freePreviewFirstLesson?: BoolFieldUpdateOperationsInput | boolean
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    videos?: VideoUncheckedUpdateManyWithoutCourseNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutCourseNestedInput
+    paymentRequest?: PaymentRequestUncheckedUpdateManyWithoutCourseNestedInput
+    resources?: CourseResourceUncheckedUpdateManyWithoutCourseNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutCourseNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type UserUpsertWithoutPurchasedGiftsInput = {
+    update: XOR<UserUpdateWithoutPurchasedGiftsInput, UserUncheckedUpdateWithoutPurchasedGiftsInput>
+    create: XOR<UserCreateWithoutPurchasedGiftsInput, UserUncheckedCreateWithoutPurchasedGiftsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPurchasedGiftsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPurchasedGiftsInput, UserUncheckedUpdateWithoutPurchasedGiftsInput>
+  }
+
+  export type UserUpdateWithoutPurchasedGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    redeemedGifts?: GiftCouponUpdateManyWithoutRedeemerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPurchasedGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    redeemedGifts?: GiftCouponUncheckedUpdateManyWithoutRedeemerNestedInput
+  }
+
+  export type UserUpsertWithoutRedeemedGiftsInput = {
+    update: XOR<UserUpdateWithoutRedeemedGiftsInput, UserUncheckedUpdateWithoutRedeemedGiftsInput>
+    create: XOR<UserCreateWithoutRedeemedGiftsInput, UserUncheckedCreateWithoutRedeemedGiftsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRedeemedGiftsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRedeemedGiftsInput, UserUncheckedUpdateWithoutRedeemedGiftsInput>
+  }
+
+  export type UserUpdateWithoutRedeemedGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUpdateManyWithoutPurchaserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRedeemedGiftsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    enrollments?: EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+    comments?: TimestampCommentUncheckedUpdateManyWithoutUserNestedInput
+    timestampCommentLikes?: TimestampCommentLikeUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    videoProgress?: VideoProgressUncheckedUpdateManyWithoutUserNestedInput
+    communityPosts?: CommunityPostUncheckedUpdateManyWithoutUserNestedInput
+    communityPostComments?: CommunityPostCommentUncheckedUpdateManyWithoutUserNestedInput
+    communityPostReactions?: CommunityPostReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    triggeredNotifications?: NotificationUncheckedUpdateManyWithoutActorUserNestedInput
+    studioCreditBalance?: StudioCreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+    studioCreditPurchases?: StudioCreditPurchaseUncheckedUpdateManyWithoutUserNestedInput
+    studioCreditLedger?: StudioCreditLedgerUncheckedUpdateManyWithoutUserNestedInput
+    studioWorkflows?: StudioWorkflowUncheckedUpdateManyWithoutUserNestedInput
+    studioGenerations?: StudioGenerationUncheckedUpdateManyWithoutUserNestedInput
+    purchasedGifts?: GiftCouponUncheckedUpdateManyWithoutPurchaserNestedInput
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -47419,6 +49989,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -47529,6 +50100,30 @@ export namespace Prisma {
     creditsCharged: number
     outputUrl?: string | null
     errorMessage?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateManyPurchaserInput = {
+    id?: string
+    code: string
+    courseId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateManyRedeemerInput = {
+    id?: string
+    code: string
+    courseId: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -47686,6 +50281,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     course?: CourseUpdateOneRequiredWithoutPaymentRequestNestedInput
@@ -47700,6 +50296,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -47713,6 +50310,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48059,6 +50657,78 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type GiftCouponUpdateWithoutPurchaserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutGiftCouponsNestedInput
+    redeemer?: UserUpdateOneWithoutRedeemedGiftsNestedInput
+  }
+
+  export type GiftCouponUncheckedUpdateWithoutPurchaserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUncheckedUpdateManyWithoutPurchaserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUpdateWithoutRedeemerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutGiftCouponsNestedInput
+    purchaser?: UserUpdateOneRequiredWithoutPurchasedGiftsNestedInput
+  }
+
+  export type GiftCouponUncheckedUpdateWithoutRedeemerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUncheckedUpdateManyWithoutRedeemerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    courseId?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VideoCreateManyCourseInput = {
     id?: string
     title: string
@@ -48090,6 +50760,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reviewedAt?: Date | string | null
     reviewedBy?: string | null
+    isGift?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48127,6 +50798,18 @@ export namespace Prisma {
     postId?: string | null
     commentId?: string | null
     videoId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GiftCouponCreateManyCourseInput = {
+    id?: string
+    code: string
+    purchaserId: string
+    amountInr: number
+    isRedeemed?: boolean
+    redeemerId?: string | null
+    redeemedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48213,6 +50896,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentsNestedInput
@@ -48227,6 +50911,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48240,6 +50925,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isGift?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48357,6 +51043,42 @@ export namespace Prisma {
     postId?: NullableStringFieldUpdateOperationsInput | string | null
     commentId?: NullableStringFieldUpdateOperationsInput | string | null
     videoId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    purchaser?: UserUpdateOneRequiredWithoutPurchasedGiftsNestedInput
+    redeemer?: UserUpdateOneWithoutRedeemedGiftsNestedInput
+  }
+
+  export type GiftCouponUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GiftCouponUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    purchaserId?: StringFieldUpdateOperationsInput | string
+    amountInr?: IntFieldUpdateOperationsInput | number
+    isRedeemed?: BoolFieldUpdateOperationsInput | boolean
+    redeemerId?: NullableStringFieldUpdateOperationsInput | string | null
+    redeemedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

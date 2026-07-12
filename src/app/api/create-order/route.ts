@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const body = (await request.json()) as { courseId?: string };
+  const body = (await request.json()) as { courseId?: string; isGift?: boolean };
   if (!body.courseId) {
     return NextResponse.json({ error: "courseId is required." }, { status: 400 });
   }
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     },
     select: { isActive: true },
   });
-  if (alreadyEnrolled?.isActive) {
+  if (alreadyEnrolled?.isActive && !body.isGift) {
     return NextResponse.json({ error: "Course already active.", redirectTo: "/dashboard" }, { status: 400 });
   }
 
@@ -81,8 +81,9 @@ export async function POST(request: Request) {
         courseId: course.id,
         amountInr: course.priceInr,
         transactionRef: order.id,
-        note: "Razorpay order created",
+        note: body.isGift ? "Razorpay order created for gift" : "Razorpay order created",
         status: "PENDING",
+        isGift: !!body.isGift,
       },
     });
 

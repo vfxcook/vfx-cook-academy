@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export function RazorpayCheckoutButton({ courseId }: { courseId: string }) {
+export function RazorpayCheckoutButton({ courseId, isGift }: { courseId: string; isGift?: boolean }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -36,7 +36,7 @@ export function RazorpayCheckoutButton({ courseId }: { courseId: string }) {
       const response = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ courseId }),
+        body: JSON.stringify({ courseId, isGift }),
       });
 
       const data = (await response.json()) as {
@@ -103,13 +103,13 @@ export function RazorpayCheckoutButton({ courseId }: { courseId: string }) {
                 razorpay_signature: response.razorpay_signature,
               }),
             });
-            const verifyJson = (await verifyRes.json()) as { ok?: boolean; error?: string };
+            const verifyJson = (await verifyRes.json()) as { ok?: boolean; error?: string; redirectUrl?: string };
             if (!verifyRes.ok || !verifyJson.ok) {
               setMessage(verifyJson.error ?? "Payment verification failed.");
               setLoading(false);
               return;
             }
-            window.location.href = "/dashboard";
+            window.location.href = verifyJson.redirectUrl || "/dashboard";
           } catch (_error) {
             setMessage("Payment verification failed due to network error.");
             setLoading(false);

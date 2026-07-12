@@ -107,24 +107,37 @@ export async function POST(request: Request) {
       });
     }
 
-    await tx.enrollment.upsert({
-      where: {
-        userId_courseId: {
+    if (pending?.isGift) {
+      const uniqueCode = `GIFT-${crypto.randomBytes(4).toString("hex").toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`;
+      await tx.giftCoupon.create({
+        data: {
+          code: uniqueCode,
+          courseId,
+          purchaserId: userId,
+          amountInr,
+          isRedeemed: false,
+        },
+      });
+    } else {
+      await tx.enrollment.upsert({
+        where: {
+          userId_courseId: {
+            userId,
+            courseId,
+          },
+        },
+        create: {
           userId,
           courseId,
+          isActive: true,
+          activatedAt: new Date(),
         },
-      },
-      create: {
-        userId,
-        courseId,
-        isActive: true,
-        activatedAt: new Date(),
-      },
-      update: {
-        isActive: true,
-        activatedAt: new Date(),
-      },
-    });
+        update: {
+          isActive: true,
+          activatedAt: new Date(),
+        },
+      });
+    }
   });
 
   return NextResponse.json({ ok: true });

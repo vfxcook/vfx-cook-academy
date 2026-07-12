@@ -116,6 +116,13 @@ export function CoursesCatalogClient({
                 >
                   {getPrimaryLabel(isLoggedIn, isAdmin, course.isEnrolled, course.isActiveEnrollment)}
                 </Link>
+                <Link
+                  className="btn btn-secondary"
+                  href={`/checkout/${course.slug}?gift=true`}
+                  title="Buy this course as a gift for someone else"
+                >
+                  Gift Course
+                </Link>
                 <button className="btn btn-secondary" type="button" onClick={() => setSelectedCourseId(course.id)}>
                   View Details
                 </button>
@@ -179,6 +186,13 @@ export function CoursesCatalogClient({
                   selectedCourse.isEnrolled,
                   selectedCourse.isActiveEnrollment,
                 )}
+              </Link>
+              <Link
+                className="btn btn-secondary"
+                href={`/checkout/${selectedCourse.slug}?gift=true`}
+                title="Buy this course as a gift for someone else"
+              >
+                Gift Course
               </Link>
               <button className="btn btn-secondary" type="button" onClick={() => setSelectedCourseId(null)}>
                 Close

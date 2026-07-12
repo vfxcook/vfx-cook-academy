@@ -66,31 +66,49 @@ export async function POST(request: Request) {
         },
       });
 
-      await tx.enrollment.upsert({
-        where: {
-          userId_courseId: {
+      let redirectUrl = "/dashboard";
+
+      if (pending.isGift) {
+        const uniqueCode = `GIFT-${crypto.randomBytes(4).toString("hex").toUpperCase()}-${crypto.randomBytes(2).toString("hex").toUpperCase()}`;
+        const coupon = await tx.giftCoupon.create({
+          data: {
+            code: uniqueCode,
+            courseId,
+            purchaserId: session.user.id,
+            amountInr: pending.amountInr,
+            isRedeemed: false,
+          },
+        });
+        redirectUrl = `/gift/success/${coupon.id}`;
+      } else {
+        await tx.enrollment.upsert({
+          where: {
+            userId_courseId: {
+              userId: session.user.id,
+              courseId,
+            },
+          },
+          create: {
             userId: session.user.id,
             courseId,
+            isActive: true,
+            activatedAt: new Date(),
           },
-        },
-        create: {
-          userId: session.user.id,
-          courseId,
-          isActive: true,
-          activatedAt: new Date(),
-        },
-        update: {
-          isActive: true,
-          activatedAt: new Date(),
-        },
-      });
+          update: {
+            isActive: true,
+            activatedAt: new Date(),
+          },
+        });
+      }
+
+      return redirectUrl;
     });
+
+    return NextResponse.json({ ok: true, redirectUrl });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Could not verify payment." },
       { status: 400 },
     );
   }
-
-  return NextResponse.json({ ok: true });
 }

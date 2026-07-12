@@ -227,6 +227,7 @@ exports.Prisma.PaymentRequestScalarFieldEnum = {
   status: 'status',
   reviewedAt: 'reviewedAt',
   reviewedBy: 'reviewedBy',
+  isGift: 'isGift',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -400,6 +401,19 @@ exports.Prisma.AppSettingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.GiftCouponScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  courseId: 'courseId',
+  purchaserId: 'purchaserId',
+  amountInr: 'amountInr',
+  isRedeemed: 'isRedeemed',
+  redeemerId: 'redeemerId',
+  redeemedAt: 'redeemedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -496,7 +510,8 @@ exports.Prisma.ModelName = {
   CommunityPostComment: 'CommunityPostComment',
   CommunityPostReaction: 'CommunityPostReaction',
   Notification: 'Notification',
-  AppSetting: 'AppSetting'
+  AppSetting: 'AppSetting',
+  GiftCoupon: 'GiftCoupon'
 };
 
 /**

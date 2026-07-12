@@ -11,10 +11,11 @@ export default async function CheckoutPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ status?: string }>;
+  searchParams: Promise<{ status?: string; gift?: string }>;
 }) {
   const { slug } = await params;
   const query = await searchParams;
+  const isGift = query.gift === "true";
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -51,17 +52,19 @@ export default async function CheckoutPage({
     select: { isActive: true },
   });
 
-  if (existingEnrollment?.isActive) {
+  if (existingEnrollment?.isActive && !isGift) {
     redirect("/dashboard");
   }
 
   return (
     <div className="checkout-shell">
       <section className="card checkout-hero">
-        <p className="admin-eyebrow">Secure Enrollment</p>
-        <h1>Complete your VFX Cook Academy access</h1>
+        <p className="admin-eyebrow">{isGift ? "Gift A Course" : "Secure Enrollment"}</p>
+        <h1>{isGift ? "Gift this course to someone special" : "Complete your VFX Cook Academy access"}</h1>
         <p className="muted">
-          Pay once, verify automatically, and continue from your dashboard after Razorpay confirms the payment.
+          {isGift
+            ? "Pay once to generate a single-use gift coupon. You can then download a premium PDF certificate with the code to give to your recipient."
+            : "Pay once, verify automatically, and continue from your dashboard after Razorpay confirms the payment."}
         </p>
       </section>
 
@@ -79,18 +82,48 @@ export default async function CheckoutPage({
         </div>
 
         <ul className="checkout-trust-list" aria-label="What happens after payment">
-          <li>Instant enrollment after Razorpay signature verification.</li>
-          <li>Dashboard access unlocks your course, progress, comments, and community.</li>
-          <li>Payment issues can be handled through WhatsApp support with your registered email.</li>
+          {isGift ? (
+            <>
+              <li>Instant generation of a single-use gift coupon.</li>
+              <li>Download a beautiful PDF certificate to send to the recipient.</li>
+              <li>They can redeem the code here for full lifetime access.</li>
+            </>
+          ) : (
+            <>
+              <li>Instant enrollment after Razorpay signature verification.</li>
+              <li>Dashboard access unlocks your course, progress, comments, and community.</li>
+              <li>Payment issues can be handled through WhatsApp support with your registered email.</li>
+            </>
+          )}
         </ul>
 
         <div className="checkout-actions">
-          <RazorpayCheckoutButton courseId={course.id} />
+          <RazorpayCheckoutButton courseId={course.id} isGift={isGift} />
           <Link className="btn btn-secondary" href="/dashboard">
             Go to dashboard
           </Link>
         </div>
 
+        {!isGift && (
+          <div className="checkout-redeem-section">
+            <h3 style={{ marginTop: "1rem" }}>Have a gift coupon?</h3>
+            <form action="/api/redeem-gift" method="POST" style={{ display: "flex", gap: "0.5rem" }}>
+              <input type="hidden" name="courseId" value={course.id} />
+              <input 
+                className="input" 
+                type="text" 
+                name="code" 
+                placeholder="Enter GIFT-XXXX-XXXX" 
+                required 
+                style={{ flex: 1 }}
+              />
+              <button className="btn btn-secondary" type="submit">Redeem</button>
+            </form>
+            {query.status === "invalid_coupon" && (
+              <p className="muted" style={{ color: "red", marginTop: "0.5rem" }}>Invalid or already redeemed coupon code.</p>
+            )}
+          </div>
+        )}
         <div className="checkout-help">
           <strong>Need help?</strong>
           <p className="muted">
