@@ -1,0 +1,94 @@
+/* The course community wall: a feed of student work with a sticky composer. */
+
+.wall-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: clamp(18px, 2.6vw, 32px);
+  align-items: start;
+}
+
+.wall-feed { display: grid; gap: clamp(14px, 2vw, 20px); min-width: 0; }
+.wall-side { position: sticky; top: 78px; }
+
+.wall-composer { padding: clamp(18px, 2.2vw, 26px); display: grid; gap: 14px; }
+.wall-preview { max-height: 220px; }
+.wall-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+.wall-post { padding: clamp(16px, 2vw, 22px); display: grid; gap: 12px; }
+
+.wall-post-head { display: flex; align-items: center; gap: 11px; }
+.wall-post-head > div { display: grid; gap: 1px; min-width: 0; }
+.wall-post-head strong { font-size: 13.5px; font-weight: 600; }
+.wall-post-head time { font-family: var(--ac-mono); font-size: 10.5px; color: var(--ac-faint); }
+.wall-post-head > button { margin-left: auto; }
+
+.wall-post-title {
+  font-family: var(--ac-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.wall-post-caption {
+  margin: 0;
+  color: var(--ac-muted);
+  font-size: 14px;
+  line-height: 1.62;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.wall-post-media { display: block; max-height: 520px; }
+.wall-post-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.wall-reactions { display: flex; gap: 6px; }
+.wall-reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--ac-border);
+  background: transparent;
+  color: var(--ac-muted);
+  font-family: var(--ac-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--ac-duration) var(--ac-ease),
+    background var(--ac-duration) var(--ac-ease),
+    transform var(--ac-duration) var(--ac-ease);
+}
+.wall-reaction:hover { border-color: var(--ac-border-strong); transform: translateY(-1px); }
+.wall-reaction[data-active] {
+  border-color: rgba(230, 1, 117, 0.42);
+  background: var(--ac-accent-soft);
+  color: #ff9fcb;
+}
+
+.wall-comments {
+  display: grid;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ac-border);
+}
+.wall-comment { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
+.wall-comment strong { font-size: 13px; font-weight: 600; margin-right: 8px; }
+.wall-comment time { font-family: var(--ac-mono); font-size: 10px; color: var(--ac-faint); }
+.wall-comment p {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  line-height: 1.58;
+  color: var(--ac-muted);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.wall-reply { display: flex; gap: 8px; }
+.wall-reply .ac-input { min-height: var(--ac-control-sm); padding-block: 7px; font-size: 13.5px; }
+
+@media (max-width: 1000px) {
+  .wall-grid { grid-template-columns: minmax(0, 1fr); }
+  .wall-side { position: static; order: -1; }
+}
