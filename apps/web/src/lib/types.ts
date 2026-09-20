@@ -178,6 +178,7 @@ export interface TrendingPrompt {
   prompt: string;
   imageUrl: string;
   sortOrder: number;
+  isPublished: boolean;
 }
 
 export interface PaymentConfig {
