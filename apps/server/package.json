@@ -1,0 +1,39 @@
+{
+  "name": "@academy/server",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "VFX Cook Academy API — Express, Prisma and cookie sessions",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "prebuild": "prisma generate --schema ../../prisma/schema.prisma",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "marked": "^15.0.7",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^7.0.13",
+    "razorpay": "^2.9.6",
+    "sanitize-html": "^2.17.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.13.1",
+    "@types/nodemailer": "^6.4.17",
+    "@types/sanitize-html": "^2.16.1",
+    "prisma": "^6.13.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.7.3"
+  }
+}
