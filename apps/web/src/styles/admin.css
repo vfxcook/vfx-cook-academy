@@ -1,0 +1,150 @@
+/* Admin workspace: a quiet rail, dense tables and stat tiles. */
+
+.adm {
+  display: grid;
+  grid-template-columns: minmax(190px, 220px) minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 32px);
+  align-items: start;
+  padding-block: clamp(20px, 3vw, 34px) clamp(40px, 6vw, 72px);
+}
+
+.adm-rail { position: sticky; top: 78px; padding: 14px; display: grid; gap: 2px; }
+.adm-rail-head { padding: 6px 10px 12px; border-bottom: 1px solid var(--ac-border); margin-bottom: 8px; }
+
+.adm-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  color: var(--ac-muted);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background var(--ac-duration) var(--ac-ease), color var(--ac-duration) var(--ac-ease);
+}
+.adm-link:hover { background: rgba(255, 255, 255, 0.05); color: var(--ac-text); text-decoration: none; }
+.adm-link[aria-current='page'] {
+  background: rgba(255, 138, 76, 0.1);
+  border-color: rgba(255, 138, 76, 0.26);
+  color: var(--ac-text);
+}
+.adm-link-count {
+  margin-left: auto;
+  font-family: var(--ac-mono);
+  font-size: 10px;
+  color: var(--ac-ember);
+}
+
+.adm-body { display: grid; gap: clamp(16px, 2.2vw, 26px); min-width: 0; }
+
+/* ---------- stat tiles ---------- */
+
+.adm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 168px), 1fr));
+  gap: 12px;
+}
+.adm-stat { padding: 16px 18px; display: grid; gap: 4px; }
+.adm-stat b {
+  font-family: var(--ac-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.adm-stat span {
+  font-family: var(--ac-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ac-faint);
+}
+.adm-stat[data-tone='ember'] b { color: var(--ac-ember); }
+.adm-stat[data-tone='warn'] b { color: var(--ac-warning); }
+.adm-stat[data-tone='ok'] b { color: var(--ac-success); }
+
+/* ---------- section card ---------- */
+
+.adm-card { padding: clamp(16px, 2vw, 22px); display: grid; gap: 14px; }
+.adm-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.adm-card-head h2 { font-family: var(--ac-display); font-size: 19px; font-weight: 700; margin: 0; }
+
+/* ---------- course rows ---------- */
+
+.adm-course {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border-radius: var(--ac-radius-lg);
+  border: 1px solid var(--ac-border);
+  transition: border-color var(--ac-duration) var(--ac-ease);
+}
+.adm-course:hover { border-color: var(--ac-border-strong); }
+.adm-course-poster {
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0a0b0e;
+  display: grid;
+  place-items: center;
+  color: var(--ac-faint);
+  font-family: var(--ac-slate);
+  font-size: 16px;
+}
+.adm-course-poster img { width: 100%; height: 100%; object-fit: cover; }
+.adm-course-body { display: grid; gap: 5px; min-width: 0; }
+.adm-course-body strong { font-size: 14.5px; font-weight: 600; }
+.adm-course-actions { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+
+/* ---------- forms in dialogs ---------- */
+
+.adm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 14px;
+}
+.adm-form-grid > .adm-span { grid-column: 1 / -1; }
+
+.adm-file {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px dashed var(--ac-border-strong);
+  border-radius: var(--ac-radius);
+}
+.adm-file input { font-size: 13px; }
+
+/* ---------- misc ---------- */
+
+.adm-mini {
+  font-family: var(--ac-mono);
+  font-size: 11px;
+  color: var(--ac-faint);
+}
+.adm-pill-row { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.adm-code {
+  font-family: var(--ac-mono);
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  color: var(--ac-ember);
+  padding: 10px 14px;
+  border-radius: var(--ac-radius);
+  border: 1px solid rgba(255, 138, 76, 0.3);
+  background: var(--ac-ember-soft);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .adm { grid-template-columns: minmax(0, 1fr); }
+  .adm-rail { position: static; display: flex; overflow-x: auto; gap: 6px; }
+  .adm-rail-head { display: none; }
+  .adm-link { white-space: nowrap; }
+  .adm-course { grid-template-columns: 72px minmax(0, 1fr); }
+  .adm-course-actions { grid-column: 1 / -1; justify-content: flex-start; }
+}
