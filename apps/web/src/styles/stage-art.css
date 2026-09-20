@@ -1,0 +1,169 @@
+/*
+ * Shared palette and motion for the stage illustrations. Plates only animate while
+ * on screen (the parent sets data-live), so a page of them costs almost nothing.
+ */
+
+.sa-plate {
+  --sa-line: rgba(244, 244, 246, 0.34);
+  --sa-hero: rgba(244, 244, 246, 0.64);
+  --sa-fill: rgba(244, 244, 246, 0.2);
+  --sa-hot: var(--ac-ember);
+  --sa-mag: var(--ac-accent);
+  width: 100%;
+  color: var(--ac-muted);
+}
+
+.sa-plate svg { width: 100%; height: auto; overflow: visible; }
+
+/* ---------- shared marks ---------- */
+
+.sa-frame { fill: none; stroke: var(--sa-line); stroke-width: 1.2; }
+.sa-frame--hero { stroke: var(--sa-hero); stroke-width: 1.5; }
+.sa-ink { fill: var(--sa-fill); }
+.sa-ink-fill { fill: var(--sa-fill); }
+.sa-ink-stroke { fill: none; stroke: var(--sa-line); stroke-width: 1.2; }
+.sa-wire { fill: none; stroke: var(--sa-line); stroke-width: 1; stroke-dasharray: 3 3; }
+.sa-accent { fill: var(--sa-hot); }
+.sa-accent-fill { fill: var(--sa-hot); }
+.sa-thirds { fill: none; stroke: var(--sa-line); stroke-width: 0.6; stroke-dasharray: 2 4; }
+
+.sa-label {
+  fill: var(--sa-line);
+  font-family: var(--ac-mono);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+.sa-tc { fill: var(--sa-hot); opacity: 0.8; }
+
+/* ---------- prompt ---------- */
+
+.sa-script {
+  transform-origin: left center;
+  animation: sa-type 3.6s var(--ac-ease) infinite;
+  animation-delay: calc(var(--d) * 180ms);
+}
+.sa-subject { fill: var(--sa-hot); opacity: 0.85; animation: sa-breathe 3.4s ease-in-out infinite; }
+.sa-beam { fill: var(--sa-hot); opacity: 0.08; animation: sa-beam 4.2s ease-in-out infinite; }
+
+@keyframes sa-type {
+  0%, 12% { transform: scaleX(0); opacity: 0; }
+  26%, 82% { transform: scaleX(1); opacity: 1; }
+  96%, 100% { transform: scaleX(1); opacity: 0.25; }
+}
+@keyframes sa-breathe { 0%, 100% { r: 11; } 50% { r: 12.5; } }
+@keyframes sa-beam { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.14; } }
+
+/* ---------- world ---------- */
+
+.sa-card { animation: sa-pop 3.8s var(--ac-ease) infinite; animation-delay: calc(var(--d) * 360ms); }
+.sa-lock-body { fill: none; stroke: var(--sa-hot); stroke-width: 1.4; }
+.sa-lock-shackle { fill: none; stroke: var(--sa-hot); stroke-width: 1.4; }
+.sa-lock { animation: sa-lock 3.8s var(--ac-ease) infinite; transform-origin: 273px 64px; }
+
+@keyframes sa-pop {
+  0%, 100% { opacity: 0.55; }
+  40%, 70% { opacity: 1; }
+}
+@keyframes sa-lock {
+  0%, 60% { transform: scale(0.9); opacity: 0.5; }
+  75%, 100% { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- motion ---------- */
+
+.sa-path {
+  fill: none;
+  stroke: var(--sa-hot);
+  stroke-width: 1.4;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sa-draw 3.4s var(--ac-ease) infinite;
+}
+.sa-dolly { fill: var(--sa-hot); opacity: 0.85; animation: sa-dolly 3.4s var(--ac-ease) infinite; }
+.sa-reel { fill: none; stroke: var(--sa-line); stroke-width: 1.2; animation: sa-spin 3s linear infinite; transform-origin: 248px 36px; }
+.sa-reel--b { transform-origin: 268px 36px; }
+.sa-track { fill: none; stroke: var(--sa-line); stroke-width: 1; }
+.sa-clip { fill: var(--sa-fill); animation: sa-clip 3.4s var(--ac-ease) infinite; animation-delay: calc(var(--d) * 200ms); }
+.sa-playhead { animation: sa-scrub 3.4s var(--ac-ease) infinite; }
+
+@keyframes sa-draw {
+  0%, 8% { stroke-dashoffset: 1; }
+  62%, 100% { stroke-dashoffset: 0; }
+}
+@keyframes sa-dolly {
+  0%, 8% { transform: translate(0, 0); }
+  62%, 100% { transform: translate(120px, 0); }
+}
+@keyframes sa-spin { to { transform: rotate(360deg); } }
+@keyframes sa-clip {
+  0%, 100% { fill: var(--sa-fill); }
+  50% { fill: rgba(255, 138, 76, 0.4); }
+}
+@keyframes sa-scrub {
+  0%, 8% { transform: translateX(0); }
+  92%, 100% { transform: translateX(258px); }
+}
+
+/* ---------- scene ---------- */
+
+.sa-coverage { animation: sa-pop 4s var(--ac-ease) infinite; animation-delay: calc(var(--d) * 420ms); }
+.sa-eyeline {
+  fill: none;
+  stroke: var(--sa-hot);
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sa-draw 4s var(--ac-ease) infinite;
+}
+
+/* ---------- finish ---------- */
+
+.sa-grade-a { fill: rgba(126, 160, 255, 0.16); }
+.sa-grade-b { fill: rgba(255, 138, 76, 0.18); }
+.sa-wipe { fill: var(--sa-hot); animation: sa-wipe 4.4s var(--ac-ease) infinite; }
+.sa-wheel { fill: none; stroke: var(--sa-line); stroke-width: 1.2; animation: sa-wheel 3.2s ease-in-out infinite; animation-delay: calc(var(--d) * 260ms); }
+.sa-bar { fill: var(--sa-fill); animation: sa-bar 1.4s ease-in-out infinite; animation-delay: calc(var(--d) * 60ms); transform-origin: center 85px; }
+
+@keyframes sa-wipe {
+  0%, 100% { transform: translateX(-70px); }
+  50% { transform: translateX(70px); }
+}
+@keyframes sa-wheel {
+  0%, 100% { stroke: var(--sa-line); }
+  50% { stroke: var(--sa-hot); }
+}
+@keyframes sa-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* ---------- deliver ---------- */
+
+.sa-play { fill: var(--sa-hot); }
+.sa-link {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sa-draw 3.6s var(--ac-ease) infinite;
+  animation-delay: calc(var(--d, 0) * 280ms);
+}
+.sa-out { animation: sa-pop 3.6s var(--ac-ease) infinite; animation-delay: calc(var(--d) * 280ms); }
+.sa-tick {
+  fill: none;
+  stroke: var(--ac-success);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: sa-draw 3.6s var(--ac-ease) infinite;
+  animation-delay: calc(var(--d) * 280ms + 600ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-plate * { animation: none !important; }
+  .sa-path,
+  .sa-link,
+  .sa-tick,
+  .sa-eyeline { stroke-dashoffset: 0; }
+}
