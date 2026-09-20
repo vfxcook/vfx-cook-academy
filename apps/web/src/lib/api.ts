@@ -1,8 +1,10 @@
 import type {
+  AdminCommunityData,
   AdminCourseFull,
   AdminOverview,
   AdminPayment,
   AdminStudent,
+  AdminStudioData,
   ClassroomData,
   CommunityPost,
   CourseSummary,
@@ -222,16 +224,9 @@ export const api = {
       patch<{ prompt: TrendingPrompt }>(`/admin/prompts/${id}`, { isPublished }),
     deletePrompt: (id: string) => del<{ ok: true }>(`/admin/prompts/${id}`),
 
-    community: () => get<{ doubts: unknown[]; posts: unknown[] }>('/admin/community'),
+    community: () => get<AdminCommunityData>('/admin/community'),
 
-    studio: () =>
-      get<{
-        settings: Array<{ key: string; hasValue: boolean; updatedAt: string }>;
-        packs: unknown[];
-        models: unknown[];
-        purchases: unknown[];
-        generations: unknown[];
-      }>('/admin/studio'),
+    studio: () => get<AdminStudioData>('/admin/studio'),
     saveStudioSetting: (key: string, value: string) =>
       post<{ ok: true }>('/admin/studio/settings', { key, value }),
     allocateCredits: (body: { email: string; credits: number; note?: string }) =>

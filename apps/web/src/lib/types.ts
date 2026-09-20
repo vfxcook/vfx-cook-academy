@@ -344,3 +344,69 @@ export interface AdminStudent {
     percent: number;
   }>;
 }
+
+export interface AdminStudioPack {
+  id: string;
+  name: string;
+  credits: number;
+  amountInr: number;
+  providerCostInr: number;
+  isActive: boolean;
+}
+
+export interface AdminStudioModel {
+  id: string;
+  displayName: string;
+  category: string;
+  providerCredits: number;
+  isEnabled: boolean;
+}
+
+export interface AdminStudioPurchase {
+  id: string;
+  amountInr: number;
+  credits: number;
+  status: string;
+  createdAt: string;
+  user: { name: string | null; email: string | null };
+  pack: { name: string } | null;
+}
+
+export interface AdminStudioGeneration {
+  id: string;
+  prompt: string;
+  status: string;
+  creditsCharged: number;
+  createdAt: string;
+  user: { name: string | null; email: string | null };
+  modelPricing: { displayName: string } | null;
+}
+
+export interface AdminStudioData {
+  settings: Array<{ key: string; hasValue: boolean; updatedAt: string }>;
+  packs: AdminStudioPack[];
+  models: AdminStudioModel[];
+  purchases: AdminStudioPurchase[];
+  generations: AdminStudioGeneration[];
+}
+
+export interface AdminCommunityData {
+  doubts: Array<{
+    id: string;
+    text: string;
+    timestamp: number;
+    createdAt: string;
+    user: { name: string | null; email: string | null };
+    video: { title: string; order: number; course: { title: string; slug: string } };
+  }>;
+  posts: Array<{
+    id: string;
+    title: string;
+    caption: string;
+    mediaUrl: string | null;
+    createdAt: string;
+    user: { name: string | null; email: string | null; image: string | null };
+    course: { title: string; slug: string };
+    _count: { comments: number; reactions: number };
+  }>;
+}
