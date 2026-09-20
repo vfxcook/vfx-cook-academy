@@ -1,0 +1,84 @@
+/*
+ * Academy tokens. The charcoal + magenta base is shared with brahmastra.studio so the
+ * module reads as part of the same studio; ember is the Academy's own signal colour and
+ * carries everything about learning — progress, unlocked lessons, streaks.
+ */
+:root,
+.ac-theme {
+  --ac-bg: #0b0c0f;
+  --ac-surface: #121419;
+  --ac-raised: #1a1d23;
+  --ac-hover: #22262e;
+  --ac-border: #2b2e37;
+  --ac-border-strong: #414653;
+
+  --ac-text: #f4f4f6;
+  --ac-muted: #a4a9b6;
+  --ac-faint: rgba(244, 244, 246, 0.34);
+
+  --ac-accent: #e60175;
+  --ac-accent-hover: #c90065;
+  --ac-accent-soft: #2d1222;
+
+  --ac-ember: #ff8a4c;
+  --ac-ember-hover: #f0743a;
+  --ac-ember-soft: rgba(255, 138, 76, 0.14);
+
+  --ac-success: #42d49c;
+  --ac-warning: #edbd63;
+  --ac-danger: #ff7c8e;
+  --ac-info: #7fbcff;
+  --ac-violet: #b6a0ff;
+
+  --ac-radius-sm: 6px;
+  --ac-radius: 10px;
+  --ac-radius-lg: 14px;
+  --ac-panel-radius: 22px;
+  --ac-composer-radius: 30px;
+  --ac-media-radius: 18px;
+
+  --ac-font: 'Inter Tight', Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ac-display: 'Archivo', 'Inter Tight', system-ui, sans-serif;
+  --ac-slate: 'Bebas Neue', Impact, sans-serif;
+  --ac-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --ac-control: 40px;
+  --ac-control-sm: 32px;
+  --ac-control-lg: 48px;
+
+  --ac-space-1: 4px;
+  --ac-space-2: 8px;
+  --ac-space-3: 12px;
+  --ac-space-4: 16px;
+  --ac-space-5: 20px;
+  --ac-space-6: 24px;
+  --ac-space-8: 32px;
+  --ac-space-12: 48px;
+
+  --ac-panel-bg: rgba(30, 32, 37, 0.72);
+  --ac-panel-border: rgba(255, 255, 255, 0.085);
+  --ac-rail-bg: rgba(28, 30, 36, 0.92);
+  --ac-header-bg: rgba(11, 12, 15, 0.94);
+  --ac-media-frame-bg: rgba(8, 10, 13, 0.5);
+  --ac-glass-blur: 22px;
+
+  --ac-focus: 0 0 0 3px var(--ac-bg), 0 0 0 5px #ff7bbd;
+  --ac-shadow: 0 16px 60px rgba(0, 0, 0, 0.47);
+  --ac-shadow-lift: 0 22px 70px rgba(0, 0, 0, 0.55);
+  --ac-duration: 140ms;
+  --ac-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --ac-measure: 68ch;
+  --ac-tracking-eyebrow: 0.13em;
+
+  --ac-z-rail: 10;
+  --ac-z-dropdown: 30;
+  --ac-z-dialog: 60;
+  --ac-z-toast: 100;
+}
+
+.ac-theme[data-density='compact'] {
+  --ac-control: 34px;
+  --ac-control-sm: 28px;
+  --ac-control-lg: 42px;
+}

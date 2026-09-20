@@ -1,0 +1,63 @@
+@import '../ui/styles/components.css';
+
+* { box-sizing: border-box; }
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: var(--ac-bg);
+  color: var(--ac-text);
+}
+
+html { color-scheme: dark; }
+
+body {
+  font-family: var(--ac-font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, p, figure { margin-top: 0; }
+
+a { color: var(--ac-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+
+img, svg, video { max-width: 100%; display: block; }
+
+:focus-visible { outline: 2px solid #ff86c1; outline-offset: 3px; border-radius: 4px; }
+
+::selection { background: var(--ac-accent); color: #fff; }
+
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); background-clip: content-box; }
+
+/*
+ * One global motion switch. Every animated surface in the app sits behind this,
+ * so a reduced-motion preference genuinely stills the page instead of trimming it.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
