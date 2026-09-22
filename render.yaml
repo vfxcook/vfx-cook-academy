@@ -1,0 +1,90 @@
+# BrahmAstra Academy on Render: the Postgres database and the API.
+# The web app runs on Cloudflare (apps/web/wrangler.jsonc) and proxies /api to this service.
+
+databases:
+  - name: brahmastra-academy-db
+    databaseName: academy
+    user: academy
+    plan: 0.1c-256mb
+    region: singapore
+    postgresMajorVersion: "17"
+    # Private network only: the API connects internally. Run the one-off data copy from
+    # this service's Shell, or add your IP here for the duration of the migration.
+    ipAllowList: []
+
+services:
+  - type: web
+    name: brahmastra-academy-api
+    runtime: node
+    region: singapore
+    plan: 0.5c-512mb
+    # Dev dependencies carry the TypeScript compiler and the Prisma CLI used below.
+    buildCommand: npm ci --include=dev && npm run build --workspace @academy/server
+    # Creates or updates tables before the new version starts. Refuses destructive changes.
+    preDeployCommand: npx prisma db push --schema prisma/schema.prisma --skip-generate
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+
+      - key: DATABASE_URL
+        fromDatabase:
+          name: brahmastra-academy-db
+          property: connectionString
+      - key: DIRECT_URL
+        fromDatabase:
+          name: brahmastra-academy-db
+          property: connectionString
+
+      # Multi-domain auth across brahmastra.studio.
+      - key: APP_URL
+        value: https://academy.brahmastra.studio
+      - key: COOKIE_DOMAIN
+        value: .brahmastra.studio
+      - key: ALLOWED_ORIGINS
+        value: https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio
+      # Copy this value into the Worker: npx wrangler secret put PROXY_SHARED_SECRET
+      - key: PROXY_SHARED_SECRET
+        generateValue: true
+
+      # Google Identity Services — the same client as BrahmAstra Studio.
+      - key: GOOGLE_CLIENT_ID
+        value: 706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com
+
+      # Shared BrahmAstra Supabase project: identity mirror and file storage.
+      - key: SUPABASE_URL
+        value: https://frnlloffzfnohagpwsti.supabase.co
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+      - key: QR_CODE_URL
+        sync: false
+
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        value: BrahmAstra Academy <noreply@brahmastra.studio>
+
+      - key: KIE_API_KEY
+        sync: false

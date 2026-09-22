@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { api } from '../lib/api';
 import { brand } from '../lib/content';
+import { forgetGoogleAccount } from '../lib/googleIdentity';
 import { formatRelative } from '../lib/format';
 import type { NotificationItem, User } from '../lib/types';
 import { Avatar } from './ui';
@@ -179,6 +180,7 @@ function UserMenu({ user }: { user: User }) {
             onClick={async () => {
               setOpen(false);
               await api.auth.signOut().catch(() => undefined);
+              forgetGoogleAccount();
               // A full navigation drops every loader result that still holds the old session.
               window.location.assign('/');
             }}

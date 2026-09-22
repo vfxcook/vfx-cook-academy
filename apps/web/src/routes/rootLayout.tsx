@@ -1,7 +1,9 @@
 import { Link, Outlet, useNavigation, useRouteLoaderData } from 'react-router';
+import GoogleOneTap from '../components/GoogleOneTap';
 import Header from '../components/Header';
 import { api } from '../lib/api';
 import { brand } from '../lib/content';
+import { resolveGoogleClientId } from '../lib/googleIdentity';
 import type { SessionState } from '../lib/types';
 
 export async function rootLoader(): Promise<SessionState> {
@@ -9,7 +11,7 @@ export async function rootLoader(): Promise<SessionState> {
     return await api.auth.session();
   } catch {
     // A cold or unreachable API should still render the marketing surface.
-    return { user: null, providers: { google: false, email: false } };
+    return { user: null, access: null, providers: { google: false, googleClientId: null, email: false } };
   }
 }
 
@@ -18,7 +20,8 @@ export function useSession(): SessionState {
   return (
     (useRouteLoaderData('root') as SessionState | undefined) ?? {
       user: null,
-      providers: { google: false, email: false }
+      access: null,
+      providers: { google: false, googleClientId: null, email: false }
     }
   );
 }
@@ -32,6 +35,9 @@ export default function RootLayout() {
       {navigation.state !== 'idle' ? <div className="route-busy" aria-hidden="true" /> : null}
 
       <Header user={session.user} />
+      {!session.user && session.providers.google ? (
+        <GoogleOneTap clientId={resolveGoogleClientId(session.providers.googleClientId)} />
+      ) : null}
 
       <main className="app-main">
         <Outlet />

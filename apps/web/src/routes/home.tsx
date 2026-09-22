@@ -7,6 +7,7 @@ import StageArt from '../components/StageArt';
 import TrendingPrompts from '../components/TrendingPrompts';
 import { api } from '../lib/api';
 import { STAGES, faqs, gallery, hero, learningOutcomes, valueProps } from '../lib/content';
+import { useSession } from './rootLayout';
 import type { CourseSummary } from '../lib/types';
 import '../styles/home.css';
 
@@ -65,6 +66,7 @@ function HeroSlate() {
 
 export default function Home() {
   const { courses, prompts } = useLoaderData<typeof homeLoader>();
+  const { access } = useSession();
   const featured = courses.slice(0, 3);
 
   return (
@@ -100,10 +102,16 @@ export default function Home() {
               {hero.proof}
             </p>
             <div className="home-cta">
-              <Link className="ac-btn ac-btn--primary ac-btn--lg" to="/courses">
-                {hero.primaryCta}
-              </Link>
-              {featured[0] ? (
+              {access?.member ? (
+                <Link className="ac-btn ac-btn--ember ac-btn--lg" to={access.landing}>
+                  Continue learning
+                </Link>
+              ) : (
+                <Link className="ac-btn ac-btn--primary ac-btn--lg" to="/courses">
+                  {hero.primaryCta}
+                </Link>
+              )}
+              {!access?.member && featured[0] ? (
                 <Link className="ac-btn ac-btn--ghost ac-btn--lg" to={`/courses/${featured[0].slug}`}>
                   {hero.secondaryCta}
                 </Link>

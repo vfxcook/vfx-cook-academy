@@ -1,18 +1,20 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useLoaderData, useSearchParams } from 'react-router';
 import CinemaScene from '../components/CinemaScene';
-import GoogleButton from '../components/GoogleButton';
+import GoogleSignIn from '../components/GoogleSignIn';
 import { Field, Notice } from '../components/ui';
 import { api, errorMessage } from '../lib/api';
+import { resolveGoogleClientId } from '../lib/googleIdentity';
 import type { SessionState } from '../lib/types';
-import { authSceneLoader, safeNext } from './signIn';
+import { authSceneLoader, explicitNext } from './signIn';
 
 export const signUpLoader = authSceneLoader;
 
 export default function SignUp() {
   const [params] = useSearchParams();
   const { providers } = useLoaderData() as SessionState;
-  const next = safeNext(params.get('next'));
+  const next = explicitNext(params);
+  const go = (landing: string) => window.location.assign(next ?? landing);
 
   const [form, setForm] = useState({ name: '', email: '', phone: '', password: '' });
   const [busy, setBusy] = useState(false);
@@ -31,13 +33,13 @@ export default function SignUp() {
     setBusy(true);
     setError('');
     try {
-      await api.auth.register({
+      const result = await api.auth.register({
         name: form.name,
         email: form.email,
         password: form.password,
         phone: form.phone.trim()
       });
-      window.location.assign(next);
+      go(result.redirectTo);
     } catch (thrown) {
       setError(errorMessage(thrown, 'Could not create that account.'));
     } finally {
@@ -63,10 +65,16 @@ export default function SignUp() {
 
       {providers.google ? (
         <>
-          <GoogleButton enabled next={next} label="Sign up with Google" />
+          <GoogleSignIn
+            clientId={resolveGoogleClientId(providers.googleClientId)}
+            mode="signup"
+            autoPrompt={false}
+            onSignedIn={result => go(result.redirectTo)}
+            onError={setError}
+          />
           <div className="ac-row" style={{ gap: 12 }}>
             <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-            <span className="ac-eyebrow">or</span>
+            <span className="ac-eyebrow">or with email</span>
             <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
           </div>
         </>
@@ -134,7 +142,7 @@ export default function SignUp() {
       </form>
 
       <p className="ac-hint" style={{ textAlign: 'center' }}>
-        Already enrolled? <Link to="/sign-in">Sign in</Link>
+        Already enrolled? <Link to={next ? `/sign-in?next=${encodeURIComponent(next)}` : '/sign-in'}>Sign in</Link>
       </p>
     </CinemaScene>
   );

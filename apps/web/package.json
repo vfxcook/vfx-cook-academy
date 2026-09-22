@@ -8,12 +8,13 @@
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc -p worker/tsconfig.json",
     "build:production": "vite build --mode production",
     "preview:worker": "npm run build && wrangler dev",
     "deploy:worker": "npm run build && wrangler deploy",
     "deploy:worker:preview": "npm run build && wrangler dev",
-    "deploy:worker:production": "npm run build:production && wrangler deploy"
+    "deploy:worker:production": "npm run build:production && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -26,7 +27,6 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.7.3",
-    "vite": "^6.2.0",
-    "wrangler": "^4.136.3"
+    "vite": "^6.2.0"
   }
 }

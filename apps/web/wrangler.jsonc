@@ -1,16 +1,46 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  // academy.brahmastra.studio at the edge: the built SPA plus a thin proxy to the API on
+  // Render, so the browser only ever talks to one origin and cookies stay first-party.
   "name": "academy",
-  "compatibility_date": "2026-09-21",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-22",
+  "compatibility_flags": ["nodejs_compat"],
+
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    // Client-side routes (/learn/…, /admin/…) fall back to index.html.
+    "not_found_handling": "single-page-application",
+    // Only these reach the Worker; everything else is served straight from assets.
+    "run_worker_first": ["/api/*", "/uploads/*", "/healthz"]
   },
+
+  "vars": {
+    // The Render web service from render.yaml. Update if Render assigns a different URL.
+    "API_ORIGIN": "https://brahmastra-academy-api.onrender.com"
+  },
+
+  // Shared with the API so it can trust the visitor IP this Worker forwards:
+  //   npx wrangler secret put PROXY_SHARED_SECRET
+  "secrets": { "required": ["PROXY_SHARED_SECRET"] },
+
+  // Needs the brahmastra.studio zone on this Cloudflare account.
+  "routes": [{ "pattern": "academy.brahmastra.studio", "custom_domain": true }],
+
+  // Created during the Cloudflare setup. The Academy's database lives on Render
+  // Postgres, so the Worker does not read this binding.
   "d1_databases": [
     {
       "binding": "academy",
       "database_name": "academy",
       "database_id": "27604e73-110b-4f87-99ac-354dca7ef5a2"
     }
-  ]
+  ],
+
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.1 }
+  }
 }
