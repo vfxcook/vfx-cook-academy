@@ -4,8 +4,9 @@ import { prisma } from './lib/prisma.js';
 
 const app = createApp();
 
+// No host argument: bind every interface, which is what Render's port detection needs.
 const server = app.listen(env.port, () => {
-  console.log(`[academy] API listening on http://127.0.0.1:${env.port} (${env.nodeEnv})`);
+  console.log(`[academy] API listening on port ${env.port} (${env.nodeEnv})`);
 });
 
 async function shutdown(signal: string) {
