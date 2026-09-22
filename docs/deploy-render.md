@@ -17,10 +17,11 @@ empty project — no `public` tables and no `auth.users` — so the v2 schema wa
 it on 22 Sep 2026: 26 tables, and `prisma migrate diff` now reports an empty migration.
 The students still have to be copied in from the old database (§4).
 
-That project's Postgres runs in **AWS ap-south-1 (Mumbai)**, which is why the Render
-service is in **Singapore**: it is the closest region Render offers, so every query makes
-one Mumbai–Singapore hop. Keep an eye on query counts per request; there is no Render
-region in India to move closer to.
+That project's Postgres runs in **AWS ap-south-1 (Mumbai)**. The live service is in
+**Oregon**, which costs roughly half a second per request in database round trips —
+measured: `/healthz` 0.28s against `/api/courses` 0.80s. Singapore is the closest region
+Render offers and would cut most of that, but a service's region cannot be changed after
+creation, so moving means creating a second service and repointing `API_ORIGIN`.
 
 `SUPABASE_URL` points here too, so the identity mirror and uploads stay inside the
 Academy's own project rather than carrying the Studio's admin key. The cost is that
@@ -68,7 +69,7 @@ no GitHub connection).
 | Branch | `version/2.0-dbsetup` |
 | Root directory | *(blank — the monorepo root)* |
 | Language | Node |
-| Region | the one closest to the Supabase region in the pooler hostname |
+| Region | Singapore — the closest to the database. The live service is in Oregon; see §1 |
 | Build command | `npm ci --include=dev && npm run build --workspace @academy/server` |
 | Start command | `npm start` |
 | Health check path | `/healthz` |
@@ -93,7 +94,7 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 | `ALLOWED_ORIGINS` | `https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio` |
 | `PROXY_SHARED_SECRET` | byte for byte the Worker's secret, from `.secrets/proxy-shared-secret.env` |
 | `GOOGLE_CLIENT_ID` | `706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com` |
-| `SUPABASE_URL` | `https://frnlloffzfnohagpwsti.supabase.co` |
+| `SUPABASE_URL` | `https://sevkabyfvpksxckkqttj.supabase.co` — the Academy's own project |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → `service_role` |
 | `ADMIN_EMAIL` | the Google account that owns the Academy |
 | `ADMIN_PASSWORD` | a new one — the old password is in this repo's git history |
@@ -148,9 +149,10 @@ fresh install needs instead.
 
 ## 5. Pointing the Worker at the service
 
-Render names the service `https://<name>.onrender.com`, and adds a suffix if the name is
-taken. If it is not `https://brahmastra-academy-api.onrender.com`, update `API_ORIGIN` in
-`apps/web/wrangler.jsonc` and redeploy:
+The live service is named `academy` but answers on `https://vfx-cook-academy.onrender.com`
+— Render keeps the URL a service was created with. `API_ORIGIN` in
+`apps/web/wrangler.jsonc` holds that hostname; change it there and redeploy if the service
+is ever recreated:
 
 ```
 npm run deploy:worker --workspace @academy/web
