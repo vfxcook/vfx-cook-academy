@@ -23,10 +23,11 @@ measured: `/healthz` 0.28s against `/api/courses` 0.80s. Singapore is the closes
 Render offers and would cut most of that, but a service's region cannot be changed after
 creation, so moving means creating a second service and repointing `API_ORIGIN`.
 
-`SUPABASE_URL` points here too, so the identity mirror and uploads stay inside the
-Academy's own project rather than carrying the Studio's admin key. The cost is that
-Academy sign-ins do not appear in BrahmAstra Studio's user base; switching later is two
-environment variables plus a backfill of `profiles`.
+`SUPABASE_URL` points at the **shared** BrahmAstra project (`frnlloffzfnohagpwsti`), not
+here: a Google sign-in on the Academy creates or updates the user there, so the Studio and
+the Academy see one person. Only `DATABASE_URL` and `DIRECT_URL` point at this project.
+Its `profiles` table and the `Profile` model in `schema.prisma` exist so the two projects
+stay swappable.
 
 Two things the database needed beyond `prisma db push`, both in `supabase/migrations/`:
 
@@ -94,7 +95,7 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 | `ALLOWED_ORIGINS` | `https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio` |
 | `PROXY_SHARED_SECRET` | byte for byte the Worker's secret, from `.secrets/proxy-shared-secret.env` |
 | `GOOGLE_CLIENT_ID` | `706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com` |
-| `SUPABASE_URL` | `https://sevkabyfvpksxckkqttj.supabase.co` — the Academy's own project |
+| `SUPABASE_URL` | `https://frnlloffzfnohagpwsti.supabase.co` — the shared project, where identities are mirrored |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → `service_role` |
 | `ADMIN_EMAIL` | the Google account that owns the Academy |
 | `ADMIN_PASSWORD` | a new one — the old password is in this repo's git history |
