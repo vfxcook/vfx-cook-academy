@@ -11,7 +11,7 @@ export async function rootLoader(): Promise<SessionState> {
     return await api.auth.session();
   } catch {
     // A cold or unreachable API should still render the marketing surface.
-    return { user: null, access: null, providers: { google: false, googleClientId: null, email: false } };
+    return { user: null, access: null, providers: { google: false, googleClientId: null } };
   }
 }
 
@@ -21,7 +21,7 @@ export function useSession(): SessionState {
     (useRouteLoaderData('root') as SessionState | undefined) ?? {
       user: null,
       access: null,
-      providers: { google: false, googleClientId: null, email: false }
+      providers: { google: false, googleClientId: null }
     }
   );
 }

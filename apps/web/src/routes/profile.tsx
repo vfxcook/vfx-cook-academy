@@ -24,11 +24,6 @@ export default function Profile() {
   const [profileMessage, setProfileMessage] = useState('');
   const [profileError, setProfileError] = useState('');
 
-  const [passwords, setPasswords] = useState({ current: '', next: '', confirm: '' });
-  const [passwordBusy, setPasswordBusy] = useState(false);
-  const [passwordMessage, setPasswordMessage] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
   const saveProfile = async (event: FormEvent) => {
     event.preventDefault();
     setProfileBusy(true);
@@ -45,30 +40,6 @@ export default function Profile() {
       setProfileError(errorMessage(thrown, 'Could not save that.'));
     } finally {
       setProfileBusy(false);
-    }
-  };
-
-  const savePassword = async (event: FormEvent) => {
-    event.preventDefault();
-    if (passwords.next !== passwords.confirm) {
-      setPasswordError('Those two passwords do not match.');
-      return;
-    }
-
-    setPasswordBusy(true);
-    setPasswordError('');
-    setPasswordMessage('');
-    try {
-      await api.auth.changePassword({
-        currentPassword: passwords.current || undefined,
-        newPassword: passwords.next
-      });
-      setPasswordMessage('Password updated.');
-      setPasswords({ current: '', next: '', confirm: '' });
-    } catch (thrown) {
-      setPasswordError(errorMessage(thrown, 'Could not change your password.'));
-    } finally {
-      setPasswordBusy(false);
     }
   };
 
@@ -157,68 +128,19 @@ export default function Profile() {
         </div>
       </form>
 
-      <form
-        className="ac-panel ac-stack"
-        style={{ padding: 'clamp(20px, 2.6vw, 30px)' }}
-        onSubmit={savePassword}
-      >
+      <section className="ac-panel ac-stack" style={{ padding: 'clamp(20px, 2.6vw, 30px)' }}>
         <div>
           <p className="ac-eyebrow">Security</p>
           <h2 className="ac-title" style={{ fontSize: 20, marginTop: 6 }}>
-            Password
+            Sign-in
           </h2>
         </div>
-
-        {passwordMessage ? <Notice tone="ok">{passwordMessage}</Notice> : null}
-        {passwordError ? <Notice tone="error">{passwordError}</Notice> : null}
-
-        <Field
-          label="Current password"
-          htmlFor="current-password"
-          hint="Leave empty if you signed up with Google and have never set one."
-        >
-          <input
-            id="current-password"
-            className="ac-input"
-            type="password"
-            autoComplete="current-password"
-            value={passwords.current}
-            onChange={event => setPasswords(current => ({ ...current, current: event.target.value }))}
-          />
-        </Field>
-
-        <Field label="New password" htmlFor="new-password" hint="At least 8 characters.">
-          <input
-            id="new-password"
-            className="ac-input"
-            type="password"
-            autoComplete="new-password"
-            required
-            minLength={8}
-            value={passwords.next}
-            onChange={event => setPasswords(current => ({ ...current, next: event.target.value }))}
-          />
-        </Field>
-
-        <Field label="Confirm new password" htmlFor="confirm-password">
-          <input
-            id="confirm-password"
-            className="ac-input"
-            type="password"
-            autoComplete="new-password"
-            required
-            minLength={8}
-            value={passwords.confirm}
-            onChange={event => setPasswords(current => ({ ...current, confirm: event.target.value }))}
-          />
-        </Field>
-
-        <div className="ac-row" style={{ justifyContent: 'flex-end' }}>
-          <button type="submit" className="ac-btn ac-btn--ghost" disabled={passwordBusy}>
-            {passwordBusy ? 'Updating…' : 'Update password'}
-          </button>
-        </div>
-      </form>
+        <p className="ac-hint">
+          You sign in with Google, so the Academy holds no password of yours to change or
+          lose. Manage that account, and the devices signed into it, in your Google account
+          settings.
+        </p>
+      </section>
 
       {activeCourses.length > 0 ? (
         <section style={{ marginTop: 28 }}>
