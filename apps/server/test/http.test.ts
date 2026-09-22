@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import type { AddressInfo } from 'node:net';
 import { after, before, describe, it } from 'node:test';
 import { createApp } from '../src/app.js';
+import { databaseFailureCode } from '../src/lib/prisma.js';
 
 // These requests never reach the database: no session cookie means no session lookup,
 // and every body here fails validation before a query runs.
@@ -68,5 +69,32 @@ describe('api surface', () => {
   it('rejects an unsigned Razorpay webhook', async () => {
     const response = await fetch(`${base}/api/payments/razorpay-webhook`, { method: 'POST', body: '{}' });
     assert.equal(response.status, 400);
+  });
+});
+
+// The readiness check reports why the database is unreachable, using the wording Prisma 6
+// puts in the message — it raises these without a code of its own. If a Prisma upgrade
+// rewords them, these fail here rather than silently answering UNKNOWN in production.
+describe('database failure codes', () => {
+  const cases: Array<[string, string, string]> = [
+    ['wrong credentials', 'Authentication failed against database server, the provided database credentials for `postgres` are not valid.', 'P1000'],
+    ['unreachable host', "Can't reach database server at `db.example.supabase.co:5432`", 'P1001'],
+    ['no such database', 'Database `academy` does not exist on the database server', 'P1003'],
+    ['unset variable', 'error: Environment variable not found: DATABASE_URL.', 'ENV_MISSING'],
+    ['quoted value', 'the URL must start with the protocol `postgresql://` or `postgres://`', 'URL_MALFORMED']
+  ];
+
+  for (const [label, message, expected] of cases) {
+    it(`reads ${label} as ${expected}`, () => {
+      assert.equal(databaseFailureCode(new Error(message)), expected);
+    });
+  }
+
+  it('keeps a Prisma error code when there is one', () => {
+    assert.equal(databaseFailureCode(Object.assign(new Error('nope'), { code: 'P2021' })), 'P2021');
+  });
+
+  it('never invents a code for something it does not recognise', () => {
+    assert.equal(databaseFailureCode(new Error('the socket hung up')), 'UNKNOWN');
   });
 });

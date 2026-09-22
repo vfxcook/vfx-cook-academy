@@ -13,12 +13,12 @@
     // Client-side routes (/learn/…, /admin/…) fall back to index.html.
     "not_found_handling": "single-page-application",
     // Only these reach the Worker; everything else is served straight from assets.
-    "run_worker_first": ["/api/*", "/uploads/*", "/healthz"]
+    "run_worker_first": ["/api/*", "/uploads/*", "/healthz", "/readyz"]
   },
 
   "vars": {
-    // The Render web service from render.yaml. Update if Render assigns a different URL.
-    "API_ORIGIN": "https://brahmastra-academy-api.onrender.com"
+    // The Render web service. Update if the service is renamed.
+    "API_ORIGIN": "https://vfx-cook-academy.onrender.com"
   },
 
   // Shared with the API so it can trust the visitor IP this Worker forwards:

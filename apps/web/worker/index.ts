@@ -7,7 +7,11 @@
 const PROXIED_PREFIXES = ['/api/', '/uploads/'];
 
 function isProxied(pathname: string) {
-  return pathname === '/healthz' || PROXIED_PREFIXES.some(prefix => pathname.startsWith(prefix));
+  return (
+    pathname === '/healthz' ||
+    pathname === '/readyz' ||
+    PROXIED_PREFIXES.some(prefix => pathname.startsWith(prefix))
+  );
 }
 
 async function proxy(request: Request, url: URL, env: Env): Promise<Response> {

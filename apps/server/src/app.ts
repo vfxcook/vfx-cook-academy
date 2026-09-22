@@ -6,7 +6,7 @@ import { attachUser, validateCsrf } from './lib/auth.js';
 import { clientIp, crossOrigin } from './lib/crossOrigin.js';
 import { env } from './lib/env.js';
 import { errorHandler, notFound } from './lib/http.js';
-import { prisma } from './lib/prisma.js';
+import { databaseFailureCode, prisma } from './lib/prisma.js';
 import { adminRouter } from './routes/admin.js';
 import { authRouter } from './routes/auth.js';
 import { commentsRouter } from './routes/comments.js';
@@ -40,8 +40,12 @@ export function createApp() {
     try {
       await prisma.$queryRaw`SELECT 1`;
       res.json({ ok: true, database: 'up' });
-    } catch {
-      res.status(503).json({ ok: false, database: 'down' });
+    } catch (error) {
+      // The code says what is wrong from outside the host — nobody has to read the logs
+      // to tell a wrong password from an unreachable server. The message, which names the
+      // host, is logged rather than returned.
+      console.error('[academy] database check failed:', error instanceof Error ? error.message : error);
+      res.status(503).json({ ok: false, database: 'down', code: databaseFailureCode(error) });
     }
   });
 
