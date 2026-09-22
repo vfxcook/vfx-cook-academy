@@ -142,6 +142,7 @@
 .home-stage:hover .home-stage-no { -webkit-text-stroke-color: var(--ac-ember); }
 
 .home-stage-body { display: grid; gap: 8px; }
+.home-stage-body .ac-chip { justify-self: start; }
 .home-stage-body h3 {
   font-family: var(--ac-display);
   font-size: clamp(18px, 2vw, 24px);
