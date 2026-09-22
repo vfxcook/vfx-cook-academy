@@ -76,89 +76,121 @@ export function getOrCreateStudioBalance(db: Db, userId: string) {
   return db.studioCreditBalance.upsert({ where: { userId }, update: {}, create: { userId } });
 }
 
-export async function addStudioCredits(params: {
+type CreditChange = {
   db: Db;
   userId: string;
   credits: number;
   referenceId?: string;
   note?: string;
-}) {
-  const current = await getOrCreateStudioBalance(params.db, params.userId);
-  const balanceAfter = current.availableCredits + params.credits;
+};
 
-  await params.db.studioCreditBalance.update({
-    where: { userId: params.userId },
+/*
+ * Every balance change is a single atomic increment or a guarded decrement, never a
+ * read-then-write. Two generations started in the same instant therefore cannot both
+ * spend the same credits, and the ledger's balanceAfter is the row as actually written.
+ */
+
+export async function addStudioCredits(change: CreditChange) {
+  await getOrCreateStudioBalance(change.db, change.userId);
+  const row = await change.db.studioCreditBalance.update({
+    where: { userId: change.userId },
     data: {
-      availableCredits: balanceAfter,
-      lifetimePurchasedCredits: { increment: params.credits }
+      availableCredits: { increment: change.credits },
+      lifetimePurchasedCredits: { increment: change.credits }
     }
   });
-  await params.db.studioCreditLedger.create({
+  await change.db.studioCreditLedger.create({
     data: {
-      userId: params.userId,
+      userId: change.userId,
       type: 'PURCHASE',
-      deltaCredits: params.credits,
-      balanceAfter,
-      referenceId: params.referenceId,
-      note: params.note
+      deltaCredits: change.credits,
+      balanceAfter: row.availableCredits,
+      referenceId: change.referenceId,
+      note: change.note
     }
   });
-  return balanceAfter;
+  return row.availableCredits;
 }
 
-export async function spendStudioCredits(params: {
-  db: Db;
-  userId: string;
-  credits: number;
-  referenceId?: string;
-  note?: string;
-}) {
-  const current = await getOrCreateStudioBalance(params.db, params.userId);
-  if (current.availableCredits < params.credits) {
+export async function spendStudioCredits(change: CreditChange) {
+  await getOrCreateStudioBalance(change.db, change.userId);
+  const spent = await change.db.studioCreditBalance.updateMany({
+    where: { userId: change.userId, availableCredits: { gte: change.credits } },
+    data: {
+      availableCredits: { decrement: change.credits },
+      lifetimeUsedCredits: { increment: change.credits }
+    }
+  });
+  if (spent.count === 0) {
     throw new ApiError(402, 'Not enough studio credits for this generation.', 'INSUFFICIENT_CREDITS');
   }
-  const balanceAfter = current.availableCredits - params.credits;
 
-  await params.db.studioCreditBalance.update({
-    where: { userId: params.userId },
-    data: { availableCredits: balanceAfter, lifetimeUsedCredits: { increment: params.credits } }
-  });
-  await params.db.studioCreditLedger.create({
+  const row = await change.db.studioCreditBalance.findUniqueOrThrow({ where: { userId: change.userId } });
+  await change.db.studioCreditLedger.create({
     data: {
-      userId: params.userId,
+      userId: change.userId,
       type: 'GENERATION_DEBIT',
-      deltaCredits: -params.credits,
-      balanceAfter,
-      referenceId: params.referenceId,
-      note: params.note
+      deltaCredits: -change.credits,
+      balanceAfter: row.availableCredits,
+      referenceId: change.referenceId,
+      note: change.note
     }
   });
-  return balanceAfter;
+  return row.availableCredits;
 }
 
-export async function refundStudioCredits(params: {
-  db: Db;
-  userId: string;
-  credits: number;
-  referenceId?: string;
-  note?: string;
-}) {
-  const current = await getOrCreateStudioBalance(params.db, params.userId);
-  const balanceAfter = current.availableCredits + params.credits;
-
-  await params.db.studioCreditBalance.update({
-    where: { userId: params.userId },
-    data: { availableCredits: balanceAfter, lifetimeUsedCredits: { decrement: params.credits } }
-  });
-  await params.db.studioCreditLedger.create({
+export async function refundStudioCredits(change: CreditChange) {
+  await getOrCreateStudioBalance(change.db, change.userId);
+  const row = await change.db.studioCreditBalance.update({
+    where: { userId: change.userId },
     data: {
-      userId: params.userId,
-      type: 'REFUND',
-      deltaCredits: params.credits,
-      balanceAfter,
-      referenceId: params.referenceId,
-      note: params.note
+      availableCredits: { increment: change.credits },
+      lifetimeUsedCredits: { decrement: change.credits }
     }
   });
-  return balanceAfter;
+  await change.db.studioCreditLedger.create({
+    data: {
+      userId: change.userId,
+      type: 'REFUND',
+      deltaCredits: change.credits,
+      balanceAfter: row.availableCredits,
+      referenceId: change.referenceId,
+      note: change.note
+    }
+  });
+  return row.availableCredits;
+}
+
+/** Admin top-ups and deductions. A deduction can never take the balance below zero. */
+export async function adjustStudioCredits(change: CreditChange) {
+  await getOrCreateStudioBalance(change.db, change.userId);
+
+  const adjusted = await change.db.studioCreditBalance.updateMany({
+    where: {
+      userId: change.userId,
+      ...(change.credits < 0 ? { availableCredits: { gte: Math.abs(change.credits) } } : {})
+    },
+    data: {
+      availableCredits: { increment: change.credits },
+      ...(change.credits > 0
+        ? { lifetimePurchasedCredits: { increment: change.credits } }
+        : { lifetimeUsedCredits: { increment: Math.abs(change.credits) } })
+    }
+  });
+  if (adjusted.count === 0) {
+    throw new ApiError(400, 'That deduction would take the balance below zero.', 'INSUFFICIENT_CREDITS');
+  }
+
+  const row = await change.db.studioCreditBalance.findUniqueOrThrow({ where: { userId: change.userId } });
+  await change.db.studioCreditLedger.create({
+    data: {
+      userId: change.userId,
+      type: 'ADMIN_ADJUSTMENT',
+      deltaCredits: change.credits,
+      balanceAfter: row.availableCredits,
+      referenceId: change.referenceId,
+      note: change.note
+    }
+  });
+  return row.availableCredits;
 }
