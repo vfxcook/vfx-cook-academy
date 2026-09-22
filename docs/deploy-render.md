@@ -22,9 +22,22 @@ service is in **Singapore**: it is the closest region Render offers, so every qu
 one Mumbai–Singapore hop. Keep an eye on query counts per request; there is no Render
 region in India to move closer to.
 
-The identity mirror is a different project on purpose. `SUPABASE_URL` stays the shared
-BrahmAstra project (`frnlloffzfnohagpwsti`), where Google sign-ins land so the Studio and
-the Academy see one user base. Only `DATABASE_URL` and `DIRECT_URL` point here.
+`SUPABASE_URL` points here too, so the identity mirror and uploads stay inside the
+Academy's own project rather than carrying the Studio's admin key. The cost is that
+Academy sign-ins do not appear in BrahmAstra Studio's user base; switching later is two
+environment variables plus a backfill of `profiles`.
+
+Two things the database needed beyond `prisma db push`, both in `supabase/migrations/`:
+
+- **`20260923010000_lock_public_schema.sql`** — Supabase serves `public` over PostgREST as
+  the `anon` role, and the anon key is public by design. Prisma's tables arrived with
+  Supabase's default grants, leaving password hashes, session tokens and enrolments
+  readable *and writable* by anyone holding that key. This revokes anon and authenticated,
+  revokes them from future tables too, and enables RLS on every table. **Run it again after
+  any push that adds tables.**
+- **`20260923020000_profiles_standalone.sql`** — the mirror's `profiles` row, which exists
+  on the shared project but not on a fresh one. A matching `Profile` model sits in
+  `schema.prisma` so `db push` leaves the table alone rather than dropping it.
 
 From the project's **Connect** panel, take the **session pooler** string (port 5432) and
 use it for both `DATABASE_URL` and `DIRECT_URL`:

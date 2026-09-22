@@ -451,3 +451,23 @@ model GiftCoupon {
 
   @@index([code])
 }
+
+/// The Supabase mirror row, written by the API with the service-role key after a Google
+/// sign-in and read by BrahmAstra Studio. Nothing in this codebase reads it through
+/// Prisma; the model exists so `prisma db push` leaves the table where it is.
+model Profile {
+  id                  String    @id @db.Uuid
+  email               String?
+  fullName            String?   @map("full_name")
+  avatarUrl           String?   @map("avatar_url")
+  provider            String?
+  lastSignInAt        DateTime? @map("last_sign_in_at") @db.Timestamptz(6)
+  updatedAt           DateTime? @default(now()) @map("updated_at") @db.Timestamptz(6)
+  academyUserId       String?   @map("academy_user_id")
+  academyAccess       Boolean   @default(false) @map("academy_access")
+  academyLastSignInAt DateTime? @map("academy_last_sign_in_at") @db.Timestamptz(6)
+
+  @@index([email])
+  @@index([academyAccess])
+  @@map("profiles")
+}
