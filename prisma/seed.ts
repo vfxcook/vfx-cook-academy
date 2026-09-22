@@ -94,10 +94,15 @@ async function main() {
   console.log(`Seeded admin: ${adminEmail}`);
 
   // Re-seeding a v1 database renames its demo accounts instead of adding a second set.
+  // An address already taken on the new domain is left alone rather than colliding.
   const renamed = await prisma.$executeRaw`
-    UPDATE "User"
-    SET email = replace(email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
-    WHERE email LIKE ${'%@' + LEGACY_DEMO_DOMAIN}
+    UPDATE "User" AS legacy
+    SET email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
+    WHERE legacy.email LIKE ${'%@' + LEGACY_DEMO_DOMAIN}
+      AND NOT EXISTS (
+        SELECT 1 FROM "User" AS taken
+        WHERE taken.email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
+      )
   `;
   if (renamed > 0) console.log(`Moved ${renamed} demo accounts to @${DEMO_DOMAIN}`);
 

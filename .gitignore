@@ -28,3 +28,8 @@ npm-debug.log*
 
 # local preview config
 .claude/launch.json
+
+# cloudflare local dev
+.wrangler/
+.dev.vars*
+!.dev.vars.example

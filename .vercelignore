@@ -1,6 +1,0 @@
-node_modules
-docs
-uploads
-**/uploads
-*.mp4
-.claude
