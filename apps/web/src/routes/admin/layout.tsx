@@ -18,6 +18,7 @@ const NAV = [
   { to: '/admin/lessons', label: 'Lessons' },
   { to: '/admin/students', label: 'Students' },
   { to: '/admin/payments', label: 'Payments', badge: true },
+  { to: '/admin/community', label: 'Community' },
   { to: '/admin/prompts', label: 'Prompts' },
   { to: '/admin/studio', label: 'AI Studio' }
 ];

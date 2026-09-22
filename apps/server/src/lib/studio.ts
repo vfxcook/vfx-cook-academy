@@ -4,7 +4,6 @@ import { ApiError } from './http.js';
 type Db = PrismaClient | Prisma.TransactionClient;
 
 export const STUDIO_BRAND_NAME = 'VFX COOK AI STUDIO';
-export const STUDIO_ROUTE = '/studio';
 
 export const STUDIO_USD_INR_RATE = 95.3;
 export const STUDIO_KIE_CREDIT_USD = 0.005;

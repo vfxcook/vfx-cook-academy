@@ -139,7 +139,6 @@ interface CinemaSceneProps {
   ghost?: string;
   lede: string;
   children: ReactNode;
-  footer?: ReactNode;
 }
 
 /**
@@ -151,8 +150,7 @@ export default function CinemaScene({
   headline,
   ghost,
   lede,
-  children,
-  footer
+  children
 }: CinemaSceneProps) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -247,7 +245,6 @@ export default function CinemaScene({
           <div ref={cardRef} className="sc-card">
             <div className="sc-card-body">{children}</div>
           </div>
-          {footer}
         </section>
       </main>
     </div>

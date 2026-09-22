@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router';
 import BootFallback from './components/BootFallback';
 import RootLayout, { rootLoader } from './routes/rootLayout';
-import RouteError from './routes/routeError';
+import RouteError, { notFoundLoader } from './routes/routeError';
+import Onboarding, { onboardingLoader } from './routes/onboarding';
 
 import Home, { homeLoader } from './routes/home';
 import Courses, { coursesLoader } from './routes/courses';
@@ -24,10 +25,12 @@ import AdminLessons, { adminLessonsLoader } from './routes/admin/lessons';
 import AdminStudents, { adminStudentsLoader } from './routes/admin/students';
 import AdminPayments, { adminPaymentsLoader } from './routes/admin/payments';
 import AdminPrompts, { adminPromptsLoader } from './routes/admin/prompts';
+import AdminCommunity, { adminCommunityLoader } from './routes/admin/community';
 import AdminStudio, { adminStudioLoader } from './routes/admin/studio';
 
 const hydrateFallbackElement = <BootFallback />;
-const errorElement = <RouteError />;
+const sceneError = <RouteError />;
+const errorElement = <RouteError inShell />;
 
 export const router = createBrowserRouter([
   // The auth scenes are full-bleed and deliberately sit outside the app chrome.
@@ -36,21 +39,28 @@ export const router = createBrowserRouter([
     element: <SignIn />,
     loader: signInLoader,
     hydrateFallbackElement,
-    errorElement
+    errorElement: sceneError
   },
   {
     path: '/sign-in/link',
     element: <SignInLink />,
     loader: signInLinkLoader,
     hydrateFallbackElement,
-    errorElement
+    errorElement: sceneError
   },
   {
     path: '/sign-up',
     element: <SignUp />,
     loader: signUpLoader,
     hydrateFallbackElement,
-    errorElement
+    errorElement: sceneError
+  },
+  {
+    path: '/onboarding',
+    element: <Onboarding />,
+    loader: onboardingLoader,
+    hydrateFallbackElement,
+    errorElement: sceneError
   },
   {
     id: 'root',
@@ -58,7 +68,7 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     loader: rootLoader,
     hydrateFallbackElement,
-    errorElement,
+    errorElement: sceneError,
     children: [
       { index: true, element: <Home />, loader: homeLoader, errorElement },
       { path: 'courses', element: <Courses />, loader: coursesLoader, errorElement },
@@ -92,12 +102,13 @@ export const router = createBrowserRouter([
           { path: 'lessons', element: <AdminLessons />, loader: adminLessonsLoader, errorElement },
           { path: 'students', element: <AdminStudents />, loader: adminStudentsLoader, errorElement },
           { path: 'payments', element: <AdminPayments />, loader: adminPaymentsLoader, errorElement },
+          { path: 'community', element: <AdminCommunity />, loader: adminCommunityLoader, errorElement },
           { path: 'prompts', element: <AdminPrompts />, loader: adminPromptsLoader, errorElement },
           { path: 'studio', element: <AdminStudio />, loader: adminStudioLoader, errorElement }
         ]
       },
 
-      { path: '*', element: <RouteError /> }
+      { path: '*', loader: notFoundLoader, errorElement }
     ]
   }
 ]);

@@ -8,28 +8,40 @@ export async function adminPaymentsLoader() {
   return api.admin.payments();
 }
 
-type Filter = 'PENDING' | 'APPROVED' | 'REJECTED' | 'ALL';
+type Filter = 'REVIEW' | 'UNPAID' | 'APPROVED' | 'REJECTED' | 'ALL';
 
 const FILTERS: Array<{ id: Filter; label: string }> = [
-  { id: 'PENDING', label: 'Awaiting review' },
+  { id: 'REVIEW', label: 'Awaiting review' },
+  { id: 'UNPAID', label: 'Unpaid checkouts' },
   { id: 'APPROVED', label: 'Approved' },
   { id: 'REJECTED', label: 'Rejected' },
   { id: 'ALL', label: 'Everything' }
 ];
 
+type Payment = Awaited<ReturnType<typeof adminPaymentsLoader>>['payments'][number];
+
+/** A manual transfer waits on a human; an unpaid online checkout waits on nobody. */
+function matches(payment: Payment, filter: Filter) {
+  if (filter === 'ALL') return true;
+  if (filter === 'REVIEW') return payment.status === 'PENDING' && payment.method !== 'gateway';
+  if (filter === 'UNPAID') return payment.status === 'PENDING' && payment.method === 'gateway';
+  return payment.status === filter;
+}
+
 export default function AdminPayments() {
   const { payments } = useLoaderData<typeof adminPaymentsLoader>();
   const revalidator = useRevalidator();
 
-  const [filter, setFilter] = useState<Filter>('PENDING');
+  const [filter, setFilter] = useState<Filter>('REVIEW');
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState('');
-  const [issued, setIssued] = useState<{ code: string; emailed: boolean; email: string } | null>(null);
+  const [issued, setIssued] = useState<{
+    code: string | null;
+    emailed: boolean;
+    email: string;
+  } | null>(null);
 
-  const visible = useMemo(
-    () => payments.filter(payment => filter === 'ALL' || payment.status === filter),
-    [payments, filter]
-  );
+  const visible = useMemo(() => payments.filter(payment => matches(payment, filter)), [payments, filter]);
 
   const act = async (id: string, action: 'approve' | 'reject', email: string) => {
     setBusy(id);
@@ -64,7 +76,7 @@ export default function AdminPayments() {
 
       <div className="ac-row" role="tablist" aria-label="Filter payments">
         {FILTERS.map(item => {
-          const count = payments.filter(p => item.id === 'ALL' || p.status === item.id).length;
+          const count = payments.filter(payment => matches(payment, item.id)).length;
           return (
             <button
               key={item.id}
@@ -83,7 +95,11 @@ export default function AdminPayments() {
       <section className="ac-panel adm-card">
         {visible.length === 0 ? (
           <EmptyState title="Nothing here">
-            {filter === 'PENDING' ? 'No payments are waiting on you.' : 'No payments in this state.'}
+            {filter === 'REVIEW'
+              ? 'No transfers are waiting on you.'
+              : filter === 'UNPAID'
+                ? 'No abandoned checkouts.'
+                : 'No payments in this state.'}
           </EmptyState>
         ) : (
           <div className="ac-table-wrap">
@@ -117,7 +133,10 @@ export default function AdminPayments() {
                     </td>
                     <td>{formatInr(payment.amountInr)}</td>
                     <td>
-                      <span className="ac-mono">{payment.transactionRef}</span>
+                      <span className="ac-chip" style={{ marginBottom: 4 }}>
+                        {payment.method === 'gateway' ? 'razorpay' : 'upi transfer'}
+                      </span>
+                      <div className="ac-mono">{payment.transactionRef}</div>
                       {payment.note ? <div className="adm-mini">{payment.note}</div> : null}
                     </td>
                     <td>
@@ -138,7 +157,17 @@ export default function AdminPayments() {
                     </td>
                     <td>{formatRelative(payment.createdAt)}</td>
                     <td>
-                      {payment.status === 'PENDING' ? (
+                      {payment.status === 'PENDING' && payment.method === 'gateway' ? (
+                        <button
+                          type="button"
+                          className="ac-btn ac-btn--quiet ac-btn--sm"
+                          disabled={busy === payment.id}
+                          title="The student opened checkout but never paid. It still settles itself if Razorpay later confirms a payment."
+                          onClick={() => act(payment.id, 'reject', payment.user.email ?? '')}
+                        >
+                          Dismiss
+                        </button>
+                      ) : payment.status === 'PENDING' ? (
                         <div className="ac-row" style={{ gap: 4, justifyContent: 'flex-end' }}>
                           <button
                             type="button"
@@ -168,21 +197,25 @@ export default function AdminPayments() {
       </section>
 
       {issued ? (
-        <Dialog title="License issued" onClose={() => setIssued(null)}>
+        <Dialog title={issued.code ? 'License issued' : 'Payment approved'} onClose={() => setIssued(null)}>
           <p className="ac-lede" style={{ marginBottom: 16 }}>
-            {issued.emailed
-              ? `The code has been emailed to ${issued.email}. It is valid for 7 days.`
-              : 'SMTP is not configured, so the email was not sent. Pass this code on yourself — it is valid for 7 days.'}
+            {!issued.code
+              ? 'The student already had access to this course, so no license was needed.'
+              : issued.emailed
+                ? `The code has been emailed to ${issued.email}. It is valid for 7 days.`
+                : 'SMTP is not configured, so the email was not sent. Pass this code on yourself — it is valid for 7 days.'}
           </p>
-          <p className="adm-code">{issued.code}</p>
+          {issued.code ? <p className="adm-code">{issued.code}</p> : null}
           <div className="ac-row" style={{ justifyContent: 'flex-end', marginTop: 20 }}>
-            <button
-              type="button"
-              className="ac-btn ac-btn--ghost"
-              onClick={() => void navigator.clipboard.writeText(issued.code).catch(() => undefined)}
-            >
-              Copy code
-            </button>
+            {issued.code ? (
+              <button
+                type="button"
+                className="ac-btn ac-btn--ghost"
+                onClick={() => void navigator.clipboard.writeText(issued.code ?? '').catch(() => undefined)}
+              >
+                Copy code
+              </button>
+            ) : null}
             <button type="button" className="ac-btn ac-btn--primary" onClick={() => setIssued(null)}>
               Done
             </button>

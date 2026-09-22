@@ -197,20 +197,3 @@ export function Dialog({
     </div>
   );
 }
-
-/** Aperture spinner used for route transitions and in-place loading. */
-export function Spinner({ label = 'Loading' }: { label?: string }) {
-  return (
-    <span className="ac-spinner" role="status" aria-label={label}>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeOpacity=".16" />
-        <path
-          d="M18.5 10A8.5 8.5 0 0 0 10 1.5"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-      </svg>
-    </span>
-  );
-}

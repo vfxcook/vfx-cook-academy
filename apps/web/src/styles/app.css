@@ -243,11 +243,6 @@
 .ftr a:hover { color: var(--ac-text); }
 .ftr-links { display: flex; flex-wrap: wrap; gap: 18px; margin-left: auto; }
 
-/* ---------- spinner ---------- */
-
-.ac-spinner { display: inline-flex; color: currentColor; }
-.ac-spinner svg { animation: sa-spin 800ms linear infinite; }
-
 /* ---------- route transition ---------- */
 
 .route-busy {
