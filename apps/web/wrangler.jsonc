@@ -28,6 +28,10 @@
   // Needs the brahmastra.studio zone on this Cloudflare account.
   "routes": [{ "pattern": "academy.brahmastra.studio", "custom_domain": true }],
 
+  // A workers.dev URL to preview the build on. Sign-in only works on the custom
+  // domain: session cookies are scoped to .brahmastra.studio.
+  "workers_dev": true,
+
   // Created during the Cloudflare setup. The Academy's database lives on Render
   // Postgres, so the Worker does not read this binding.
   "d1_databases": [

@@ -22,7 +22,7 @@ async function proxy(request: Request, url: URL, env: Env): Promise<Response> {
   // The real visitor address, vouched for with the shared secret so the API can trust it.
   const visitor = request.headers.get('CF-Connecting-IP');
   if (visitor) upstream.headers.set('X-Forwarded-For', visitor);
-  upstream.headers.set('X-Academy-Proxy', env.PROXY_SHARED_SECRET);
+  if (env.PROXY_SHARED_SECRET) upstream.headers.set('X-Academy-Proxy', env.PROXY_SHARED_SECRET);
 
   try {
     // Bodies stream both ways, so uploads and video never sit in Worker memory.

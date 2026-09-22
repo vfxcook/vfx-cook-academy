@@ -47,9 +47,10 @@ services:
         value: .brahmastra.studio
       - key: ALLOWED_ORIGINS
         value: https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio
-      # Copy this value into the Worker: npx wrangler secret put PROXY_SHARED_SECRET
+      # Must equal the Worker's secret of the same name. Paste the value from
+      # .secrets/proxy-shared-secret.env (created when the Worker was first deployed).
       - key: PROXY_SHARED_SECRET
-        generateValue: true
+        sync: false
 
       # Google Identity Services — the same client as BrahmAstra Studio.
       - key: GOOGLE_CLIENT_ID

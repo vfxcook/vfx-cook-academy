@@ -33,3 +33,6 @@ npm-debug.log*
 .wrangler/
 .dev.vars*
 !.dev.vars.example
+
+# generated deployment secrets (never commit)
+.secrets/
