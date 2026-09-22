@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { Router } from 'express';
 import { z } from 'zod';
 import { requireUser } from '../lib/auth.js';
@@ -5,9 +6,10 @@ import { env } from '../lib/env.js';
 import { ApiError, badRequest, notFound, parse, route } from '../lib/http.js';
 import { prisma } from '../lib/prisma.js';
 import { createOrder, verifyCheckoutSignature } from '../lib/razorpay.js';
+import { settleStudioPurchase } from '../lib/settle.js';
+import { timingSafeEqual } from '../lib/utils.js';
 import {
   STUDIO_BRAND_NAME,
-  addStudioCredits,
   ensureStudioDefaults,
   getOrCreateStudioBalance,
   refundStudioCredits,
@@ -108,30 +110,15 @@ studioRouter.post(
       throw badRequest('We could not verify that payment signature.');
     }
 
-    const balance = await prisma.$transaction(async tx => {
-      const purchase = await tx.studioCreditPurchase.findUnique({
-        where: { razorpayOrderId: data.razorpayOrderId }
-      });
-      if (!purchase || purchase.userId !== req.user!.id) throw notFound('Purchase not found.');
-
-      // Razorpay can deliver the same success twice; crediting is done once.
-      if (purchase.status === 'PAID') {
-        const existing = await tx.studioCreditBalance.findUnique({ where: { userId: req.user!.id } });
-        return existing?.availableCredits ?? 0;
-      }
-
-      await tx.studioCreditPurchase.update({
-        where: { id: purchase.id },
-        data: { status: 'PAID', razorpayPaymentId: data.razorpayPaymentId }
-      });
-      return addStudioCredits({
-        db: tx,
-        userId: req.user!.id,
-        credits: purchase.credits,
-        referenceId: purchase.id,
-        note: `Studio credits purchased via Razorpay order ${data.razorpayOrderId}`
-      });
-    });
+    const result = await prisma.$transaction(tx =>
+      settleStudioPurchase(tx, {
+        orderId: data.razorpayOrderId,
+        paymentId: data.razorpayPaymentId,
+        userId: req.user!.id
+      })
+    );
+    if (!result.found) throw notFound('Purchase not found.');
+    const balance = result.balance;
 
     res.json({ ok: true, balance });
   })
@@ -187,6 +174,23 @@ studioRouter.post(
 
 const KIE_BASE = 'https://api.kie.ai';
 
+async function providerKey() {
+  const stored = await prisma.appSetting.findUnique({ where: { key: 'KIE_API_KEY' } });
+  return stored?.value || env.studio.kieApiKey;
+}
+
+/**
+ * The provider calls back unauthenticated, and students can see their own generation
+ * ids. Without a signature anyone could post a fake failure, collect the refund and keep
+ * the provider bill running. The key is STUDIO_CALLBACK_SECRET, or derived from the
+ * provider key when that is unset, so no extra configuration is required.
+ */
+async function callbackSignature(generationId: string) {
+  const secret = env.studio.callbackSecret || (await providerKey());
+  if (!secret) return '';
+  return crypto.createHmac('sha256', `academy-callback:${secret}`).update(generationId).digest('hex');
+}
+
 studioRouter.post(
   '/generate',
   requireUser,
@@ -235,12 +239,12 @@ studioRouter.post(
     });
 
     try {
-      const stored = await prisma.appSetting.findUnique({ where: { key: 'KIE_API_KEY' } });
-      const apiKey = stored?.value || env.studio.kieApiKey;
+      const apiKey = await providerKey();
       if (!apiKey) throw new Error('KIE_API_KEY is not configured.');
 
       const base = (env.studio.callbackBaseUrl || env.appUrl).replace(/\/$/, '');
-      const callBackUrl = `${base}/api/studio/callback?id=${queued.generation.id}`;
+      const sig = await callbackSignature(queued.generation.id);
+      const callBackUrl = `${base}/api/studio/callback?id=${queued.generation.id}&sig=${sig}`;
 
       let endpoint = `${KIE_BASE}/api/v1/jobs/createTask`;
       let body: Record<string, unknown> = {
@@ -330,6 +334,11 @@ studioRouter.post(
   route(async (req, res) => {
     const generationId = String(req.query.id ?? '').trim();
     if (!generationId) return res.json({ received: true });
+
+    const expected = await callbackSignature(generationId);
+    if (!expected || !timingSafeEqual(expected, String(req.query.sig ?? ''))) {
+      return res.json({ received: true });
+    }
 
     const body = (req.body ?? {}) as Record<string, unknown>;
     const data = (body.data ?? body) as Record<string, unknown>;

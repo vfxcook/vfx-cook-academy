@@ -4,8 +4,9 @@ import { requireUser } from '../lib/auth.js';
 import { env } from '../lib/env.js';
 import { badRequest, conflict, notFound, parse, route } from '../lib/http.js';
 import { prisma } from '../lib/prisma.js';
-import { createOrder, razorpay, verifyCheckoutSignature } from '../lib/razorpay.js';
-import { makeGiftCode } from '../lib/utils.js';
+import { rateLimit } from '../lib/rateLimit.js';
+import { createOrder, verifyCheckoutSignature, verifyWebhookSignature } from '../lib/razorpay.js';
+import { manualTransfersOnly, settleCoursePayment, settleStudioPurchase } from '../lib/settle.js';
 
 export const paymentsRouter = Router();
 
@@ -26,6 +27,15 @@ async function loadPurchasableCourse(courseId: string) {
   return course;
 }
 
+async function assertNotAlreadyEnrolled(userId: string, courseId: string) {
+  const enrollment = await prisma.enrollment.findUnique({
+    where: { userId_courseId: { userId, courseId } },
+    select: { isActive: true }
+  });
+  if (enrollment?.isActive) throw conflict('You already have access to this course.');
+}
+
+/** Makes the course show up on the dashboard while a manual transfer is reviewed. */
 async function ensurePendingEnrollment(userId: string, courseId: string) {
   await prisma.enrollment.upsert({
     where: { userId_courseId: { userId, courseId } },
@@ -43,19 +53,13 @@ paymentsRouter.post(
       req.body
     );
     const course = await loadPurchasableCourse(data.courseId);
-
-    if (!data.isGift) {
-      const enrollment = await prisma.enrollment.findUnique({
-        where: { userId_courseId: { userId: req.user!.id, courseId: course.id } },
-        select: { isActive: true }
-      });
-      if (enrollment?.isActive) throw conflict('You already have access to this course.');
-    }
+    if (!data.isGift) await assertNotAlreadyEnrolled(req.user!.id, course.id);
 
     const order = await createOrder({
       amountInr: course.priceInr,
       receipt: `rcpt_${req.user!.id.slice(-8)}_${Date.now()}`,
       notes: {
+        kind: 'course_purchase',
         userId: req.user!.id,
         courseId: course.id,
         courseSlug: course.slug,
@@ -69,12 +73,11 @@ paymentsRouter.post(
         courseId: course.id,
         amountInr: course.priceInr,
         transactionRef: order.id,
-        note: data.isGift ? 'Razorpay order created for gift' : 'Razorpay order created',
+        note: data.isGift ? 'Razorpay checkout opened for a gift' : 'Razorpay checkout opened',
         status: 'PENDING',
         isGift: Boolean(data.isGift)
       }
     });
-    await ensurePendingEnrollment(req.user!.id, course.id);
 
     res.json({
       orderId: order.id,
@@ -104,108 +107,51 @@ paymentsRouter.post(
       throw badRequest('We could not verify that payment signature.');
     }
 
-    const result = await prisma.$transaction(async tx => {
-      const pending = await tx.paymentRequest.findFirst({
+    const course = await prisma.course.findUnique({
+      where: { id: data.courseId },
+      select: { slug: true }
+    });
+    if (!course) throw notFound('Course not found.');
+
+    const redirectTo = await prisma.$transaction(async tx => {
+      // Either id may be on the row: the order id before settling, the payment id after.
+      const request = await tx.paymentRequest.findFirst({
         where: {
           userId: req.user!.id,
           courseId: data.courseId,
-          transactionRef: data.razorpayOrderId,
-          status: 'PENDING'
+          transactionRef: { in: [data.razorpayOrderId, data.razorpayPaymentId] }
         },
         orderBy: { createdAt: 'desc' }
       });
-      if (!pending) throw notFound('We could not find a pending payment for this course.');
+      if (!request) throw notFound('We could not find that checkout. Contact support with your payment id.');
 
-      await tx.paymentRequest.update({
-        where: { id: pending.id },
-        data: {
-          status: 'APPROVED',
-          reviewedAt: new Date(),
-          reviewedBy: 'razorpay-checkout',
-          transactionRef: data.razorpayPaymentId,
-          note: 'Verified through Razorpay Checkout'
-        }
+      const outcome = await settleCoursePayment(tx, {
+        requestId: request.id,
+        paymentRef: data.razorpayPaymentId,
+        reviewer: 'razorpay-checkout',
+        note: 'Verified through Razorpay Checkout'
       });
 
-      if (pending.isGift) {
-        const coupon = await tx.giftCoupon.create({
-          data: {
-            code: makeGiftCode(),
-            courseId: data.courseId,
-            purchaserId: req.user!.id,
-            amountInr: pending.amountInr,
-            isRedeemed: false
-          }
-        });
-        return { redirectTo: `/gift/${coupon.id}` };
-      }
+      if (!request.isGift) return `/learn/${course.slug}`;
+      if (outcome.giftId) return `/gift/${outcome.giftId}`;
 
-      await tx.enrollment.upsert({
-        where: { userId_courseId: { userId: req.user!.id, courseId: data.courseId } },
-        create: {
-          userId: req.user!.id,
-          courseId: data.courseId,
-          isActive: true,
-          activatedAt: new Date()
-        },
-        update: { isActive: true, activatedAt: new Date() }
+      // The webhook settled this gift first; send the buyer to the coupon it minted.
+      const coupon = await tx.giftCoupon.findFirst({
+        where: { purchaserId: req.user!.id, courseId: data.courseId, createdAt: { gte: request.createdAt } },
+        orderBy: { createdAt: 'desc' },
+        select: { id: true }
       });
-      return { redirectTo: '/dashboard' };
+      return coupon ? `/gift/${coupon.id}` : '/dashboard';
     });
 
-    res.json({ ok: true, ...result });
-  })
-);
-
-paymentsRouter.post(
-  '/payment-link',
-  requireUser,
-  route(async (req, res) => {
-    const { courseId } = parse(z.object({ courseId: z.string().min(1) }), req.body);
-    const course = await loadPurchasableCourse(courseId);
-
-    const enrollment = await prisma.enrollment.findUnique({
-      where: { userId_courseId: { userId: req.user!.id, courseId: course.id } },
-      select: { isActive: true }
-    });
-    if (enrollment?.isActive) throw conflict('You already have access to this course.');
-
-    const link = (await razorpay().paymentLink.create({
-      amount: course.priceInr * 100,
-      currency: 'INR',
-      accept_partial: false,
-      description: `${course.title} — VFX Cook Academy`,
-      customer: {
-        name: req.user!.name ?? undefined,
-        email: req.user!.email ?? undefined,
-        contact: req.user!.phone ?? undefined
-      },
-      notify: { sms: false, email: false },
-      reminder_enable: false,
-      callback_url: `${env.appUrl.replace(/\/$/, '')}/checkout/${course.slug}`,
-      callback_method: 'get',
-      notes: { userId: req.user!.id, courseId: course.id, courseSlug: course.slug }
-    })) as unknown as { id: string; short_url: string };
-
-    await prisma.paymentRequest.create({
-      data: {
-        userId: req.user!.id,
-        courseId: course.id,
-        amountInr: course.priceInr,
-        transactionRef: link.id,
-        note: 'Razorpay payment link generated',
-        status: 'PENDING'
-      }
-    });
-    await ensurePendingEnrollment(req.user!.id, course.id);
-
-    res.json({ paymentUrl: link.short_url });
+    res.json({ ok: true, redirectTo });
   })
 );
 
 paymentsRouter.post(
   '/requests',
   requireUser,
+  rateLimit({ name: 'manual-payment', windowMs: 60 * 60_000, max: 10 }),
   route(async (req, res) => {
     const data = parse(
       z.object({
@@ -216,11 +162,13 @@ paymentsRouter.post(
       req.body
     );
     const course = await loadPurchasableCourse(data.courseId);
+    await assertNotAlreadyEnrolled(req.user!.id, course.id);
 
+    // An abandoned online checkout must not block the manual fallback.
     const existing = await prisma.paymentRequest.findFirst({
-      where: { userId: req.user!.id, courseId: course.id, status: 'PENDING' }
+      where: { userId: req.user!.id, courseId: course.id, status: 'PENDING', ...manualTransfersOnly }
     });
-    if (existing) throw conflict('You already have a payment under review for this course.');
+    if (existing) throw conflict('You already have a transfer under review for this course.');
 
     const paymentRequest = await prisma.paymentRequest.create({
       data: {
@@ -266,6 +214,7 @@ paymentsRouter.get(
 paymentsRouter.post(
   '/gifts/redeem',
   requireUser,
+  rateLimit({ name: 'gift-redeem', windowMs: 15 * 60_000, max: 10 }),
   route(async (req, res) => {
     const { code } = parse(
       z.object({ code: z.string().trim().min(6, 'Enter the full gift code.').max(64) }),
@@ -278,12 +227,14 @@ paymentsRouter.post(
         include: { course: { select: { slug: true } } }
       });
       if (!coupon) throw badRequest('That gift code is not valid.');
-      if (coupon.isRedeemed) throw conflict('That gift code has already been redeemed.');
 
-      await tx.giftCoupon.update({
-        where: { id: coupon.id },
+      // Conditional flip, so one code can only ever be redeemed once.
+      const claimed = await tx.giftCoupon.updateMany({
+        where: { id: coupon.id, isRedeemed: false },
         data: { isRedeemed: true, redeemerId: req.user!.id, redeemedAt: new Date() }
       });
+      if (claimed.count === 0) throw conflict('That gift code has already been redeemed.');
+
       await tx.enrollment.upsert({
         where: { userId_courseId: { userId: req.user!.id, courseId: coupon.courseId } },
         create: {
@@ -292,7 +243,7 @@ paymentsRouter.post(
           isActive: true,
           activatedAt: new Date()
         },
-        update: { isActive: true, activatedAt: new Date() }
+        update: { isActive: true, activatedAt: new Date(), licenseCode: null, licenseExpiresAt: null }
       });
       return coupon.course.slug;
     });
@@ -301,94 +252,103 @@ paymentsRouter.post(
   })
 );
 
+type WebhookEvent = {
+  event?: string;
+  payload?: {
+    order?: { entity?: { id?: string; notes?: Record<string, string> } };
+    payment?: { entity?: { id?: string } };
+    payment_link?: {
+      entity?: { id?: string; amount_paid?: number; notes?: { userId?: string; courseId?: string } };
+    };
+  };
+};
+
 /**
- * Razorpay webhook. Mounted with a raw body parser and outside the CSRF check,
- * since the signature over the exact bytes is what authenticates it.
+ * Razorpay webhook. Mounted with a raw body parser and outside the CSRF check, since the
+ * signature over the exact bytes is what authenticates it. Subscribe to `order.paid` and
+ * `payment_link.paid`: the first catches students who paid but closed the tab before
+ * Checkout could report back, which would otherwise leave them charged and locked out.
  */
 export const razorpayWebhook = route(async (req, res) => {
   const signature = req.get('x-razorpay-signature');
   if (!signature) throw badRequest('Missing signature.');
 
-  const rawBody = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : String(req.body ?? '');
-  const { verifyWebhookSignature } = await import('../lib/razorpay.js');
+  const rawBody = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : '';
   if (!verifyWebhookSignature(rawBody, signature)) {
     return res.status(401).json({ error: 'Invalid signature.' });
   }
 
-  const event = JSON.parse(rawBody) as {
-    event?: string;
-    payload?: {
-      payment_link?: {
-        entity?: {
-          id?: string;
-          amount_paid?: number;
-          notes?: { userId?: string; courseId?: string };
-        };
-      };
-      payment?: { entity?: { id?: string } };
-    };
-  };
+  const event = JSON.parse(rawBody) as WebhookEvent;
+  const paymentId = event.payload?.payment?.entity?.id;
 
-  if (event.event !== 'payment_link.paid') return res.json({ ok: true, ignored: true });
+  if (event.event === 'order.paid') {
+    const order = event.payload?.order?.entity;
+    if (!order?.id || !paymentId) return res.json({ ok: true, ignored: true });
 
-  const link = event.payload?.payment_link?.entity;
-  const userId = link?.notes?.userId;
-  const courseId = link?.notes?.courseId;
-  if (!userId || !courseId) return res.json({ ok: true, ignored: true, reason: 'missing notes' });
+    if (order.notes?.kind === 'studio_credit_purchase') {
+      await prisma.$transaction(tx => settleStudioPurchase(tx, { orderId: order.id!, paymentId }));
+      return res.json({ ok: true });
+    }
 
-  const paymentRef = event.payload?.payment?.entity?.id ?? link?.id ?? 'razorpay-webhook';
-  const amountInr = Math.round((link?.amount_paid ?? 0) / 100);
-
-  await prisma.$transaction(async tx => {
-    const pending = await tx.paymentRequest.findFirst({
-      where: { userId, courseId, status: 'PENDING' },
-      orderBy: { createdAt: 'desc' }
-    });
-
-    if (pending) {
-      await tx.paymentRequest.update({
-        where: { id: pending.id },
-        data: {
-          status: 'APPROVED',
-          reviewedAt: new Date(),
-          reviewedBy: 'razorpay-webhook',
-          transactionRef: paymentRef,
-          note: 'Auto-approved from Razorpay webhook'
-        }
+    await prisma.$transaction(async tx => {
+      const request = await tx.paymentRequest.findFirst({
+        where: { transactionRef: { in: [order.id!, paymentId] } }
       });
-    } else {
+      if (!request) return;
+      await settleCoursePayment(tx, {
+        requestId: request.id,
+        paymentRef: paymentId,
+        reviewer: 'razorpay-webhook',
+        note: 'Settled by the Razorpay order.paid webhook'
+      });
+    });
+    return res.json({ ok: true });
+  }
+
+  if (event.event === 'payment_link.paid') {
+    const link = event.payload?.payment_link?.entity;
+    const userId = link?.notes?.userId;
+    const courseId = link?.notes?.courseId;
+    if (!link?.id || !userId || !courseId) return res.json({ ok: true, ignored: true });
+
+    const paymentRef = paymentId ?? link.id;
+
+    await prisma.$transaction(async tx => {
+      const request = await tx.paymentRequest.findFirst({
+        where: { transactionRef: { in: [link.id!, paymentRef] } }
+      });
+
+      if (request) {
+        await settleCoursePayment(tx, {
+          requestId: request.id,
+          paymentRef,
+          reviewer: 'razorpay-webhook',
+          note: 'Settled by the Razorpay payment_link.paid webhook'
+        });
+        return;
+      }
+
+      // A link paid that this app never recorded: keep the money and the access in step.
       await tx.paymentRequest.create({
         data: {
           userId,
           courseId,
-          amountInr,
+          amountInr: Math.round((link.amount_paid ?? 0) / 100),
           transactionRef: paymentRef,
-          note: 'Created from Razorpay webhook',
+          note: 'Created from the Razorpay payment_link.paid webhook',
           status: 'APPROVED',
           reviewedAt: new Date(),
           reviewedBy: 'razorpay-webhook'
         }
       });
-    }
-
-    if (pending?.isGift) {
-      await tx.giftCoupon.create({
-        data: {
-          code: makeGiftCode(),
-          courseId,
-          purchaserId: userId,
-          amountInr: amountInr || pending.amountInr,
-          isRedeemed: false
-        }
-      });
-    } else {
       await tx.enrollment.upsert({
         where: { userId_courseId: { userId, courseId } },
         create: { userId, courseId, isActive: true, activatedAt: new Date() },
         update: { isActive: true, activatedAt: new Date() }
       });
-    }
-  });
+    });
+    return res.json({ ok: true });
+  }
 
-  return res.json({ ok: true });
+  return res.json({ ok: true, ignored: true });
 });

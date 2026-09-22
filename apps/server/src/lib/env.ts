@@ -87,7 +87,8 @@ export const env = {
 
   studio: {
     kieApiKey: str('KIE_API_KEY'),
-    callbackBaseUrl: str('CALLBACK_BASE_URL')
+    callbackBaseUrl: str('CALLBACK_BASE_URL'),
+    callbackSecret: str('STUDIO_CALLBACK_SECRET')
   },
 
   qrCodeUrl: str('QR_CODE_URL', str('NEXT_PUBLIC_QR_CODE_URL')),

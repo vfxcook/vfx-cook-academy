@@ -156,8 +156,6 @@ export const api = {
       razorpayPaymentId: string;
       razorpaySignature: string;
     }) => post<{ ok: true; redirectTo: string }>('/payments/verify', body),
-    paymentLink: (courseId: string) =>
-      post<{ paymentUrl: string }>('/payments/payment-link', { courseId }),
     submitRequest: (body: { courseId: string; transactionRef: string; note?: string }) =>
       post<{ paymentRequest: unknown }>('/payments/requests', body),
     gift: (id: string) => get<{ gift: GiftSummary & { redeemUrl: string } }>(`/payments/gifts/${id}`),
