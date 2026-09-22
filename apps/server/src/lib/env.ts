@@ -44,7 +44,6 @@ export const env = {
   appUrl: str('APP_URL', str('NEXTAUTH_URL', 'http://localhost:5173')),
   webDist: str('WEB_DIST', ''),
 
-  sessionSecret: str('SESSION_SECRET', str('NEXTAUTH_SECRET', '')),
   sessionDays: num('SESSION_DAYS', 30),
 
   adminEmail: str('ADMIN_EMAIL').toLowerCase(),
@@ -92,13 +91,5 @@ export const env = {
   },
 
   qrCodeUrl: str('QR_CODE_URL', str('NEXT_PUBLIC_QR_CODE_URL')),
-  uploadsDir: str('UPLOADS_DIR', resolve(process.cwd(), 'uploads')),
-  allowedWriteOrigins: str('ALLOWED_WRITE_ORIGINS')
-    .split(',')
-    .map(value => value.trim())
-    .filter(Boolean)
+  uploadsDir: str('UPLOADS_DIR', resolve(process.cwd(), 'uploads'))
 };
-
-if (env.production && !env.sessionSecret) {
-  throw new Error('SESSION_SECRET is required in production.');
-}
