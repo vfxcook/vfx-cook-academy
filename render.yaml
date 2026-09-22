@@ -1,5 +1,9 @@
 # BrahmAstra Academy on Render: the Postgres database and the API.
 # The web app runs on Cloudflare (apps/web/wrangler.jsonc) and proxies /api to this service.
+#
+# Applying this file needs a Blueprint, which is a paid workspace feature. The same two
+# resources, created by hand in the dashboard, are written out in docs/deploy-render.md.
+# Change one and change the other.
 
 databases:
   - name: brahmastra-academy-db
