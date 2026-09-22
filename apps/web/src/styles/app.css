@@ -39,16 +39,22 @@
   flex: none;
 }
 .hdr-brand:hover { text-decoration: none; }
-.hdr-brand img { width: 22px; height: 22px; object-fit: contain; }
-.hdr-brand b {
-  font-family: var(--ac-slate);
-  font-size: 18px;
-  letter-spacing: 0.18em;
-  margin-right: -0.18em;
-  text-transform: uppercase;
-  font-weight: 400;
+.hdr-brand img {
+  width: auto;
+  height: 22px;
+  object-fit: contain;
+  transition: transform 0.6s var(--ac-ease);
 }
-.hdr-brand b em { font-style: normal; color: var(--ac-ember); }
+.hdr-brand:hover img { transform: rotate(-8deg) scale(1.12); }
+.hdr-brand b {
+  font-family: var(--ac-display);
+  font-variation-settings: 'wdth' 112, 'wght' 800;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.hdr-brand b em { font-style: normal; font-variation-settings: 'wdth' 112, 'wght' 400; font-weight: 400; }
 .hdr-brand small {
   font-family: var(--ac-mono);
   font-size: 9px;
@@ -261,7 +267,11 @@
 }
 
 @media (max-width: 860px) {
-  .hdr-brand small { display: none; }
   .hdr-parent { display: none; }
   .usr-name { display: none; }
+}
+
+/* The Academy tag is the product's name, so it only yields on the smallest phones. */
+@media (max-width: 480px) {
+  .hdr-brand small { display: none; }
 }

@@ -38,11 +38,11 @@ export const STAGES: Stage[] = [
 ];
 
 export const brand = {
-  name: 'VFX Cook',
+  name: 'BrahmAstra',
   module: 'Academy',
   parent: 'brahmastra.studio',
   parentUrl: 'https://brahmastra.studio',
-  tagline: 'The learning floor of Brahmastra Studio.'
+  tagline: 'Cinematic AI, taught like film.'
 };
 
 export const hero = {
@@ -50,8 +50,8 @@ export const hero = {
   headline: ['Learn to direct', 'what the model', 'only generates.'],
   ghost: 'In Malayalam.',
   lede:
-    'AI tools can produce a frame. Only a filmmaker can decide the frame is right. This is the craft in between — taught end to end, in Malayalam, by the team behind VFX Cook.',
-  proof: '36M+ views generated through our cinematic AI work.',
+    'AI tools can produce a frame. Only a filmmaker can decide the frame is right. This is the craft in between — taught end to end, in Malayalam, by the team that builds BrahmAstra Studio.',
+  proof: 'Built on the BrahmAstra production pipeline.',
   primaryCta: 'See the courses',
   secondaryCta: 'Watch a free lesson'
 };
@@ -104,12 +104,12 @@ export const faqs = [
     a: 'Your enrolment does not expire. New lessons added to a course you own show up in your classroom automatically.'
   },
   {
-    q: 'How does this connect to Brahmastra Studio?',
+    q: 'How does this connect to BrahmAstra Studio?',
     a: 'The Academy is the learning module of brahmastra.studio. The six stages you learn here are the same six stages the studio runs on, so finishing a course drops you straight into the tool.'
   }
 ];
 
 export const gallery = Array.from({ length: 15 }, (_, index) => ({
   src: `/bg/${index + 1}.jpeg`,
-  alt: `Frame from a VFX Cook cinematic AI experiment, plate ${index + 1}`
+  alt: `Cinematic AI frame from the Academy reel, plate ${index + 1}`
 })).filter(item => !item.src.endsWith('/7.jpeg'));

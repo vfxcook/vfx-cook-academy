@@ -160,7 +160,10 @@
 
 .wall-lightbox { width: 100%; height: auto; border-radius: var(--ac-radius-lg); }
 
+/* On one column: compose first, then the feed, with the leaderboard last. */
 @media (max-width: 1000px) {
   .wall-grid { grid-template-columns: minmax(0, 1fr); }
-  .wall-side { position: static; order: -1; }
+  .wall-side { display: contents; }
+  .wall-side > :not(.wall-board) { order: -1; }
+  .wall-board { order: 1; }
 }

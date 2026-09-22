@@ -1,73 +1,110 @@
-# VFX Cook Academy - MVP
+# BrahmAstra Academy
 
-Lightweight video course platform with:
+The learning module of [brahmastra.studio](https://brahmastra.studio). Cinematic AI video
+courses in Malayalam, taught around the same six-stage pipeline the studio runs on —
+Prompt, World, Motion, Scene, Finish, Deliver.
 
-- Google login and email one-time login links
-- Course purchase flow using QR payment + admin review
-- Optional Razorpay Payment Link button + admin review
-- Email one-time license code unlock per paid course
-- Timeline timestamp comments on lessons
-- Real email/password login + registration
-- Course progress tracking (mark lesson complete)
-- Next.js + Prisma + SQLite (fast start, easy to host)
+Version 2 is a full rewrite of the original Next.js MVP onto the BrahmAstra stack and
+design language:
 
-## 1) Setup
+- **apps/web** — React 19, React Router 7 data routers, Vite. The cinemastudio visual
+  system: charcoal glass surfaces, letterbox scenes, a running REC timecode, the animated
+  pipeline rail and line-art stage illustrations. Magenta is shared with BrahmAstra; ember
+  is the Academy's own signal colour for everything about learning progress.
+- **apps/server** — Express, Prisma, PostgreSQL. Cookie sessions with double-submit CSRF,
+  the same pattern as BrahmAstra's `apps/server`.
 
-```bash
-cp .env.example .env
+```
+apps/
+  web/            React client (routes/, components/, styles/, ui/styles/ design tokens)
+  server/         API (routes/, lib/), tests in test/
+api/index.js      Vercel function entry — mounts the Express app
+prisma/           schema.prisma (shared) and seed.ts
 ```
 
-Update env values in `.env`.
+## Features
 
-## 2) Initialize DB + seed sample course
+- Course catalogue, syllabus pages and a free first-lesson preview
+- Classroom with sequential unlocks, lesson notes (Markdown, sanitised), project files,
+  automatic progress tracking for uploaded videos and a manual "mark complete" for
+  YouTube/Vimeo lessons
+- Timestamped doubt threads with replies and likes — click a timestamp to scrub an
+  uploaded lesson to that moment
+- Per-course community wall: image or link posts, reactions, nested replies, latest/top
+  sorting, lightbox and a leaderboard
+- Enrolment through Razorpay Checkout, or manual UPI transfer reviewed by an admin who
+  issues a one-time license code
+- Gift a course: pay once, share a gift code, the recipient redeems it
+- AI Studio: prepaid credit packs, image and video generation through the KIE provider,
+  with automatic refunds when a job fails
+- Notifications for replies, reactions, new posts and new lessons
+- Admin workspace: overview, courses, lessons and resources, student CRM with grant and
+  revoke, payment review, community moderation, the prompt library and AI Studio
+  settings
+- Email/password, Google, and email magic-link sign-in
+
+## Setup
+
+Requires Node 20+ and a PostgreSQL database (Supabase works as-is).
 
 ```bash
+cp .env.example .env        # then fill in DATABASE_URL, DIRECT_URL and ADMIN_PASSWORD
 npm install
-npm run db:push
-npm run db:seed
+npm run db:push             # create or update tables
+npm run db:seed             # sample course, admin account, studio pricing
+npm run dev                 # API on :8080, client on :5173
 ```
 
-## 3) Run locally
+Open http://localhost:5173. Sign in with `ADMIN_EMAIL` / `ADMIN_PASSWORD` for the admin
+workspace at `/admin`.
 
-```bash
-npm run dev
-```
+The client proxies `/api` and `/uploads` to the API in development. Everything optional
+in `.env.example` degrades cleanly when unset: no Razorpay → manual UPI checkout only; no
+SMTP → license codes are shown to the admin instead of emailed and magic links are hidden;
+no Google keys → the Google button is hidden; no Supabase → uploads are written to
+`apps/server/uploads`.
 
-Open `http://localhost:3000`.
+## Scripts
 
-## 4) Admin workflow
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | API (tsx watch) and client (Vite) together |
+| `npm run build` | Prisma client, server `tsc`, client typecheck + Vite build |
+| `npm start` | Production server; also serves the built client on one origin |
+| `npm run typecheck` | Both apps |
+| `npm test` | Server tests (`node:test` via tsx) |
+| `npm run db:push` / `db:migrate` / `db:seed` / `db:studio` | Prisma helpers |
 
-1. User submits UTR/payment reference on course page.
-2. Admin logs in with admin account and opens `/admin`.
-3. Click **Approve** to generate one-time course license code and email it.
-4. User enters code in dashboard to activate course access.
+## Deploying
 
-## 5) Razorpay quick setup for current manual approval flow
+**Vercel.** `vercel.json` builds both apps, serves `apps/web/dist` as static files and
+routes `/api/*` to the Express app through `api/index.js`. Add every variable from
+`.env.example`, set `APP_URL` to your domain, and set `NODEJS_HELPERS=0` so Express reads
+raw request bodies — the Razorpay webhook signature is computed over the exact bytes.
+Uploads must go to Supabase storage on Vercel (the filesystem is read-only), and function
+bodies are capped at 4.5 MB, so host lesson videos on YouTube, Vimeo or Supabase and paste
+the URL.
 
-1. Create a Razorpay Payment Link for INR 499.
-2. Put the link in `.env` as `NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK`.
-3. Restart the app.
-4. User pays with Razorpay, then submits Razorpay payment ID / UTR on the course page.
-5. Admin approves the payment request and the app emails the license code.
+**Any Node host** (Render, Railway, a VM): `npm run build && npm start`. One process serves
+the API and the client.
 
-## 6) Deploy today (quick path)
+### Payments
 
-### Option A: Vercel + Neon/Supabase Postgres (recommended for production)
+In the Razorpay dashboard, add a webhook to `https://<your-domain>/api/payments/razorpay-webhook`
+with the secret in `RAZORPAY_WEBHOOK_SECRET`, subscribed to **`order.paid`** and
+**`payment_link.paid`**. `order.paid` is what unlocks a student who paid but closed the tab
+before Checkout could report back.
 
-- Push project to GitHub.
-- Import repo in Vercel.
-- Add all env vars from `.env.example`.
-- Replace `DATABASE_URL` with Neon/Supabase Postgres URL.
-- Change Prisma datasource provider in `prisma/schema.prisma` from `sqlite` to `postgresql`.
-- Run `npx prisma db push` once on deployed environment or CI.
+Every settlement path — Checkout's verify call and both webhooks — goes through
+`apps/server/src/lib/settle.ts`, which flips a request from pending to approved with a
+conditional update, so a race between them can never unlock twice, mint two gift codes or
+credit a studio pack twice.
 
-### Option B: Render/Railway with persistent disk + SQLite
+## Migrating from v1
 
-- Works for low traffic quickly.
-- Must mount persistent volume and keep `DATABASE_URL=file:...` pointing to mounted path.
+The database schema is unchanged, so the existing Supabase database works without a
+migration. Password accounts keep their passwords, and Google accounts reconnect by email
+on their next Google sign-in. The v1 `Session` and `VerificationToken` tables are reused
+for v2's hashed session and magic-link tokens; everyone signs in once after the switch.
 
-## Notes
-
-- "Non-downloadable" video is best-effort only on web.
-- For stronger protection later, move to signed URLs + DRM provider.
-- Current MVP embeds hosted video URLs (e.g. unlisted YouTube or cloud player URLs).
+Google OAuth needs a new authorised redirect URI: `${APP_URL}/api/auth/google/callback`.

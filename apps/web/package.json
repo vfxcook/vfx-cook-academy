@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "VFX Cook Academy client — Vite, React and React Router data loaders",
+  "description": "BrahmAstra Academy client — Vite, React and React Router data loaders",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.json && vite build",

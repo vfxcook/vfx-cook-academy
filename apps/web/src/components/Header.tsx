@@ -195,12 +195,12 @@ export default function Header({ user }: { user: User | null }) {
   return (
     <header className="hdr">
       <div className="hdr-inner">
-        <Link className="hdr-brand" to="/">
-          <img src="/brand/logo-mark.png" alt="" width={22} height={22} />
-          <b>
-            VFX <em>Cook</em>
+        <Link className="hdr-brand" to="/" aria-label={`${brand.name} ${brand.module} — home`}>
+          <img src="/brand/logo-mark.png" alt="" width={21} height={22} />
+          <b aria-hidden="true">
+            Brahm<em>astra</em>
           </b>
-          <small>{brand.module}</small>
+          <small aria-hidden="true">{brand.module}</small>
         </Link>
 
         <nav className="hdr-nav" aria-label="Main">

@@ -71,11 +71,12 @@ export function Timecode() {
 export function SceneHeader({ action }: { action?: ReactNode }) {
   return (
     <header className="sc-top">
-      <Link className="sc-brand" to="/">
-        <img src="/brand/logo-mark.png" alt="" width={22} height={22} />
-        <span>
-          VFX <em>Cook</em>
+      <Link className="sc-brand" to="/" aria-label={`${brand.name} ${brand.module} — home`}>
+        <img src="/brand/logo-mark.png" alt="" width={19} height={20} />
+        <span aria-hidden="true">
+          Brahm<em>astra</em>
         </span>
+        <small aria-hidden="true">{brand.module}</small>
       </Link>
       {action ?? <Timecode />}
     </header>

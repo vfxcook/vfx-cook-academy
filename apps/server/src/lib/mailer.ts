@@ -38,7 +38,7 @@ export function sendLicenseEmail(params: { to: string; courseTitle: string; lice
       '',
       'Enter this code on your dashboard to unlock the course.',
       '',
-      '— VFX Cook Academy'
+      '— BrahmAstra Academy'
     ].join('\n')
   );
 }
@@ -46,7 +46,7 @@ export function sendLicenseEmail(params: { to: string; courseTitle: string; lice
 export function sendLoginLinkEmail(params: { to: string; url: string }) {
   return send(
     params.to,
-    'Your VFX Cook Academy sign-in link',
+    'Your BrahmAstra Academy sign-in link',
     [
       'Use the link below to sign in. It expires in 15 minutes.',
       '',
@@ -54,7 +54,7 @@ export function sendLoginLinkEmail(params: { to: string; url: string }) {
       '',
       'If you did not request this, you can ignore this email.',
       '',
-      '— VFX Cook Academy'
+      '— BrahmAstra Academy'
     ].join('\n')
   );
 }
@@ -69,7 +69,7 @@ export function sendGiftEmail(params: { to: string; courseTitle: string; code: s
       `Gift code: ${params.code}`,
       `Redeem here: ${params.url}`,
       '',
-      '— VFX Cook Academy'
+      '— BrahmAstra Academy'
     ].join('\n')
   );
 }

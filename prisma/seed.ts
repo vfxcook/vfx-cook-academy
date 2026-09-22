@@ -6,6 +6,11 @@ const prisma = new PrismaClient();
 
 const COURSE_PRICE_INR = 499;
 
+/** Demo accounts live on a reserved domain, so nothing can ever be emailed to them. */
+const DEMO_DOMAIN = 'students.academy.example';
+/** Domain the v1 seed used for the same accounts; renamed below, never created. */
+const LEGACY_DEMO_DOMAIN = 'learn.vfxcookacademy.com';
+
 const keralaStudentNames = [
   'Aarav Nair', 'Adithya Menon', 'Akhil Raj', 'Amal Krishna', 'Anand Mohan',
   'Arjun Suresh', 'Ashwin Prasad', 'Avinash Babu', 'Basil Mathew', 'Devanand Pillai',
@@ -74,26 +79,34 @@ async function main() {
   });
   console.log(`Seeded course: ${course.title}`);
 
-  const adminEmail = (process.env.ADMIN_EMAIL ?? 'itsvfxcook@gmail.com').toLowerCase();
+  const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const adminPassword = process.env.ADMIN_PASSWORD;
-  if (!adminPassword) {
-    throw new Error('Set ADMIN_PASSWORD in your environment before seeding.');
+  if (!adminEmail || !adminPassword) {
+    throw new Error('Set ADMIN_EMAIL and ADMIN_PASSWORD in your environment before seeding.');
   }
 
   const passwordHash = await bcrypt.hash(adminPassword, 10);
   await prisma.user.upsert({
     where: { email: adminEmail },
-    update: { role: 'ADMIN', passwordHash, name: 'VFX Cook Admin' },
-    create: { email: adminEmail, role: 'ADMIN', passwordHash, name: 'VFX Cook Admin' }
+    update: { role: 'ADMIN', passwordHash, name: 'Academy Admin' },
+    create: { email: adminEmail, role: 'ADMIN', passwordHash, name: 'Academy Admin' }
   });
   console.log(`Seeded admin: ${adminEmail}`);
+
+  // Re-seeding a v1 database renames its demo accounts instead of adding a second set.
+  const renamed = await prisma.$executeRaw`
+    UPDATE "User"
+    SET email = replace(email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
+    WHERE email LIKE ${'%@' + LEGACY_DEMO_DOMAIN}
+  `;
+  if (renamed > 0) console.log(`Moved ${renamed} demo accounts to @${DEMO_DOMAIN}`);
 
   for (const [index, fullName] of keralaStudentNames.entries()) {
     const local = fullName
       .toLowerCase()
       .replace(/[^a-z]+/g, '.')
       .replace(/(^\.|\.$)/g, '');
-    const email = `${local}.${index + 1}@learn.vfxcookacademy.com`;
+    const email = `${local}.${index + 1}@${DEMO_DOMAIN}`;
 
     const student = await prisma.user.upsert({
       where: { email },

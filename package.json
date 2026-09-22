@@ -1,9 +1,9 @@
 {
-  "name": "vfx-cook-academy",
+  "name": "brahmastra-academy",
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "VFX Cook Academy — the learning module of brahmastra.studio. React client (apps/web) and API server (apps/server).",
+  "description": "BrahmAstra Academy — the learning module of BrahmAstra Studio. React client (apps/web) and API server (apps/server).",
   "workspaces": [
     "apps/web",
     "apps/server"

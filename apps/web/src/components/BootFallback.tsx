@@ -1,3 +1,9 @@
+import type { CSSProperties } from 'react';
+
+const WORD = 'BRAHMASTRA';
+/** The A that opens "Astra" carries the accent, as in BrahmAstra's own loader. */
+const ASTRA_INDEX = 5;
+
 /** Mirrors the static boot shell in index.html so hydration never flashes. */
 export default function BootFallback() {
   return (
@@ -5,29 +11,32 @@ export default function BootFallback() {
       <div className="boot-card">
         <div className="boot-emblem" aria-hidden="true">
           <span className="boot-aperture" />
+          <span className="boot-trail" />
           <div className="boot-mark">
+            <i className="boot-dots" />
+            <i className="boot-fill" />
             <i className="boot-sheen" />
           </div>
         </div>
-        <b className="boot-word" aria-label="VFX Cook Academy">
-          {['V', 'F', 'X', ' ', 'C', 'O', 'O', 'K'].map((letter, index) => (
+        <b className="boot-word" aria-label="BrahmAstra Academy">
+          {WORD.split('').map((letter, index) => (
             <span
-              key={`${letter}-${index}`}
+              key={index}
               aria-hidden="true"
-              className={index > 3 ? 'is-hot' : undefined}
-              style={{ ['--i' as string]: index }}
+              className={index === ASTRA_INDEX ? 'is-astra' : undefined}
+              style={{ '--i': index } as CSSProperties}
             >
               {letter}
             </span>
           ))}
         </b>
-        <span className="boot-sub">Rolling the Academy…</span>
+        <small className="boot-module" aria-hidden="true">
+          Academy
+        </small>
+        <span className="boot-sub">Opening the Academy…</span>
         <div className="boot-bar" aria-hidden="true">
           <i />
         </div>
-        <small className="boot-meta" aria-hidden="true">
-          A module of brahmastra.studio
-        </small>
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ export default function RootLayout() {
       <footer className="ftr">
         <div className="ftr-inner">
           <span>
-            © {new Date().getFullYear()} VFX Cook · {brand.tagline}
+            © {new Date().getFullYear()} BrahmAstra Studio · {brand.module} — {brand.tagline}
           </span>
           <nav className="ftr-links" aria-label="Footer">
             <Link to="/courses">Courses</Link>

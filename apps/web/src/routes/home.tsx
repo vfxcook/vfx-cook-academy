@@ -42,7 +42,7 @@ function HeroSlate() {
           />
         ))}
         <div className="home-slate-meta">
-          <span>VFX Cook · Plate {String(index + 1).padStart(2, '0')}</span>
+          <span>Academy reel · Plate {String(index + 1).padStart(2, '0')}</span>
           <span>Shot on Brahmastra</span>
         </div>
       </div>

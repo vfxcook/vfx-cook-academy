@@ -55,7 +55,7 @@ export default function Checkout() {
         orderId: order.orderId,
         amount: order.amount,
         currency: order.currency,
-        name: 'VFX Cook Academy',
+        name: 'BrahmAstra Academy',
         description: isGift ? `Gift — ${order.courseTitle}` : order.courseTitle,
         prefill: {
           name: user?.name ?? undefined,
@@ -172,7 +172,7 @@ export default function Checkout() {
                   <figure style={{ margin: '0 0 18px' }}>
                     <img
                       src={config.qrCodeUrl}
-                      alt="UPI QR code for VFX Cook Academy"
+                      alt="UPI QR code for BrahmAstra Academy"
                       style={{
                         width: 190,
                         borderRadius: 'var(--ac-radius-lg)',

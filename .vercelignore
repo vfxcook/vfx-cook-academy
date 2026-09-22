@@ -1,10 +1,6 @@
 node_modules
-.next
-tests
+docs
+uploads
+**/uploads
 *.mp4
-public/uploads/videos
-public/uploads/resources
-public/uploads/profiles
-public/uploads/thumbnails
-prisma/prisma/dev.db
-prisma/prisma/dev.db-journal
+.claude

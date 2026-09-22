@@ -3,7 +3,7 @@ import { ApiError } from './http.js';
 
 type Db = PrismaClient | Prisma.TransactionClient;
 
-export const STUDIO_BRAND_NAME = 'VFX COOK AI STUDIO';
+export const STUDIO_BRAND_NAME = 'Academy AI Studio';
 
 export const STUDIO_USD_INR_RATE = 95.3;
 export const STUDIO_KIE_CREDIT_USD = 0.005;
@@ -39,7 +39,7 @@ export async function ensureStudioDefaults(db: PrismaClient) {
     const calculated = calculateStudioCreditPack(pack.credits);
     const shape = {
       name: pack.name,
-      description: `${pack.credits.toLocaleString('en-IN')} Studio Credits for ${STUDIO_BRAND_NAME}`,
+      description: `${pack.credits.toLocaleString('en-IN')} credits for the ${STUDIO_BRAND_NAME}`,
       credits: pack.credits,
       amountInr: calculated.amountInr,
       providerCostUsd: calculated.providerCostUsd,

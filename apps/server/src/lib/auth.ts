@@ -170,7 +170,7 @@ export async function ensureAdminAccount(email: string, password: string) {
   const passwordHash = await hashPassword(password);
   return prisma.user.upsert({
     where: { email },
-    update: { role: 'ADMIN', passwordHash, name: 'VFX Cook Admin' },
-    create: { email, role: 'ADMIN', passwordHash, name: 'VFX Cook Admin' }
+    update: { role: 'ADMIN', passwordHash, name: 'Academy Admin' },
+    create: { email, role: 'ADMIN', passwordHash, name: 'Academy Admin' }
   });
 }

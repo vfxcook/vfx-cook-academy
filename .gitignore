@@ -25,3 +25,6 @@ npm-debug.log*
 
 # deployment
 .vercel
+
+# local preview config
+.claude/launch.json

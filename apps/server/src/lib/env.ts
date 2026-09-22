@@ -62,7 +62,7 @@ export const env = {
     port: num('SMTP_PORT', 587),
     user: str('SMTP_USER'),
     pass: str('SMTP_PASS'),
-    from: str('EMAIL_FROM', 'VFX Cook Academy <noreply@vfxcook.com>'),
+    from: str('EMAIL_FROM', 'BrahmAstra Academy <noreply@brahmastra.studio>'),
     get enabled() {
       return Boolean(this.host && this.user && this.pass);
     }
