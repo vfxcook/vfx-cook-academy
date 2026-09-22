@@ -12,7 +12,8 @@ services:
   - type: web
     name: brahmastra-academy-api
     runtime: node
-    # Sit next to the Supabase project: its region is in the pooler hostname.
+    # The Supabase project (sevkabyfvpksxckkqttj) is in AWS ap-south-1; Singapore is the
+    # closest region Render offers.
     region: singapore
     plan: 0.5c-512mb
     # Dev dependencies carry the TypeScript compiler and the Prisma CLI used below.

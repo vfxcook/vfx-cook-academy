@@ -12,26 +12,34 @@ proxies `/api` and `/healthz` to this service, so the browser only ever sees one
 
 ## 1. The database stays on Supabase
 
-Nothing to create. The Academy already runs on Supabase Postgres, so pointing the API at
-it keeps every student, enrolment and payment exactly where it is — no migration, and no
-second database to pay for.
+Nothing to create. The Academy's database is Supabase project **`sevkabyfvpksxckkqttj`**,
+so pointing the API at it keeps every student, enrolment and payment exactly where it is —
+no migration, and no second database to pay for.
+
+That project's Postgres runs in **AWS ap-south-1 (Mumbai)**, which is why the Render
+service is in **Singapore**: it is the closest region Render offers, so every query makes
+one Mumbai–Singapore hop. Keep an eye on query counts per request; there is no Render
+region in India to move closer to.
+
+The identity mirror is a different project on purpose. `SUPABASE_URL` stays the shared
+BrahmAstra project (`frnlloffzfnohagpwsti`), where Google sign-ins land so the Studio and
+the Academy see one user base. Only `DATABASE_URL` and `DIRECT_URL` point here.
 
 From the project's **Connect** panel, take the **session pooler** string (port 5432) and
 use it for both `DATABASE_URL` and `DIRECT_URL`:
 
 ```
-postgresql://postgres.<project-ref>:<password>@<region>.pooler.supabase.com:5432/postgres?sslmode=require
+postgresql://postgres.sevkabyfvpksxckkqttj:<password>@<host>-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 ```
 
-Three things decide which string is the right one:
+Two things decide which string is the right one:
 
 - **Session pooler, not transaction pooler.** This API is a long-lived server, which is
   what session mode is for. The transaction pooler (6543) is for serverless and needs
   `&pgbouncer=true`, which turns off prepared statements.
-- **Pooler host, not `db.<ref>.supabase.co`.** The direct host is IPv6 only unless the
-  project has the IPv4 add-on, and Render cannot reach it.
-- **The region in that hostname is the region to give Render**, so the API sits next to
-  its database instead of crossing an ocean on every query.
+- **Pooler host, not `db.sevkabyfvpksxckkqttj.supabase.co`.** The direct host resolves to
+  IPv6 only (`2406:da1a::/35`, ap-south-1) unless the project has the IPv4 add-on, and
+  Render cannot reach it.
 
 If the project is on Supabase's free plan, note that it pauses after 7 days without
 activity — fine while building, not for students who paid.
