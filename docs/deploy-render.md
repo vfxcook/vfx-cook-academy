@@ -12,9 +12,10 @@ proxies `/api` and `/healthz` to this service, so the browser only ever sees one
 
 ## 1. The database stays on Supabase
 
-Nothing to create. The Academy's database is Supabase project **`sevkabyfvpksxckkqttj`**,
-so pointing the API at it keeps every student, enrolment and payment exactly where it is —
-no migration, and no second database to pay for.
+The Academy's database is Supabase project **`sevkabyfvpksxckkqttj`**. It was a fresh,
+empty project — no `public` tables and no `auth.users` — so the v2 schema was pushed into
+it on 22 Sep 2026: 26 tables, and `prisma migrate diff` now reports an empty migration.
+The students still have to be copied in from the old database (§4).
 
 That project's Postgres runs in **AWS ap-south-1 (Mumbai)**, which is why the Render
 service is in **Singapore**: it is the closest region Render offers, so every query makes
@@ -96,8 +97,9 @@ rather than stopping the server.
 
 ## 3. Bringing the schema up to date — look before you push
 
-The database already holds live rows, so read what `prisma db push` intends to do before
-anything runs it. From the repo root:
+The schema is already in place, so the pre-deploy command is currently a no-op. Once the
+database holds live rows, read what `prisma db push` intends to do before anything runs
+it. From the repo root:
 
 ```
 npx prisma migrate diff --from-url "<session pooler url>" --to-schema-datamodel prisma/schema.prisma --script
@@ -114,16 +116,22 @@ When the diff is clean, apply it:
 DATABASE_URL="<session pooler url>" DIRECT_URL="<session pooler url>" npm run db:push
 ```
 
-## 4. If the students are in a different Supabase project
+## 4. Bringing the students across
 
-Only when the API points at a project that does not already hold them:
+This project started empty, so the people who paid are still in the old Academy database.
+Until they are copied over, everyone who signs in looks like a new visitor and lands on the
+offer instead of the classroom.
 
 ```
-SOURCE_DATABASE_URL="<old project url>" TARGET_DATABASE_URL="<new project url>" npm run db:copy
+SOURCE_DATABASE_URL="<old database url>" TARGET_DATABASE_URL="<this project's url>" npm run db:copy
 ```
 
 Rows keep their ids, so enrolments, payments and progress stay attached to the same people.
-Sessions and one-time tokens are deliberately left behind — everyone signs in again.
+Sessions and one-time tokens are deliberately left behind — everyone signs in again. The
+copy refuses to run into a database that already has users unless you pass `--force`.
+
+With no old database to copy from, `npm run db:seed` lays down the courses and settings a
+fresh install needs instead.
 
 ## 5. Pointing the Worker at the service
 
