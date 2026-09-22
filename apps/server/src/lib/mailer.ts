@@ -43,22 +43,6 @@ export function sendLicenseEmail(params: { to: string; courseTitle: string; lice
   );
 }
 
-export function sendLoginLinkEmail(params: { to: string; url: string }) {
-  return send(
-    params.to,
-    'Your BrahmAstra Academy sign-in link',
-    [
-      'Use the link below to sign in. It expires in 15 minutes.',
-      '',
-      params.url,
-      '',
-      'If you did not request this, you can ignore this email.',
-      '',
-      '— BrahmAstra Academy'
-    ].join('\n')
-  );
-}
-
 export function sendGiftEmail(params: { to: string; courseTitle: string; code: string; url: string }) {
   return send(
     params.to,

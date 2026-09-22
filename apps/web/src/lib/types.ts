@@ -19,7 +19,7 @@ export interface AcademyAccess {
 export interface SessionState {
   user: User | null;
   access: AcademyAccess | null;
-  providers: { google: boolean; googleClientId: string | null; email: boolean };
+  providers: { google: boolean; googleClientId: string | null };
 }
 
 export interface SignInResult {

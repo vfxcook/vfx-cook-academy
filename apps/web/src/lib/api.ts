@@ -99,18 +99,10 @@ const del = <T>(path: string) => request<T>(path, { method: 'DELETE' });
 export const api = {
   auth: {
     session: () => get<SessionState>('/auth/session'),
-    register: (body: { name: string; email: string; password: string; phone?: string }) =>
-      post<SignInResult>('/auth/register', body),
-    signIn: (body: { email: string; password: string }) => post<SignInResult>('/auth/sign-in', body),
     google: (body: { credential: string; nonce: string }) => post<GoogleSignInResult>('/auth/google', body),
     signOut: () => post<{ ok: true }>('/auth/sign-out'),
-    requestLoginLink: (email: string) => post<{ ok: true }>('/auth/login-link', { email }),
-    consumeLoginLink: (body: { email: string; token: string }) =>
-      post<SignInResult>('/auth/login-link/consume', body),
     updateProfile: (body: { name: string; phone?: string; image?: string }) =>
-      patch<{ user: User }>('/auth/profile', body),
-    changePassword: (body: { currentPassword?: string; newPassword: string }) =>
-      post<{ ok: true }>('/auth/password', body)
+      patch<{ user: User }>('/auth/profile', body)
   },
 
   courses: {

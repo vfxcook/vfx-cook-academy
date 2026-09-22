@@ -56,7 +56,6 @@ export const env = {
   sessionDays: num('SESSION_DAYS', 30),
 
   adminEmail: str('ADMIN_EMAIL').toLowerCase(),
-  adminPassword: str('ADMIN_PASSWORD'),
 
   /**
    * Google Identity Services. The browser gets an ID token and the server verifies it,

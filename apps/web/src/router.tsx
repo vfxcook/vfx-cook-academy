@@ -15,7 +15,6 @@ import Profile, { profileLoader } from './routes/profile';
 import Studio, { studioLoader } from './routes/studio';
 import SignIn, { signInLoader } from './routes/signIn';
 import SignUp, { signUpLoader } from './routes/signUp';
-import SignInLink, { signInLinkLoader } from './routes/signInLink';
 import { GiftRedeem, GiftSuccess, giftLoader, giftRedeemLoader } from './routes/gift';
 
 import AdminLayout, { adminLoader } from './routes/admin/layout';
@@ -38,13 +37,6 @@ export const router = createBrowserRouter([
     path: '/sign-in',
     element: <SignIn />,
     loader: signInLoader,
-    hydrateFallbackElement,
-    errorElement: sceneError
-  },
-  {
-    path: '/sign-in/link',
-    element: <SignInLink />,
-    loader: signInLinkLoader,
     hydrateFallbackElement,
     errorElement: sceneError
   },

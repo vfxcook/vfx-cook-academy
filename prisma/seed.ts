@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
 import { ensureStudioDefaults } from '../apps/server/src/lib/studio.js';
 
 const prisma = new PrismaClient();
@@ -80,16 +79,16 @@ async function main() {
   console.log(`Seeded course: ${course.title}`);
 
   const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
-  const adminPassword = process.env.ADMIN_PASSWORD;
-  if (!adminEmail || !adminPassword) {
-    throw new Error('Set ADMIN_EMAIL and ADMIN_PASSWORD in your environment before seeding.');
+  if (!adminEmail) {
+    throw new Error('Set ADMIN_EMAIL in your environment before seeding.');
   }
 
-  const passwordHash = await bcrypt.hash(adminPassword, 10);
+  // No password: this account signs in with Google like everyone else, and the API
+  // promotes whoever matches ADMIN_EMAIL to ADMIN as they arrive.
   await prisma.user.upsert({
     where: { email: adminEmail },
-    update: { role: 'ADMIN', passwordHash, name: 'Academy Admin' },
-    create: { email: adminEmail, role: 'ADMIN', passwordHash, name: 'Academy Admin' }
+    update: { role: 'ADMIN', name: 'Academy Admin' },
+    create: { email: adminEmail, role: 'ADMIN', name: 'Academy Admin' }
   });
   console.log(`Seeded admin: ${adminEmail}`);
 

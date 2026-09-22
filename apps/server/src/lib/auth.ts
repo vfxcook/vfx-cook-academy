@@ -1,10 +1,8 @@
 import crypto from 'node:crypto';
-import bcrypt from 'bcryptjs';
 import type { NextFunction, Request, Response } from 'express';
 import { env } from './env.js';
 import { forbidden, unauthorized } from './http.js';
 import { prisma } from './prisma.js';
-import { timingSafeEqual } from './utils.js';
 
 export const SESSION_COOKIE = 'academy_session';
 export const CSRF_COOKIE = 'academy_csrf';
@@ -26,10 +24,6 @@ declare global {
     }
   }
 }
-
-const SALT_ROUNDS = 10;
-export const hashPassword = (plain: string) => bcrypt.hash(plain, SALT_ROUNDS);
-export const verifyPassword = (plain: string, hash: string) => bcrypt.compare(plain, hash);
 
 /** Tokens are stored hashed, so a database leak cannot be replayed as a session. */
 const digest = (token: string) => crypto.createHash('sha256').update(token).digest('hex');
@@ -126,42 +120,4 @@ export function validateCsrf(req: Request, _res: Response, next: NextFunction) {
   if (!headerToken) return next(forbidden('CSRF token header missing.'));
   if (cookieToken !== headerToken) return next(forbidden('CSRF token mismatch.'));
   next();
-}
-
-const LOGIN_TOKEN_MINUTES = 15;
-
-export async function issueLoginToken(email: string) {
-  const token = newToken();
-  await prisma.verificationToken.deleteMany({ where: { identifier: email } });
-  await prisma.verificationToken.create({
-    data: {
-      identifier: email,
-      token: digest(token),
-      expires: new Date(Date.now() + LOGIN_TOKEN_MINUTES * 60_000)
-    }
-  });
-  return token;
-}
-
-export async function consumeLoginToken(email: string, token: string) {
-  const row = await prisma.verificationToken.findUnique({ where: { token: digest(token) } });
-  if (!row || row.identifier !== email) return false;
-  await prisma.verificationToken.delete({ where: { token: row.token } });
-  return row.expires >= new Date();
-}
-
-/**
- * Promotes the env-configured owner account on sign-in so the operator always
- * has a way in, even on a freshly restored database.
- */
-export async function ensureAdminAccount(email: string, password: string) {
-  if (!env.adminEmail || !env.adminPassword) return null;
-  if (email !== env.adminEmail || !timingSafeEqual(password, env.adminPassword)) return null;
-
-  const passwordHash = await hashPassword(password);
-  return prisma.user.upsert({
-    where: { email },
-    update: { role: 'ADMIN', passwordHash, name: 'Academy Admin' },
-    create: { email, role: 'ADMIN', passwordHash, name: 'Academy Admin' }
-  });
 }
