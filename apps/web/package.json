@@ -12,8 +12,8 @@
     "build:production": "vite build --mode production",
     "preview:worker": "npm run build && wrangler dev",
     "deploy:worker": "npm run build && wrangler deploy",
-    "deploy:worker:preview": "npm run build && wrangler publish --preview",
-    "deploy:worker:production": "npm run build && wrangler publish --env production"
+    "deploy:worker:preview": "npm run build && wrangler dev",
+    "deploy:worker:production": "npm run build:production && wrangler deploy"
   },
   "dependencies": {
     "react": "^19.0.0",
