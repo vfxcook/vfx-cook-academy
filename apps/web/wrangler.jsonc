@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "academy",
+  "compatibility_date": "2026-09-21",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+  "d1_databases": [
+    {
+      "binding": "academy",
+      "database_name": "academy",
+      "database_id": "27604e73-110b-4f87-99ac-354dca7ef5a2"
+    }
+  ]
+}

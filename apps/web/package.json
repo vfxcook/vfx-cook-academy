@@ -8,7 +8,12 @@
     "dev": "vite",
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build:production": "vite build --mode production",
+    "preview:worker": "npm run build && wrangler dev",
+    "deploy:worker": "npm run build && wrangler deploy",
+    "deploy:worker:preview": "npm run build && wrangler publish --preview",
+    "deploy:worker:production": "npm run build && wrangler publish --env production"
   },
   "dependencies": {
     "react": "^19.0.0",
