@@ -271,7 +271,17 @@
   .usr-name { display: none; }
 }
 
+/*
+ * On narrow screens the nav takes its own row, as BrahmAstra's floor header does, so the
+ * brand, the Academy tag and the account actions never compete with it for width.
+ */
+@media (max-width: 640px) {
+  .hdr-inner { flex-wrap: wrap; min-height: 0; padding-top: 10px; row-gap: 4px; }
+  .hdr-nav { order: 3; flex-basis: 100%; margin-inline: -12px; }
+  .hdr-link[aria-current='page']::after { bottom: 0; }
+}
+
 /* The Academy tag is the product's name, so it only yields on the smallest phones. */
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .hdr-brand small { display: none; }
 }
