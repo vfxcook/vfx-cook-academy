@@ -93,44 +93,50 @@ async function main() {
   });
   console.log(`Seeded admin: ${adminEmail}`);
 
-  // Re-seeding a v1 database renames its demo accounts instead of adding a second set.
-  // An address already taken on the new domain is left alone rather than colliding.
-  const renamed = await prisma.$executeRaw`
-    UPDATE "User" AS legacy
-    SET email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
-    WHERE legacy.email LIKE ${'%@' + LEGACY_DEMO_DOMAIN}
-      AND NOT EXISTS (
-        SELECT 1 FROM "User" AS taken
-        WHERE taken.email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
-      )
-  `;
-  if (renamed > 0) console.log(`Moved ${renamed} demo accounts to @${DEMO_DOMAIN}`);
+  // Demo students are opt-in. A production database should hold real people only:
+  // an active enrolment nobody paid for is the exact thing the access rules exist to stop.
+  if (process.argv.includes('--demo-students')) {
+    // Re-seeding a v1 database renames its demo accounts instead of adding a second set.
+    // An address already taken on the new domain is left alone rather than colliding.
+    const renamed = await prisma.$executeRaw`
+      UPDATE "User" AS legacy
+      SET email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
+      WHERE legacy.email LIKE ${'%@' + LEGACY_DEMO_DOMAIN}
+        AND NOT EXISTS (
+          SELECT 1 FROM "User" AS taken
+          WHERE taken.email = replace(legacy.email, ${'@' + LEGACY_DEMO_DOMAIN}, ${'@' + DEMO_DOMAIN})
+        )
+    `;
+    if (renamed > 0) console.log(`Moved ${renamed} demo accounts to @${DEMO_DOMAIN}`);
 
-  for (const [index, fullName] of keralaStudentNames.entries()) {
-    const local = fullName
-      .toLowerCase()
-      .replace(/[^a-z]+/g, '.')
-      .replace(/(^\.|\.$)/g, '');
-    const email = `${local}.${index + 1}@${DEMO_DOMAIN}`;
+    for (const [index, fullName] of keralaStudentNames.entries()) {
+      const local = fullName
+        .toLowerCase()
+        .replace(/[^a-z]+/g, '.')
+        .replace(/(^\.|\.$)/g, '');
+      const email = `${local}.${index + 1}@${DEMO_DOMAIN}`;
 
-    const student = await prisma.user.upsert({
-      where: { email },
-      update: { name: fullName, role: 'STUDENT' },
-      create: { email, name: fullName, role: 'STUDENT' }
-    });
+      const student = await prisma.user.upsert({
+        where: { email },
+        update: { name: fullName, role: 'STUDENT' },
+        create: { email, name: fullName, role: 'STUDENT' }
+      });
 
-    await prisma.enrollment.upsert({
-      where: { userId_courseId: { userId: student.id, courseId: course.id } },
-      update: { isActive: true, activatedAt: new Date() },
-      create: {
-        userId: student.id,
-        courseId: course.id,
-        isActive: true,
-        activatedAt: new Date()
-      }
-    });
+      await prisma.enrollment.upsert({
+        where: { userId_courseId: { userId: student.id, courseId: course.id } },
+        update: { isActive: true, activatedAt: new Date() },
+        create: {
+          userId: student.id,
+          courseId: course.id,
+          isActive: true,
+          activatedAt: new Date()
+        }
+      });
+    }
+    console.log(`Seeded ${keralaStudentNames.length} students with active enrolments`);
+  } else {
+    console.log('Skipped demo students — pass --demo-students to add them');
   }
-  console.log(`Seeded ${keralaStudentNames.length} students with active enrolments`);
 
   await ensureStudioDefaults(prisma);
   console.log('Seeded AI Studio credit packs and model pricing');
