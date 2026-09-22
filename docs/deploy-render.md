@@ -1,32 +1,40 @@
 # Deploying the Academy API on Render, by hand
 
-Blueprints (`render.yaml`) need a paid workspace, so the two resources are created
-separately: the database first, then the web service that connects to it. The settings
-below are the same ones `render.yaml` describes — keep the two in step if either changes.
+Blueprints (`render.yaml`) need a paid workspace, so the API service is created by hand in
+the dashboard. The settings below are the same ones `render.yaml` describes — keep the two
+in step if either changes.
+
+Only the API lives on Render. The database stays on Supabase, where the Academy's students
+already are.
 
 The web app is not deployed here. It runs on Cloudflare (`apps/web/wrangler.jsonc`) and
 proxies `/api` and `/healthz` to this service, so the browser only ever sees one origin.
 
-## 1. The database
+## 1. The database stays on Supabase
 
-**New → Postgres**
+Nothing to create. The Academy already runs on Supabase Postgres, so pointing the API at
+it keeps every student, enrolment and payment exactly where it is — no migration, and no
+second database to pay for.
 
-| Setting | Value |
-| --- | --- |
-| Name | `brahmastra-academy-db` |
-| Database | `academy` |
-| User | `academy` |
-| Region | Singapore — the web service must match, or it cannot use the internal URL |
-| PostgreSQL version | 17 |
-| Instance type | Any paid tier; 0.1 CPU / 256 MB is the smallest |
+From the project's **Connect** panel, take the **session pooler** string (port 5432) and
+use it for both `DATABASE_URL` and `DIRECT_URL`:
 
-Not the free tier: free instances are deleted 30 days after creation (with a 14-day grace
-period to upgrade), and this database holds paying students' enrolments and payments.
+```
+postgresql://postgres.<project-ref>:<password>@<region>.pooler.supabase.com:5432/postgres?sslmode=require
+```
 
-From the database's **Connect** menu, keep both strings:
+Three things decide which string is the right one:
 
-- **Internal URL** — what the API uses. Same region, private network, no egress.
-- **External URL** — what your laptop uses for the schema push and the data copy below.
+- **Session pooler, not transaction pooler.** This API is a long-lived server, which is
+  what session mode is for. The transaction pooler (6543) is for serverless and needs
+  `&pgbouncer=true`, which turns off prepared statements.
+- **Pooler host, not `db.<ref>.supabase.co`.** The direct host is IPv6 only unless the
+  project has the IPv4 add-on, and Render cannot reach it.
+- **The region in that hostname is the region to give Render**, so the API sits next to
+  its database instead of crossing an ocean on every query.
+
+If the project is on Supabase's free plan, note that it pauses after 7 days without
+activity — fine while building, not for students who paid.
 
 ## 2. The web service
 
@@ -38,7 +46,7 @@ no GitHub connection).
 | Branch | `version/2.0-dbsetup` |
 | Root directory | *(blank — the monorepo root)* |
 | Language | Node |
-| Region | Singapore — same as the database |
+| Region | the one closest to the Supabase region in the pooler hostname |
 | Build command | `npm ci --include=dev && npm run build --workspace @academy/server` |
 | Start command | `npm start` |
 | Health check path | `/healthz` |
@@ -56,8 +64,8 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 | --- | --- |
 | `NODE_VERSION` | `22` |
 | `NODE_ENV` | `production` |
-| `DATABASE_URL` | the database's **internal** URL |
-| `DIRECT_URL` | the same internal URL |
+| `DATABASE_URL` | Supabase session pooler string (§1) |
+| `DIRECT_URL` | the same string |
 | `APP_URL` | `https://academy.brahmastra.studio` |
 | `COOKIE_DOMAIN` | `.brahmastra.studio` |
 | `ALLOWED_ORIGINS` | `https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio` |
@@ -78,28 +86,36 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 Everything else has a safe default. A missing Razorpay or SMTP key disables that feature
 rather than stopping the server.
 
-## 3. Creating the tables
+## 3. Bringing the schema up to date — look before you push
 
-With a pre-deploy command, every deploy brings the schema up to date by itself. Without
-one, run this once from the repo root against the **external** URL:
-
-```
-DATABASE_URL="<external url>" DIRECT_URL="<external url>" npm run db:push
-```
-
-`prisma db push` refuses changes that would drop data, so it is safe to re-run.
-
-## 4. Moving the existing students across
+The database already holds live rows, so read what `prisma db push` intends to do before
+anything runs it. From the repo root:
 
 ```
-SOURCE_DATABASE_URL="<old Supabase url>" TARGET_DATABASE_URL="<external Render url>" npm run db:copy
+npx prisma migrate diff --from-url "<session pooler url>" --to-schema-datamodel prisma/schema.prisma --script
+```
+
+Empty output means the live schema already matches and the pre-deploy command is a no-op.
+Otherwise the SQL it prints is exactly what would be applied. `prisma db push` refuses
+changes that would drop data, so a destructive diff shows up as a failed deploy rather
+than as lost enrolments — but it is much better to know beforehand.
+
+When the diff is clean, apply it:
+
+```
+DATABASE_URL="<session pooler url>" DIRECT_URL="<session pooler url>" npm run db:push
+```
+
+## 4. If the students are in a different Supabase project
+
+Only when the API points at a project that does not already hold them:
+
+```
+SOURCE_DATABASE_URL="<old project url>" TARGET_DATABASE_URL="<new project url>" npm run db:copy
 ```
 
 Rows keep their ids, so enrolments, payments and progress stay attached to the same people.
 Sessions and one-time tokens are deliberately left behind — everyone signs in again.
-
-Afterwards, restrict the database under **Access Control**: remove `0.0.0.0/0` so only
-Render's private network reaches it.
 
 ## 5. Pointing the Worker at the service
 

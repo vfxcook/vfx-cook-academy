@@ -1,25 +1,18 @@
-# BrahmAstra Academy on Render: the Postgres database and the API.
+# BrahmAstra Academy on Render: the API service.
 # The web app runs on Cloudflare (apps/web/wrangler.jsonc) and proxies /api to this service.
 #
 # Applying this file needs a Blueprint, which is a paid workspace feature. The same two
 # resources, created by hand in the dashboard, are written out in docs/deploy-render.md.
 # Change one and change the other.
 
-databases:
-  - name: brahmastra-academy-db
-    databaseName: academy
-    user: academy
-    plan: 0.1c-256mb
-    region: singapore
-    postgresMajorVersion: "17"
-    # Private network only: the API connects internally. Run the one-off data copy from
-    # this service's Shell, or add your IP here for the duration of the migration.
-    ipAllowList: []
+# The database is not Render's. It is the Supabase Postgres the Academy already runs on,
+# so the students, enrolments and payments stay exactly where they are.
 
 services:
   - type: web
     name: brahmastra-academy-api
     runtime: node
+    # Sit next to the Supabase project: its region is in the pooler hostname.
     region: singapore
     plan: 0.5c-512mb
     # Dev dependencies carry the TypeScript compiler and the Prisma CLI used below.
@@ -35,14 +28,12 @@ services:
       - key: NODE_ENV
         value: production
 
+      # Supabase, from the project's Connect panel. Session pooler (port 5432) for both:
+      # this is a long-lived server, and the direct host is IPv6 only.
       - key: DATABASE_URL
-        fromDatabase:
-          name: brahmastra-academy-db
-          property: connectionString
+        sync: false
       - key: DIRECT_URL
-        fromDatabase:
-          name: brahmastra-academy-db
-          property: connectionString
+        sync: false
 
       # Multi-domain auth across brahmastra.studio.
       - key: APP_URL
