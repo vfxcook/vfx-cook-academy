@@ -11,10 +11,12 @@ import type {
   CoursePageData,
   DashboardData,
   GiftSummary,
+  GoogleSignInResult,
   Leaderboard,
   NotificationItem,
   PaymentConfig,
   SessionState,
+  SignInResult,
   StudioOverview,
   TimestampComment,
   TrendingPrompt,
@@ -43,6 +45,13 @@ function csrfToken(): string | null {
   return match ? decodeURIComponent(match.split('=').slice(1).join('=')) : null;
 }
 
+/*
+ * Same origin by default: in production the Cloudflare Worker proxies /api to Render, so
+ * cookies stay first-party. VITE_API_BASE points at a separate API origin instead, which
+ * then needs COOKIE_DOMAIN and ALLOWED_ORIGINS set on the server.
+ */
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/+$/, '');
+
 export async function request<T = unknown>(path: string, options: RequestInit = {}): Promise<T> {
   const isFormData = options.body instanceof FormData;
   const headers: Record<string, string> = {
@@ -53,8 +62,8 @@ export async function request<T = unknown>(path: string, options: RequestInit = 
   const token = csrfToken();
   if (token) headers['X-CSRF-Token'] = token;
 
-  const response = await fetch(`/api${path}`, {
-    credentials: 'same-origin',
+  const response = await fetch(`${API_BASE}/api${path}`, {
+    credentials: API_BASE ? 'include' : 'same-origin',
     ...options,
     headers
   });
@@ -91,13 +100,13 @@ export const api = {
   auth: {
     session: () => get<SessionState>('/auth/session'),
     register: (body: { name: string; email: string; password: string; phone?: string }) =>
-      post<{ user: User }>('/auth/register', body),
-    signIn: (body: { email: string; password: string }) =>
-      post<{ user: User }>('/auth/sign-in', body),
+      post<SignInResult>('/auth/register', body),
+    signIn: (body: { email: string; password: string }) => post<SignInResult>('/auth/sign-in', body),
+    google: (body: { credential: string; nonce: string }) => post<GoogleSignInResult>('/auth/google', body),
     signOut: () => post<{ ok: true }>('/auth/sign-out'),
     requestLoginLink: (email: string) => post<{ ok: true }>('/auth/login-link', { email }),
     consumeLoginLink: (body: { email: string; token: string }) =>
-      post<{ user: User }>('/auth/login-link/consume', body),
+      post<SignInResult>('/auth/login-link/consume', body),
     updateProfile: (body: { name: string; phone?: string; image?: string }) =>
       patch<{ user: User }>('/auth/profile', body),
     changePassword: (body: { currentPassword?: string; newPassword: string }) =>

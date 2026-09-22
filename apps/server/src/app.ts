@@ -3,6 +3,7 @@ import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { attachUser, validateCsrf } from './lib/auth.js';
+import { clientIp, crossOrigin } from './lib/crossOrigin.js';
 import { env } from './lib/env.js';
 import { errorHandler, notFound } from './lib/http.js';
 import { prisma } from './lib/prisma.js';
@@ -49,6 +50,9 @@ export function createApp() {
   }
 
   const api = express.Router();
+  // CORS answers preflights before anything else looks at the request.
+  api.use(crossOrigin);
+  api.use(clientIp);
   api.use(attachUser);
   api.use(validateCsrf);
 

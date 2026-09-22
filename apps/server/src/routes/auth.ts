@@ -1,4 +1,3 @@
-import crypto from 'node:crypto';
 import { Router } from 'express';
 import { z } from 'zod';
 import {
@@ -11,11 +10,14 @@ import {
   requireUser,
   verifyPassword
 } from '../lib/auth.js';
+import { academyAccess } from '../lib/access.js';
 import { env } from '../lib/env.js';
+import { verifyGoogleCredential } from '../lib/google.js';
 import { badRequest, conflict, parse, route, unauthorized } from '../lib/http.js';
 import { sendLoginLinkEmail } from '../lib/mailer.js';
 import { prisma } from '../lib/prisma.js';
 import { rateLimit } from '../lib/rateLimit.js';
+import { syncGoogleIdentityToSupabase } from '../lib/supabaseSync.js';
 
 export const authRouter = Router();
 
@@ -33,12 +35,27 @@ const signInSchema = z.object({
   password: z.string().min(1, 'Enter your password.')
 });
 
-authRouter.get('/session', (req, res) => {
-  res.json({
-    user: req.user ?? null,
-    providers: { google: env.google.enabled, email: env.smtp.enabled }
-  });
-});
+authRouter.get(
+  '/session',
+  route(async (req, res) => {
+    res.json({
+      user: req.user ?? null,
+      // Other brahmastra.studio frontends read this to know who is an Academy member.
+      access: req.user ? await academyAccess(req.user) : null,
+      providers: {
+        google: env.google.enabled,
+        googleClientId: env.google.clientIds[0] ?? null,
+        email: env.smtp.enabled
+      }
+    });
+  })
+);
+
+/** Every sign-in answers with who you are, whether you're a member and where to go. */
+async function signedIn(user: Parameters<typeof publicUser>[0]) {
+  const access = await academyAccess(user);
+  return { user: publicUser(user), access, redirectTo: access.landing };
+}
 
 const perMinute = (name: string, max: number) => rateLimit({ name, windowMs: 60_000, max });
 
@@ -62,7 +79,7 @@ authRouter.post(
     });
 
     await createSession(req, res, user.id);
-    res.status(201).json({ user: publicUser(user) });
+    res.status(201).json(await signedIn(user));
   })
 );
 
@@ -75,7 +92,7 @@ authRouter.post(
     const owner = await ensureAdminAccount(data.email, data.password);
     if (owner) {
       await createSession(req, res, owner.id);
-      return res.json({ user: publicUser(owner) });
+      return res.json(await signedIn(owner));
     }
 
     const user = await prisma.user.findUnique({ where: { email: data.email } });
@@ -84,7 +101,7 @@ authRouter.post(
     }
 
     await createSession(req, res, user.id);
-    return res.json({ user: publicUser(user) });
+    return res.json(await signedIn(user));
   })
 );
 
@@ -131,146 +148,87 @@ authRouter.post(
 
     await prisma.user.update({ where: { id: user.id }, data: { emailVerified: new Date() } });
     await createSession(req, res, user.id);
-    res.json({ user: publicUser(user) });
+    res.json(await signedIn(user));
   })
 );
 
-const OAUTH_STATE_COOKIE = 'academy_oauth_state';
-const googleRedirectUri = () => `${env.appUrl.replace(/\/$/, '')}/api/auth/google/callback`;
-
-authRouter.get('/google', (req, res) => {
-  if (!env.google.enabled) {
-    return res.redirect(`/sign-in?error=${encodeURIComponent('Google sign-in is not set up yet.')}`);
-  }
-
-  const state = crypto.randomBytes(16).toString('base64url');
-  res.cookie(OAUTH_STATE_COOKIE, state, {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: env.production,
-    maxAge: 10 * 60_000,
-    path: '/'
-  });
-
-  const params = new URLSearchParams({
-    client_id: env.google.clientId,
-    redirect_uri: googleRedirectUri(),
-    response_type: 'code',
-    scope: 'openid email profile',
-    state,
-    prompt: 'select_account'
-  });
-  const next = typeof req.query.next === 'string' ? req.query.next : '';
-  if (next) params.set('state', `${state}.${Buffer.from(next).toString('base64url')}`);
-
-  return res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
-});
-
-authRouter.get(
-  '/google/callback',
+/**
+ * Google Identity Services sign-in. The browser hands over the ID token Google issued for
+ * the BrahmAstra client; we verify it, find or create the Academy account, open a session,
+ * then mirror the person into the shared Supabase project.
+ *
+ * Accounts are matched on Google's stable subject id first and email second, so someone
+ * whose Google address changed still lands on the account that holds their purchases.
+ */
+authRouter.post(
+  '/google',
+  perMinute('google', 20),
   route(async (req, res) => {
-    const fail = (reason: string) =>
-      res.redirect(`/sign-in?error=${encodeURIComponent(reason)}`);
+    const { credential, nonce } = parse(
+      z.object({ credential: z.string().min(20), nonce: z.string().min(16).max(256) }),
+      req.body
+    );
+    const google = await verifyGoogleCredential(credential, nonce);
+    const isOwner = Boolean(env.adminEmail) && google.email === env.adminEmail;
 
-    const code = typeof req.query.code === 'string' ? req.query.code : '';
-    const state = typeof req.query.state === 'string' ? req.query.state : '';
-    const [stateToken, encodedNext] = state.split('.');
+    const linked = await prisma.account.findUnique({
+      where: { provider_providerAccountId: { provider: 'google', providerAccountId: google.sub } },
+      select: { userId: true }
+    });
+    const existing = linked
+      ? await prisma.user.findUnique({ where: { id: linked.userId } })
+      : await prisma.user.findUnique({ where: { email: google.email } });
 
-    res.clearCookie(OAUTH_STATE_COOKIE, { path: '/' });
-    if (!code || !stateToken || stateToken !== req.cookies?.[OAUTH_STATE_COOKIE]) {
-      return fail('Google sign-in could not be verified. Please try again.');
+    // A name or avatar someone set themselves is kept; Google only fills the gaps.
+    const user = existing
+      ? await prisma.user.update({
+          where: { id: existing.id },
+          data: {
+            name: existing.name || google.name,
+            image: existing.image || google.picture,
+            emailVerified: existing.emailVerified ?? new Date(),
+            ...(isOwner ? { role: 'ADMIN' as const } : {})
+          }
+        })
+      : await prisma.user.create({
+          data: {
+            email: google.email,
+            name: google.name,
+            image: google.picture,
+            emailVerified: new Date(),
+            role: isOwner ? 'ADMIN' : 'STUDENT'
+          }
+        });
+
+    if (!linked) {
+      await prisma.account.create({
+        data: {
+          userId: user.id,
+          type: 'oidc',
+          provider: 'google',
+          providerAccountId: google.sub
+        }
+      });
     }
-
-    const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        code,
-        client_id: env.google.clientId,
-        client_secret: env.google.clientSecret,
-        redirect_uri: googleRedirectUri(),
-        grant_type: 'authorization_code'
-      })
-    });
-    if (!tokenResponse.ok) return fail('Google rejected the sign-in. Please try again.');
-
-    const tokens = (await tokenResponse.json()) as {
-      access_token?: string;
-      id_token?: string;
-      refresh_token?: string;
-      expires_in?: number;
-      scope?: string;
-      token_type?: string;
-    };
-    if (!tokens.access_token) return fail('Google did not return an access token.');
-
-    const profileResponse = await fetch('https://openidconnect.googleapis.com/v1/userinfo', {
-      headers: { Authorization: `Bearer ${tokens.access_token}` }
-    });
-    if (!profileResponse.ok) return fail('Could not read your Google profile.');
-
-    const profile = (await profileResponse.json()) as {
-      sub: string;
-      email?: string;
-      email_verified?: boolean;
-      name?: string;
-      picture?: string;
-    };
-    if (!profile.email) return fail('Your Google account has no email address attached.');
-
-    const email = profile.email.toLowerCase();
-    const isOwner = Boolean(env.adminEmail) && email === env.adminEmail;
-
-    const user = await prisma.user.upsert({
-      where: { email },
-      update: {
-        name: profile.name ?? undefined,
-        image: profile.picture ?? undefined,
-        emailVerified: profile.email_verified ? new Date() : undefined,
-        ...(isOwner ? { role: 'ADMIN' as const } : {})
-      },
-      create: {
-        email,
-        name: profile.name ?? null,
-        image: profile.picture ?? null,
-        emailVerified: profile.email_verified ? new Date() : null,
-        role: isOwner ? 'ADMIN' : 'STUDENT'
-      }
-    });
-
-    await prisma.account.upsert({
-      where: { provider_providerAccountId: { provider: 'google', providerAccountId: profile.sub } },
-      update: {
-        access_token: tokens.access_token,
-        id_token: tokens.id_token,
-        refresh_token: tokens.refresh_token,
-        expires_at: tokens.expires_in ? Math.floor(Date.now() / 1000) + tokens.expires_in : null,
-        scope: tokens.scope,
-        token_type: tokens.token_type
-      },
-      create: {
-        userId: user.id,
-        type: 'oauth',
-        provider: 'google',
-        providerAccountId: profile.sub,
-        access_token: tokens.access_token,
-        id_token: tokens.id_token,
-        refresh_token: tokens.refresh_token,
-        expires_at: tokens.expires_in ? Math.floor(Date.now() / 1000) + tokens.expires_in : null,
-        scope: tokens.scope,
-        token_type: tokens.token_type
-      }
-    });
 
     await createSession(req, res, user.id);
+    const body = await signedIn(user);
 
-    let next = '/dashboard';
-    if (encodedNext) {
-      const decoded = Buffer.from(encodedNext, 'base64url').toString('utf8');
-      // Only same-origin paths, so the OAuth round trip cannot become an open redirect.
-      if (decoded.startsWith('/') && !decoded.startsWith('//')) next = decoded;
+    const supabase = await syncGoogleIdentityToSupabase({
+      identity: google,
+      academy: { userId: user.id, member: body.access.member }
+    });
+    if (!supabase.ok) {
+      console.warn(`[academy] Supabase sync for ${google.email} did not complete: ${supabase.skipped ?? supabase.error}`);
     }
-    return res.redirect(next);
+
+    res.status(existing ? 200 : 201).json({
+      ...body,
+      created: !existing,
+      supabase: supabase.ok
+        ? { synced: true, userId: supabase.supabaseUserId }
+        : { synced: false, reason: supabase.skipped ? 'not-configured' : 'sync-failed' }
+    });
   })
 );
 

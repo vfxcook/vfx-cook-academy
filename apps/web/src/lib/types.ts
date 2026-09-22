@@ -9,9 +9,28 @@ export interface User {
   role: Role;
 }
 
+export interface AcademyAccess {
+  /** Paid students (an active enrolment) and admins. */
+  member: boolean;
+  /** Where this person should land after signing in. */
+  landing: string;
+}
+
 export interface SessionState {
   user: User | null;
-  providers: { google: boolean; email: boolean };
+  access: AcademyAccess | null;
+  providers: { google: boolean; googleClientId: string | null; email: boolean };
+}
+
+export interface SignInResult {
+  user: User;
+  access: AcademyAccess;
+  redirectTo: string;
+}
+
+export interface GoogleSignInResult extends SignInResult {
+  created: boolean;
+  supabase: { synced: boolean; userId?: string; reason?: string };
 }
 
 export interface Author {

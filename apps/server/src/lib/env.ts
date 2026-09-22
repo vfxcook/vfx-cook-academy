@@ -26,10 +26,19 @@ function loadDotEnv(file: string) {
   }
 }
 
+export const DEFAULT_GOOGLE_CLIENT_ID =
+  '706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com';
+export const DEFAULT_SUPABASE_URL = 'https://frnlloffzfnohagpwsti.supabase.co';
+
 loadDotEnv(resolve(process.cwd(), '.env'));
 loadDotEnv(resolve(process.cwd(), '..', '..', '.env'));
 
 const str = (key: string, fallback = '') => process.env[key]?.trim() || fallback;
+const list = (key: string) =>
+  str(key)
+    .split(',')
+    .map(value => value.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
 const num = (key: string, fallback: number) => {
   const parsed = Number(process.env[key]);
   return Number.isFinite(parsed) ? parsed : fallback;
@@ -49,11 +58,15 @@ export const env = {
   adminEmail: str('ADMIN_EMAIL').toLowerCase(),
   adminPassword: str('ADMIN_PASSWORD'),
 
+  /**
+   * Google Identity Services. The browser gets an ID token and the server verifies it,
+   * so only client IDs are needed — no secret. Defaults to the BrahmAstra Studio client so
+   * one Google consent covers every brahmastra.studio product.
+   */
   google: {
-    clientId: str('GOOGLE_CLIENT_ID'),
-    clientSecret: str('GOOGLE_CLIENT_SECRET'),
+    clientIds: list('GOOGLE_CLIENT_ID').length ? list('GOOGLE_CLIENT_ID') : [DEFAULT_GOOGLE_CLIENT_ID],
     get enabled() {
-      return Boolean(this.clientId && this.clientSecret);
+      return this.clientIds.length > 0;
     }
   },
 
@@ -69,7 +82,7 @@ export const env = {
   },
 
   supabase: {
-    url: str('SUPABASE_URL'),
+    url: str('SUPABASE_URL', DEFAULT_SUPABASE_URL).replace(/\/+$/, ''),
     serviceRoleKey: str('SUPABASE_SERVICE_ROLE_KEY'),
     get enabled() {
       return Boolean(this.url && this.serviceRoleKey);
@@ -90,6 +103,16 @@ export const env = {
     callbackBaseUrl: str('CALLBACK_BASE_URL'),
     callbackSecret: str('STUDIO_CALLBACK_SECRET')
   },
+
+  /*
+   * Multi-domain auth. COOKIE_DOMAIN (e.g. `.brahmastra.studio`) shares the session across
+   * subdomains; ALLOWED_ORIGINS lists the frontends that may call this API with credentials
+   * (`https://*.brahmastra.studio` style wildcards allowed); PROXY_SHARED_SECRET marks
+   * requests forwarded by our Cloudflare Worker so their client IP can be trusted.
+   */
+  cookieDomain: str('COOKIE_DOMAIN'),
+  allowedOrigins: list('ALLOWED_ORIGINS'),
+  proxySecret: str('PROXY_SHARED_SECRET'),
 
   qrCodeUrl: str('QR_CODE_URL', str('NEXT_PUBLIC_QR_CODE_URL')),
   uploadsDir: str('UPLOADS_DIR', resolve(process.cwd(), 'uploads'))

@@ -1,23 +1,17 @@
 import { useState, type FormEvent } from 'react';
-import { Link, redirect, useLoaderData, useSearchParams } from 'react-router';
+import { Link, redirect, useLoaderData, useSearchParams, type LoaderFunctionArgs } from 'react-router';
 import CinemaScene from '../components/CinemaScene';
-import GoogleButton from '../components/GoogleButton';
+import GoogleSignIn from '../components/GoogleSignIn';
 import { Field, Notice } from '../components/ui';
 import { api, errorMessage } from '../lib/api';
+import { resolveGoogleClientId } from '../lib/googleIdentity';
 import type { SessionState } from '../lib/types';
 
-/** Shared by the auth scenes, which sit outside the root layout and its session loader. */
-export async function authSceneLoader(): Promise<SessionState | Response> {
-  try {
-    const session = await api.auth.session();
-    if (session.user) return redirect('/dashboard');
-    return session;
-  } catch {
-    return { user: null, providers: { google: false, email: false } };
-  }
-}
-
-export const signInLoader = authSceneLoader;
+const SIGNED_OUT: SessionState = {
+  user: null,
+  access: null,
+  providers: { google: true, googleClientId: null, email: false }
+};
 
 /** Only same-origin paths survive, so ?next= can never bounce someone off-site. */
 export function safeNext(value: string | null, fallback = '/dashboard') {
@@ -25,10 +19,31 @@ export function safeNext(value: string | null, fallback = '/dashboard') {
   return value.startsWith('/') && !value.startsWith('//') ? value : fallback;
 }
 
+/** An explicit ?next= wins; otherwise the server's landing decides (classroom or dashboard). */
+export function explicitNext(params: URLSearchParams) {
+  const next = params.get('next');
+  return next ? safeNext(next) : null;
+}
+
+/** Shared by the auth scenes, which sit outside the root layout and its session loader. */
+export async function authSceneLoader({ request }: LoaderFunctionArgs): Promise<SessionState | Response> {
+  try {
+    const session = await api.auth.session();
+    if (session.user) {
+      return redirect(explicitNext(new URL(request.url).searchParams) ?? session.access?.landing ?? '/dashboard');
+    }
+    return session;
+  } catch {
+    return SIGNED_OUT;
+  }
+}
+
+export const signInLoader = authSceneLoader;
+
 export default function SignIn() {
   const [params] = useSearchParams();
   const { providers } = useLoaderData() as SessionState;
-  const next = safeNext(params.get('next'));
+  const next = explicitNext(params);
 
   const [mode, setMode] = useState<'password' | 'link'>('password');
   const [email, setEmail] = useState('');
@@ -36,6 +51,9 @@ export default function SignIn() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(params.get('error') ?? '');
   const [linkSent, setLinkSent] = useState(false);
+
+  // A full navigation re-runs every loader against the new session.
+  const go = (landing: string) => window.location.assign(next ?? landing);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -47,9 +65,8 @@ export default function SignIn() {
         await api.auth.requestLoginLink(email);
         setLinkSent(true);
       } else {
-        await api.auth.signIn({ email, password });
-        // A full navigation re-runs every loader against the new session.
-        window.location.assign(next);
+        const result = await api.auth.signIn({ email, password });
+        go(result.redirectTo);
       }
     } catch (thrown) {
       setError(errorMessage(thrown, 'Could not sign you in.'));
@@ -62,7 +79,7 @@ export default function SignIn() {
     <CinemaScene
       eyebrow="Welcome back"
       headline={['Pick up', 'where the', 'reel stopped.']}
-      lede="Your lessons, your doubts and your progress are exactly where you left them."
+      lede="One BrahmAstra account across the Studio and the Academy. Your lessons, doubts and progress are exactly where you left them."
     >
       <div>
         <p className="ac-eyebrow">Sign in</p>
@@ -82,10 +99,16 @@ export default function SignIn() {
 
       {providers.google ? (
         <>
-          <GoogleButton enabled next={next} label="Continue with Google" />
+          <GoogleSignIn
+            clientId={resolveGoogleClientId(providers.googleClientId)}
+            mode="signin"
+            autoPrompt
+            onSignedIn={result => go(result.redirectTo)}
+            onError={setError}
+          />
           <div className="ac-row" style={{ gap: 12 }}>
             <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-            <span className="ac-eyebrow">or</span>
+            <span className="ac-eyebrow">or with email</span>
             <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
           </div>
         </>
@@ -120,7 +143,7 @@ export default function SignIn() {
           </Field>
         ) : null}
 
-        <button type="submit" className="ac-btn ac-btn--primary ac-btn--lg ac-btn--block" disabled={busy}>
+        <button type="submit" className="ac-btn ac-btn--ghost ac-btn--lg ac-btn--block" disabled={busy}>
           {busy ? 'Checking…' : mode === 'link' ? 'Email me a sign-in link' : 'Sign in'}
         </button>
       </form>
@@ -141,7 +164,7 @@ export default function SignIn() {
         ) : (
           <span />
         )}
-        <Link className="ac-btn ac-btn--quiet ac-btn--sm" to="/sign-up">
+        <Link className="ac-btn ac-btn--quiet ac-btn--sm" to={next ? `/sign-up?next=${encodeURIComponent(next)}` : '/sign-up'}>
           Create account
         </Link>
       </div>

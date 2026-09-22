@@ -39,6 +39,9 @@ function secureCookies(req: Request) {
   return env.production && (req.secure || req.get('x-forwarded-proto') === 'https');
 }
 
+/** Set once `COOKIE_DOMAIN` is `.brahmastra.studio`, so every subdomain shares the session. */
+const cookieScope = () => ({ path: '/', ...(env.cookieDomain ? { domain: env.cookieDomain } : {}) });
+
 export async function createSession(req: Request, res: Response, userId: string) {
   const token = newToken();
   const maxAge = env.sessionDays * 864e5;
@@ -49,20 +52,8 @@ export async function createSession(req: Request, res: Response, userId: string)
   });
 
   const secure = secureCookies(req);
-  res.cookie(SESSION_COOKIE, token, {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure,
-    maxAge,
-    path: '/'
-  });
-  res.cookie(CSRF_COOKIE, newToken(), {
-    httpOnly: false,
-    sameSite: 'lax',
-    secure,
-    maxAge,
-    path: '/'
-  });
+  res.cookie(SESSION_COOKIE, token, { ...cookieScope(), httpOnly: true, sameSite: 'lax', secure, maxAge });
+  res.cookie(CSRF_COOKIE, newToken(), { ...cookieScope(), httpOnly: false, sameSite: 'lax', secure, maxAge });
 }
 
 export async function destroySession(req: Request, res: Response) {
@@ -70,8 +61,8 @@ export async function destroySession(req: Request, res: Response) {
   if (token) {
     await prisma.session.deleteMany({ where: { sessionToken: digest(token) } });
   }
-  res.clearCookie(SESSION_COOKIE, { path: '/' });
-  res.clearCookie(CSRF_COOKIE, { path: '/' });
+  res.clearCookie(SESSION_COOKIE, cookieScope());
+  res.clearCookie(CSRF_COOKIE, cookieScope());
 }
 
 export async function userFromRequest(req: Request): Promise<SessionUser | null> {

@@ -11,7 +11,7 @@ export function rateLimit(options: { name: string; windowMs: number; max: number
 
   return (req: Request, res: Response, next: NextFunction) => {
     const now = Date.now();
-    const key = `${options.name}:${req.ip ?? 'unknown'}`;
+    const key = `${options.name}:${req.clientIp ?? req.ip ?? 'unknown'}`;
 
     let entry = hits.get(key);
     if (!entry || entry.resetAt <= now) {
