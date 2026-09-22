@@ -1,15 +1,23 @@
 import { useState, type FormEvent } from 'react';
-import { Link, redirect, useSearchParams } from 'react-router';
+import { Link, redirect, useLoaderData, useSearchParams } from 'react-router';
 import CinemaScene from '../components/CinemaScene';
 import GoogleButton from '../components/GoogleButton';
 import { Field, Notice } from '../components/ui';
 import { api, errorMessage } from '../lib/api';
+import type { SessionState } from '../lib/types';
 
-export async function signInLoader() {
-  const session = await api.auth.session();
-  if (session.user) return redirect('/dashboard');
-  return session;
+/** Shared by the auth scenes, which sit outside the root layout and its session loader. */
+export async function authSceneLoader(): Promise<SessionState | Response> {
+  try {
+    const session = await api.auth.session();
+    if (session.user) return redirect('/dashboard');
+    return session;
+  } catch {
+    return { user: null, providers: { google: false, email: false } };
+  }
 }
+
+export const signInLoader = authSceneLoader;
 
 /** Only same-origin paths survive, so ?next= can never bounce someone off-site. */
 export function safeNext(value: string | null, fallback = '/dashboard') {
@@ -19,6 +27,7 @@ export function safeNext(value: string | null, fallback = '/dashboard') {
 
 export default function SignIn() {
   const [params] = useSearchParams();
+  const { providers } = useLoaderData() as SessionState;
   const next = safeNext(params.get('next'));
 
   const [mode, setMode] = useState<'password' | 'link'>('password');
@@ -71,13 +80,16 @@ export default function SignIn() {
 
       {error ? <Notice tone="error">{error}</Notice> : null}
 
-      <GoogleButton next={next} label="Continue with Google" />
-
-      <div className="ac-row" style={{ gap: 12 }}>
-        <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-        <span className="ac-eyebrow">or</span>
-        <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-      </div>
+      {providers.google ? (
+        <>
+          <GoogleButton enabled next={next} label="Continue with Google" />
+          <div className="ac-row" style={{ gap: 12 }}>
+            <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
+            <span className="ac-eyebrow">or</span>
+            <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
+          </div>
+        </>
+      ) : null}
 
       <form className="ac-stack" onSubmit={submit}>
         <Field label="Email" htmlFor="email">
@@ -114,17 +126,21 @@ export default function SignIn() {
       </form>
 
       <div className="ac-between">
-        <button
-          type="button"
-          className="ac-btn ac-btn--quiet ac-btn--sm"
-          onClick={() => {
-            setMode(current => (current === 'password' ? 'link' : 'password'));
-            setError('');
-            setLinkSent(false);
-          }}
-        >
-          {mode === 'password' ? 'Use an email link instead' : 'Use a password instead'}
-        </button>
+        {providers.email ? (
+          <button
+            type="button"
+            className="ac-btn ac-btn--quiet ac-btn--sm"
+            onClick={() => {
+              setMode(current => (current === 'password' ? 'link' : 'password'));
+              setError('');
+              setLinkSent(false);
+            }}
+          >
+            {mode === 'password' ? 'Use an email link instead' : 'Use a password instead'}
+          </button>
+        ) : (
+          <span />
+        )}
         <Link className="ac-btn ac-btn--quiet ac-btn--sm" to="/sign-up">
           Create account
         </Link>

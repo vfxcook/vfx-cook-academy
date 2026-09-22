@@ -48,7 +48,6 @@ export default function RootLayout() {
             <a href={brand.parentUrl} target="_blank" rel="noreferrer noopener">
               {brand.parent}
             </a>
-            <a href="mailto:itsvfxcook@gmail.com">Support</a>
           </nav>
         </div>
       </footer>

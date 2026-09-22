@@ -1,19 +1,17 @@
 import { useState, type FormEvent } from 'react';
-import { Link, redirect, useSearchParams } from 'react-router';
+import { Link, useLoaderData, useSearchParams } from 'react-router';
 import CinemaScene from '../components/CinemaScene';
 import GoogleButton from '../components/GoogleButton';
 import { Field, Notice } from '../components/ui';
 import { api, errorMessage } from '../lib/api';
-import { safeNext } from './signIn';
+import type { SessionState } from '../lib/types';
+import { authSceneLoader, safeNext } from './signIn';
 
-export async function signUpLoader() {
-  const session = await api.auth.session();
-  if (session.user) return redirect('/dashboard');
-  return session;
-}
+export const signUpLoader = authSceneLoader;
 
 export default function SignUp() {
   const [params] = useSearchParams();
+  const { providers } = useLoaderData() as SessionState;
   const next = safeNext(params.get('next'));
 
   const [form, setForm] = useState({ name: '', email: '', phone: '', password: '' });
@@ -37,7 +35,7 @@ export default function SignUp() {
         name: form.name,
         email: form.email,
         password: form.password,
-        phone: form.phone || undefined
+        phone: form.phone.trim()
       });
       window.location.assign(next);
     } catch (thrown) {
@@ -63,13 +61,16 @@ export default function SignUp() {
 
       {error ? <Notice tone="error">{error}</Notice> : null}
 
-      <GoogleButton next={next} label="Sign up with Google" />
-
-      <div className="ac-row" style={{ gap: 12 }}>
-        <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-        <span className="ac-eyebrow">or</span>
-        <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
-      </div>
+      {providers.google ? (
+        <>
+          <GoogleButton enabled next={next} label="Sign up with Google" />
+          <div className="ac-row" style={{ gap: 12 }}>
+            <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
+            <span className="ac-eyebrow">or</span>
+            <span style={{ flex: 1, height: 1, background: 'var(--ac-border)' }} />
+          </div>
+        </>
+      ) : null}
 
       <form className="ac-stack" onSubmit={submit}>
         <Field label="Your name" htmlFor="name">
@@ -81,7 +82,7 @@ export default function SignUp() {
             minLength={2}
             value={form.name}
             onChange={set('name')}
-            placeholder="Anish M Prasad"
+            placeholder="Your full name"
           />
         </Field>
 
@@ -98,12 +99,15 @@ export default function SignUp() {
           />
         </Field>
 
-        <Field label="Phone" htmlFor="phone" hint="Optional — used only for payment follow-ups.">
+        <Field label="Phone" htmlFor="phone" hint="For enrolment and payment support only.">
           <input
             id="phone"
             className="ac-input"
             type="tel"
             autoComplete="tel"
+            required
+            minLength={8}
+            maxLength={20}
             value={form.phone}
             onChange={set('phone')}
             placeholder="+91 98470 00000"

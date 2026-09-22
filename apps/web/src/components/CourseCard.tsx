@@ -25,8 +25,6 @@ function Poster({ src, title }: { src: string | null; title: string }) {
 }
 
 export default function CourseCard({ course }: { course: CourseSummary }) {
-  const isFree = course.priceInr === 0;
-
   return (
     <article className="ac-panel cc">
       <Link className="cc-poster" to={`/courses/${course.slug}`} aria-label={course.title}>
@@ -56,7 +54,7 @@ export default function CourseCard({ course }: { course: CourseSummary }) {
         <p className="cc-desc">{course.description}</p>
 
         <div className="cc-foot">
-          <span className="cc-price">{isFree ? 'Free' : formatInr(course.priceInr)}</span>
+          <span className="cc-price">{formatInr(course.priceInr)}</span>
           {course.isEnrolled ? (
             <Link className="ac-btn ac-btn--ember ac-btn--sm" to={`/learn/${course.slug}`}>
               Continue
@@ -110,22 +108,35 @@ export function EnrolledCourseCard({ course }: { course: DashboardCourse }) {
               </Link>
             </div>
           </>
-        ) : (
+        ) : course.awaitingLicense ? (
           <>
             <p className="cc-desc">
-              {course.awaitingLicense
-                ? 'Your payment is approved. Enter the license code we emailed you to unlock the lessons.'
-                : 'Your payment is under review. We will email your license code once it clears.'}
+              Your payment is approved. Enter the license code we emailed you to unlock the lessons.
             </p>
             <div className="cc-foot">
-              <span className={`ac-chip ${course.awaitingLicense ? 'ac-chip--ember' : 'ac-chip--warn'}`}>
-                {course.awaitingLicense ? 'License ready' : 'Under review'}
-              </span>
-              {course.awaitingLicense ? (
-                <a className="ac-btn ac-btn--primary ac-btn--sm" href="#activate">
-                  Activate
-                </a>
-              ) : null}
+              <span className="ac-chip ac-chip--ember">License ready</span>
+              <a className="ac-btn ac-btn--primary ac-btn--sm" href="#activate">
+                Activate
+              </a>
+            </div>
+          </>
+        ) : course.paymentUnderReview ? (
+          <>
+            <p className="cc-desc">
+              Your transfer is under review. We email a license code as soon as it clears.
+            </p>
+            <div className="cc-foot">
+              <span className="ac-chip ac-chip--warn">Under review</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="cc-desc">You started enrolling but the payment did not go through.</p>
+            <div className="cc-foot">
+              <span className="ac-chip">Not paid</span>
+              <Link className="ac-btn ac-btn--primary ac-btn--sm" to={`/checkout/${course.slug}`}>
+                Finish enrolling
+              </Link>
             </div>
           </>
         )}

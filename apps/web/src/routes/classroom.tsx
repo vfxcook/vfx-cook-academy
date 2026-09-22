@@ -24,7 +24,7 @@ export async function classroomLoader({ params }: LoaderFunctionArgs) {
 }
 
 export default function Classroom() {
-  const { course, lesson, lessons, progress, comments } = useLoaderData<typeof classroomLoader>();
+  const { course, lesson, lessons, progress, access, comments } = useLoaderData<typeof classroomLoader>();
   const playerRef = useRef<PlayerHandle>(null);
   const [completed, setCompleted] = useState(lesson.isCompleted);
   const [marking, setMarking] = useState(false);
@@ -103,6 +103,7 @@ export default function Classroom() {
             title={lesson.title}
             videoUrl={lesson.videoUrl}
             isCompleted={completed}
+            trackProgress={access.hasAccess}
             onProgress={(_percent, isCompleted) => {
               if (isCompleted) setCompleted(true);
             }}
@@ -121,7 +122,14 @@ export default function Classroom() {
           <h1>{lesson.title}</h1>
 
           <div className="room-actions">
-            {completed ? (
+            {!access.hasAccess ? (
+              <>
+                <span className="ac-chip ac-chip--ember">Free preview</span>
+                <Link className="ac-btn ac-btn--primary" to={`/courses/${course.slug}`}>
+                  Enrol for the full course
+                </Link>
+              </>
+            ) : completed ? (
               <span className="ac-chip ac-chip--ok">
                 <span className="ac-dot" />
                 Completed
@@ -152,7 +160,7 @@ export default function Classroom() {
 
           {error ? <Notice tone="error">{error}</Notice> : null}
 
-          {!completed && next === undefined && index < lessons.length - 1 ? (
+          {access.hasAccess && !completed && next === undefined && index < lessons.length - 1 ? (
             <Notice>Finish this lesson to unlock the next one.</Notice>
           ) : null}
         </div>
@@ -204,7 +212,9 @@ export default function Classroom() {
           lessonId={lesson.id}
           videoUrl={lesson.videoUrl}
           comments={comments}
-          canPost={!lesson.isLocked}
+          canPost={access.hasAccess}
+          signedIn={access.isSignedIn}
+          courseSlug={course.slug}
           currentTime={() => playerRef.current?.currentTime() ?? 0}
           onSeek={seconds => playerRef.current?.seekTo(seconds)}
         />

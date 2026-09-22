@@ -27,7 +27,6 @@ function LockIcon() {
 
 export default function Course() {
   const { course, lessons, progress, access } = useLoaderData<typeof courseLoader>();
-  const isFree = course.priceInr === 0;
   const previewLesson = lessons.find(lesson => !lesson.isLocked);
 
   return (
@@ -79,8 +78,8 @@ export default function Course() {
             <p className="ac-eyebrow">Enrolment</p>
 
             <div className="course-buy-price">
-              <b>{isFree ? 'Free' : formatInr(course.priceInr)}</b>
-              {!isFree ? <span>one-time · lifetime access</span> : null}
+              <b>{formatInr(course.priceInr)}</b>
+              <span>one-time · lifetime access</span>
             </div>
 
             <ul className="course-buy-facts">
@@ -107,7 +106,7 @@ export default function Course() {
             </ul>
 
             <Link className="ac-btn ac-btn--primary ac-btn--lg ac-btn--block" to={`/checkout/${course.slug}`}>
-              {isFree ? 'Enrol free' : 'Enrol now'}
+              Enrol now
             </Link>
 
             {previewLesson ? (

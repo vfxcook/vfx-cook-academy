@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import { requireUser } from '../lib/auth.js';
+import { requireUser, type SessionUser } from '../lib/auth.js';
 import { badRequest, forbidden, notFound, parse, route } from '../lib/http.js';
 import { prisma } from '../lib/prisma.js';
 import { toAuthor } from '../lib/serialize.js';
@@ -55,7 +55,9 @@ type PostRow = {
 
 const REACTIONS = ['LIKE', 'FIRE', 'CLAP'] as const;
 
-function shapePost(post: PostRow, viewerId: string) {
+function shapePost(post: PostRow, viewer: SessionUser) {
+  const viewerId = viewer.id;
+  const moderator = viewer.role === 'ADMIN';
   const counts = Object.fromEntries(
     REACTIONS.map(type => [type, post.reactions.filter(r => r.type === type).length])
   ) as Record<(typeof REACTIONS)[number], number>;
@@ -70,6 +72,7 @@ function shapePost(post: PostRow, viewerId: string) {
     createdAt: post.createdAt,
     author: toAuthor(post.user),
     isMine: post.userId === viewerId,
+    canDelete: post.userId === viewerId || moderator,
     reactions: REACTIONS.map(type => ({ type, count: counts[type], mine: mine.has(type) })),
     comments: post.comments.map(comment => ({
       id: comment.id,
@@ -77,7 +80,8 @@ function shapePost(post: PostRow, viewerId: string) {
       parentId: comment.parentId,
       createdAt: comment.createdAt,
       author: toAuthor(comment.user),
-      isMine: comment.userId === viewerId
+      isMine: comment.userId === viewerId,
+      canDelete: comment.userId === viewerId || moderator
     }))
   };
 }
@@ -95,7 +99,7 @@ communityRouter.get(
       include: postInclude
     });
 
-    res.json({ posts: posts.map(post => shapePost(post, req.user!.id)) });
+    res.json({ posts: posts.map(post => shapePost(post, req.user!)) });
   })
 );
 
@@ -153,7 +157,7 @@ communityRouter.post(
       });
     }
 
-    res.status(201).json({ post: shapePost(post, req.user!.id) });
+    res.status(201).json({ post: shapePost(post, req.user!) });
   })
 );
 
@@ -236,7 +240,8 @@ communityRouter.post(
         parentId: comment.parentId,
         createdAt: comment.createdAt,
         author: toAuthor(comment.user),
-        isMine: true
+        isMine: true,
+        canDelete: true
       }
     });
   })

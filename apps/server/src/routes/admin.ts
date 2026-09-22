@@ -6,6 +6,8 @@ import { badRequest, conflict, notFound, parse, route } from '../lib/http.js';
 import { sendLicenseEmail } from '../lib/mailer.js';
 import { prisma } from '../lib/prisma.js';
 import { assertImage, assertVideo, saveUpload } from '../lib/storage.js';
+import { gatewayCheckoutsOnly, isGatewayCheckout, manualTransfersOnly } from '../lib/settle.js';
+import { adjustStudioCredits } from '../lib/studio.js';
 import { makeLicenseCode, parseDateInput, slugify } from '../lib/utils.js';
 
 export const adminRouter = Router();
@@ -43,7 +45,7 @@ adminRouter.get(
       prisma.course.count({ where: { isPublished: true } }),
       prisma.video.count(),
       prisma.enrollment.findMany({ where: { isActive: true }, distinct: ['userId'], select: { userId: true } }),
-      prisma.paymentRequest.count({ where: { status: 'PENDING' } }),
+      prisma.paymentRequest.count({ where: { status: 'PENDING', ...manualTransfersOnly } }),
       prisma.paymentRequest.findMany({
         orderBy: { createdAt: 'desc' },
         take: 6,
@@ -82,6 +84,9 @@ adminRouter.get(
         resources: resourceCount,
         activeStudents: activeStudents.length,
         pendingPayments,
+        unpaidCheckouts: await prisma.paymentRequest.count({
+          where: { status: 'PENDING', ...gatewayCheckoutsOnly }
+        }),
         completionRate: Math.round((completedProgress / possibleProgress) * 100),
         revenueInr: revenue._sum.amountInr ?? 0,
         studioCreditsOutstanding: studioCredits._sum.availableCredits ?? 0
@@ -482,7 +487,15 @@ adminRouter.get(
         course: { select: { title: true, slug: true, priceInr: true } }
       }
     });
-    res.json({ payments });
+    res.json({
+      payments: payments.map(payment => ({
+        ...payment,
+        method:
+          isGatewayCheckout(payment.transactionRef) || payment.reviewedBy?.startsWith('razorpay')
+            ? 'gateway'
+            : 'manual'
+      }))
+    });
   })
 );
 
@@ -495,30 +508,45 @@ adminRouter.post(
     });
     if (!payment) throw notFound('Payment request not found.');
     if (payment.status !== 'PENDING') throw conflict('That request has already been reviewed.');
+    if (isGatewayCheckout(payment.transactionRef)) {
+      throw conflict(
+        'This is an online checkout that was never paid. It unlocks by itself if Razorpay confirms a payment.'
+      );
+    }
 
-    const licenseCode = makeLicenseCode();
+    const enrollment = await prisma.enrollment.findUnique({
+      where: { userId_courseId: { userId: payment.userId, courseId: payment.courseId } },
+      select: { isActive: true }
+    });
+
+    // Paying twice must never lock a student out of a course they already have.
+    const licenseCode = enrollment?.isActive ? null : makeLicenseCode();
     const licenseExpiresAt = new Date(Date.now() + LICENSE_VALID_DAYS * 864e5);
 
-    await prisma.$transaction([
-      prisma.paymentRequest.update({
-        where: { id: payment.id },
+    await prisma.$transaction(async tx => {
+      const claimed = await tx.paymentRequest.updateMany({
+        where: { id: payment.id, status: 'PENDING' },
         data: { status: 'APPROVED', reviewedAt: new Date(), reviewedBy: req.user!.email ?? 'admin' }
-      }),
-      prisma.enrollment.upsert({
-        where: { userId_courseId: { userId: payment.userId, courseId: payment.courseId } },
-        create: {
-          userId: payment.userId,
-          courseId: payment.courseId,
-          isActive: false,
-          licenseCode,
-          licenseExpiresAt
-        },
-        update: { isActive: false, licenseCode, licenseExpiresAt }
-      })
-    ]);
+      });
+      if (claimed.count === 0) throw conflict('That request has already been reviewed.');
+
+      if (licenseCode) {
+        await tx.enrollment.upsert({
+          where: { userId_courseId: { userId: payment.userId, courseId: payment.courseId } },
+          create: {
+            userId: payment.userId,
+            courseId: payment.courseId,
+            isActive: false,
+            licenseCode,
+            licenseExpiresAt
+          },
+          update: { licenseCode, licenseExpiresAt }
+        });
+      }
+    });
 
     let emailed = false;
-    if (payment.user.email) {
+    if (licenseCode && payment.user.email) {
       emailed = await sendLicenseEmail({
         to: payment.user.email,
         courseTitle: payment.course.title,
@@ -526,7 +554,7 @@ adminRouter.post(
       });
     }
 
-    res.json({ ok: true, licenseCode, emailed });
+    res.json({ ok: true, licenseCode, emailed, alreadyActive: !licenseCode });
   })
 );
 
@@ -699,34 +727,14 @@ adminRouter.post(
     const user = await prisma.user.findUnique({ where: { email: data.email } });
     if (!user) throw notFound('No account uses that email.');
 
-    const balanceAfter = await prisma.$transaction(async tx => {
-      const current = await tx.studioCreditBalance.upsert({
-        where: { userId: user.id },
-        update: {},
-        create: { userId: user.id }
-      });
-      const next = current.availableCredits + data.credits;
-
-      await tx.studioCreditBalance.update({
-        where: { userId: user.id },
-        data: {
-          availableCredits: next,
-          ...(data.credits > 0
-            ? { lifetimePurchasedCredits: { increment: data.credits } }
-            : { lifetimeUsedCredits: { increment: Math.abs(data.credits) } })
-        }
-      });
-      await tx.studioCreditLedger.create({
-        data: {
-          userId: user.id,
-          type: 'ADMIN_ADJUSTMENT',
-          deltaCredits: data.credits,
-          balanceAfter: next,
-          note: data.note || `Adjusted by ${req.user!.email ?? 'admin'}`
-        }
-      });
-      return next;
-    });
+    const balanceAfter = await prisma.$transaction(tx =>
+      adjustStudioCredits({
+        db: tx,
+        userId: user.id,
+        credits: data.credits,
+        note: data.note || `Adjusted by ${req.user!.email ?? 'admin'}`
+      })
+    );
 
     res.json({ ok: true, balance: balanceAfter });
   })

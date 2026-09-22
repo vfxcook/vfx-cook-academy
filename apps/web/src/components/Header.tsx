@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, useFetcher, useNavigate } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { api } from '../lib/api';
 import { brand } from '../lib/content';
 import { formatRelative } from '../lib/format';
@@ -101,7 +101,13 @@ function NotificationBell() {
                 key={item.id}
                 className="pop-item"
                 data-unread={!item.isRead || undefined}
-                to={item.course ? `/learn/${item.course.slug}` : '/dashboard'}
+                to={
+                  !item.course
+                    ? '/dashboard'
+                    : item.postId
+                      ? `/learn/${item.course.slug}/community`
+                      : `/learn/${item.course.slug}`
+                }
                 onClick={() => {
                   setOpen(false);
                   if (!item.isRead) {
@@ -128,8 +134,6 @@ function NotificationBell() {
 function UserMenu({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
   const ref = useDismissOnOutside(open, () => setOpen(false));
-  const fetcher = useFetcher();
-  const navigate = useNavigate();
 
   return (
     <div className="bell" ref={ref}>
@@ -172,13 +176,11 @@ function UserMenu({ user }: { user: User }) {
           <button
             type="button"
             role="menuitem"
-            disabled={fetcher.state !== 'idle'}
             onClick={async () => {
               setOpen(false);
               await api.auth.signOut().catch(() => undefined);
-              navigate('/', { replace: true });
-              // A full reload clears every loader cache holding the old session.
-              window.location.reload();
+              // A full navigation drops every loader result that still holds the old session.
+              window.location.assign('/');
             }}
           >
             Sign out
@@ -188,9 +190,6 @@ function UserMenu({ user }: { user: User }) {
     </div>
   );
 }
-
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  isActive ? 'hdr-link' : 'hdr-link';
 
 export default function Header({ user }: { user: User | null }) {
   return (
@@ -205,15 +204,15 @@ export default function Header({ user }: { user: User | null }) {
         </Link>
 
         <nav className="hdr-nav" aria-label="Main">
-          <NavLink className={navLinkClass} to="/courses">
+          <NavLink className="hdr-link" to="/courses">
             Courses
           </NavLink>
           {user ? (
             <>
-              <NavLink className={navLinkClass} to="/dashboard">
+              <NavLink className="hdr-link" to="/dashboard">
                 Classroom
               </NavLink>
-              <NavLink className={navLinkClass} to="/studio">
+              <NavLink className="hdr-link" to="/studio">
                 AI Studio
               </NavLink>
             </>

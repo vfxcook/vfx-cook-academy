@@ -65,7 +65,7 @@ commentsRouter.post(
       include: { ...withAuthor, replies: { include: withAuthor } }
     });
 
-    res.status(201).json({ comment: shapeComment(comment, req.user!.id) });
+    res.status(201).json({ comment: shapeComment(comment, req.user!) });
   })
 );
 

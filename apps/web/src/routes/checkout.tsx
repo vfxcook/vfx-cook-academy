@@ -25,7 +25,9 @@ export async function checkoutLoader({ params, request }: LoaderFunctionArgs) {
     api.courses.detail(params.slug!),
     api.payments.config()
   ]);
-  if (course.access.hasAccess) return redirect(`/learn/${params.slug}`);
+  // Owning a course is no reason not to gift it.
+  const isGift = new URL(request.url).searchParams.get('gift') === '1';
+  if (course.access.hasAccess && !isGift) return redirect(`/learn/${params.slug}`);
 
   return { ...course, config };
 }
@@ -142,6 +144,14 @@ export default function Checkout() {
             </section>
           ) : null}
 
+          {isGift && !config.razorpayEnabled ? (
+            <Notice tone="warn">
+              Gifting needs online payment, which is not switched on yet. Reach out to the team and
+              we will set a gift up for you.
+            </Notice>
+          ) : null}
+
+          {isGift ? null : (
           <section className="ac-panel" style={{ padding: 'clamp(20px, 2.4vw, 28px)' }}>
             <p className="ac-eyebrow">
               {config.razorpayEnabled ? 'Option 2 · manual transfer' : 'Manual transfer'}
@@ -216,6 +226,7 @@ export default function Checkout() {
               </>
             )}
           </section>
+          )}
 
           <p className="ac-hint">
             Have a gift code instead? <Link to="/gift/redeem">Redeem it here</Link>.

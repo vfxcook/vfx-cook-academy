@@ -33,12 +33,9 @@ export type LessonDto = {
   resources: Array<Omit<ResourceRow, 'videoId'>>;
 };
 
+/** Other students only ever see a name — never an email, not even its local part. */
 export function toAuthor(user: LessonAuthor) {
-  return {
-    id: user.id,
-    name: user.name ?? user.email?.split('@')[0] ?? 'Student',
-    image: user.image
-  };
+  return { id: user.id, name: user.name?.trim() || 'Student', image: user.image };
 }
 
 /**
@@ -51,6 +48,8 @@ export function buildLessons(params: {
   progressByVideo: Map<string, { progressPercent: number; isCompleted: boolean }>;
   hasAccess: boolean;
   freePreviewFirstLesson: boolean;
+  /** Admins review the whole course, so the sequence does not gate them. */
+  unlockAll?: boolean;
 }): LessonDto[] {
   const ordered = [...params.videos].sort((a, b) => a.order - b.order);
   let previousComplete = true;
@@ -61,7 +60,7 @@ export function buildLessons(params: {
 
     const isPreview = index === 0 && params.freePreviewFirstLesson;
     const sequentiallyOpen = index === 0 || previousComplete;
-    const isLocked = !(isPreview || (params.hasAccess && sequentiallyOpen));
+    const isLocked = !(params.unlockAll || isPreview || (params.hasAccess && sequentiallyOpen));
 
     previousComplete = previousComplete && isCompleted;
 

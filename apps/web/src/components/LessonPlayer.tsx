@@ -12,6 +12,8 @@ interface LessonPlayerProps {
   title: string;
   videoUrl: string;
   isCompleted: boolean;
+  /** Free-preview viewers and signed-out visitors watch without anything being saved. */
+  trackProgress: boolean;
   onProgress: (percent: number, isCompleted: boolean) => void;
 }
 
@@ -24,7 +26,7 @@ const COMPLETE_AT = 0.95;
  * by hand. Saves are throttled and one final save is flushed on unmount.
  */
 const LessonPlayer = forwardRef<PlayerHandle, LessonPlayerProps>(function LessonPlayer(
-  { lessonId, title, videoUrl, isCompleted, onProgress },
+  { lessonId, title, videoUrl, isCompleted, trackProgress, onProgress },
   ref
 ) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -46,6 +48,7 @@ const LessonPlayer = forwardRef<PlayerHandle, LessonPlayerProps>(function Lesson
   }));
 
   const save = async (percent: number, completed: boolean) => {
+    if (!trackProgress) return;
     try {
       await api.courses.saveProgress({
         videoId: lessonId,

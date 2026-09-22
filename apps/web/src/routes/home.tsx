@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import CourseCard from '../components/CourseCard';
-import { Letterbox, PipelineRail, SceneBackdrop } from '../components/CinemaScene';
+import { PipelineRail, SceneBackdrop } from '../components/CinemaScene';
 import StageArt from '../components/StageArt';
+import TrendingPrompts from '../components/TrendingPrompts';
 import { api } from '../lib/api';
 import { STAGES, faqs, gallery, hero, learningOutcomes, valueProps } from '../lib/content';
 import type { CourseSummary } from '../lib/types';
@@ -63,15 +64,20 @@ function HeroSlate() {
 }
 
 export default function Home() {
-  const { courses } = useLoaderData<typeof homeLoader>();
+  const { courses, prompts } = useLoaderData<typeof homeLoader>();
   const featured = courses.slice(0, 3);
 
   return (
     <div className="sc" style={{ minHeight: 'auto' }}>
       <SceneBackdrop />
-      <Letterbox />
 
       <section className="home-hero">
+        <div className="ac-frame-marks ac-frame-marks--local" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
         <div className="ac-shell home-hero-inner">
           <div className="home-hero-copy">
             <p className="ac-eyebrow">{hero.eyebrow}</p>
@@ -190,6 +196,8 @@ export default function Home() {
           </div>
         </section>
       ) : null}
+
+      <TrendingPrompts prompts={prompts} />
 
       <section className="home-reel" aria-label="Work from the batch">
         <div className="home-reel-track">

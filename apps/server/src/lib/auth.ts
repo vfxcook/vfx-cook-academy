@@ -4,6 +4,7 @@ import type { NextFunction, Request, Response } from 'express';
 import { env } from './env.js';
 import { forbidden, unauthorized } from './http.js';
 import { prisma } from './prisma.js';
+import { timingSafeEqual } from './utils.js';
 
 export const SESSION_COOKIE = 'academy_session';
 export const CSRF_COOKIE = 'academy_csrf';
@@ -164,7 +165,7 @@ export async function consumeLoginToken(email: string, token: string) {
  */
 export async function ensureAdminAccount(email: string, password: string) {
   if (!env.adminEmail || !env.adminPassword) return null;
-  if (email !== env.adminEmail || password !== env.adminPassword) return null;
+  if (email !== env.adminEmail || !timingSafeEqual(password, env.adminPassword)) return null;
 
   const passwordHash = await hashPassword(password);
   return prisma.user.upsert({

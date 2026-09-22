@@ -11,6 +11,7 @@ import type {
   CoursePageData,
   DashboardData,
   GiftSummary,
+  Leaderboard,
   NotificationItem,
   PaymentConfig,
   SessionState,
@@ -113,7 +114,8 @@ export const api = {
       post<{ progress: unknown }>('/courses/progress', body),
     activateLicense: (body: { courseId: string; licenseCode: string }) =>
       post<{ ok: true }>('/courses/license/activate', body),
-    trendingPrompts: () => get<{ prompts: TrendingPrompt[] }>('/courses/prompts/trending')
+    trendingPrompts: () => get<{ prompts: TrendingPrompt[] }>('/courses/prompts/trending'),
+    leaderboard: (slug: string) => get<Leaderboard>(`/courses/${slug}/leaderboard`)
   },
 
   comments: {
@@ -213,7 +215,9 @@ export const api = {
 
     payments: () => get<{ payments: AdminPayment[] }>('/admin/payments'),
     approvePayment: (id: string) =>
-      post<{ ok: true; licenseCode: string; emailed: boolean }>(`/admin/payments/${id}/approve`),
+      post<{ ok: true; licenseCode: string | null; emailed: boolean; alreadyActive: boolean }>(
+        `/admin/payments/${id}/approve`
+      ),
     rejectPayment: (id: string) => post<{ ok: true }>(`/admin/payments/${id}/reject`),
 
     prompts: () => get<{ prompts: TrendingPrompt[] }>('/admin/prompts'),

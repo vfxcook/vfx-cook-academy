@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router';
 import { api, errorMessage } from '../lib/api';
 import { formatRelative, formatTimecode } from '../lib/format';
 import type { TimestampComment } from '../lib/types';
@@ -10,6 +11,8 @@ interface DoubtThreadProps {
   videoUrl: string | null;
   comments: TimestampComment[];
   canPost: boolean;
+  signedIn: boolean;
+  courseSlug: string;
   currentTime: () => number;
   onSeek: (seconds: number) => void;
 }
@@ -178,7 +181,7 @@ function Doubt({
             </button>
           ) : null}
 
-          {comment.isMine ? (
+          {comment.canDelete ? (
             <button type="button" className="doubt-tool" onClick={() => void onDelete(comment.id)}>
               Delete
             </button>
@@ -223,6 +226,8 @@ export default function DoubtThread({
   videoUrl,
   comments: initial,
   canPost,
+  signedIn,
+  courseSlug,
   currentTime,
   onSeek
 }: DoubtThreadProps) {
@@ -297,7 +302,19 @@ export default function DoubtThread({
           </p>
         </div>
       ) : (
-        <Notice>Enrol in this course to ask questions and reply to the batch.</Notice>
+        <Notice>
+          {signedIn ? (
+            <>
+              <Link to={`/courses/${courseSlug}`}>Enrol in this course</Link> to ask questions and
+              reply to the batch.
+            </>
+          ) : (
+            <>
+              <Link to={`/sign-in?next=${encodeURIComponent(`/courses/${courseSlug}`)}`}>Sign in</Link>{' '}
+              and enrol to ask questions and reply to the batch.
+            </>
+          )}
+        </Notice>
       )}
 
       {error ? <Notice tone="error">{error}</Notice> : null}

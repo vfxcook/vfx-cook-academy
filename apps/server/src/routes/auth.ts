@@ -15,6 +15,7 @@ import { env } from '../lib/env.js';
 import { badRequest, conflict, parse, route, unauthorized } from '../lib/http.js';
 import { sendLoginLinkEmail } from '../lib/mailer.js';
 import { prisma } from '../lib/prisma.js';
+import { rateLimit } from '../lib/rateLimit.js';
 
 export const authRouter = Router();
 
@@ -39,8 +40,11 @@ authRouter.get('/session', (req, res) => {
   });
 });
 
+const perMinute = (name: string, max: number) => rateLimit({ name, windowMs: 60_000, max });
+
 authRouter.post(
   '/register',
+  perMinute('register', 5),
   route(async (req, res) => {
     const data = parse(registerSchema, req.body);
 
@@ -64,6 +68,7 @@ authRouter.post(
 
 authRouter.post(
   '/sign-in',
+  perMinute('sign-in', 10),
   route(async (req, res) => {
     const data = parse(signInSchema, req.body);
 
@@ -93,6 +98,7 @@ authRouter.post(
 
 authRouter.post(
   '/login-link',
+  perMinute('login-link', 5),
   route(async (req, res) => {
     const { email } = parse(z.object({ email: emailField }), req.body);
     if (!env.smtp.enabled) throw badRequest('Email sign-in is not available right now.');
@@ -110,6 +116,7 @@ authRouter.post(
 
 authRouter.post(
   '/login-link/consume',
+  perMinute('login-link-consume', 10),
   route(async (req, res) => {
     const { email, token } = parse(
       z.object({ email: emailField, token: z.string().min(10) }),
@@ -132,7 +139,9 @@ const OAUTH_STATE_COOKIE = 'academy_oauth_state';
 const googleRedirectUri = () => `${env.appUrl.replace(/\/$/, '')}/api/auth/google/callback`;
 
 authRouter.get('/google', (req, res) => {
-  if (!env.google.enabled) throw badRequest('Google sign-in is not configured.');
+  if (!env.google.enabled) {
+    return res.redirect(`/sign-in?error=${encodeURIComponent('Google sign-in is not set up yet.')}`);
+  }
 
   const state = crypto.randomBytes(16).toString('base64url');
   res.cookie(OAUTH_STATE_COOKIE, state, {
@@ -154,7 +163,7 @@ authRouter.get('/google', (req, res) => {
   const next = typeof req.query.next === 'string' ? req.query.next : '';
   if (next) params.set('state', `${state}.${Buffer.from(next).toString('base64url')}`);
 
-  res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
+  return res.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params}`);
 });
 
 authRouter.get(
@@ -278,7 +287,8 @@ authRouter.patch(
     const data = parse(profileSchema, req.body);
     const user = await prisma.user.update({
       where: { id: req.user!.id },
-      data: { name: data.name, phone: data.phone || null, image: data.image || undefined }
+      // An empty avatar field clears it, falling back to initials.
+      data: { name: data.name, phone: data.phone || null, image: data.image || null }
     });
     res.json({ user: publicUser(user) });
   })

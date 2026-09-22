@@ -8,7 +8,7 @@
 }
 
 .wall-feed { display: grid; gap: clamp(14px, 2vw, 20px); min-width: 0; }
-.wall-side { position: sticky; top: 78px; }
+.wall-side { position: sticky; top: 78px; display: grid; gap: 16px; }
 
 .wall-composer { padding: clamp(18px, 2.2vw, 26px); display: grid; gap: 14px; }
 .wall-preview { max-height: 220px; }
@@ -38,8 +38,17 @@
   overflow-wrap: anywhere;
 }
 
-.wall-post-media { display: block; max-height: 520px; }
-.wall-post-media img { width: 100%; height: 100%; object-fit: cover; }
+.wall-post-media {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  padding: 0;
+  cursor: zoom-in;
+  color: inherit;
+}
+.wall-post-media img { width: 100%; height: 100%; max-height: 520px; object-fit: cover; }
+.wall-link { justify-self: start; text-decoration: none; }
+.wall-link:hover { color: var(--ac-text); text-decoration: none; border-color: var(--ac-border-strong); }
 
 .wall-reactions { display: flex; gap: 6px; }
 .wall-reaction {
@@ -85,8 +94,71 @@
   overflow-wrap: anywhere;
 }
 
-.wall-reply { display: flex; gap: 8px; }
+.wall-reply-btn {
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ac-faint);
+  font-size: 12px;
+  cursor: pointer;
+}
+.wall-reply-btn:hover { color: var(--ac-ember); }
+
+.wall-replies {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 1px solid var(--ac-border);
+}
+
+.wall-reply { display: grid; gap: 6px; }
+.wall-reply-row { display: flex; gap: 8px; }
 .wall-reply .ac-input { min-height: var(--ac-control-sm); padding-block: 7px; font-size: 13.5px; }
+.wall-replying {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ac-mono);
+  font-size: 10.5px;
+  color: var(--ac-ember);
+}
+.wall-replying button {
+  border: 0;
+  background: none;
+  color: var(--ac-faint);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---------- leaderboard ---------- */
+
+.wall-board { padding: 16px 16px 10px; display: grid; gap: 10px; }
+.wall-board-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.wall-board-list li {
+  display: grid;
+  grid-template-columns: 20px auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+}
+.wall-board-list li[data-me] { background: rgba(255, 138, 76, 0.09); }
+.wall-board-list b { font-family: var(--ac-mono); font-size: 10px; color: var(--ac-faint); }
+.wall-board-list li:nth-child(-n + 3) b { color: var(--ac-ember); }
+.wall-board-body { display: grid; gap: 5px; min-width: 0; }
+.wall-board-body strong {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wall-board-list small { font-family: var(--ac-mono); font-size: 10.5px; color: var(--ac-muted); }
+
+.wall-lightbox { width: 100%; height: auto; border-radius: var(--ac-radius-lg); }
 
 @media (max-width: 1000px) {
   .wall-grid { grid-template-columns: minmax(0, 1fr); }

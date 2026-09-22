@@ -9,6 +9,9 @@ import '../styles/course.css';
 export async function dashboardLoader() {
   const session = await api.auth.session();
   if (!session.user) return redirect('/sign-in?next=%2Fdashboard');
+  if (!session.user.phone && session.user.role !== 'ADMIN') {
+    return redirect('/onboarding?next=%2Fdashboard');
+  }
   return api.courses.dashboard();
 }
 

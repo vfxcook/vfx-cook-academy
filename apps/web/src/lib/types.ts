@@ -94,6 +94,7 @@ export interface TimestampComment {
   likeCount: number;
   likedByMe: boolean;
   isMine: boolean;
+  canDelete: boolean;
   replies: TimestampComment[];
 }
 
@@ -102,6 +103,7 @@ export interface ClassroomData {
   lesson: Lesson;
   lessons: LessonStub[];
   progress: CourseProgress;
+  access: { hasAccess: boolean; isSignedIn: boolean };
   comments: TimestampComment[];
 }
 
@@ -117,6 +119,7 @@ export interface DashboardCourse {
   percent: number;
   isActive: boolean;
   awaitingLicense: boolean;
+  paymentUnderReview: boolean;
   activatedAt: string | null;
 }
 
@@ -145,6 +148,7 @@ export interface CommunityComment {
   createdAt: string;
   author: Author;
   isMine: boolean;
+  canDelete: boolean;
 }
 
 export interface CommunityPost {
@@ -155,6 +159,7 @@ export interface CommunityPost {
   createdAt: string;
   author: Author;
   isMine: boolean;
+  canDelete: boolean;
   reactions: Array<{ type: ReactionType; count: number; mine: boolean }>;
   comments: CommunityComment[];
 }
@@ -257,6 +262,7 @@ export interface AdminStats {
   resources: number;
   activeStudents: number;
   pendingPayments: number;
+  unpaidCheckouts: number;
   completionRate: number;
   revenueInr: number;
   studioCreditsOutstanding: number;
@@ -279,6 +285,7 @@ export interface AdminPayment {
   transactionRef: string;
   note: string | null;
   status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  method?: 'gateway' | 'manual';
   isGift: boolean;
   createdAt: string;
   reviewedAt: string | null;
@@ -409,4 +416,17 @@ export interface AdminCommunityData {
     course: { title: string; slug: string };
     _count: { comments: number; reactions: number };
   }>;
+}
+
+export interface LeaderboardRow extends Author {
+  completedLessons: number;
+  totalLessons: number;
+  percent: number;
+  posts: number;
+  isMe: boolean;
+}
+
+export interface Leaderboard {
+  rows: LeaderboardRow[];
+  myRank: number | null;
 }
