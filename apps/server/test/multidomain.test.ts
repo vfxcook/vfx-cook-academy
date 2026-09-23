@@ -5,6 +5,7 @@ import { after, before, describe, it } from 'node:test';
 // Configure before the env module loads, the way Render would.
 process.env.ALLOWED_ORIGINS = 'https://brahmastra.studio, https://*.brahmastra.studio';
 process.env.PROXY_SHARED_SECRET = 'worker-proof';
+process.env.COOKIE_DOMAIN = '.brahmastra.studio';
 
 const { originAllowed, clientIp } = await import('../src/lib/crossOrigin.js');
 const { createApp } = await import('../src/app.js');
@@ -99,5 +100,34 @@ describe('client IP through the Cloudflare Worker', () => {
   it('ignores a spoofed forwarded address', () => {
     assert.equal(run({ 'X-Academy-Proxy': 'guess', 'X-Forwarded-For': '1.2.3.4' }), '172.70.1.1');
     assert.equal(run({ 'X-Forwarded-For': '1.2.3.4' }), '172.70.1.1');
+  });
+});
+
+// A cookie carrying a Domain the page does not sit under is discarded by the browser, and
+// the person is left looking signed out with a perfectly good session row in the database.
+describe('session cookie scope', () => {
+  const cookiesFor = async (host: string) => {
+    const response = await fetch(`${base}/api/auth/sign-out`, {
+      method: 'POST',
+      headers: { 'X-Forwarded-Host': host }
+    });
+    return response.headers.getSetCookie().join(' | ');
+  };
+
+  it('shares the session across brahmastra.studio subdomains', async () => {
+    const cookies = await cookiesFor('academy.brahmastra.studio');
+    assert.match(cookies, /Domain=\.brahmastra\.studio/);
+  });
+
+  it('keeps it host-only on the apex itself', async () => {
+    const cookies = await cookiesFor('brahmastra.studio');
+    assert.match(cookies, /Domain=\.brahmastra\.studio/);
+  });
+
+  it('drops the domain on a host outside it, so preview URLs can sign in', async () => {
+    for (const host of ['academy.brahmastra.workers.dev', 'localhost:5173', 'brahmastra.studio.evil.example']) {
+      const cookies = await cookiesFor(host);
+      assert.doesNotMatch(cookies, /Domain=/, `${host} should get a host-only cookie`);
+    }
   });
 });

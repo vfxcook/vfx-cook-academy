@@ -33,8 +33,22 @@ function secureCookies(req: Request) {
   return env.production && (req.secure || req.get('x-forwarded-proto') === 'https');
 }
 
-/** Set once `COOKIE_DOMAIN` is `.brahmastra.studio`, so every subdomain shares the session. */
-const cookieScope = () => ({ path: '/', ...(env.cookieDomain ? { domain: env.cookieDomain } : {}) });
+/**
+ * `COOKIE_DOMAIN=.brahmastra.studio` shares the session across every subdomain — but a
+ * browser only accepts a Domain the page it is on actually sits under. Sent from a
+ * workers.dev preview or localhost, that cookie is dropped on the floor: sign-in appears
+ * to do nothing, because the session was created and then never stored. So the domain is
+ * attached only where it is allowed, and everywhere else the cookie is host-only.
+ */
+function cookieScope(req: Request) {
+  const domain = env.cookieDomain;
+  if (!domain) return { path: '/' };
+
+  const host = (req.get('x-forwarded-host') ?? req.hostname ?? '').split(':')[0].toLowerCase();
+  const root = domain.replace(/^\./, '');
+  const inside = host === root || host.endsWith(`.${root}`);
+  return inside ? { path: '/', domain } : { path: '/' };
+}
 
 export async function createSession(req: Request, res: Response, userId: string) {
   const token = newToken();
@@ -46,8 +60,9 @@ export async function createSession(req: Request, res: Response, userId: string)
   });
 
   const secure = secureCookies(req);
-  res.cookie(SESSION_COOKIE, token, { ...cookieScope(), httpOnly: true, sameSite: 'lax', secure, maxAge });
-  res.cookie(CSRF_COOKIE, newToken(), { ...cookieScope(), httpOnly: false, sameSite: 'lax', secure, maxAge });
+  const scope = cookieScope(req);
+  res.cookie(SESSION_COOKIE, token, { ...scope, httpOnly: true, sameSite: 'lax', secure, maxAge });
+  res.cookie(CSRF_COOKIE, newToken(), { ...scope, httpOnly: false, sameSite: 'lax', secure, maxAge });
 }
 
 export async function destroySession(req: Request, res: Response) {
@@ -55,8 +70,9 @@ export async function destroySession(req: Request, res: Response) {
   if (token) {
     await prisma.session.deleteMany({ where: { sessionToken: digest(token) } });
   }
-  res.clearCookie(SESSION_COOKIE, cookieScope());
-  res.clearCookie(CSRF_COOKIE, cookieScope());
+  const scope = cookieScope(req);
+  res.clearCookie(SESSION_COOKIE, scope);
+  res.clearCookie(CSRF_COOKIE, scope);
 }
 
 export async function userFromRequest(req: Request): Promise<SessionUser | null> {
