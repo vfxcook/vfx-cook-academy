@@ -16,7 +16,6 @@ import type {
   NotificationItem,
   PaymentConfig,
   SessionState,
-  SignInResult,
   StudioOverview,
   TimestampComment,
   TrendingPrompt,

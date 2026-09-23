@@ -97,8 +97,7 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 | `GOOGLE_CLIENT_ID` | `706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com` |
 | `SUPABASE_URL` | `https://frnlloffzfnohagpwsti.supabase.co` — the shared project, where identities are mirrored |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → `service_role` |
-| `ADMIN_EMAIL` | the Google account that owns the Academy |
-| `ADMIN_PASSWORD` | a new one — the old password is in this repo's git history |
+| `ADMIN_EMAIL` | the Google account that owns the Academy — signing in with it grants admin |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay → Settings → API Keys |
 | `RAZORPAY_WEBHOOK_SECRET` | the secret on the webhook pointed at `https://academy.brahmastra.studio/api/payments/razorpay-webhook` |
 | `QR_CODE_URL` | the UPI QR image used on the manual payment screen |
@@ -109,6 +108,10 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 
 Everything else has a safe default. A missing Razorpay or SMTP key disables that feature
 rather than stopping the server.
+
+Google is the only way in: there are no password or emailed-link sign-ins, so a missing
+`GOOGLE_CLIENT_ID` (or an origin not registered on that client) means nobody can sign in,
+including the admin.
 
 ## 3. Bringing the schema up to date — look before you push
 

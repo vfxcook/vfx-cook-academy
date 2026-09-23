@@ -35,13 +35,31 @@ describe('api surface', () => {
     assert.equal((await response.json()).code, 'NOT_FOUND');
   });
 
-  it('rejects malformed sign-ins before touching the database', async () => {
-    const response = await fetch(`${base}/api/auth/sign-in`, {
+  it('rejects a malformed Google credential before touching the database', async () => {
+    const response = await fetch(`${base}/api/auth/google`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'not-an-email', password: '' })
+      body: JSON.stringify({ credential: 'too-short', nonce: 'also-too-short' })
     });
     assert.equal(response.status, 400);
+  });
+
+  // Google is the only way in. These four used to exist and must stay gone: a password
+  // route quietly coming back would be a second, weaker door into the same accounts.
+  for (const path of ['/api/auth/sign-in', '/api/auth/register', '/api/auth/login-link', '/api/auth/password']) {
+    it(`no longer serves ${path}`, async () => {
+      const response = await fetch(`${base}${path}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+      assert.equal(response.status, 404);
+    });
+  }
+
+  it('advertises Google as the only provider', async () => {
+    const body = await (await fetch(`${base}/api/auth/session`)).json();
+    assert.deepEqual(Object.keys(body.providers).sort(), ['google', 'googleClientId']);
   });
 
   it('refuses a write that carries a session but no CSRF token', async () => {

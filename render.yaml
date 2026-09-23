@@ -58,9 +58,8 @@ services:
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
 
+      # Signing in with Google at this address grants admin. There is no password.
       - key: ADMIN_EMAIL
-        sync: false
-      - key: ADMIN_PASSWORD
         sync: false
 
       - key: RAZORPAY_KEY_ID
