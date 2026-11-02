@@ -2,10 +2,10 @@ import { env } from './env.js';
 import type { GoogleIdentity } from './google.js';
 
 /*
- * Mirrors a Google identity this server has already verified into the shared BrahmAstra
+ * Mirrors a Google identity this server has already verified into the shared Frameon
  * Supabase project: an Auth user (so `profiles.id` keeps its foreign key to auth.users)
- * and the profile row. Same contract as BrahmAstra Studio's sync, so a person has one
- * Supabase identity across every brahmastra.studio product. Needs the service-role key,
+ * and the profile row. Same contract as Frameon Studio's sync, so a person has one
+ * Supabase identity across every frameon.si product. Needs the service-role key,
  * which never leaves the server.
  */
 

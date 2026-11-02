@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
-  // academy.brahmastra.studio at the edge: the built SPA plus a thin proxy to the API on
+  // academy.frameon.si at the edge: the built SPA plus a thin proxy to the API on
   // Render, so the browser only ever talks to one origin and cookies stay first-party.
   "name": "academy",
   "main": "worker/index.ts",
@@ -25,11 +25,11 @@
   //   npx wrangler secret put PROXY_SHARED_SECRET
   "secrets": { "required": ["PROXY_SHARED_SECRET"] },
 
-  // Needs the brahmastra.studio zone on this Cloudflare account.
-  "routes": [{ "pattern": "academy.brahmastra.studio", "custom_domain": true }],
+  // Needs the frameon.si zone on this Cloudflare account.
+  "routes": [{ "pattern": "academy.frameon.si", "custom_domain": true }],
 
   // A workers.dev URL to preview the build on. Sign-in only works on the custom
-  // domain: session cookies are scoped to .brahmastra.studio.
+  // domain: session cookies are scoped to .frameon.si.
   "workers_dev": true,
 
   // Created during the Cloudflare setup. The Academy's database lives on Render

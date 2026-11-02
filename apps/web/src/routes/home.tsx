@@ -44,7 +44,7 @@ function HeroSlate() {
         ))}
         <div className="home-slate-meta">
           <span>Academy reel · Plate {String(index + 1).padStart(2, '0')}</span>
-          <span>Shot on Brahmastra</span>
+          <span>Shot on Frameon</span>
         </div>
       </div>
       <div className="home-slate-strip" role="tablist" aria-label="Reference plates">
@@ -159,7 +159,7 @@ export default function Home() {
             The same pipeline the studio runs on.
           </h2>
           <p className="ac-lede">
-            Each stage you learn here maps onto a stage inside brahmastra.studio. Finish the course
+            Each stage you learn here maps onto a stage inside Frameon Studio. Finish the course
             and the tool already makes sense.
           </p>
         </div>

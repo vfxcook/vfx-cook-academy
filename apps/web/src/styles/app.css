@@ -47,14 +47,11 @@
 }
 .hdr-brand:hover img { transform: rotate(-8deg) scale(1.12); }
 .hdr-brand b {
-  font-family: var(--ac-display);
-  font-variation-settings: 'wdth' 112, 'wght' 800;
+  font-family: var(--ac-wordmark);
   font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: -0.02em;
 }
-.hdr-brand b em { font-style: normal; font-variation-settings: 'wdth' 112, 'wght' 400; font-weight: 400; }
 .hdr-brand small {
   font-family: var(--ac-mono);
   font-size: 9px;
@@ -272,7 +269,7 @@
 }
 
 /*
- * On narrow screens the nav takes its own row, as BrahmAstra's floor header does, so the
+ * On narrow screens the nav takes its own row, as Frameon's floor header does, so the
  * brand, the Academy tag and the account actions never compete with it for width.
  */
 @media (max-width: 640px) {

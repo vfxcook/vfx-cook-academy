@@ -22,7 +22,7 @@ export default function SignUp() {
       eyebrow="Join the batch"
       headline={['Learn the craft', 'behind the', 'generation.']}
       ghost="Not the button."
-      lede="One account gets you the courses, the community wall and the AI Studio credits — and it carries into brahmastra.studio."
+      lede="One account gets you the courses, the community wall and the AI Studio credits — and it carries into Frameon Studio."
     >
       <div>
         <p className="ac-eyebrow">Create account</p>

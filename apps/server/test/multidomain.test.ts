@@ -3,9 +3,9 @@ import type { AddressInfo } from 'node:net';
 import { after, before, describe, it } from 'node:test';
 
 // Configure before the env module loads, the way Render would.
-process.env.ALLOWED_ORIGINS = 'https://brahmastra.studio, https://*.brahmastra.studio';
+process.env.ALLOWED_ORIGINS = 'https://frameon.si, https://*.frameon.si';
 process.env.PROXY_SHARED_SECRET = 'worker-proof';
-process.env.COOKIE_DOMAIN = '.brahmastra.studio';
+process.env.COOKIE_DOMAIN = '.frameon.si';
 
 const { originAllowed, clientIp } = await import('../src/lib/crossOrigin.js');
 const { createApp } = await import('../src/app.js');
@@ -23,10 +23,10 @@ after(() => close());
 describe('allowed origins', () => {
   it('accepts the Studio, any Academy subdomain depth and local dev', () => {
     for (const origin of [
-      'https://brahmastra.studio',
-      'https://academy.brahmastra.studio',
-      'https://app.brahmastra.studio',
-      'https://preview.academy.brahmastra.studio',
+      'https://frameon.si',
+      'https://academy.frameon.si',
+      'https://app.frameon.si',
+      'https://preview.academy.frameon.si',
       'http://localhost:5173'
     ]) {
       assert.equal(originAllowed(origin), true, origin);
@@ -35,10 +35,10 @@ describe('allowed origins', () => {
 
   it('refuses look-alikes and plain http', () => {
     for (const origin of [
-      'https://evilbrahmastra.studio',
-      'https://brahmastra.studio.evil.com',
-      'http://academy.brahmastra.studio',
-      'https://brahmastra.studios'
+      'https://evilframeon.si',
+      'https://frameon.si.evil.com',
+      'http://academy.frameon.si',
+      'https://frameon.sis'
     ]) {
       assert.equal(originAllowed(origin), false, origin);
     }
@@ -46,9 +46,9 @@ describe('allowed origins', () => {
 });
 
 describe('credentialed CORS', () => {
-  it('lets a brahmastra.studio frontend read the session', async () => {
-    const response = await fetch(`${base}/api/auth/session`, { headers: { Origin: 'https://app.brahmastra.studio' } });
-    assert.equal(response.headers.get('access-control-allow-origin'), 'https://app.brahmastra.studio');
+  it('lets a frameon.si frontend read the session', async () => {
+    const response = await fetch(`${base}/api/auth/session`, { headers: { Origin: 'https://app.frameon.si' } });
+    assert.equal(response.headers.get('access-control-allow-origin'), 'https://app.frameon.si');
     assert.equal(response.headers.get('access-control-allow-credentials'), 'true');
     const body = await response.json();
     assert.equal(body.user, null);
@@ -59,7 +59,7 @@ describe('credentialed CORS', () => {
     const response = await fetch(`${base}/api/auth/google`, {
       method: 'OPTIONS',
       headers: {
-        Origin: 'https://academy.brahmastra.studio',
+        Origin: 'https://academy.frameon.si',
         'Access-Control-Request-Method': 'POST',
         'Access-Control-Request-Headers': 'content-type,x-csrf-token'
       }
@@ -114,18 +114,18 @@ describe('session cookie scope', () => {
     return response.headers.getSetCookie().join(' | ');
   };
 
-  it('shares the session across brahmastra.studio subdomains', async () => {
-    const cookies = await cookiesFor('academy.brahmastra.studio');
-    assert.match(cookies, /Domain=\.brahmastra\.studio/);
+  it('shares the session across frameon.si subdomains', async () => {
+    const cookies = await cookiesFor('academy.frameon.si');
+    assert.match(cookies, /Domain=\.frameon\.si/);
   });
 
   it('keeps it host-only on the apex itself', async () => {
-    const cookies = await cookiesFor('brahmastra.studio');
-    assert.match(cookies, /Domain=\.brahmastra\.studio/);
+    const cookies = await cookiesFor('frameon.si');
+    assert.match(cookies, /Domain=\.frameon\.si/);
   });
 
   it('drops the domain on a host outside it, so preview URLs can sign in', async () => {
-    for (const host of ['academy.brahmastra.workers.dev', 'localhost:5173', 'brahmastra.studio.evil.example']) {
+    for (const host of ['academy.frameon.workers.dev', 'localhost:5173', 'frameon.si.evil.example']) {
       const cookies = await cookiesFor(host);
       assert.doesNotMatch(cookies, /Domain=/, `${host} should get a host-only cookie`);
     }

@@ -14,7 +14,7 @@ declare global {
 
 const DEV_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:8787'];
 
-/** `https://*.brahmastra.studio` matches any depth of subdomain, never the bare domain. */
+/** `https://*.frameon.si` matches any depth of subdomain, never the bare domain. */
 function toMatcher(entry: string): (origin: string) => boolean {
   const wildcard = /^(https?):\/\/\*\.(.+)$/.exec(entry);
   if (!wildcard) return origin => origin === entry;
@@ -36,7 +36,7 @@ const matchers = [
 export const originAllowed = (origin: string) => matchers.some(matches => matches(origin));
 
 /**
- * Credentialed CORS for the brahmastra.studio family. Only listed origins get the
+ * Credentialed CORS for the frameon.si family. Only listed origins get the
  * headers back, so any other site can still send a request but can never read the
  * answer — and writes stay behind the CSRF pair regardless.
  */

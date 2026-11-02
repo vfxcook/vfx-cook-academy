@@ -1,9 +1,9 @@
 {
-  "name": "@academy/server",
+  "name": "@frameon/academy-server",
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "BrahmAstra Academy API — Express, Prisma and cookie sessions",
+  "description": "Frameon Academy API — Express, Prisma and cookie sessions",
   "main": "dist/main.js",
   "scripts": {
     "dev": "tsx watch src/main.ts",

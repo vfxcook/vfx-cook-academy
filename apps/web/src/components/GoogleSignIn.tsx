@@ -9,7 +9,7 @@ type Phase = 'loading' | 'ready' | 'unavailable' | 'verifying';
 interface GoogleSignInProps {
   clientId: string;
   mode: 'signin' | 'signup';
-  /** Offer One Tap on arrival, so a returning BrahmAstra user signs in with one tap. */
+  /** Offer One Tap on arrival, so a returning Frameon user signs in with one tap. */
   autoPrompt: boolean;
   onSignedIn: (result: GoogleSignInResult) => void;
   onError: (message: string) => void;

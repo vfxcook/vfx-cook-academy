@@ -59,8 +59,8 @@ export const env = {
 
   /**
    * Google Identity Services. The browser gets an ID token and the server verifies it,
-   * so only client IDs are needed — no secret. Defaults to the BrahmAstra Studio client so
-   * one Google consent covers every brahmastra.studio product.
+   * so only client IDs are needed — no secret. Defaults to the Frameon Studio client so
+   * one Google consent covers every frameon.si product.
    */
   google: {
     clientIds: list('GOOGLE_CLIENT_ID').length ? list('GOOGLE_CLIENT_ID') : [DEFAULT_GOOGLE_CLIENT_ID],
@@ -74,7 +74,7 @@ export const env = {
     port: num('SMTP_PORT', 587),
     user: str('SMTP_USER'),
     pass: str('SMTP_PASS'),
-    from: str('EMAIL_FROM', 'BrahmAstra Academy <noreply@brahmastra.studio>'),
+    from: str('EMAIL_FROM', 'Frameon Academy <noreply@frameon.si>'),
     get enabled() {
       return Boolean(this.host && this.user && this.pass);
     }
@@ -104,9 +104,9 @@ export const env = {
   },
 
   /*
-   * Multi-domain auth. COOKIE_DOMAIN (e.g. `.brahmastra.studio`) shares the session across
+   * Multi-domain auth. COOKIE_DOMAIN (e.g. `.frameon.si`) shares the session across
    * subdomains; ALLOWED_ORIGINS lists the frontends that may call this API with credentials
-   * (`https://*.brahmastra.studio` style wildcards allowed); PROXY_SHARED_SECRET marks
+   * (`https://*.frameon.si` style wildcards allowed); PROXY_SHARED_SECRET marks
    * requests forwarded by our Cloudflare Worker so their client IP can be trusted.
    */
   cookieDomain: str('COOKIE_DOMAIN'),

@@ -1,5 +1,5 @@
 /*
- * Academy tokens. The charcoal + magenta base is shared with brahmastra.studio so the
+ * Academy tokens. The charcoal + magenta base is shared with Frameon Studio so the
  * module reads as part of the same studio; ember is the Academy's own signal colour and
  * carries everything about learning — progress, unlocked lessons, streaks.
  */
@@ -41,6 +41,8 @@
   --ac-display: 'Archivo', 'Inter Tight', system-ui, sans-serif;
   --ac-slate: 'Bebas Neue', Impact, sans-serif;
   --ac-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  /* Frameon's wordmark face, shipped with the app (public/brand/manrope-800.woff2). */
+  --ac-wordmark: Manrope, 'Inter Tight', system-ui, sans-serif;
 
   --ac-control: 40px;
   --ac-control-sm: 32px;

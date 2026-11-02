@@ -16,7 +16,7 @@ authRouter.get(
   route(async (req, res) => {
     res.json({
       user: req.user ?? null,
-      // Other brahmastra.studio frontends read this to know who is an Academy member.
+      // Other frameon.si frontends read this to know who is an Academy member.
       access: req.user ? await academyAccess(req.user) : null,
       // Google is the only way in. The client reads this to render the button.
       providers: {
@@ -45,7 +45,7 @@ authRouter.post(
 
 /**
  * Google Identity Services sign-in. The browser hands over the ID token Google issued for
- * the BrahmAstra client; we verify it, find or create the Academy account, open a session,
+ * the Frameon client; we verify it, find or create the Academy account, open a session,
  * then mirror the person into the shared Supabase project.
  *
  * Accounts are matched on Google's stable subject id first and email second, so someone

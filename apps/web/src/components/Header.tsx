@@ -198,10 +198,8 @@ export default function Header({ user }: { user: User | null }) {
     <header className="hdr">
       <div className="hdr-inner">
         <Link className="hdr-brand" to="/" aria-label={`${brand.name} ${brand.module} — home`}>
-          <img src="/brand/logo-mark.png" alt="" width={21} height={22} />
-          <b aria-hidden="true">
-            Brahm<em>astra</em>
-          </b>
+          <img src="/brand/frameon-mark.svg" alt="" width={18} height={22} />
+          <b aria-hidden="true">{brand.name}</b>
           <small aria-hidden="true">{brand.module}</small>
         </Link>
 

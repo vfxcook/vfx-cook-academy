@@ -4,7 +4,7 @@
 interface __BaseEnv_Env {
 	academy: D1Database;
 	ASSETS: Fetcher;
-	API_ORIGIN: "https://brahmastra-academy-api.onrender.com";
+	API_ORIGIN: "https://vfx-cook-academy.onrender.com";
 	PROXY_SHARED_SECRET: string;
 }
 declare namespace Cloudflare {

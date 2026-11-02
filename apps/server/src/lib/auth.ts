@@ -34,7 +34,7 @@ function secureCookies(req: Request) {
 }
 
 /**
- * `COOKIE_DOMAIN=.brahmastra.studio` shares the session across every subdomain — but a
+ * `COOKIE_DOMAIN=.frameon.si` shares the session across every subdomain — but a
  * browser only accepts a Domain the page it is on actually sits under. Sent from a
  * workers.dev preview or localhost, that cookie is dropped on the floor: sign-in appears
  * to do nothing, because the session was created and then never stored. So the domain is

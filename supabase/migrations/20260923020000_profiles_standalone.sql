@@ -1,6 +1,6 @@
 -- The `profiles` row the Academy writes after each Google sign-in.
 --
--- On the shared BrahmAstra project this table already exists and belongs to the Studio;
+-- On the shared Frameon project this table already exists and belongs to the Studio;
 -- there the Academy only adds columns (see 20260922120000_academy_profiles.sql). When the
 -- Academy runs against its own Supabase project, nothing has created it, and every sign-in
 -- logs a failed mirror. This creates the same shape, so the two projects stay swappable.

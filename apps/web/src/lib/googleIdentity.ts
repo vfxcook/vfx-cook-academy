@@ -1,6 +1,6 @@
 /*
  * Google Identity Services — Google's standard browser SDK for Sign in with Google and One
- * Tap. It issues an ID token for the BrahmAstra client; the API verifies it server-side.
+ * Tap. It issues an ID token for the Frameon client; the API verifies it server-side.
  */
 
 const DEFAULT_GOOGLE_CLIENT_ID = '706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com';

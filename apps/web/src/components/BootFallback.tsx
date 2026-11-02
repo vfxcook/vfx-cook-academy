@@ -1,8 +1,7 @@
 import type { CSSProperties } from 'react';
 
-const WORD = 'BRAHMASTRA';
-/** The A that opens "Astra" carries the accent, as in BrahmAstra's own loader. */
-const ASTRA_INDEX = 5;
+/** Set in Manrope, as in Frameon's own loader. */
+const WORD = 'Frameon';
 
 /** Mirrors the static boot shell in index.html so hydration never flashes. */
 export default function BootFallback() {
@@ -18,14 +17,9 @@ export default function BootFallback() {
             <i className="boot-sheen" />
           </div>
         </div>
-        <b className="boot-word" aria-label="BrahmAstra Academy">
+        <b className="boot-word" aria-label="Frameon Academy">
           {WORD.split('').map((letter, index) => (
-            <span
-              key={index}
-              aria-hidden="true"
-              className={index === ASTRA_INDEX ? 'is-astra' : undefined}
-              style={{ '--i': index } as CSSProperties}
-            >
+            <span key={index} aria-hidden="true" style={{ '--i': index } as CSSProperties}>
               {letter}
             </span>
           ))}

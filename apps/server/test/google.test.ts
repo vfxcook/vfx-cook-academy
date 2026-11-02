@@ -39,7 +39,7 @@ function sign(claims: Record<string, unknown>, key = privateKey) {
 const NONCE = 'nonce-from-this-browser';
 
 describe('Google credential verification', () => {
-  it('defaults to the BrahmAstra Studio client id', () => {
+  it('defaults to the Frameon Studio client id', () => {
     assert.equal(env.google.clientIds[0], '706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com');
   });
 

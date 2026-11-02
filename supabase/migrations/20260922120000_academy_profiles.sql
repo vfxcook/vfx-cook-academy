@@ -1,4 +1,4 @@
--- Columns the Academy API writes on the shared BrahmAstra `profiles` row after each Google
+-- Columns the Academy API writes on the shared Frameon `profiles` row after each Google
 -- sign-in. Additive only: nothing here drops, renames or retypes an existing column, and
 -- every statement is safe to re-run.
 --

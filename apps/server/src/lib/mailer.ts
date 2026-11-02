@@ -38,7 +38,7 @@ export function sendLicenseEmail(params: { to: string; courseTitle: string; lice
       '',
       'Enter this code on your dashboard to unlock the course.',
       '',
-      '— BrahmAstra Academy'
+      '— Frameon Academy'
     ].join('\n')
   );
 }
@@ -53,7 +53,7 @@ export function sendGiftEmail(params: { to: string; courseTitle: string; code: s
       `Gift code: ${params.code}`,
       `Redeem here: ${params.url}`,
       '',
-      '— BrahmAstra Academy'
+      '— Frameon Academy'
     ].join('\n')
   );
 }

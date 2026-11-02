@@ -100,22 +100,20 @@
   gap: 10px;
   color: var(--sc-fg);
   text-decoration: none;
-  font-family: var(--ac-display);
-  font-variation-settings: 'wdth' 112, 'wght' 800;
+  font-family: var(--ac-wordmark);
   font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-size: 17px;
+  letter-spacing: -0.02em;
 }
 .sc-brand:hover { text-decoration: none; }
 .sc-brand img { height: 20px; width: auto; transition: transform 0.6s var(--ac-ease); }
 .sc-brand:hover img { transform: rotate(-8deg) scale(1.12); }
-.sc-brand em { font-style: normal; font-variation-settings: 'wdth' 112, 'wght' 400; font-weight: 400; }
 .sc-brand small {
   font-family: var(--ac-mono);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--sc-faint);
   padding: 3px 7px;
   border: 1px solid var(--sc-line);
@@ -310,7 +308,7 @@
   .sc-mask > span { animation: none; }
 }
 
-/* ---------- Sign in with Google (BrahmAstra's button over Google's own) ---------- */
+/* ---------- Sign in with Google (Frameon's button over Google's own) ---------- */
 
 .gs-wrap {
   --gx: 50%;

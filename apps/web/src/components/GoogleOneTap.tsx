@@ -3,8 +3,8 @@ import { api } from '../lib/api';
 import { loadGoogleIdentity, randomNonce, type GoogleCredentialResponse } from '../lib/googleIdentity';
 
 /**
- * Google One Tap for signed-out visitors. BrahmAstra Studio and the Academy share one
- * Google client, so someone already signed in to Google on brahmastra.studio is offered —
+ * Google One Tap for signed-out visitors. Frameon Studio and the Academy share one
+ * Google client, so someone already signed in to Google on frameon.si is offered —
  * or, having used it before, automatically given — a session here. It keeps them on the
  * page they came for; the header and calls to action pick up their access after reload.
  */

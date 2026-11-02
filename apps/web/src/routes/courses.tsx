@@ -42,7 +42,7 @@ export default function Courses() {
         <p className="ac-eyebrow">The catalogue</p>
         <h1>Courses</h1>
         <p className="ac-lede">
-          Every course runs the same six-stage pipeline as brahmastra.studio, taught in Malayalam
+          Every course runs the same six-stage pipeline as Frameon Studio, taught in Malayalam
           with the technical terms kept in English.
         </p>
       </div>

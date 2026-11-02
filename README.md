@@ -1,18 +1,18 @@
-# BrahmAstra Academy
+# Frameon Academy
 
-The learning module of [brahmastra.studio](https://brahmastra.studio). Cinematic AI video
+The learning module of [frameon.si](https://frameon.si). Cinematic AI video
 courses in Malayalam, taught around the same six-stage pipeline the studio runs on —
 Prompt, World, Motion, Scene, Finish, Deliver.
 
-Version 2 is a full rewrite of the original Next.js MVP onto the BrahmAstra stack and
+Version 2 is a full rewrite of the original Next.js MVP onto the Frameon stack and
 design language:
 
-- **apps/web** — React 19, React Router 7 data routers, Vite. The cinemastudio visual
+- **apps/web** — React 19, React Router 7 data routers, Vite. Frameon Studio's visual
   system: charcoal glass surfaces, letterbox scenes, a running REC timecode, the animated
-  pipeline rail and line-art stage illustrations. Magenta is shared with BrahmAstra; ember
+  pipeline rail and line-art stage illustrations. Magenta is shared with Frameon Studio; ember
   is the Academy's own signal colour for everything about learning progress.
 - **apps/server** — Express, Prisma, PostgreSQL. Cookie sessions with double-submit CSRF,
-  the same pattern as BrahmAstra's `apps/server`.
+  the same pattern as Frameon Studio's `apps/server`.
 
 ```
 apps/
@@ -44,9 +44,9 @@ supabase/         migration adding Academy columns to the shared `profiles` tabl
 - Admin workspace: overview, courses, lessons and resources, student CRM with grant and
   revoke, payment review, community moderation, the prompt library and AI Studio
   settings
-- Sign in with Google (Google Identity Services, shared with BrahmAstra Studio), plus
+- Sign in with Google (Google Identity Services, shared with Frameon Studio), plus
   email/password and email magic links
-- One session across `*.brahmastra.studio`; paid students land in their classroom,
+- One session across `*.frameon.si`; paid students land in their classroom,
   everyone else on the dashboard with the offer
 
 ## Setup
@@ -85,9 +85,9 @@ no Google keys → the Google button is hidden; no Supabase → uploads are writ
 | `npm run deploy:worker` (apps/web) | Build and deploy the Worker to Cloudflare |
 | `npm run cf-typegen` (apps/web) | Regenerate Worker binding types after editing `wrangler.jsonc` |
 
-## Sign-in across brahmastra.studio
+## Sign-in across frameon.si
 
-Google sign-in uses Google Identity Services with the **same OAuth client as BrahmAstra
+Google sign-in uses Google Identity Services with the **same OAuth client as Frameon
 Studio**, so one Google consent covers both products and One Tap can sign a returning
 Studio user straight into the Academy.
 
@@ -102,12 +102,12 @@ Studio user straight into the Academy.
 5. They land in the classroom of their most recent course if they paid, on `/admin` if
    they are an admin, and on `/dashboard` with the offer otherwise.
 
-Multi-domain pieces, all driven by env: `COOKIE_DOMAIN=.brahmastra.studio` shares the
-session across subdomains; `ALLOWED_ORIGINS` lets other brahmastra.studio frontends call
+Multi-domain pieces, all driven by env: `COOKIE_DOMAIN=.frameon.si` shares the
+session across subdomains; `ALLOWED_ORIGINS` lets other frameon.si frontends call
 the API with credentials (e.g. `GET /api/auth/session` returns `access.member`).
 
 **Google Cloud Console** — for client `706720560213-…`, add every origin that shows the
-button under *Authorised JavaScript origins*: `https://academy.brahmastra.studio`, plus
+button under *Authorised JavaScript origins*: `https://academy.frameon.si`, plus
 `http://localhost:5173` and `http://localhost` for local development.
 
 **Supabase** — run `supabase/migrations/20260922120000_academy_profiles.sql` on the shared
@@ -117,10 +117,10 @@ name, avatar and sign-in time. `SUPABASE_SERVICE_ROLE_KEY` never leaves the API.
 ## Deploying
 
 ```
-Browser ──> academy.brahmastra.studio  (Cloudflare Worker)
+Browser ──> academy.frameon.si  (Cloudflare Worker)
               ├─ /*          SPA from Workers Static Assets
-              └─ /api/*      proxied ──> brahmastra-academy-api  (Render, Node)
-                                            └─ brahmastra-academy-db  (Render Postgres)
+              └─ /api/*      proxied ──> frameon-academy-api  (Render, Node)
+                                            └─ frameon-academy-db  (Render Postgres)
 ```
 
 The Worker keeps the browser on one origin, so cookies are first-party and the Academy
@@ -130,11 +130,11 @@ rate limits key on real people rather than Cloudflare's addresses.
 ### 1. Render — database and API
 
 1. In Render, **New → Blueprint** and point it at this repo. `render.yaml` creates the
-   Postgres database and the `brahmastra-academy-api` web service in Singapore.
+   Postgres database and the `frameon-academy-api` web service in Singapore.
 2. Fill the prompted secrets: `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`,
    the Razorpay keys, SMTP and `KIE_API_KEY`. `PROXY_SHARED_SECRET` is generated for you.
 3. The first deploy creates the tables (`preDeployCommand` runs `prisma db push`) and
-   serves the API at `https://brahmastra-academy-api.onrender.com`.
+   serves the API at `https://frameon-academy-api.onrender.com`.
 
 ### 2. Move the existing students across
 
@@ -159,7 +159,7 @@ npx wrangler secret put PROXY_SHARED_SECRET   # paste the value from Render
 npm run deploy:worker
 ```
 
-`wrangler.jsonc` binds the custom domain `academy.brahmastra.studio` (the zone must be on
+`wrangler.jsonc` binds the custom domain `academy.frameon.si` (the zone must be on
 the same Cloudflare account) and points `API_ORIGIN` at the Render service — update it if
 Render assigns a different URL. Logs and traces are enabled.
 
@@ -168,7 +168,7 @@ To run the production topology locally: start the API, then `npm run preview:wor
 
 ### Payments
 
-In the Razorpay dashboard, add a webhook to `https://academy.brahmastra.studio/api/payments/razorpay-webhook`
+In the Razorpay dashboard, add a webhook to `https://academy.frameon.si/api/payments/razorpay-webhook`
 with the secret in `RAZORPAY_WEBHOOK_SECRET`, subscribed to **`order.paid`** and
 **`payment_link.paid`**. `order.paid` is what unlocks a student who paid but closed the tab
 before Checkout could report back.

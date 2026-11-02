@@ -23,7 +23,7 @@ measured: `/healthz` 0.28s against `/api/courses` 0.80s. Singapore is the closes
 Render offers and would cut most of that, but a service's region cannot be changed after
 creation, so moving means creating a second service and repointing `API_ORIGIN`.
 
-`SUPABASE_URL` points at the **shared** BrahmAstra project (`frnlloffzfnohagpwsti`), not
+`SUPABASE_URL` points at the **shared** Frameon project (`frnlloffzfnohagpwsti`), not
 here: a Google sign-in on the Academy creates or updates the user there, so the Studio and
 the Academy see one person. Only `DATABASE_URL` and `DIRECT_URL` point at this project.
 Its `profiles` table and the `Profile` model in `schema.prisma` exist so the two projects
@@ -67,11 +67,12 @@ no GitHub connection).
 
 | Setting | Value |
 | --- | --- |
+| Name | `frameon-academy-api` |
 | Branch | `version/2.0-dbsetup` |
 | Root directory | *(blank — the monorepo root)* |
 | Language | Node |
 | Region | Singapore — the closest to the database. The live service is in Oregon; see §1 |
-| Build command | `npm ci --include=dev && npm run build --workspace @academy/server` |
+| Build command | `npm ci --include=dev && npm run build --workspace @frameon/academy-server` |
 | Start command | `npm start` |
 | Health check path | `/healthz` |
 | Pre-deploy command | `npx prisma db push --schema prisma/schema.prisma --skip-generate` |
@@ -90,20 +91,20 @@ minutes idle, which means a ~50 second cold start on the first lesson someone op
 | `NODE_ENV` | `production` |
 | `DATABASE_URL` | Supabase session pooler string (§1) |
 | `DIRECT_URL` | the same string |
-| `APP_URL` | `https://academy.brahmastra.studio` |
-| `COOKIE_DOMAIN` | `.brahmastra.studio` |
-| `ALLOWED_ORIGINS` | `https://academy.brahmastra.studio,https://brahmastra.studio,https://*.brahmastra.studio` |
+| `APP_URL` | `https://academy.frameon.si` |
+| `COOKIE_DOMAIN` | `.frameon.si` |
+| `ALLOWED_ORIGINS` | `https://academy.frameon.si,https://frameon.si,https://*.frameon.si` |
 | `PROXY_SHARED_SECRET` | byte for byte the Worker's secret, from `.secrets/proxy-shared-secret.env` |
 | `GOOGLE_CLIENT_ID` | `706720560213-1f3dmo50amk180u2a7o6qcuqh2hm435i.apps.googleusercontent.com` |
 | `SUPABASE_URL` | `https://frnlloffzfnohagpwsti.supabase.co` — the shared project, where identities are mirrored |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API → `service_role` |
 | `ADMIN_EMAIL` | the Google account that owns the Academy — signing in with it grants admin |
 | `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Razorpay → Settings → API Keys |
-| `RAZORPAY_WEBHOOK_SECRET` | the secret on the webhook pointed at `https://academy.brahmastra.studio/api/payments/razorpay-webhook` |
+| `RAZORPAY_WEBHOOK_SECRET` | the secret on the webhook pointed at `https://academy.frameon.si/api/payments/razorpay-webhook` |
 | `QR_CODE_URL` | the UPI QR image used on the manual payment screen |
 | `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS` | Zoho India: `smtp.zoho.in` and an app password |
 | `SMTP_PORT` | `587` |
-| `EMAIL_FROM` | `BrahmAstra Academy <noreply@brahmastra.studio>` |
+| `EMAIL_FROM` | `Frameon Academy <noreply@frameon.si>` |
 | `KIE_API_KEY` | the KIE key for the generation features |
 
 Everything else has a safe default. A missing Razorpay or SMTP key disables that feature
@@ -153,11 +154,12 @@ fresh install needs instead.
 
 ## 5. Pointing the Worker at the service
 
-The live service is named `academy` but answers on `https://vfx-cook-academy.onrender.com`
-— Render keeps the URL a service was created with. `API_ORIGIN` in
-`apps/web/wrangler.jsonc` holds that hostname; change it there and redeploy if the service
-is ever recreated:
+The live service is still the pre-Frameon one, named `academy` and answering on
+`https://vfx-cook-academy.onrender.com` — Render keeps the URL a service was created with.
+`API_ORIGIN` in `apps/web/wrangler.jsonc` holds that hostname. Once `frameon-academy-api`
+is created and serving, set `API_ORIGIN` to `https://frameon-academy-api.onrender.com` and
+redeploy:
 
 ```
-npm run deploy:worker --workspace @academy/web
+npm run deploy:worker --workspace @frameon/academy-web
 ```

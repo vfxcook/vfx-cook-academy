@@ -457,7 +457,7 @@ model GiftCoupon {
 }
 
 /// The Supabase mirror row, written by the API with the service-role key after a Google
-/// sign-in and read by BrahmAstra Studio. Nothing in this codebase reads it through
+/// sign-in and read by Frameon Studio. Nothing in this codebase reads it through
 /// Prisma; the model exists so `prisma db push` leaves the table where it is.
 model Profile {
   id                  String    @id @db.Uuid

@@ -1,6 +1,6 @@
 /**
  * The Academy's own pipeline. It mirrors the six stages a film moves through inside
- * brahmastra.studio, so what a student learns here maps one-to-one onto the tool they
+ * frameon.si, so what a student learns here maps one-to-one onto the tool they
  * graduate into. The landing scene, the sign-in scene and the curriculum rail all read
  * from this one list.
  */
@@ -38,10 +38,10 @@ export const STAGES: Stage[] = [
 ];
 
 export const brand = {
-  name: 'BrahmAstra',
+  name: 'Frameon',
   module: 'Academy',
-  parent: 'brahmastra.studio',
-  parentUrl: 'https://brahmastra.studio',
+  parent: 'frameon.si',
+  parentUrl: 'https://frameon.si',
   tagline: 'Cinematic AI, taught like film.'
 };
 
@@ -50,8 +50,8 @@ export const hero = {
   headline: ['Learn to direct', 'what the model', 'only generates.'],
   ghost: 'In Malayalam.',
   lede:
-    'AI tools can produce a frame. Only a filmmaker can decide the frame is right. This is the craft in between — taught end to end, in Malayalam, by the team that builds BrahmAstra Studio.',
-  proof: 'Built on the BrahmAstra production pipeline.',
+    'AI tools can produce a frame. Only a filmmaker can decide the frame is right. This is the craft in between — taught end to end, in Malayalam, by the team that builds Frameon Studio.',
+  proof: 'Built on the Frameon production pipeline.',
   primaryCta: 'See the courses',
   secondaryCta: 'Watch a free lesson'
 };
@@ -104,8 +104,8 @@ export const faqs = [
     a: 'Your enrolment does not expire. New lessons added to a course you own show up in your classroom automatically.'
   },
   {
-    q: 'How does this connect to BrahmAstra Studio?',
-    a: 'The Academy is the learning module of brahmastra.studio. The six stages you learn here are the same six stages the studio runs on, so finishing a course drops you straight into the tool.'
+    q: 'How does this connect to Frameon Studio?',
+    a: 'The Academy is the learning module of Frameon Studio. The six stages you learn here are the same six stages the studio runs on, so finishing a course drops you straight into the tool.'
   }
 ];
 

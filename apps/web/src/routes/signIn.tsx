@@ -53,7 +53,7 @@ export default function SignIn() {
     <CinemaScene
       eyebrow="Welcome back"
       headline={['Pick up', 'where the', 'reel stopped.']}
-      lede="One BrahmAstra account across the Studio and the Academy. Your lessons, doubts and progress are exactly where you left them."
+      lede="One Frameon account across the Studio and the Academy. Your lessons, doubts and progress are exactly where you left them."
     >
       <div>
         <p className="ac-eyebrow">Sign in</p>
