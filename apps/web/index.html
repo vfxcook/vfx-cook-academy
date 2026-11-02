@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0c0f">
+  <title>Frameon Academy — Cinematic AI, taught like film</title>
+  <meta name="description" content="Learn to direct cinematic AI video in Malayalam. Frameon Academy teaches the six-stage pipeline behind Frameon Studio, end to end.">
+  <link rel="icon" type="image/svg+xml" href="/brand/frameon-mark.svg">
+  <link rel="icon" type="image/png" href="/brand/logo-mark.png">
+  <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+  <link rel="preload" href="/brand/manrope-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Bebas+Neue&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face{font-family:Manrope;font-style:normal;font-weight:800;font-display:swap;src:url('/brand/manrope-800.woff2') format('woff2')}
+    html,body{height:100%;margin:0;background:#0b0c0f;color:#f4f4f6}
+    #root{min-height:100%}
+
+    /* Frameon's boot loader: the mark charges through a dotted mask while the name sets. */
+    .boot{
+      --boot-bg:#0b0c0f;--boot-text:#f4f4f6;--boot-accent:#e60175;
+      --boot-muted:color-mix(in srgb,var(--boot-text) 58%,transparent);--boot-faint:color-mix(in srgb,var(--boot-text) 12%,transparent);
+      --boot-ease:cubic-bezier(.2,0,0,1);--boot-logo:url('/brand/frameon-mark.svg');
+      position:relative;min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:24px 16px;
+      background:var(--boot-bg);color:var(--boot-text);overflow:hidden;isolation:isolate;
+    }
+    .boot::before{
+      content:"";position:absolute;left:50%;top:46%;width:min(70vw,720px);aspect-ratio:1;z-index:-1;
+      transform:translate(-50%,-50%);pointer-events:none;
+      background:radial-gradient(circle,color-mix(in srgb,var(--boot-accent) 9%,transparent),transparent 62%);
+      animation:boot-breathe 4.8s ease-in-out infinite;
+    }
+    .boot-card{position:relative;width:min(420px,100%);display:grid;gap:14px;justify-items:center;text-align:center}
+    .boot-emblem{position:relative;width:112px;height:112px;display:grid;place-items:center;margin-bottom:10px;animation:boot-in 520ms var(--boot-ease) both}
+    .boot-aperture{position:absolute;inset:0;border-radius:50%;border:1px dashed var(--boot-faint);animation:boot-spin 24s linear infinite}
+    .boot-aperture::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1.5px solid transparent;border-top-color:var(--boot-accent);animation:boot-spin 1.6s var(--boot-ease) infinite}
+    .boot-trail{position:absolute;left:50%;top:-10px;width:2px;height:34px;margin-left:-1px;border-radius:2px;opacity:0;background:linear-gradient(to top,var(--boot-accent),transparent);transform-origin:bottom;animation:boot-trail 2.8s var(--boot-ease) infinite}
+    .boot-mark{position:relative;width:50px;height:62px}
+    .boot-mark i{position:absolute;inset:0;-webkit-mask:var(--boot-logo) center/contain no-repeat;mask:var(--boot-logo) center/contain no-repeat}
+    .boot-dots{background:radial-gradient(circle,var(--boot-accent) 1.1px,transparent 1.5px) 0 0/5px 5px;opacity:.55}
+    .boot-mark .boot-fill{background:var(--boot-logo) center/contain no-repeat;-webkit-mask:none;mask:none;animation:boot-charge 2.8s var(--boot-ease) infinite}
+    .boot-sheen{background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%) 0 0/300% 100% no-repeat;mix-blend-mode:soft-light;animation:boot-sheen 2.8s var(--boot-ease) infinite}
+    .boot-word{display:inline-flex;font:800 34px/1 Manrope,"Inter Tight",system-ui,sans-serif;letter-spacing:-.025em;color:var(--boot-text)}
+    .boot-word span{display:inline-block;animation:boot-letter 560ms var(--boot-ease) both;animation-delay:calc(160ms + var(--i,0) * 45ms)}
+    .boot-module{font:600 9.5px/1 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--boot-muted);padding:5px 9px;border:1px solid var(--boot-faint);border-radius:999px;animation:boot-in 520ms var(--boot-ease) 420ms both}
+    .boot-sub{color:var(--boot-muted);font:400 14px/20px "Inter Tight",system-ui,sans-serif;animation:boot-in 520ms var(--boot-ease) 520ms both}
+    .boot-bar{position:relative;width:200px;height:2px;border-radius:2px;background:var(--boot-faint);overflow:hidden}
+    .boot-bar i{position:absolute;inset:0 auto 0 0;width:38%;border-radius:inherit;background:var(--boot-accent);animation:boot-slide 1.4s var(--boot-ease) infinite}
+
+    @keyframes boot-slide{0%{transform:translateX(-100%)}100%{transform:translateX(265%)}}
+    @keyframes boot-spin{to{transform:rotate(360deg)}}
+    @keyframes boot-breathe{0%,100%{opacity:.7}50%{opacity:1}}
+    @keyframes boot-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    @keyframes boot-letter{from{opacity:0;transform:translateY(55%)}to{opacity:1;transform:none}}
+    @keyframes boot-charge{0%{clip-path:inset(100% 0 0 0)}48%,72%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 100% 0)}}
+    @keyframes boot-sheen{0%,40%{background-position:100% 0}72%,100%{background-position:0 0}}
+    @keyframes boot-trail{0%,70%{opacity:0;transform:translateY(12px) scaleY(.2)}82%{opacity:1;transform:translateY(0) scaleY(1)}100%{opacity:0;transform:translateY(-22px) scaleY(.4)}}
+
+    @media(prefers-reduced-motion:reduce){
+      .boot *,.boot::before{animation:none!important;transition:none!important}
+      .boot-mark .boot-fill{clip-path:none}
+      .boot-dots,.boot-sheen,.boot-trail{display:none}
+      .boot-bar i{width:62%;opacity:.85}
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="boot" role="status" aria-live="polite">
+      <div class="boot-card">
+        <div class="boot-emblem" aria-hidden="true">
+          <span class="boot-aperture"></span>
+          <span class="boot-trail"></span>
+          <div class="boot-mark"><i class="boot-dots"></i><i class="boot-fill"></i><i class="boot-sheen"></i></div>
+        </div>
+        <b class="boot-word" aria-label="Frameon Academy"><span aria-hidden="true" style="--i:0">F</span><span aria-hidden="true" style="--i:1">r</span><span aria-hidden="true" style="--i:2">a</span><span aria-hidden="true" style="--i:3">m</span><span aria-hidden="true" style="--i:4">e</span><span aria-hidden="true" style="--i:5">o</span><span aria-hidden="true" style="--i:6">n</span></b>
+        <small class="boot-module" aria-hidden="true">Academy</small>
+        <span class="boot-sub">Opening the Academy…</span>
+        <div class="boot-bar" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

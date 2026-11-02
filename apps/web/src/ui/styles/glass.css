@@ -1,0 +1,77 @@
+/* Film chrome — a small set of glass surfaces. Never nest glass inside glass. */
+
+.ac-floor {
+  background-color: var(--ac-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% -10%, rgba(230, 1, 117, 0.14), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 88% 0%, rgba(182, 160, 255, 0.1), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 108%, rgba(255, 138, 76, 0.08), transparent 60%);
+}
+
+.ac-panel {
+  background: var(--ac-panel-bg);
+  border: 1px solid var(--ac-panel-border);
+  border-radius: var(--ac-panel-radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(var(--ac-glass-blur)) saturate(122%);
+  backdrop-filter: blur(var(--ac-glass-blur)) saturate(122%);
+}
+
+.ac-composer {
+  background: rgba(30, 32, 37, 0.78);
+  border: 1px solid var(--ac-panel-border);
+  border-radius: var(--ac-composer-radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(29px) saturate(125%);
+  backdrop-filter: blur(29px) saturate(125%);
+}
+
+.ac-media-frame {
+  background: var(--ac-media-frame-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--ac-media-radius);
+  overflow: hidden;
+}
+
+/* Letterbox bars and the corner frame that mark every full-bleed scene. */
+.ac-letterbox {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: clamp(14px, 2.6vh, 26px);
+  background: #000;
+  pointer-events: none;
+  z-index: 40;
+}
+.ac-letterbox--top { top: 0; }
+.ac-letterbox--bottom { bottom: 0; }
+
+.ac-frame-marks {
+  position: fixed;
+  inset: clamp(18px, 3vh, 34px) clamp(16px, 3vw, 38px);
+  pointer-events: none;
+  z-index: 41;
+}
+.ac-frame-marks i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(244, 244, 246, 0.16);
+}
+.ac-frame-marks i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.ac-frame-marks i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.ac-frame-marks i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.ac-frame-marks i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .ac-panel {
+    background: rgba(28, 30, 36, 0.94);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .ac-composer {
+    background: rgba(24, 26, 31, 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
