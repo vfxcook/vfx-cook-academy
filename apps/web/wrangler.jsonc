@@ -32,16 +32,6 @@
   // domain: session cookies are scoped to .frameon.si.
   "workers_dev": true,
 
-  // Created during the Cloudflare setup. The Academy's database lives on Render
-  // Postgres, so the Worker does not read this binding.
-  "d1_databases": [
-    {
-      "binding": "academy",
-      "database_name": "academy",
-      "database_id": "27604e73-110b-4f87-99ac-354dca7ef5a2"
-    }
-  ],
-
   "observability": {
     "enabled": true,
     "logs": { "enabled": true, "head_sampling_rate": 1 },
